@@ -6,4 +6,5 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.SPM {
+    static let Inject = TargetDependency.external(name: "Inject")
 }
