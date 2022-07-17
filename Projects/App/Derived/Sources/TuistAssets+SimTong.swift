@@ -16,14 +16,14 @@
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-public enum SimSimPulYiAsset {
-  public static let accentColor = SimSimPulYiColors(name: "AccentColor")
+public enum SimTongAsset {
+  public static let accentColor = SimTongColors(name: "AccentColor")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-public final class SimSimPulYiColors {
+public final class SimTongColors {
   public fileprivate(set) var name: String
 
   #if os(macOS)
@@ -45,10 +45,10 @@ public final class SimSimPulYiColors {
   }
 }
 
-public extension SimSimPulYiColors.Color {
+public extension SimTongColors.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  convenience init?(asset: SimSimPulYiColors) {
-    let bundle = SimSimPulYiResources.bundle
+  convenience init?(asset: SimTongColors) {
+    let bundle = SimTongResources.bundle
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
