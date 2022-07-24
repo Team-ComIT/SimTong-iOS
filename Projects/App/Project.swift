@@ -3,7 +3,7 @@ import ProjectDescription
 import UtilityPlugin
 import Foundation
 
-let isForTest = (ProcessInfo.processInfo.environment["TUIST_TEST"] ?? "0") == "1" ? true : false
+let isForDev = (ProcessInfo.processInfo.environment["TUIST_DEV"] ?? "0") == "1" ? true : false
 
 let settinges: Settings =
     .settings(base: Environment.baseSetting,
@@ -13,7 +13,7 @@ let settinges: Settings =
               ],
               defaultSettings: .recommended)
 
-let scripts: [TargetScript] = isForTest ? [] : [.swiftLint]
+let scripts: [TargetScript] = isForDev ? [.swiftLint] : []
 
 let targets: [Target] = [
     .init(

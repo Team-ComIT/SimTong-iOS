@@ -29,7 +29,7 @@ public extension Project {
     }
 }
 
-let isForTest = (ProcessInfo.processInfo.environment["TUIST_TEST"] ?? "0") == "1" ? true : false
+let isForDev = (ProcessInfo.processInfo.environment["TUIST_DEV"] ?? "0") == "1" ? true : false
 
 public extension Project {
     static func project(
@@ -46,7 +46,7 @@ public extension Project {
         infoPlist: InfoPlist,
         hasDemoApp: Bool = false
     ) -> Project {
-        let scripts: [TargetScript] = isForTest ? [] : [.swiftLint]
+        let scripts: [TargetScript] = isForDev ? [.swiftLint] : []
         let settings: Settings = .settings(
             base: Environment.baseSetting,
             configurations: [
