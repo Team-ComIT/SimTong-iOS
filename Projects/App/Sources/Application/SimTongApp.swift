@@ -5,7 +5,7 @@ import DesignSystem
 struct SimTongApp: App {
     var body: some Scene {
         WindowGroup {
-            Typography_Previews.previews
+            Text("Hello World")
         }
     }
 }
