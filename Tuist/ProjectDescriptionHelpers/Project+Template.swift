@@ -1,3 +1,4 @@
+// swiftlint:disable all
 import ProjectDescription
 import UtilityPlugin
 import Foundation
