@@ -46,12 +46,22 @@ public enum DesignSystemAsset {
   public enum Icons {
     public static let bell = DesignSystemImages(name: "bell")
     public static let bellBadge = DesignSystemImages(name: "bell_badge")
+    public static let cartFill = DesignSystemImages(name: "cart_fill")
+    public static let chevronDown = DesignSystemImages(name: "chevron_down")
+    public static let chevronLeft = DesignSystemImages(name: "chevron_left")
+    public static let clip = DesignSystemImages(name: "clip")
     public static let hand = DesignSystemImages(name: "hand")
     public static let handFill = DesignSystemImages(name: "hand_fill")
     public static let heart = DesignSystemImages(name: "heart")
     public static let heartFill = DesignSystemImages(name: "heart_fill")
     public static let message = DesignSystemImages(name: "message")
     public static let person = DesignSystemImages(name: "person")
+    public static let plus = DesignSystemImages(name: "plus")
+    public static let send = DesignSystemImages(name: "send")
+    public static let signOut = DesignSystemImages(name: "sign_out")
+    public static let trash = DesignSystemImages(name: "trash")
+    public static let write = DesignSystemImages(name: "write")
+    public static let xmark = DesignSystemImages(name: "xmark")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
