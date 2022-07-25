@@ -32,6 +32,17 @@ public struct STIcon: View {
         case xmark
         case chevronDown
         case back
+        
+        case home
+        case homeFill
+        case news
+        case newsFill
+        case vote
+        case voteFill
+        case idea
+        case ideaFill
+        case deal
+        case dealFill
     }
     var icon: Icon
     var color: Color?
@@ -98,13 +109,44 @@ public struct STIcon: View {
         case .back:
             return DesignSystemAsset.Icons.chevronLeft.suiImage
                 .renderingMode(.template)
+        case .home:
+            return DesignSystemAsset.Icons.home.suiImage
+                .renderingMode(.template)
+        case .homeFill:
+            return DesignSystemAsset.Icons.homeFill.suiImage
+                .renderingMode(.template)
+        case .news:
+            return DesignSystemAsset.Icons.news.suiImage
+                .renderingMode(.template)
+        case .newsFill:
+            return DesignSystemAsset.Icons.newsFill.suiImage
+                .renderingMode(.template)
+        case .vote:
+            return DesignSystemAsset.Icons.vote.suiImage
+                .renderingMode(.template)
+        case .voteFill:
+            return DesignSystemAsset.Icons.voteFill.suiImage
+                .renderingMode(.template)
+        case .idea:
+            return DesignSystemAsset.Icons.idea.suiImage
+                .renderingMode(.template)
+        case .ideaFill:
+            return DesignSystemAsset.Icons.ideaFill.suiImage
+                .renderingMode(.template)
+        case .deal:
+            return DesignSystemAsset.Icons.deal.suiImage
+                .renderingMode(.template)
+        case .dealFill:
+            return DesignSystemAsset.Icons.dealFill.suiImage
+                .renderingMode(.template)
         }
     }
 }
 
 public struct Icons_Previews: PreviewProvider {
     public static var previews: some View {
-        VStack {
+        let column = Array(repeating: GridItem(.fixed(35)), count: 7)
+        LazyVGrid(columns: column, alignment: .center) {
             ForEach(STIcon.Icon.allCases, id: \.self) { icon in
                 STIcon(icon)
             }
