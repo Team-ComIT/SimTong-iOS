@@ -38,8 +38,8 @@ public extension Color {
     static let extraBackground = DesignSystemAsset.background.suiColor
 }
 
-public struct Colors_Previews: PreviewProvider {
-    public static var previews: some View {
+struct Colors_Previews: PreviewProvider {
+    static var previews: some View {
         VStack(alignment: .center, spacing: 30) {
             let colors: [[Color]] = [
                 [.main01, .main02, .main03, .main04, .main05, .main06, .main07, .main08, .main09],
