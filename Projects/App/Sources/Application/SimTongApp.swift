@@ -5,7 +5,7 @@ import DesignSystem
 struct SimTongApp: App {
     var body: some Scene {
         WindowGroup {
-            CTAButton_Previews.previews
+            WideButton_Previews.previews
         }
     }
 }

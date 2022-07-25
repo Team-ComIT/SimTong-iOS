@@ -1,7 +1,6 @@
 import SwiftUI
 
 public struct CTAButton: View {
-
     var text: String?
     var style: Style = .enabled
     var action: () -> Void
