@@ -1,4 +1,4 @@
-
+// swiftlint:disable all
 import ProjectDescription
 
 public extension TargetDependency {
