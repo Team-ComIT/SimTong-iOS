@@ -44,6 +44,16 @@ public enum DesignSystemAsset {
     public static let main09 = DesignSystemColors(name: "Main09")
   }
   public enum Icons {
+    public static let deal = DesignSystemImages(name: "deal")
+    public static let dealFill = DesignSystemImages(name: "deal_fill")
+    public static let home = DesignSystemImages(name: "home")
+    public static let homeFill = DesignSystemImages(name: "home_fill")
+    public static let idea = DesignSystemImages(name: "idea")
+    public static let ideaFill = DesignSystemImages(name: "idea_fill")
+    public static let news = DesignSystemImages(name: "news")
+    public static let newsFill = DesignSystemImages(name: "news_fill")
+    public static let vote = DesignSystemImages(name: "vote")
+    public static let voteFill = DesignSystemImages(name: "vote_fill")
     public static let bell = DesignSystemImages(name: "bell")
     public static let bellBadge = DesignSystemImages(name: "bell_badge")
     public static let cartFill = DesignSystemImages(name: "cart_fill")
