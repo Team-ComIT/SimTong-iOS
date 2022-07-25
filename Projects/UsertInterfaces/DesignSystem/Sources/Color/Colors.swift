@@ -8,34 +8,34 @@ fileprivate extension DesignSystemColors {
 }
 public extension Color {
     // MARK: - Main
-    static let main01 = DesignSystemAsset.main01.suiColor
-    static let main02 = DesignSystemAsset.main02.suiColor
-    static let main03 = DesignSystemAsset.main03.suiColor
-    static let main04 = DesignSystemAsset.main04.suiColor
-    static let main05 = DesignSystemAsset.main05.suiColor
-    static let main06 = DesignSystemAsset.main06.suiColor
-    static let main07 = DesignSystemAsset.main07.suiColor
-    static let main08 = DesignSystemAsset.main08.suiColor
-    static let main09 = DesignSystemAsset.main09.suiColor
+    static let main01 = DesignSystemAsset.Colors.main01.suiColor
+    static let main02 = DesignSystemAsset.Colors.main02.suiColor
+    static let main03 = DesignSystemAsset.Colors.main03.suiColor
+    static let main04 = DesignSystemAsset.Colors.main04.suiColor
+    static let main05 = DesignSystemAsset.Colors.main05.suiColor
+    static let main06 = DesignSystemAsset.Colors.main06.suiColor
+    static let main07 = DesignSystemAsset.Colors.main07.suiColor
+    static let main08 = DesignSystemAsset.Colors.main08.suiColor
+    static let main09 = DesignSystemAsset.Colors.main09.suiColor
 
     // MARK: - Gray
-    static let gray01 = DesignSystemAsset.gray01.suiColor
-    static let gray02 = DesignSystemAsset.gray02.suiColor
-    static let gray03 = DesignSystemAsset.gray03.suiColor
-    static let gray04 = DesignSystemAsset.gray04.suiColor
-    static let gray05 = DesignSystemAsset.gray05.suiColor
-    static let gray06 = DesignSystemAsset.gray06.suiColor
-    static let gray07 = DesignSystemAsset.gray07.suiColor
-    static let gray08 = DesignSystemAsset.gray08.suiColor
-    static let gray09 = DesignSystemAsset.gray09.suiColor
+    static let gray01 = DesignSystemAsset.Colors.gray01.suiColor
+    static let gray02 = DesignSystemAsset.Colors.gray02.suiColor
+    static let gray03 = DesignSystemAsset.Colors.gray03.suiColor
+    static let gray04 = DesignSystemAsset.Colors.gray04.suiColor
+    static let gray05 = DesignSystemAsset.Colors.gray05.suiColor
+    static let gray06 = DesignSystemAsset.Colors.gray06.suiColor
+    static let gray07 = DesignSystemAsset.Colors.gray07.suiColor
+    static let gray08 = DesignSystemAsset.Colors.gray08.suiColor
+    static let gray09 = DesignSystemAsset.Colors.gray09.suiColor
 
     // MARK: - Extra
-    static let extraWhite = DesignSystemAsset.white.suiColor
-    static let extraBlack = DesignSystemAsset.black.suiColor
-    static let extraPrimary = DesignSystemAsset.primary.suiColor
-    static let extraCheck = DesignSystemAsset.check.suiColor
-    static let extraError = DesignSystemAsset.error.suiColor
-    static let extraBackground = DesignSystemAsset.background.suiColor
+    static let extraWhite = DesignSystemAsset.Colors.white.suiColor
+    static let extraBlack = DesignSystemAsset.Colors.black.suiColor
+    static let extraPrimary = DesignSystemAsset.Colors.primary.suiColor
+    static let extraCheck = DesignSystemAsset.Colors.check.suiColor
+    static let extraError = DesignSystemAsset.Colors.error.suiColor
+    static let extraBackground = DesignSystemAsset.Colors.background.suiColor
 }
 
 public struct Colors_Previews: PreviewProvider {
