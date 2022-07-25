@@ -33,7 +33,6 @@ public struct STIcon: View {
         case chevronDown
         case back
     }
-
     var icon: Icon
     var color: Color?
 
