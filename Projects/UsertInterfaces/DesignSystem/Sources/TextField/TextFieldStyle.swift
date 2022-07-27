@@ -6,7 +6,7 @@ extension CustomTextField {
     enum Style {
         case `default`, button
     }
-    enum Disable {
+    enum States {
         case disabled, enabled
     }
 }
@@ -17,7 +17,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
     @Binding var placeholderText: String
 
     var style: CustomTextField.Style
-    var state: CustomTextField.Disable
+    var state: CustomTextField.States
 
     func _body(configuration: TextField<Self._Label>) -> some View {
         switch state {
