@@ -1,4 +1,3 @@
-// swiftlint: disable all
 import SwiftUI
 import UIKit
 
@@ -56,11 +55,11 @@ public struct CustomTextField: View {
 
 struct TextFieldClearButton: ViewModifier {
     @Binding var text: String
-    
+
     func body(content: Content) -> some View {
         HStack {
             content
-            
+
             if !text.isEmpty {
                 Button(
                     action: { self.text = "" },
@@ -100,7 +99,14 @@ public struct TextField_Previews: PreviewProvider {
             CustomTextField(placeHolderText: "Input Text", style: .default, states: .enabled, buttonText: "text") {}
             CustomTextField(placeHolderText: "Input Text", style: .button, states: .disabled, buttonText: "text") {}
             CustomTextField(placeHolderText: "Input Text", style: .button, states: .enabled, buttonText: "text") {}
-            CustomTextField(placeHolderText: "Input Text", style: .button, states: .enabled, buttonText: "text", errorText: "errorText", error: true) {}
+            CustomTextField(
+                placeHolderText: "Input Text",
+                style: .button,
+                states: .enabled,
+                buttonText: "text",
+                errorText: "errorText",
+                error: true
+            ) {}
             Spacer()
         }
         .background(Color.gray03)
