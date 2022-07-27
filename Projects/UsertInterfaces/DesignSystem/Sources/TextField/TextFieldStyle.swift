@@ -1,3 +1,4 @@
+// swiftlint:disable all
 import SwiftUI
 import UIKit
 
@@ -5,7 +6,7 @@ extension CustomTextField {
     enum Style {
         case `default`, button
     }
-    enum States {
+    enum Disable {
         case disabled, enabled
     }
 }
@@ -16,7 +17,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
     @Binding var placeholderText: String
 
     var style: CustomTextField.Style
-    var state: CustomTextField.States
+    var state: CustomTextField.Disable
 
     func _body(configuration: TextField<Self._Label>) -> some View {
         switch state {

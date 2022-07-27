@@ -4,7 +4,7 @@ import UIKit
 public struct CustomTextField: View {
     @State var placeHolderText: String
     var style: Style
-    var states: States
+    var states: Disable
     var buttonText: String?
     var errorText: String?
     var error: Bool?
