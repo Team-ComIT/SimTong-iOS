@@ -2,47 +2,68 @@
 import SwiftUI
 import UIKit
 
-extension CustomTextField {
+extension STTextField {
     enum Style {
         case `default`, button
     }
-    enum States {
-        case disabled, enabled
+}
+
+struct STTextFieldStyle: TextFieldStyle {
+    @Binding var text: String
+    @Binding var buttonText: String?
+    var placeholderText: String
+    var style: STTextField.Style
+
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        switch style {
+        case .`default`:
+            return AnyView(DefaultSTTextField(configuration: configuration, text: $text, placeholderText: placeholderText))
+        case .button:
+            return AnyView(ButtonSTTextField(configuration: configuration, text: $text, buttonText: $buttonText, placeholderText: placeholderText))
+        }
     }
 }
 
-struct CustomTextFieldStyle: TextFieldStyle {
-
-    @Binding var text: String
-    @Binding var placeholderText: String
-
-    var style: CustomTextField.Style
-    var state: CustomTextField.States
-
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        switch state {
-        case .disabled:
-            return ZStack {
+extension STTextFieldStyle {
+    struct DefaultSTTextField: View {
+        let configuration: TextField<STTextFieldStyle._Label>
+        @Binding var text: String
+        var placeholderText: String
+        @FocusState private var focusState: Bool
+        
+        var body: some View {
+            HStack {
                 configuration
-                    .modifier(
-                        PlaceholderStyle(
-                            showPlaceHolder: text.isEmpty,
-                            placeholder: placeholderText,
-                            foregroundColor: .gray04
-                        ))
-                    .background(Color.gray02)
+                    .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
+                    .modifier(STTextFieldClearButton(text: $text))
+                    .multilineTextAlignment(.leading)
             }
-        case .enabled:
-            return ZStack {
+            .focused($focusState)
+            .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
+        }
+    }
+    struct ButtonSTTextField: View {
+        let configuration: TextField<STTextFieldStyle._Label>
+        @Binding var text: String
+        @Binding var buttonText: String?
+        var placeholderText: String
+        @FocusState private var focusState: Bool
+        
+        var body: some View {
+            HStack {
                 configuration
-                    .modifier(
-                        PlaceholderStyle(
-                            showPlaceHolder: text.isEmpty,
-                            placeholder: placeholderText,
-                            foregroundColor: .gray09
-                        ))
-                    .background(Color.gray01)
+                    .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
+                    .multilineTextAlignment(.leading)
+                Button {
+                } label: {
+                    Text(buttonText ?? "")
+                        .stTypo(.m5, color: .extraWhite)
+                }
+                .frame(width: 72, height: 54)
+                .background(!text.isEmpty ? Color.main05 : Color.gray04)
             }
+            .focused($focusState)
+            .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
         }
     }
 }
