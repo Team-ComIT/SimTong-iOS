@@ -3,10 +3,10 @@ import SwiftUI
 public struct STTextField: View {
     var placeHolderText: String
     var style: Style
-    @State var buttonText: String?
-    var errorText: String?
-    var isError: Bool?
-    var buttonAction: (() -> Void)? = {}
+    @State var buttonText: String = ""
+    var errorText: String = ""
+    var isError: Bool = false
+    var buttonAction: () -> Void = {}
     var onCommit: () -> Void = {}
     @Binding var text: String
 
@@ -24,14 +24,14 @@ public struct STTextField: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.main06, lineWidth: isError ?? false ? 2 : 0)
+                        .stroke(Color.main06, lineWidth: isError ? 2 : 0)
                 )
                 .cornerRadius(5)
                 .onSubmit {
                     onCommit()
                 }
             if isError == true {
-                Text(errorText ?? "")
+                Text(errorText)
                     .padding(.leading, 24)
                     .stTypo(.r7, color: Color.main06)
             }

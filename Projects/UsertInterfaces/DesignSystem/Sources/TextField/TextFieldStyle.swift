@@ -10,10 +10,10 @@ extension STTextField {
 
 struct STTextFieldStyle: TextFieldStyle {
     @Binding var text: String
-    @Binding var buttonText: String?
+    @Binding var buttonText: String
     var placeholderText: String
     var style: STTextField.Style
-    var buttonAction: (() -> Void)?
+    var buttonAction: () -> Void
 
     func _body(configuration: TextField<Self._Label>) -> some View {
         switch style {
@@ -44,9 +44,9 @@ extension STTextFieldStyle {
     struct ButtonSTTextField: View {
         let configuration: TextField<STTextFieldStyle._Label>
         @Binding var text: String
-        @Binding var buttonText: String?
+        @Binding var buttonText: String
         var placeholderText: String
-        var buttonAction: (() -> Void)?
+        var buttonAction: () -> Void
         @FocusState private var focusState: Bool
         
         var body: some View {
@@ -56,7 +56,7 @@ extension STTextFieldStyle {
                     .multilineTextAlignment(.leading)
                 Button {
                 } label: {
-                    Text(buttonText ?? "")
+                    Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
                 }
                 .frame(width: 72, height: 54)
