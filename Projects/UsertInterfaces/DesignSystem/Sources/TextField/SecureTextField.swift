@@ -1,8 +1,8 @@
 import SwiftUI
 
 public struct STSecureTextField: View {
-    var placeHolderText: String
-    var style: STTextField.Style
+    var placeHolderText: String = ""
+    var style: STTextField.Style = .default
     @State var buttonText: String = ""
     var errorText: String = ""
     var isError: Bool = false
