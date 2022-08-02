@@ -59,6 +59,7 @@ extension STTextFieldStyle {
                     Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
                 }
+                .disable(text.isEmpty)
                 .frame(width: 72, height: 54)
                 .background(!text.isEmpty ? Color.main05 : Color.gray04)
             }
