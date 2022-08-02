@@ -37,8 +37,8 @@ extension STTextFieldStyle {
                 .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                 .modifier(STTextFieldClearButton(text: $text))
                 .multilineTextAlignment(.leading)
-            .focused($focusState)
-            .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
+                .focused($focusState)
+                .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
         }
     }
     struct ButtonSTTextField: View {

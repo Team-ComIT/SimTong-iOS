@@ -32,7 +32,7 @@ public struct STIcon: View {
         case xmark
         case chevronDown
         case back
-        
+
         case home
         case homeFill
         case news
