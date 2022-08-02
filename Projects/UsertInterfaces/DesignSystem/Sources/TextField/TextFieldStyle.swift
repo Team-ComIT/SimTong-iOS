@@ -2,7 +2,7 @@
 import SwiftUI
 import UIKit
 
-extension STTextField {
+public extension STTextField {
     enum Style {
         case `default`, button
     }
@@ -54,12 +54,11 @@ extension STTextFieldStyle {
                 configuration
                     .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                     .multilineTextAlignment(.leading)
-                Button {
-                } label: {
+                Button(action: buttonAction) {
                     Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
                 }
-                .disable(text.isEmpty)
+                .disabled(text.isEmpty)
                 .frame(width: 72, height: 54)
                 .background(!text.isEmpty ? Color.main05 : Color.gray04)
             }

@@ -1,14 +1,34 @@
 import SwiftUI
 
 public struct STSecureTextField: View {
-    var placeHolderText: String = ""
-    var style: STTextField.Style = .default
-    @State var buttonText: String = ""
-    var errorText: String = ""
-    var isError: Bool = false
-    var buttonAction: () -> Void = {}
-    var onCommit: () -> Void = {}
+    var placeHolderText: String
+    var style: STTextField.Style
+    @State var buttonText: String
+    var errorText: String
+    var isError: Bool
+    var buttonAction: () -> Void
+    var onCommit: () -> Void
     @Binding var text: String
+
+    public init(
+        _ placeholderText: String = "",
+        text: Binding<String>,
+        style: STTextField.Style = .default,
+        buttonText: String = "",
+        errorText: String = "",
+        isError: Bool = false,
+        buttonAction: @escaping () -> Void = {},
+        onCommit: @escaping () -> Void = {}
+    ) {
+        self.placeHolderText = placeholderText
+        self._text = text
+        self.style = style
+        self.buttonText = buttonText
+        self.errorText = errorText
+        self.isError = isError
+        self.buttonAction = buttonAction
+        self.onCommit = onCommit
+    }
 
     public var body: some View {
         VStack(alignment: .leading) {
@@ -45,69 +65,69 @@ public struct SecureTextField_Previews: PreviewProvider {
             ScrollView {
                 VStack(spacing: 30) {
                     Spacer()
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant(""),
                         style: .default,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: false,
-                        text: .constant("")
+                        isError: false
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant(""),
                         style: .default,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: true,
-                        text: .constant("")
+                        isError: true
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant(""),
                         style: .button,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: false,
-                        text: .constant("")
+                        isError: false
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant(""),
                         style: .button,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: false,
-                        text: .constant("")
+                        isError: false
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant("1"),
                         style: .default,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: false,
-                        text: .constant("1")
+                        isError: false
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant("1"),
                         style: .default,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: true,
-                        text: .constant("1")
+                        isError: true
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant("1"),
                         style: .button,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: false,
-                        text: .constant("1")
+                        isError: false
                     )
-                    STTextField(
-                        placeHolderText: "Input Text",
+                    STSecureTextField(
+                        "Input Text",
+                        text: .constant("1"),
                         style: .button,
                         buttonText: "text",
                         errorText: "errorText",
-                        isError: true,
-                        text: .constant("1")
+                        isError: true
                     )
                     Spacer()
                 }
