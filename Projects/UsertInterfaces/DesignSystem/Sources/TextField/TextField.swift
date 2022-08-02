@@ -6,8 +6,8 @@ public struct STTextField: View {
     @State var buttonText: String?
     var errorText: String?
     var isError: Bool?
-    var buttonAction: (() -> Void)?
-    var onCommit: (() -> Void)?
+    var buttonAction: (() -> Void)? = {}
+    var onCommit: () -> Void = {}
     @Binding var text: String
 
     public var body: some View {
@@ -18,7 +18,8 @@ public struct STTextField: View {
                         text: $text,
                         buttonText: $buttonText,
                         placeholderText: placeHolderText,
-                        style: style
+                        style: style,
+                        buttonAction: buttonAction
                     )
                 )
                 .overlay(
@@ -26,6 +27,9 @@ public struct STTextField: View {
                         .stroke(Color.main06, lineWidth: isError ?? false ? 2 : 0)
                 )
                 .cornerRadius(5)
+                .onSubmit {
+                    onCommit()
+                }
             if isError == true {
                 Text(errorText ?? "")
                     .padding(.leading, 24)

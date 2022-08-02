@@ -13,13 +13,14 @@ struct STTextFieldStyle: TextFieldStyle {
     @Binding var buttonText: String?
     var placeholderText: String
     var style: STTextField.Style
+    var buttonAction: (() -> Void)?
 
     func _body(configuration: TextField<Self._Label>) -> some View {
         switch style {
         case .`default`:
             return AnyView(DefaultSTTextField(configuration: configuration, text: $text, placeholderText: placeholderText))
         case .button:
-            return AnyView(ButtonSTTextField(configuration: configuration, text: $text, buttonText: $buttonText, placeholderText: placeholderText))
+            return AnyView(ButtonSTTextField(configuration: configuration, text: $text, buttonText: $buttonText, placeholderText: placeholderText, buttonAction: buttonAction))
         }
     }
 }
@@ -32,12 +33,10 @@ extension STTextFieldStyle {
         @FocusState private var focusState: Bool
         
         var body: some View {
-            HStack {
-                configuration
-                    .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
-                    .modifier(STTextFieldClearButton(text: $text))
-                    .multilineTextAlignment(.leading)
-            }
+            configuration
+                .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
+                .modifier(STTextFieldClearButton(text: $text))
+                .multilineTextAlignment(.leading)
             .focused($focusState)
             .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
         }
@@ -47,6 +46,7 @@ extension STTextFieldStyle {
         @Binding var text: String
         @Binding var buttonText: String?
         var placeholderText: String
+        var buttonAction: (() -> Void)?
         @FocusState private var focusState: Bool
         
         var body: some View {
