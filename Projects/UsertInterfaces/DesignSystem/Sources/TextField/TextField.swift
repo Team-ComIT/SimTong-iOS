@@ -169,9 +169,9 @@ public struct TextField_Previews: PreviewProvider {
                     )
                     Spacer()
                 }
-                .background(Color.gray03)
-                .previewInterfaceOrientation(.portrait)
             }
+            .background(Color.gray03)
+            .previewInterfaceOrientation(.portrait)
         }
     }
 }

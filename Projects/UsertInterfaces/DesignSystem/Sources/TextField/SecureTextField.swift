@@ -131,9 +131,9 @@ public struct SecureTextField_Previews: PreviewProvider {
                     )
                     Spacer()
                 }
-                .background(Color.gray03)
-                .previewInterfaceOrientation(.portrait)
             }
+            .background(Color.gray03)
+            .previewInterfaceOrientation(.portrait)
         }
     }
 }
