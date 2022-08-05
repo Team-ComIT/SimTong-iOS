@@ -32,7 +32,7 @@ public struct STSecureTextField: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
-            TextField("", text: $text)
+            SecureField("", text: $text)
                 .textFieldStyle(
                     STTextFieldStyle(
                         text: $text,
