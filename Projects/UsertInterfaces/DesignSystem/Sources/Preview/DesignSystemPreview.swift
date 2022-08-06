@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct DesignSystemPreview: View {
+public struct DesignSystemPreview: View {
+    public init() {}
     let list: [(String, AnyView)] = [
         ("Button", AnyView(STButtonPreview())),
         ("Checkbox", AnyView(STCheckboxPreview())),
@@ -10,7 +11,7 @@ struct DesignSystemPreview: View {
         ("Typography", AnyView(STTypoPreview())),
         ("Toast", AnyView(ToastPreview()))
     ]
-    var body: some View {
+    public var body: some View {
         NavigationView {
             List(list, id: \.0) { item in
                 NavigationLink {
