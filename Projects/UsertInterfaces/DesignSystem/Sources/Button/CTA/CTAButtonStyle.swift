@@ -28,7 +28,7 @@ extension CTAButtonStyle {
         var body: some View {
             configuration.label
                 .stTypo(.m5, color: .extraWhite)
-                .background(Color.gray03)
+                .background(Color.main02)
                 .cornerRadius(5)
         }
     }
