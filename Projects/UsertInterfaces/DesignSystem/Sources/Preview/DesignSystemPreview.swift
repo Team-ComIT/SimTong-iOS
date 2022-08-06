@@ -7,7 +7,8 @@ struct DesignSystemPreview: View {
         ("Color", AnyView(ColorsPreview())),
         ("Icon", AnyView(IconsPreview())),
         ("TextField", AnyView(STTextFieldPreview())),
-        ("Typography", AnyView(STTypoPreview()))
+        ("Typography", AnyView(STTypoPreview())),
+        ("Toast", AnyView(ToastPreview()))
     ]
     var body: some View {
         NavigationView {

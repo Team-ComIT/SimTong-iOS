@@ -5,7 +5,21 @@ import DesignSystem
 struct SimTongApp: App {
     var body: some Scene {
         WindowGroup {
-            Text("Hello World")
+            NavigationView {
+                Text("Hello World")
+                    .onAppear {
+                        print(safeArea().top)
+                }
+            }
         }
+    }
+    func safeArea() -> UIEdgeInsets {
+        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return .zero
+        }
+        guard let safeArea = screen.windows.first?.safeAreaInsets else {
+            return .zero
+        }
+        return safeArea
     }
 }
