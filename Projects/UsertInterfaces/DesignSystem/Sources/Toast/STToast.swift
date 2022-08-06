@@ -47,7 +47,14 @@ public struct STToast: ViewModifier {
                 .transition(.move(edge: .top))
                 .onTapGesture {
                     withAnimation {
-                        isShowing.toggle()
+                        isShowing = false
+                    }
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation {
+                            isShowing = false
+                        }
                     }
                 }
             }
