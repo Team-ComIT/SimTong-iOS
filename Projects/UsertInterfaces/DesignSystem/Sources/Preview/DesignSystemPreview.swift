@@ -9,7 +9,8 @@ public struct DesignSystemPreview: View {
         ("Icon", AnyView(IconsPreview())),
         ("TextField", AnyView(STTextFieldPreview())),
         ("Typography", AnyView(STTypoPreview())),
-        ("Toast", AnyView(ToastPreview()))
+        ("Toast", AnyView(ToastPreview())),
+        ("RadioButton", AnyView(STRadioButtonPreview()))
     ]
     public var body: some View {
         NavigationView {

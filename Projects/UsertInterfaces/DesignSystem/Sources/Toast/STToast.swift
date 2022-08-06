@@ -42,7 +42,13 @@ public struct STToast: ViewModifier {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16.5)
-                .background(Color.extraWhite)
+                .background(
+                    Color.extraWhite.opacity(0.9)
+                        .background(
+                            Color.extraBlack.opacity(0.07)
+                                .blur(radius: 0.4)
+                        )
+                )
                 .cornerRadius(8)
                 .transition(.move(edge: .top))
                 .onTapGesture {

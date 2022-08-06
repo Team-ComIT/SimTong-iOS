@@ -9,8 +9,11 @@ public struct STCheckbox: View {
     public var body: some View {
         Toggle("", isOn: $isOn)
             .toggleStyle(STCheckboxStyle())
+            .animation(.easeInOut, value: isOn)
             .onTapGesture {
-                isOn.toggle()
+                withAnimation {
+                    isOn.toggle()
+                }
             }
     }
 }

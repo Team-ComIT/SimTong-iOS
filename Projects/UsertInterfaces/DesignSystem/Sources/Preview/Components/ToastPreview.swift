@@ -1,11 +1,3 @@
-//
-//  ToastPreview.swift
-//  DesignSystem
-//
-//  Created by 최형우 on 2022/08/06.
-//  Copyright © 2022 com.ComIT. All rights reserved.
-//
-
 import SwiftUI
 
 struct ToastPreview: View {
