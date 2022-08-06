@@ -10,7 +10,8 @@ public struct DesignSystemPreview: View {
         ("TextField", AnyView(STTextFieldPreview())),
         ("Typography", AnyView(STTypoPreview())),
         ("Toast", AnyView(ToastPreview())),
-        ("RadioButton", AnyView(STRadioButtonPreview()))
+        ("RadioButton", AnyView(STRadioButtonPreview())),
+        ("Loading", AnyView(STLoadingPreview()))
     ]
     public var body: some View {
         NavigationView {
@@ -23,6 +24,7 @@ public struct DesignSystemPreview: View {
             }
             .navigationTitle("Design System")
         }
+        .navigationViewStyle(.stack)
     }
 }
 
