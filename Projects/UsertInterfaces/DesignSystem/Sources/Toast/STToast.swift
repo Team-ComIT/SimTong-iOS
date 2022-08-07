@@ -22,6 +22,7 @@ public struct STToast: ViewModifier {
         ZStack {
             content
             toastView()
+                .zIndex(0)
         }
     }
 
@@ -49,15 +50,16 @@ public struct STToast: ViewModifier {
                                 .blur(radius: 0.4)
                         )
                 )
+                .opacity(isShowing ? 1 : 0)
+                .transition(.move(edge: .top).combined(with: AnyTransition.opacity.animation(.easeInOut)))
                 .cornerRadius(8)
-                .transition(.move(edge: .top))
                 .onTapGesture {
                     withAnimation {
                         isShowing = false
                     }
                 }
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         withAnimation {
                             isShowing = false
                         }
@@ -66,6 +68,7 @@ public struct STToast: ViewModifier {
             }
             Spacer()
         }
+        .animation(.interactiveSpring(response: 0.3, dampingFraction: 0.3, blendDuration: 0.4), value: isShowing)
         .offset(y: safeArea().top)
         .ignoresSafeArea()
     }

@@ -22,7 +22,7 @@ public struct DesignSystemPreview: View {
                     Text(item.0)
                 }
             }
-            .navigationTitle("Design System")
+            .navigationTitle("DS")
         }
         .navigationViewStyle(.stack)
     }
