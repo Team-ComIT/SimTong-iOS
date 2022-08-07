@@ -3,12 +3,13 @@ import SwiftUI
 public struct STSecureTextField: View {
     var placeHolderText: String
     var style: STTextField.Style
-    @State var buttonText: String
+    var buttonText: String
     var errorText: String
     var isError: Bool
     var buttonAction: () -> Void
     var onCommit: () -> Void
     @Binding var text: String
+    @State var isSecure = true
 
     public init(
         _ placeholderText: String = "",
@@ -32,28 +33,67 @@ public struct STSecureTextField: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
-            SecureField("", text: $text)
-                .textFieldStyle(
-                    STTextFieldStyle(
-                        text: $text,
-                        buttonText: $buttonText,
-                        placeholderText: placeHolderText,
-                        style: style,
-                        buttonAction: buttonAction
+            if isSecure {
+                SecureField("", text: $text)
+                    .textFieldStyle(
+                        STTextFieldStyle(
+                            text: $text,
+                            buttonText: buttonText,
+                            placeholderText: placeHolderText,
+                            style: style,
+                            buttonAction: buttonAction
+                        )
                     )
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.main06, lineWidth: isError ? 2 : 0)
-                )
-                .cornerRadius(5)
-                .onSubmit {
-                    onCommit()
-                }
+                    .modifier(STTextFieldSecureModifier(isSecure: $isSecure))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.main06, lineWidth: isError ? 2 : 0)
+                    )
+                    .cornerRadius(5)
+                    .onSubmit(onCommit)
+            } else {
+                TextField("", text: $text)
+                    .textFieldStyle(
+                        STTextFieldStyle(
+                            text: $text,
+                            buttonText: buttonText,
+                            placeholderText: placeHolderText,
+                            style: style,
+                            buttonAction: buttonAction
+                        )
+                    )
+                    .modifier(STTextFieldSecureModifier(isSecure: $isSecure))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.main06, lineWidth: isError ? 2 : 0)
+                    )
+                    .cornerRadius(5)
+                    .onSubmit(onCommit)
+            }
             if isError == true {
                 Text(errorText)
                     .padding(.leading, 24)
                     .stTypo(.r7, color: Color.main06)
+            }
+        }
+    }
+}
+
+struct STTextFieldSecureModifier: ViewModifier {
+    @Binding var isSecure: Bool
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            HStack {
+                Spacer()
+                Button {
+                    isSecure.toggle()
+                } label: {
+                    Image(systemName: isSecure ? "eye.fill" : "eye.slash.fill")
+                        .foregroundColor(Color.gray04)
+                }
+                .padding()
             }
         }
     }

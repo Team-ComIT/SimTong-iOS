@@ -36,7 +36,7 @@ public struct STTextField: View {
                 .textFieldStyle(
                     STTextFieldStyle(
                         text: $text,
-                        buttonText: $buttonText,
+                        buttonText: buttonText,
                         placeholderText: placeHolderText,
                         style: style,
                         buttonAction: buttonAction
@@ -44,12 +44,10 @@ public struct STTextField: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.main06, lineWidth: isError ? 2 : 0)
+                        .stroke(Color.main06, lineWidth: isError ? 1 : 0)
                 )
                 .cornerRadius(5)
-                .onSubmit {
-                    onCommit()
-                }
+                .onSubmit(onCommit)
             if isError == true {
                 Text(errorText)
                     .padding(.leading, 24)
@@ -59,22 +57,24 @@ public struct STTextField: View {
     }
 }
 
-struct STTextFieldClearButton: ViewModifier {
+struct STTextFieldClearModifier: ViewModifier {
     @Binding var text: String
 
     func body(content: Content) -> some View {
-        HStack {
+        ZStack {
             content
-
             if !text.isEmpty {
-                Button(
-                    action: { self.text = "" },
-                    label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(Color.gray04)
-                    }
-                )
-                .padding()
+                HStack {
+                    Spacer()
+                    Button(
+                        action: { self.text = "" },
+                        label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(Color.gray04)
+                        }
+                    )
+                    .padding()
+                }
             }
         }
     }

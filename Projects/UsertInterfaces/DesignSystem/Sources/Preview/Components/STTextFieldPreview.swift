@@ -2,6 +2,7 @@ import SwiftUI
 
 struct STTextFieldPreview: View {
     @State var defaultText = ""
+    @State var clearText = ""
     @State var secureText = ""
     @State var buttonText = ""
     @State var buttonIsError = false
@@ -11,6 +12,7 @@ struct STTextFieldPreview: View {
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 30) {
                 STTextField("placeholder", text: $defaultText)
+                STTextField("placeholder", text: $clearText, style: .clear)
                 STSecureTextField("placeholder", text: $secureText)
                 STTextField(
                     "placeholder",
