@@ -9,7 +9,7 @@ public struct DesignSystemPreview: View {
         ("Icon", AnyView(IconsPreview())),
         ("TextField", AnyView(STTextFieldPreview())),
         ("Typography", AnyView(STTypoPreview())),
-        ("Toast", AnyView(ToastPreview())),
+        ("Toast", AnyView(STToastPreview())),
         ("RadioButton", AnyView(STRadioButtonPreview())),
         ("Loading", AnyView(STLoadingPreview()))
     ]

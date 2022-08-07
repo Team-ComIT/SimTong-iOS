@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ToastPreview: View {
+struct STToastPreview: View {
     @State var successIsShow = false
     @State var failedIsShow = false
     @State var noneIsShow = false
