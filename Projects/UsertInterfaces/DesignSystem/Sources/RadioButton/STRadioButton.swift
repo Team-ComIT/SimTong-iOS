@@ -3,7 +3,7 @@ import SwiftUI
 public struct STRadioButton: View {
     var isChecked: Bool
     var action: () -> Void
-    
+
     public init(
         isChecked: Bool = false,
         action: @escaping () -> Void = {}

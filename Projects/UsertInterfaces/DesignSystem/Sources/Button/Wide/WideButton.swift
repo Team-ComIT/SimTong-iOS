@@ -4,7 +4,7 @@ public struct WideButton: View {
     var text: String
     var style: Style
     var action: () -> Void
-    
+
     public init(
         text: String = "",
         style: Style = .enabled,

@@ -4,7 +4,7 @@ public struct CTAButton: View {
     var text: String
     var style: Style = .enabled
     var action: () -> Void
-    
+
     public init(
         text: String = "",
         style: Style = .enabled,
