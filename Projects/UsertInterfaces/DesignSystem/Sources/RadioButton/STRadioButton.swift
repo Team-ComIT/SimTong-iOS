@@ -3,6 +3,14 @@ import SwiftUI
 public struct STRadioButton: View {
     var isChecked: Bool
     var action: () -> Void
+    
+    public init(
+        isChecked: Bool = false,
+        action: @escaping () -> Void = {}
+    ) {
+        self.isChecked = isChecked
+        self.action = action
+    }
 
     public var body: some View {
         isChecked ?

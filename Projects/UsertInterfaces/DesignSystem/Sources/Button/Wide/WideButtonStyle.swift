@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension WideButton {
+public extension WideButton {
     enum Style {
         case disabled, enabled
     }

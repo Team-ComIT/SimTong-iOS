@@ -1,15 +1,25 @@
 import SwiftUI
 
 public struct CTAButton: View {
-    var text: String?
+    var text: String
     var style: Style = .enabled
     var action: () -> Void
+    
+    public init(
+        text: String = "",
+        style: Style = .enabled,
+        action: @escaping () -> Void = {}
+    ) {
+        self.text = text
+        self.style = style
+        self.action = action
+    }
 
     public var body: some View {
         Button(action: action) {
             HStack {
                 Spacer()
-                Text(text ?? "")
+                Text(text)
                     .padding(.vertical, 17)
                 Spacer()
             }

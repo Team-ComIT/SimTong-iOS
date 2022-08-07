@@ -1,12 +1,14 @@
 import SwiftUI
 
-struct STLoadingView: View {
-    @State var play = false
-    var body: some View {
+public struct STLoadingView: View {
+    @Binding var play: Bool
+
+    public init(play: Binding<Bool> = .constant(true)) {
+        self._play = play
+    }
+
+    public var body: some View {
         LottieUIView(name: "SimTongLoading", play: $play)
-            .onAppear {
-                play.toggle()
-            }
     }
 }
 

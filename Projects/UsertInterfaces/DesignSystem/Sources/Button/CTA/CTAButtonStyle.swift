@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension CTAButton {
+public extension CTAButton {
     enum Style {
         case disabled, enabled, cancel
     }

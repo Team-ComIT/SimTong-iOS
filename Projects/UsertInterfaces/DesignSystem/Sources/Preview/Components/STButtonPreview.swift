@@ -10,9 +10,7 @@ struct STButtonPreview: View {
                     CTAButton(text: "enabled") {
                         print("CTA - enabled")
                     }
-                    CTAButton(text: "disabled", style: .disabled) {
-                        print("CTA - disabled")
-                    }
+                    CTAButton(text: "disabled", style: .disabled)
                     CTAButton(text: "cancel", style: .cancel) {
                         print("CTA - cancel")
                     }
@@ -23,9 +21,7 @@ struct STButtonPreview: View {
                     WideButton(text: "enabled") {
                         print("Wide - enabled")
                     }
-                    WideButton(text: "disabled", style: .disabled) {
-                        print("Wide - disabled")
-                    }
+                    WideButton(text: "disabled", style: .disabled)
                 }
             }
         }
