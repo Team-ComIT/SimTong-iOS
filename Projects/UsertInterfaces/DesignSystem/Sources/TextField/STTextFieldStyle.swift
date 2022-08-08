@@ -18,11 +18,31 @@ struct STTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         switch style {
         case .`default`:
-            return AnyView(DefaultSTTextField(configuration: configuration, text: $text, placeholderText: placeholderText))
+            return AnyView(
+                DefaultSTTextField(
+                    configuration: configuration,
+                    text: $text,
+                    placeholderText: placeholderText
+                )
+            )
         case .clear:
-            return AnyView(CLeaerSTTextField(configuration: configuration, text: $text, placeholderText: placeholderText))
+            return AnyView(
+                CLeaerSTTextField(
+                    configuration: configuration,
+                    text: $text,
+                    placeholderText: placeholderText
+                )
+            )
         case .button:
-            return AnyView(ButtonSTTextField(configuration: configuration, text: $text, buttonText: buttonText, placeholderText: placeholderText, buttonAction: buttonAction))
+            return AnyView(
+                ButtonSTTextField(
+                    configuration: configuration,
+                    text: $text,
+                    buttonText: buttonText,
+                    placeholderText: placeholderText,
+                    buttonAction: buttonAction
+                )
+            )
         }
     }
 }
@@ -33,7 +53,7 @@ extension STTextFieldStyle {
         @Binding var text: String
         var placeholderText: String
         @FocusState private var focusState: Bool
-        
+
         var body: some View {
             configuration
                 .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
@@ -47,7 +67,7 @@ extension STTextFieldStyle {
         @Binding var text: String
         var placeholderText: String
         @FocusState private var focusState: Bool
-        
+
         var body: some View {
             configuration
                 .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
@@ -64,7 +84,7 @@ extension STTextFieldStyle {
         var placeholderText: String
         var buttonAction: () -> Void
         @FocusState private var focusState: Bool
-        
+
         var body: some View {
             HStack {
                 configuration
