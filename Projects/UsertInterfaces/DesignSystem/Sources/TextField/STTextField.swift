@@ -34,13 +34,14 @@ public struct STTextField: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(labelText)
-                    .stTypo(.r5, color: .gray06)
-                Spacer()
+        VStack(alignment: .leading, spacing: 8) {
+            if !labelText.isEmpty {
+                HStack {
+                    Text(labelText)
+                        .stTypo(.r5, color: .gray06)
+                    Spacer()
+                }
             }
-            .padding(.bottom, 8)
             TextField("", text: $text)
                 .textFieldStyle(
                     STTextFieldStyle(
@@ -59,7 +60,6 @@ public struct STTextField: View {
                 .onSubmit(onCommit)
             if isError == true {
                 Text(errorText)
-                    .padding(.leading, 24)
                     .stTypo(.r7, color: Color.main06)
             }
         }

@@ -35,13 +35,14 @@ public struct STSecureTextField: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(labelText)
-                    .stTypo(.r5, color: .gray06)
-                Spacer()
+        VStack(alignment: .leading, spacing: 8) {
+            if !labelText.isEmpty {
+                HStack {
+                    Text(labelText)
+                        .stTypo(.r5, color: .gray06)
+                    Spacer()
+                }
             }
-            .padding(.bottom, 8)
             if isSecure {
                 SecureField("", text: $text)
                     .textFieldStyle(
@@ -81,8 +82,7 @@ public struct STSecureTextField: View {
             }
             if isError == true {
                 Text(errorText)
-                    .padding(.leading, 24)
-                    .stTypo(.r7, color: Color.main06)
+                    .stTypo(.r7, color: .main06)
             }
         }
     }
@@ -116,6 +116,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                     Spacer()
                     STSecureTextField(
                         "Input Text",
+                        labelText: "asdf",
                         text: .constant(""),
                         style: .default,
                         buttonText: "text",
