@@ -8,9 +8,18 @@ fileprivate extension DesignSystemImages {
 }
 
 public struct STIcon: View {
-    public init(_ icon: Icon, color: Color? = nil) {
+    public init(
+        _ icon: Icon,
+        color: Color = .gray05,
+        width: CGFloat = 28,
+        height: CGFloat = 28,
+        renderingMode: Image.TemplateRenderingMode = .template
+    ) {
         self.icon = icon
         self.color = color
+        self.width = width
+        self.height = height
+        self.renderingMode = renderingMode
     }
 
     public enum Icon: CaseIterable {
@@ -45,100 +54,77 @@ public struct STIcon: View {
         case dealFill
     }
     var icon: Icon
-    var color: Color?
+    var color: Color
+    var renderingMode: Image.TemplateRenderingMode
+    var width: CGFloat
+    var height: CGFloat
 
     public var body: some View {
         iconToImage()
-            .foregroundColor(color ?? .gray05)
-            .frame(width: 28, height: 28)
+            .resizable()
+            .renderingMode(renderingMode)
+            .foregroundColor(color)
+            .frame(width: width, height: height)
     }
 
     private func iconToImage() -> Image {
         switch icon {
         case .bell:
             return DesignSystemAsset.Icons.bell.suiImage
-                .renderingMode(.template)
         case .bellBadge:
             return DesignSystemAsset.Icons.bellBadge.suiImage
-                .renderingMode(.original)
         case .person:
             return DesignSystemAsset.Icons.person.suiImage
-                .renderingMode(.template)
         case .message:
             return DesignSystemAsset.Icons.message.suiImage
-                .renderingMode(.template)
         case .heart:
             return DesignSystemAsset.Icons.heart.suiImage
-                .renderingMode(.template)
         case .heartFill:
             return DesignSystemAsset.Icons.heartFill.suiImage
-                .renderingMode(.template)
         case .hand:
             return DesignSystemAsset.Icons.hand.suiImage
-                .renderingMode(.template)
         case .handFill:
             return DesignSystemAsset.Icons.handFill.suiImage
-                .renderingMode(.template)
         case .plus:
             return DesignSystemAsset.Icons.plus.suiImage
-                .renderingMode(.template)
         case .signOut:
             return DesignSystemAsset.Icons.signOut.suiImage
-                .renderingMode(.template)
         case .write:
             return DesignSystemAsset.Icons.write.suiImage
-                .renderingMode(.template)
         case .trash:
             return DesignSystemAsset.Icons.trash.suiImage
-                .renderingMode(.template)
         case .clip:
             return DesignSystemAsset.Icons.clip.suiImage
-                .renderingMode(.template)
         case .cartFill:
             return DesignSystemAsset.Icons.cartFill.suiImage
-                .renderingMode(.template)
         case .send:
             return DesignSystemAsset.Icons.send.suiImage
-                .renderingMode(.template)
         case .xmark:
             return DesignSystemAsset.Icons.xmark.suiImage
-                .renderingMode(.template)
         case .chevronDown:
             return DesignSystemAsset.Icons.chevronDown.suiImage
-                .renderingMode(.template)
         case .back:
             return DesignSystemAsset.Icons.chevronLeft.suiImage
-                .renderingMode(.template)
         case .home:
             return DesignSystemAsset.Icons.home.suiImage
-                .renderingMode(.template)
         case .homeFill:
             return DesignSystemAsset.Icons.homeFill.suiImage
-                .renderingMode(.template)
         case .news:
             return DesignSystemAsset.Icons.news.suiImage
-                .renderingMode(.template)
         case .newsFill:
             return DesignSystemAsset.Icons.newsFill.suiImage
-                .renderingMode(.template)
         case .vote:
             return DesignSystemAsset.Icons.vote.suiImage
-                .renderingMode(.template)
         case .voteFill:
             return DesignSystemAsset.Icons.voteFill.suiImage
-                .renderingMode(.template)
         case .idea:
             return DesignSystemAsset.Icons.idea.suiImage
-                .renderingMode(.template)
         case .ideaFill:
             return DesignSystemAsset.Icons.ideaFill.suiImage
-                .renderingMode(.template)
         case .deal:
             return DesignSystemAsset.Icons.deal.suiImage
-                .renderingMode(.template)
         case .dealFill:
             return DesignSystemAsset.Icons.dealFill.suiImage
-                .renderingMode(.template)
         }
     }
 }
