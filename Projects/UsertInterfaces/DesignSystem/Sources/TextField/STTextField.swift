@@ -2,16 +2,18 @@ import SwiftUI
 
 public struct STTextField: View {
     var placeHolderText: String
+    var labelText: String
+    @Binding var text: String
     var style: Style
     @State var buttonText: String
     var errorText: String
     var isError: Bool
     var buttonAction: () -> Void
     var onCommit: () -> Void
-    @Binding var text: String
 
     public init(
         _ placeholderText: String = "",
+        labelText: String = "",
         text: Binding<String>,
         style: Style = .default,
         buttonText: String = "",
@@ -21,6 +23,7 @@ public struct STTextField: View {
         onCommit: @escaping () -> Void = {}
     ) {
         self.placeHolderText = placeholderText
+        self.labelText = labelText
         self._text = text
         self.style = style
         self.buttonText = buttonText
@@ -32,6 +35,12 @@ public struct STTextField: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Text(labelText)
+                    .stTypo(.r5, color: .gray06)
+                Spacer()
+            }
+            .padding(.bottom, 8)
             TextField("", text: $text)
                 .textFieldStyle(
                     STTextFieldStyle(

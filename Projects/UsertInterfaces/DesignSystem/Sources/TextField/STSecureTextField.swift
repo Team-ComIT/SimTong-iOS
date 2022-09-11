@@ -2,17 +2,19 @@ import SwiftUI
 
 public struct STSecureTextField: View {
     var placeHolderText: String
+    var labelText: String
+    @Binding var text: String
     var style: STTextField.Style
     var buttonText: String
     var errorText: String
     var isError: Bool
     var buttonAction: () -> Void
     var onCommit: () -> Void
-    @Binding var text: String
     @State var isSecure = true
 
     public init(
         _ placeholderText: String = "",
+        labelText: String = "",
         text: Binding<String>,
         style: STTextField.Style = .default,
         buttonText: String = "",
@@ -22,6 +24,7 @@ public struct STSecureTextField: View {
         onCommit: @escaping () -> Void = {}
     ) {
         self.placeHolderText = placeholderText
+        self.labelText = labelText
         self._text = text
         self.style = style
         self.buttonText = buttonText
@@ -33,6 +36,12 @@ public struct STSecureTextField: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Text(labelText)
+                    .stTypo(.r5, color: .gray06)
+                Spacer()
+            }
+            .padding(.bottom, 8)
             if isSecure {
                 SecureField("", text: $text)
                     .textFieldStyle(
