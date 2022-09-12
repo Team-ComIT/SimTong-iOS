@@ -55,7 +55,7 @@ public struct STTextField: View {
                 )
                 .cornerRadius(5)
                 .onSubmit(onCommit)
-            if isError {
+            if isError && !errorText.isEmpty {
                 Text(errorText)
                     .stTypo(.r7, color: Color.main06)
             }
