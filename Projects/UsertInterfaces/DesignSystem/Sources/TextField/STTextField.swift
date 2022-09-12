@@ -36,11 +36,8 @@ public struct STTextField: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             if !labelText.isEmpty {
-                HStack {
-                    Text(labelText)
-                        .stTypo(.r5, color: .gray06)
-                    Spacer()
-                }
+                Text(labelText)
+                    .stTypo(.r5, color: .gray06)
             }
             TextField("", text: $text)
                 .textFieldStyle(
@@ -58,7 +55,7 @@ public struct STTextField: View {
                 )
                 .cornerRadius(5)
                 .onSubmit(onCommit)
-            if isError == true {
+            if isError {
                 Text(errorText)
                     .stTypo(.r7, color: Color.main06)
             }
