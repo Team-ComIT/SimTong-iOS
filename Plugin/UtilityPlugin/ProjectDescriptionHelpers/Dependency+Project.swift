@@ -17,12 +17,14 @@ public extension TargetDependency.Project.Features {
 }
 
 public extension TargetDependency.Project.Module {
+    static let ErrorModule = TargetDependency.module(name: "ErrorModule")
     static let FeatureThirdPartyLib = TargetDependency.module(name: "FeatureThirdPartyLib")
     static let ThirdPartyLib = TargetDependency.module(name: "ThirdPartyLib")
     static let Utility = TargetDependency.module(name: "Utility")
 }
 
 public extension TargetDependency.Project.Service {
+    static let DataMappingModule = TargetDependency.service(name: "DataMappingModule")
     static let APIKit = TargetDependency.service(name: "APIKit")
     static let Data = TargetDependency.service(name: "DataModule")
     static let Domain = TargetDependency.service(name: "DomainModule")
