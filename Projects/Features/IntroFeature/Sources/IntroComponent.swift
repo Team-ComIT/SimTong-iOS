@@ -1,9 +1,10 @@
-//
-//  IntroComponent.swift
-//  IntroFeature
-//
-//  Created by 최형우 on 2022/09/26.
-//  Copyright © 2022 com.ComIT. All rights reserved.
-//
+import NeedleFoundation
+import SwiftUI
 
-import Foundation
+public protocol IntroDependency: Dependency {}
+
+public final class IntroComponent: Component<IntroDependency> {
+    public func makeView() -> some View {
+        Text("")
+    }
+}
