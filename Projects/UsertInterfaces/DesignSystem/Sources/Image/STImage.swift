@@ -17,7 +17,7 @@ public struct STImage: View {
         self.image = image
         self.renderingMode = renderingMode
     }
-    
+
     public enum Image {
         case place1
         case place2
