@@ -1,4 +1,5 @@
 generate:
+	tuist fetch
 	TUIST_DEV=1 tuist generate
 
 clean:

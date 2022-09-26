@@ -1,12 +1,11 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
+import UtilityPlugin
 
 let project = Project.makeModule(
-    name: "DesignSystem",
+    name: "FeatureThirdPartyLib",
     product: .framework,
-    packages: [],
     dependencies: [
-        .SPM.Lottie
-    ],
-    resources: ["Resources/**"]
+        .SPM.Needle
+    ]
 )

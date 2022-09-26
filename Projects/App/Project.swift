@@ -13,7 +13,7 @@ let settinges: Settings =
               ],
               defaultSettings: .recommended)
 
-let scripts: [TargetScript] = isForDev ? [.swiftLint] : []
+let scripts: [TargetScript] = isForDev ? [.swiftLint, .needle] : []
 
 let targets: [Target] = [
     .init(
