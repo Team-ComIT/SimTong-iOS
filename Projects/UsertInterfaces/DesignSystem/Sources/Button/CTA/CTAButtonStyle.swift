@@ -57,7 +57,7 @@ extension CTAButtonStyle {
         let configuration: ButtonStyle.Configuration
         var body: some View {
             configuration.label
-                .stTypo(.m5, color: .gray04)
+                .stTypo(.m5, color: .gray05)
                 .background(
                     configuration.isPressed ?
                     Color.gray02 :

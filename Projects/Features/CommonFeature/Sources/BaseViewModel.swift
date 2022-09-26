@@ -6,6 +6,8 @@ open class BaseViewModel: ObservableObject {
     @Published public var isLoading = false
     @Published public var errorMessage = ""
 
+    public init() {}
+
     @MainActor
     public func withAsyncTry<Object: AnyObject>(
         with object: Object,

@@ -12,7 +12,7 @@ public struct STImage: View {
 
     public init(
         _ image: Image,
-        renderingMode: SwiftUI.Image.TemplateRenderingMode
+        renderingMode: SwiftUI.Image.TemplateRenderingMode = .original
     ) {
         self.image = image
         self.renderingMode = renderingMode
@@ -24,6 +24,7 @@ public struct STImage: View {
         case place3
         case place4
         case place5
+        case introLogo
     }
 
     public var body: some View {
@@ -44,6 +45,8 @@ public struct STImage: View {
             return DesignSystemAsset.Images.place4.suiImage
         case .place5:
             return DesignSystemAsset.Images.place5.suiImage
+        case .introLogo:
+            return DesignSystemAsset.Images.introLogo.suiImage
         }
     }
 }

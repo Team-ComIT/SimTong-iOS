@@ -74,6 +74,7 @@ public enum DesignSystemAsset {
     public static let xmark = DesignSystemImages(name: "xmark")
   }
   public enum Images {
+    public static let introLogo = DesignSystemImages(name: "IntroLogo")
     public static let place1 = DesignSystemImages(name: "place1")
     public static let place2 = DesignSystemImages(name: "place2")
     public static let place3 = DesignSystemImages(name: "place3")

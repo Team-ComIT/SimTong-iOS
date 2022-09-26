@@ -1,5 +1,6 @@
 
 
+import IntroFeature
 import NeedleFoundation
 import RootFeature
 import SwiftUI
@@ -28,6 +29,17 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider()
 }
+private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->IntroComponent
+private func factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return IntroDependencye04a89d39c733d937499Provider()
+}
 
 #else
 extension AppComponent: Registration {
@@ -37,6 +49,11 @@ extension AppComponent: Registration {
     }
 }
 extension RootComponent: Registration {
+    public func registerItems() {
+
+    }
+}
+extension IntroComponent: Registration {
     public func registerItems() {
 
     }
@@ -59,6 +76,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
 #endif
 
