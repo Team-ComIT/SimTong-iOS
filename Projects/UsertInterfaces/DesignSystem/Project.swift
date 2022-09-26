@@ -4,9 +4,7 @@ import ProjectDescriptionHelpers
 let project = Project.makeModule(
     name: "DesignSystem",
     product: .framework,
-    packages: [
-        .Lottie
-    ],
+    packages: [],
     dependencies: [
         .SPM.Lottie
     ],
