@@ -11,17 +11,20 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.Project.Features {
+    static let IntroFeature = TargetDependency.feature(name: "IntroFeature")
     static let CommonFeature = TargetDependency.feature(name: "CommonFeature")
     static let RootFeature = TargetDependency.feature(name: "RootFeature")
 }
 
 public extension TargetDependency.Project.Module {
+    static let ErrorModule = TargetDependency.module(name: "ErrorModule")
     static let FeatureThirdPartyLib = TargetDependency.module(name: "FeatureThirdPartyLib")
     static let ThirdPartyLib = TargetDependency.module(name: "ThirdPartyLib")
     static let Utility = TargetDependency.module(name: "Utility")
 }
 
 public extension TargetDependency.Project.Service {
+    static let DataMappingModule = TargetDependency.service(name: "DataMappingModule")
     static let APIKit = TargetDependency.service(name: "APIKit")
     static let Data = TargetDependency.service(name: "DataModule")
     static let Domain = TargetDependency.service(name: "DomainModule")

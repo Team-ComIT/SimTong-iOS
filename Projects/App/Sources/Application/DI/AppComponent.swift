@@ -1,6 +1,7 @@
 import NeedleFoundation
 import SwiftUI
 import RootFeature
+import IntroFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -13,4 +14,8 @@ final class AppComponent: BootstrapComponent {
 }
 
 // MARK: - Auth
-extension AppComponent {}
+extension AppComponent {
+    var introComponent: IntroComponent {
+        IntroComponent(parent: self)
+    }
+}

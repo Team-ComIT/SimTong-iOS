@@ -73,6 +73,14 @@ public enum DesignSystemAsset {
     public static let write = DesignSystemImages(name: "write")
     public static let xmark = DesignSystemImages(name: "xmark")
   }
+  public enum Images {
+    public static let introLogo = DesignSystemImages(name: "IntroLogo")
+    public static let place1 = DesignSystemImages(name: "place1")
+    public static let place2 = DesignSystemImages(name: "place2")
+    public static let place3 = DesignSystemImages(name: "place3")
+    public static let place4 = DesignSystemImages(name: "place4")
+    public static let place5 = DesignSystemImages(name: "place5")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
