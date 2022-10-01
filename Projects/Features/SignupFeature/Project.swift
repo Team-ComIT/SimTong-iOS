@@ -2,10 +2,9 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-    name: "IntroFeature",
+    name: "SignupFeature",
     product: .staticFramework,
     dependencies: [
-        .Project.Features.CommonFeature,
-        .Project.Features.SignupFeature
+        .Project.Features.CommonFeature
     ]
 )
