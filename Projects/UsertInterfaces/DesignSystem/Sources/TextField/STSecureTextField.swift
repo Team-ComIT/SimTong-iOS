@@ -57,7 +57,7 @@ public struct STSecureTextField: View {
                     .modifier(STTextFieldSecureModifier(isSecure: $isSecure))
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.main06, lineWidth: isError ? 2 : 0)
+                            .stroke(isError ? Color.extraError : Color.gray02, lineWidth: 1)
                     )
                     .cornerRadius(5)
                     .onSubmit(onCommit)

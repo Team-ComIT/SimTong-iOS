@@ -75,6 +75,7 @@ extension STTextFieldStyle {
                 .multilineTextAlignment(.leading)
                 .focused($focusState)
                 .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
+                .accentColor(.extraError)
         }
     }
     struct ButtonSTTextField: View {
@@ -90,6 +91,7 @@ extension STTextFieldStyle {
                 configuration
                     .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                     .multilineTextAlignment(.leading)
+                    .accentColor(.extraError)
                 Button(action: buttonAction) {
                     Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
