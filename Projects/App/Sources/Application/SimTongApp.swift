@@ -1,6 +1,7 @@
 import SwiftUI
 import DesignSystem
 import IntroFeature
+import SignupFeature
 
 @main
 struct SimTongApp: App {
@@ -11,7 +12,7 @@ struct SimTongApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppComponent().introComponent.makeView()
+            AppComponent().signupComponent.makeView()
         }
     }
 }

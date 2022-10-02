@@ -1,3 +1,6 @@
 import Combine
+import CommonFeature
 
-final class SignupViewModel: ObservableObject {}
+public final class SignupViewModel: BaseViewModel {
+    @Published var nameText: String = ""
+}

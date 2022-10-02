@@ -1,8 +1,10 @@
 
 
+import CommonFeature
 import IntroFeature
 import NeedleFoundation
 import RootFeature
+import SignupFeature
 import SwiftUI
 
 // swiftlint:disable unused_declaration
@@ -18,6 +20,17 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
+private class SignupDependency1ff7d1355204bb65e850Provider: SignupDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->SignupComponent
+private func factory86602ff0d0dbaf2cb017e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupDependency1ff7d1355204bb65e850Provider()
+}
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 
 
@@ -48,6 +61,11 @@ extension AppComponent: Registration {
 
     }
 }
+extension SignupComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension RootComponent: Registration {
     public func registerItems() {
 
@@ -75,6 +93,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->AppComponent->SignupComponent", factory86602ff0d0dbaf2cb017e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
