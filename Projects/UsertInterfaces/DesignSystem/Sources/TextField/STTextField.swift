@@ -51,7 +51,7 @@ public struct STTextField: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.main06, lineWidth: isError ? 1 : 0)
+                        .stroke(isError ? Color.extraError : Color.gray02, lineWidth: 1)
                 )
                 .cornerRadius(5)
                 .onSubmit(onCommit)

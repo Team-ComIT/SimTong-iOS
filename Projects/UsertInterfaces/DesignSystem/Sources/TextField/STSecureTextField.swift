@@ -43,43 +43,29 @@ public struct STSecureTextField: View {
                     Spacer()
                 }
             }
-            if isSecure {
-                SecureField("", text: $text)
-                    .textFieldStyle(
-                        STTextFieldStyle(
-                            text: $text,
-                            buttonText: buttonText,
-                            placeholderText: placeHolderText,
-                            style: style,
-                            buttonAction: buttonAction
-                        )
-                    )
-                    .modifier(STTextFieldSecureModifier(isSecure: $isSecure))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.main06, lineWidth: isError ? 2 : 0)
-                    )
-                    .cornerRadius(5)
-                    .onSubmit(onCommit)
-            } else {
-                TextField("", text: $text)
-                    .textFieldStyle(
-                        STTextFieldStyle(
-                            text: $text,
-                            buttonText: buttonText,
-                            placeholderText: placeHolderText,
-                            style: style,
-                            buttonAction: buttonAction
-                        )
-                    )
-                    .modifier(STTextFieldSecureModifier(isSecure: $isSecure))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.main06, lineWidth: isError ? 2 : 0)
-                    )
-                    .cornerRadius(5)
-                    .onSubmit(onCommit)
+            Group {
+                if isSecure {
+                    SecureField("", text: $text)
+                } else {
+                    TextField("", text: $text)
+                }
             }
+            .textFieldStyle(
+                STTextFieldStyle(
+                    text: $text,
+                    buttonText: buttonText,
+                    placeholderText: placeHolderText,
+                    style: style,
+                    buttonAction: buttonAction
+                )
+            )
+            .modifier(STTextFieldSecureModifier(isSecure: $isSecure))
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(isError ? Color.extraError : Color.gray02, lineWidth: 1)
+            )
+            .cornerRadius(5)
+            .onSubmit(onCommit)
             if isError == true {
                 Text(errorText)
                     .stTypo(.r7, color: .main06)

@@ -27,7 +27,7 @@ struct STTextFieldStyle: TextFieldStyle {
             )
         case .clear:
             return AnyView(
-                CLeaerSTTextField(
+                ClearSTTextField(
                     configuration: configuration,
                     text: $text,
                     placeholderText: placeholderText
@@ -62,7 +62,7 @@ extension STTextFieldStyle {
                 .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
         }
     }
-    struct CLeaerSTTextField: View {
+    struct ClearSTTextField: View {
         let configuration: TextField<STTextFieldStyle._Label>
         @Binding var text: String
         var placeholderText: String
@@ -75,6 +75,7 @@ extension STTextFieldStyle {
                 .multilineTextAlignment(.leading)
                 .focused($focusState)
                 .background(focusState || !text.isEmpty ? Color.gray01 : Color.gray02)
+                .tint(.extraError)
         }
     }
     struct ButtonSTTextField: View {
@@ -90,6 +91,7 @@ extension STTextFieldStyle {
                 configuration
                     .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                     .multilineTextAlignment(.leading)
+                    .tint(.extraError)
                 Button(action: buttonAction) {
                     Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
