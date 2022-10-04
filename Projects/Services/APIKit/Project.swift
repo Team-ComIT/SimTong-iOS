@@ -7,6 +7,8 @@ let project = Project.makeModule(
     dependencies: [
         .Project.Module.ThirdPartyLib,
         .Project.Module.ErrorModule,
-        .Project.Service.DataMappingModule
+        .Project.Service.DataMappingModule,
+
+        .SPM.Moya
     ]
 )
