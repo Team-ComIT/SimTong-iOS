@@ -13,6 +13,19 @@ public struct EmployeeIDSpotListView: View {
     }
 
     public var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            LazyVStack {
+                
+            }
+            .navigationTitle("지점선택")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+
+    @ViewBuilder
+    func spotItemView() -> some View {
+        HStack {
+            
+        }
     }
 }

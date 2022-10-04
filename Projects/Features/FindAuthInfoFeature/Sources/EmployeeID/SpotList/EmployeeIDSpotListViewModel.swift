@@ -1,4 +1,6 @@
 import Combine
 import CommonFeature
 
-public final class EmployeeIDSpotListViewModel: BaseViewModel {}
+public final class EmployeeIDSpotListViewModel: BaseViewModel {
+    
+}
