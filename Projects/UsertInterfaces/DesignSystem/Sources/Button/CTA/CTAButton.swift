@@ -2,12 +2,12 @@ import SwiftUI
 
 public struct CTAButton: View {
     var text: String
-    var style: Style = .enabled
+    var style: Style
     var action: () -> Void
 
     public init(
         text: String = "",
-        style: Style = .enabled,
+        style: Style = .default,
         action: @escaping () -> Void = {}
     ) {
         self.text = text
@@ -32,8 +32,9 @@ public struct CTAButton: View {
 public struct CTAButton_Previews: PreviewProvider {
     public static var previews: some View {
         VStack(spacing: 30) {
-            CTAButton(text: "disabled", style: .disabled) {}
-            CTAButton(text: "enabled", style: .enabled) {}
+            CTAButton(text: "enabled") {}
+            CTAButton(text: "disabled") {}
+                .disabled(true)
             CTAButton(text: "cancel", style: .cancel) {}
         }
         .padding(.horizontal)
