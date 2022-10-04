@@ -2,8 +2,8 @@ import Foundation
 
 public enum KeychainType: String {
     case accessToken = "ACCESS-TOKEN"
+    case accessTokenExp = "ACCESS-TOKEN-EXP"
     case refreshToken = "REFRESH-TOKEN"
-    case expiredAt = "EXPIRED-AT"
 }
 
 public protocol Keychain {
