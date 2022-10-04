@@ -12,10 +12,6 @@ final class AppComponent: BootstrapComponent {
     var rootComponent: RootComponent {
         RootComponent(parent: self)
     }
-
-    var testComponent: FindingAuthInfoTabComponent {
-        FindingAuthInfoTabComponent(parent: self)
-    }
 }
 
 // MARK: - Auth
