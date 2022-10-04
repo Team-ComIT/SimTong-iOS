@@ -1,8 +1,8 @@
 import NeedleFoundation
 import SwiftUI
 
-public final class FindingAuthInfoTabComponent: Component<EmptyDependency> {
+public final class FindAuthInfoTabComponent: Component<EmptyDependency> {
     public func makeView() -> some View {
-        FindingAuthInfoTabView()
+        FindAuthInfoTabView()
     }
 }

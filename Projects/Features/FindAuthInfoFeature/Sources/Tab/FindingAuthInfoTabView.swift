@@ -1,7 +1,7 @@
 import SwiftUI
 import DesignSystem
 
-public struct FindingAuthInfoTabView: View {
+public struct FindAuthInfoTabView: View {
     @State var currentTab: Int = 0
 
     public var body: some View {
@@ -71,7 +71,7 @@ private struct TabbarView: View {
 struct FindingAuthInfoTabView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FindingAuthInfoTabView()
+            FindAuthInfoTabView()
         }
     }
 }
