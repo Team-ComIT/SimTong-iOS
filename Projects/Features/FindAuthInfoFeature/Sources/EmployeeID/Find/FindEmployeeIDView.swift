@@ -3,9 +3,15 @@ import DesignSystem
 
 public struct FindEmployeeIDView: View {
     @StateObject var viewModel: FindEmployeeIDViewModel
+    @State var isPresentedSpotList = false
+    let employeeIDSpotListComponent: EmployeeIDSpotListComponent
 
-    public init(viewModel: FindEmployeeIDViewModel) {
+    public init(
+        viewModel: FindEmployeeIDViewModel,
+        employeeIDSpotListComponent: EmployeeIDSpotListComponent
+    ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.employeeIDSpotListComponent = employeeIDSpotListComponent
     }
 
     public var body: some View {
@@ -19,9 +25,22 @@ public struct FindEmployeeIDView: View {
                 STTextField("근무지점을 선택해주세요", text: $viewModel.spot)
                     .disabled(true)
             }
+            .onTapGesture {
+                isPresentedSpotList.toggle()
+            }
+
+            CTAButton(text: "확인") {
+                
+            }
+            .padding(.top, 32)
 
             Spacer()
         }
         .padding(.horizontal, 16)
+        .sheet(isPresented: $isPresentedSpotList) {
+            employeeIDSpotListComponent.makeView { spot in
+                viewModel.spot = spot
+            }
+        }
     }
 }

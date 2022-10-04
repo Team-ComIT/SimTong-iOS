@@ -27,4 +27,8 @@ extension AppComponent {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
         FindEmployeeIDComponent(parent: self)
     }
+
+    var employeeIDSpotListComponent: EmployeeIDSpotListComponent {
+        EmployeeIDSpotListComponent(parent: self)
+    }
 }
