@@ -7,7 +7,7 @@ public struct WideButton: View {
 
     public init(
         text: String = "",
-        style: Style = .enabled,
+        style: Style = .default,
         action: @escaping () -> Void = {}
     ) {
         self.text = text
@@ -34,8 +34,9 @@ public struct WideButton_Previews: PreviewProvider {
     public static var previews: some View {
         VStack(spacing: 30) {
             Spacer()
-            WideButton(text: "Disabled", style: .disabled) {}
             WideButton(text: "Enabled") {}
+            WideButton(text: "Disabled") {}
+                .disabled(true)
 
             TextField("For Testing", text: .constant(""))
             Spacer()
