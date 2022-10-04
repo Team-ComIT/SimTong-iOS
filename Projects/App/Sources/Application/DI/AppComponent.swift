@@ -2,6 +2,7 @@ import NeedleFoundation
 import SwiftUI
 import RootFeature
 import IntroFeature
+import FindAuthInfoFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -10,6 +11,10 @@ final class AppComponent: BootstrapComponent {
 
     var rootComponent: RootComponent {
         RootComponent(parent: self)
+    }
+
+    var testComponent: FindingAuthInfoTabComponent {
+        FindingAuthInfoTabComponent(parent: self)
     }
 }
 

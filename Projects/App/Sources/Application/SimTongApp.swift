@@ -11,7 +11,13 @@ struct SimTongApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppComponent().introComponent.makeView()
+            NavigationView {
+                NavigationLink {
+                    AppComponent().testComponent.makeView()
+                } label: {
+                    Text("N")
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 
 
+import FindAuthInfoFeature
 import IntroFeature
 import NeedleFoundation
 import RootFeature
@@ -53,6 +54,11 @@ extension RootComponent: Registration {
 
     }
 }
+extension FindingAuthInfoTabComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension IntroComponent: Registration {
     public func registerItems() {
 
@@ -76,6 +82,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->FindingAuthInfoTabComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
 #endif
