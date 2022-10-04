@@ -2,6 +2,7 @@ import NeedleFoundation
 import SwiftUI
 import RootFeature
 import IntroFeature
+import FindAuthInfoFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
