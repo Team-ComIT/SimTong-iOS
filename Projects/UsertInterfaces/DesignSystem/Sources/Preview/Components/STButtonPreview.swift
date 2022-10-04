@@ -22,7 +22,8 @@ struct STButtonPreview: View {
                     WideButton(text: "enabled") {
                         print("Wide - enabled")
                     }
-                    WideButton(text: "disabled", style: .disabled)
+                    WideButton(text: "disabled")
+                        .disabled(true)
                 }
             }
         }
