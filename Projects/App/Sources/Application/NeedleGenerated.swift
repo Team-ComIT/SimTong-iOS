@@ -30,6 +30,30 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider()
 }
+private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
+    var findEmployeeIDComponent: FindEmployeeIDComponent {
+        return appComponent.findEmployeeIDComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->FindAuthInfoTabComponent
+private func factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindAuthInfoTabDependency79082cf44b62999fcee0Provider(appComponent: parent1(component) as! AppComponent)
+}
+private class FindEmployeeDependency636344242d29e7292bd9Provider: FindEmployeeDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->FindEmployeeIDComponent
+private func factoryfbe97e441ca213085fa6e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindEmployeeDependency636344242d29e7292bd9Provider()
+}
 private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
 
 
@@ -50,6 +74,16 @@ extension AppComponent: Registration {
     }
 }
 extension RootComponent: Registration {
+    public func registerItems() {
+
+    }
+}
+extension FindAuthInfoTabComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\FindAuthInfoTabDependency.findEmployeeIDComponent] = "findEmployeeIDComponent-FindEmployeeIDComponent"
+    }
+}
+extension FindEmployeeIDComponent: Registration {
     public func registerItems() {
 
     }
@@ -77,6 +111,8 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
 #endif

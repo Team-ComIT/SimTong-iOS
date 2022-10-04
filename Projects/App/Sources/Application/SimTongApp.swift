@@ -11,7 +11,7 @@ struct SimTongApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppComponent().makeRootView()
+            AppComponent().findAuthInfoComponent.makeView()
         }
     }
 }

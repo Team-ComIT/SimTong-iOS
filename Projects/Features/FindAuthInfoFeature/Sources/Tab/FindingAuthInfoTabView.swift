@@ -3,6 +3,13 @@ import DesignSystem
 
 public struct FindAuthInfoTabView: View {
     @State var currentTab: Int = 0
+    let findEmployeeIDComponent: FindEmployeeIDComponent
+
+    public init(
+        findEmployeeIDComponent: FindEmployeeIDComponent
+    ) {
+        self.findEmployeeIDComponent = findEmployeeIDComponent
+    }
 
     public var body: some View {
         VStack {
@@ -11,7 +18,7 @@ public struct FindAuthInfoTabView: View {
             ])
 
             TabView(selection: $currentTab) {
-                Text("0")
+                findEmployeeIDComponent.makeView()
                     .tag(0)
 
                 Text("1")
@@ -64,14 +71,6 @@ private struct TabbarView: View {
             Rectangle()
                 .fill(Color.gray05)
                 .frame(height: 0.5)
-        }
-    }
-}
-
-struct FindingAuthInfoTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            FindAuthInfoTabView()
         }
     }
 }

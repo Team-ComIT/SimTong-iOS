@@ -1,8 +1,11 @@
 import NeedleFoundation
 import SwiftUI
 
-public final class FindAuthInfoTabComponent: Component<EmptyDependency> {
+public protocol FindAuthInfoTabDependency: Dependency {
+    var findEmployeeIDComponent: FindEmployeeIDComponent { get }
+}
+public final class FindAuthInfoTabComponent: Component<FindAuthInfoTabDependency> {
     public func makeView() -> some View {
-        FindAuthInfoTabView()
+        FindAuthInfoTabView(findEmployeeIDComponent: dependency.findEmployeeIDComponent)
     }
 }

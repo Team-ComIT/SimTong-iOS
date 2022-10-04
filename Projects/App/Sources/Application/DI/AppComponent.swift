@@ -19,4 +19,12 @@ extension AppComponent {
     var introComponent: IntroComponent {
         IntroComponent(parent: self)
     }
+
+    var findAuthInfoComponent: FindAuthInfoTabComponent {
+        FindAuthInfoTabComponent(parent: self)
+    }
+
+    var findEmployeeIDComponent: FindEmployeeIDComponent {
+        FindEmployeeIDComponent(parent: self)
+    }
 }
