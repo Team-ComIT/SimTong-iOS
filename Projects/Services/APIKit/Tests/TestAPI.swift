@@ -32,7 +32,7 @@ public enum TestAPI: TargetType, JwtAuthorizable {
     "access_token": "access"
 }
 """.data(using: .utf8)!
-            
+
         default:
             return .init()
         }
@@ -41,7 +41,7 @@ public enum TestAPI: TargetType, JwtAuthorizable {
     public var task: Moya.Task { .requestPlain }
 
     public var headers: [String: String]? { nil }
-    
+
     public var jwtTokenType: JwtTokenType {
         switch self {
         case .withAccess:
@@ -49,7 +49,7 @@ public enum TestAPI: TargetType, JwtAuthorizable {
 
         case .withRefresh:
             return .refreshToken
-            
+
         default:
             return .none
         }
