@@ -1,6 +1,6 @@
 import Foundation
 
-final class MockKeyChain: Keychain {
+final class FakeKeyChain: Keychain {
     var store: [String: String] = [:]
 
     func save(type: KeychainType, value: String) {
