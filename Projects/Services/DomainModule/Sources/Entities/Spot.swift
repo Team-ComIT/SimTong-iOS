@@ -10,7 +10,7 @@ public struct Spot: Equatable {
         self.name = name
         self.location = location
     }
-    
+
     public let id: String
     public let name: String
     public let location: String
