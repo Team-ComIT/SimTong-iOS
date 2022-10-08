@@ -1,5 +1,5 @@
 import Combine
-import CommonFeature
+import BaseFeature
 
 public final class FindEmployeeIDViewModel: BaseViewModel {
     @Published var name = ""
