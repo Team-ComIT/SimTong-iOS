@@ -5,7 +5,7 @@ let project = Project.makeModule(
     name: "IntroFeature",
     product: .staticFramework,
     dependencies: [
-        .Project.Features.CommonFeature,
+        .Project.Features.BaseFeature,
         .Project.Features.FindAuthInfoFeature
     ]
 )

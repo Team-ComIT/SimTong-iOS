@@ -13,7 +13,7 @@ public extension TargetDependency {
 public extension TargetDependency.Project.Features {
     static let FindAuthInfoFeature = TargetDependency.feature(name: "FindAuthInfoFeature")
     static let IntroFeature = TargetDependency.feature(name: "IntroFeature")
-    static let CommonFeature = TargetDependency.feature(name: "CommonFeature")
+    static let BaseFeature = TargetDependency.feature(name: "BaseFeature")
     static let RootFeature = TargetDependency.feature(name: "RootFeature")
 }
 
