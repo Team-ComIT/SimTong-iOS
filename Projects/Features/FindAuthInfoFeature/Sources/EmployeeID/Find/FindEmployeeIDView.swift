@@ -16,10 +16,10 @@ public struct FindEmployeeIDView: View {
 
     public var body: some View {
         VStack(spacing: 8) {
-            STTextField("이름을 입력해주세요", text: $viewModel.name)
+            STTextField("이름을 입력해주세요", text: $viewModel.name, style: .clear)
                 .padding(.top, 64)
 
-            STTextField("E-mail을 입력해주세요", text: $viewModel.email)
+            STTextField("E-mail을 입력해주세요", text: $viewModel.email, style: .clear)
 
             Group {
                 STTextField("근무지점을 선택해주세요", text: $viewModel.spot)
@@ -30,16 +30,17 @@ public struct FindEmployeeIDView: View {
             }
 
             CTAButton(text: "확인") {
-                
             }
             .padding(.top, 32)
+            .disabled(!viewModel.isFormValid)
 
             Spacer()
         }
         .padding(.horizontal, 16)
         .sheet(isPresented: $isPresentedSpotList) {
-            employeeIDSpotListComponent.makeView { spot in
-                viewModel.spot = spot
+            employeeIDSpotListComponent.makeView(selectedSpot: viewModel.selectedSpot) { spot in
+                viewModel.selectedSpot = spot
+                viewModel.spot = spot.name
             }
         }
     }
