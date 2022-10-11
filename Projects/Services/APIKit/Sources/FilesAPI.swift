@@ -38,7 +38,7 @@ public extension FilsAPI {
             return .uploadMultipart([
                 MultipartFormData(
                     provider: .data(data),
-                    name: "\(UUID().uuidString).png"
+                    name: "file_path"
                 )
             ])
 
@@ -46,7 +46,7 @@ public extension FilsAPI {
             return .uploadMultipart(datas.map { data in
                 MultipartFormData(
                     provider: .data(data),
-                    name: "\(UUID().uuidString).png"
+                    name: "file_path_list"
                 )
             })
         }
