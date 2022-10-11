@@ -17,7 +17,6 @@ public extension SingleSpotResponseDTO {
 
 public extension SpotListResponseDTO {
     func toDomain() -> [Spot] {
-        spotList
-            .map { $0.toDomain() }
+        spotList.map { $0.toDomain() }
     }
 }
