@@ -24,10 +24,7 @@ public extension FilsAPI {
 
     var method: Moya.Method {
         switch self {
-        case .uploadImage:
-            return .post
-
-        case .uploadImages:
+        case .uploadImage, .uploadImages:
             return .post
         }
     }
