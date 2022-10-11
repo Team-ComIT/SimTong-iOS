@@ -4,6 +4,7 @@ import KeychainModule
 import Moya
 import Utility
 
+// swiftlint: disable force_cast
 public class BaseRemoteDataSource<API: SimTongAPI> {
     private let keychain: any Keychain
     private let provider: MoyaProvider<API>
@@ -79,6 +80,6 @@ private extension BaseRemoteDataSource {
     }
 
     func tokenRefresh() async throws {
-        // TODO: Refresh API
+        _ = try await performRequest(CommonAPI.reissueToken as! API)
     }
 }
