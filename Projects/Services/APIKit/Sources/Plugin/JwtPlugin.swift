@@ -17,9 +17,7 @@ public struct JwtPlugin: PluginType {
               jwtTokenType != .none
         else { return request }
         var req = request
-        let token = jwtTokenType == .accessToken ?
-            "Bearer \(getToken(type: .accessToken))" :
-            getToken(type: .refreshToken)
+        let token = "Bearer \(getToken(type: jwtTokenType == .accessToken ? .accessToken : .refreshToken))"
 
         req.addValue(token, forHTTPHeaderField: jwtTokenType.rawValue)
         return req

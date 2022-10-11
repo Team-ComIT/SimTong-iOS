@@ -57,15 +57,33 @@ final class JwtPluginTests: QuickSpec {
                 beforeEach {
                     keychain.save(type: .accessToken, value: "Access")
                 }
-                it("header의 Authorization에 앞에 Bearer와 함께 'Access'가 자동으로 담긴다") {
+                it("HTTPHeader의 Authorization에 앞에 Bearer와 함께 'Access'가 자동으로 담긴다") {
                     api.request(.withAccess) { result in
                         switch result {
                         case .failure:
                             fail("요청이 실패..함..?")
 
                         case let .success(res):
-                            expect(res.request?.allHTTPHeaderFields?["Authorization"]).notTo(beNil())
+                            expect(res.request?.allHTTPHeaderFields?["Authorization"]).toNot(beNil())
                             expect(res.request?.allHTTPHeaderFields?["Authorization"]).to(equal("Bearer Access"))
+                            expect(res.statusCode).to(equal(200))
+                        }
+                    }
+                }
+            }
+            context("Enpoint에 Refresh를 포함해서 보낸다면") {
+                beforeEach {
+                    keychain.save(type: .refreshToken, value: "Refresh")
+                }
+                it("HTTPHeader의 Refresh-Token에 앞에 Bearer와 함께 'Refresh'가 자동으로 담긴다") {
+                    api.request(.withRefresh) { result in
+                        switch result {
+                        case .failure:
+                            fail("요청이.. 실..패..함..?")
+
+                        case let .success(res):
+                            expect(res.request?.allHTTPHeaderFields?["Refresh-Token"]).toNot(beNil())
+                            expect(res.request?.allHTTPHeaderFields?["Refresh-Token"]).to(equal("Bearer Refresh"))
                             expect(res.statusCode).to(equal(200))
                         }
                     }
