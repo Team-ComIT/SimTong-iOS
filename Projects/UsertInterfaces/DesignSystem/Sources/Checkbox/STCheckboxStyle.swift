@@ -10,7 +10,7 @@ struct STCheckboxStyle: ToggleStyle {
                 .onTapGesture {
                     configuration.isOn.toggle()
                 }
-                .foregroundColor(configuration.isOn ? .main05 : .gray03)
+                .foregroundColor(configuration.isOn ? .mainMain : .gray03)
         }
     }
 }

@@ -26,7 +26,7 @@ extension WideButtonStyle {
             if isEnabled {
                 return configuration.isPressed ?
                     Color.main06 :
-                    .main05
+                    .mainMain
             } else {
                 return .main02
             }
