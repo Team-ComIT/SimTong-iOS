@@ -80,6 +80,6 @@ private extension BaseRemoteDataSource {
     }
 
     func tokenRefresh() async throws {
-        _ = try await performRequest(CommonAPI.reissueToken as! API)
+        _ = try await performRequest(CommonsAPI.reissueToken as! API)
     }
 }

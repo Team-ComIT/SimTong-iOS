@@ -2,9 +2,9 @@ import DomainModule
 import DataMappingModule
 
 public struct FindEmployeeNumberUseCaseImpl: FindEmployeeNumberUseCase {
-    private let commonRepository: any CommonRepository
+    private let commonRepository: any CommonsRepository
 
-    public init(commonRepository: any CommonRepository) {
+    public init(commonRepository: any CommonsRepository) {
         self.commonRepository = commonRepository
     }
 

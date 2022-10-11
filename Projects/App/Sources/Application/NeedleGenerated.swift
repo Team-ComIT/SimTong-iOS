@@ -104,7 +104,7 @@ extension AppComponent: Registration {
     public func registerItems() {
 
         localTable["commonRemoteDataSource-any RemoteCommonDataSource"] = { self.commonRemoteDataSource as Any }
-        localTable["commonRepository-any CommonRepository"] = { self.commonRepository as Any }
+        localTable["commonRepository-any CommonsRepository"] = { self.commonRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
     }
 }

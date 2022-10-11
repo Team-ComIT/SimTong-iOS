@@ -4,7 +4,7 @@ import DataModule
 
 // MARK: - Common
 extension AppComponent {
-    public var commonRepository: any CommonRepository {
+    public var commonRepository: any CommonsRepository {
         CommonRepositoryImpl(commonRemoteDataSource: commonRemoteDataSource)
     }
 }

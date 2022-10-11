@@ -2,7 +2,7 @@ import NetworkModule
 import DomainModule
 import DataMappingModule
 
-public struct CommonRepositoryImpl: CommonRepository {
+public struct CommonRepositoryImpl: CommonsRepository {
     private let commonRemoteDataSource: any RemoteCommonDataSource
 
     public init(commonRemoteDataSource: any RemoteCommonDataSource) {

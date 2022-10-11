@@ -2,13 +2,13 @@ import Moya
 import ErrorModule
 import DataMappingModule
 
-public enum CommonAPI: SimTongAPI {
+public enum CommonsAPI: SimTongAPI {
     case reissueToken
     case findEmployeeNumber(FindEmployeeNumberRequestDTO)
     case spotList
 }
 
-public extension CommonAPI {
+public extension CommonsAPI {
     var domain: SimTongDomain {
         .commons
     }

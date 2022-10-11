@@ -1,6 +1,6 @@
 import DataMappingModule
 
-public protocol CommonRepository {
+public protocol CommonsRepository {
     func fetchSpotList() async throws -> [Spot]
     func findEmployeeNumber(req: FindEmployeeNumberRequestDTO) async throws -> Int
 }
