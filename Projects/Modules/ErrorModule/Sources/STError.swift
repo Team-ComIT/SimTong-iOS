@@ -5,7 +5,7 @@ public enum STError: Error {
 
     // global
     case internalServerError
-    
+
     // common
     case notFoundUserByFindEmployeeNumber
 }
