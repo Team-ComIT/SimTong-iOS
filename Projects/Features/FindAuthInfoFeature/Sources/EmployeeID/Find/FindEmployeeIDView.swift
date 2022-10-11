@@ -21,14 +21,19 @@ public struct FindEmployeeIDView: View {
 
     public var body: some View {
         VStack(spacing: 8) {
-            STTextField("이름을 입력해주세요", text: $viewModel.name, style: .clear)
+            STTextField("이름을 입력해주세요", text: $viewModel.name, style: .clear, isError: viewModel.isError)
                 .padding(.top, 64)
 
-            STTextField("E-mail을 입력해주세요", text: $viewModel.email, style: .clear)
+            STTextField("E-mail을 입력해주세요", text: $viewModel.email, style: .clear, isError: viewModel.isError)
 
             Group {
-                STTextField("근무지점을 선택해주세요", text: $viewModel.spot)
-                    .disabled(true)
+                STTextField(
+                    "근무지점을 선택해주세요",
+                    text: $viewModel.spot,
+                    errorText: viewModel.errorMessage,
+                    isError: viewModel.isError
+                )
+                .disabled(true)
             }
             .onTapGesture {
                 isPresentedSpotList.toggle()
