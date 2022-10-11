@@ -79,7 +79,7 @@ final class JwtPluginTests: QuickSpec {
                     api.request(.withRefresh) { result in
                         switch result {
                         case .failure:
-                            fail("요청이.. 실..패..함..?")
+                            fail("요청이 실패함 (비정상적인 상황)")
 
                         case let .success(res):
                             expect(res.request?.allHTTPHeaderFields?["Refresh-Token"]).toNot(beNil())
