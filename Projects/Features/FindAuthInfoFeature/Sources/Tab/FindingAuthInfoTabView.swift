@@ -1,8 +1,17 @@
 import SwiftUI
 import DesignSystem
 
-public struct FindingAuthInfoTabView: View {
+public struct FindAuthInfoTabView: View {
+    @Environment(\.dismiss) var dismiss
     @State var currentTab: Int = 0
+
+    let findEmployeeIDComponent: FindEmployeeIDComponent
+
+    public init(
+        findEmployeeIDComponent: FindEmployeeIDComponent
+    ) {
+        self.findEmployeeIDComponent = findEmployeeIDComponent
+    }
 
     public var body: some View {
         VStack {
@@ -11,7 +20,7 @@ public struct FindingAuthInfoTabView: View {
             ])
 
             TabView(selection: $currentTab) {
-                Text("0")
+                findEmployeeIDComponent.makeView()
                     .tag(0)
 
                 Text("1")
@@ -20,6 +29,8 @@ public struct FindingAuthInfoTabView: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .ignoresSafeArea()
         }
+        .configBackButton(dismiss: dismiss)
+        .stBackground()
     }
 }
 
@@ -42,6 +53,7 @@ private struct TabbarView: View {
                         Text(tabbarItems[index])
                             .stTypo(.m5, color: currentTab == index ? .grayMain : .gray05)
                             .padding(.vertical, 20)
+                            .padding(.horizontal, 10)
                             .overlay {
                                 if currentTab == index {
                                     Color.grayMain
@@ -64,14 +76,6 @@ private struct TabbarView: View {
             Rectangle()
                 .fill(Color.gray05)
                 .frame(height: 0.5)
-        }
-    }
-}
-
-struct FindingAuthInfoTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            FindingAuthInfoTabView()
         }
     }
 }

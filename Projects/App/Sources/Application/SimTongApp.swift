@@ -5,7 +5,6 @@ import SignupFeature
 
 @main
 struct SimTongApp: App {
-
     init() {
         registerProviderFactories()
     }
