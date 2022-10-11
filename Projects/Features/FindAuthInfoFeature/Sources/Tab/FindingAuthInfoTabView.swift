@@ -47,12 +47,12 @@ private struct TabbarView: View {
                         }
                     } label: {
                         Text(tabbarItems[index])
-                            .stTypo(.m5, color: currentTab == index ? .gray09 : .gray05)
+                            .stTypo(.m5, color: currentTab == index ? .grayMain : .gray05)
                             .padding(.vertical, 20)
                             .padding(.horizontal, 10)
                             .overlay {
                                 if currentTab == index {
-                                    Color.gray09
+                                    Color.grayMain
                                         .frame(height: 2)
                                         .cornerRadius(32)
                                         .offset(y: 29)

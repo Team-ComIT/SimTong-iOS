@@ -12,7 +12,7 @@ public extension View {
                         Image(systemName: "chevron.left")
                             .resizable()
                             .frame(width: 9, height: 16)
-                            .foregroundColor(.gray09)
+                            .foregroundColor(.grayMain)
                     }
                 }
             }
