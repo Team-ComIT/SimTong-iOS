@@ -5,6 +5,9 @@ public enum STError: Error {
 
     // global
     case internalServerError
+    
+    // common
+    case notFoundUserByFindEmployeeNumber
 }
 
 extension STError: LocalizedError {
@@ -12,6 +15,10 @@ extension STError: LocalizedError {
         switch self {
         case let .unknown(message):
             return message
+
+        case .notFoundUserByFindEmployeeNumber:
+            return "입력한 정보에 따른 회원을 찾지 못했습니다"
+
         case .internalServerError:
             return "서버에서 문제가 발생했습니다"
         }
