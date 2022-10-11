@@ -82,7 +82,7 @@ struct SignupView: View {
             .background(Color.extraBackground)
             VStack {
                 Spacer()
-                WideButton(text: wideButtonText, style: isEnabled ? .enabled : .disabled) {
+                WideButton(text: wideButtonText) {
                     withAnimation(Animation.spring().speed(0.7)) {
                         isEnabled = false
                         if isNumberTextField {
