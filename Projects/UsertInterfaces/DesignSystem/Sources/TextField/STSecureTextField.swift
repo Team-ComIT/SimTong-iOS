@@ -43,6 +43,7 @@ public struct STSecureTextField: View {
                     Spacer()
                 }
             }
+
             Group {
                 if isSecure {
                     SecureField("", text: $text)
@@ -66,6 +67,7 @@ public struct STSecureTextField: View {
             )
             .cornerRadius(5)
             .onSubmit(onCommit)
+
             if isError == true {
                 Text(errorText)
                     .stTypo(.r7, color: .main06)
@@ -80,8 +82,10 @@ struct STTextFieldSecureModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
+
             HStack {
                 Spacer()
+
                 Button {
                     isSecure.toggle()
                 } label: {
@@ -100,6 +104,7 @@ public struct SecureTextField_Previews: PreviewProvider {
             ScrollView {
                 VStack(spacing: 30) {
                     Spacer()
+
                     STSecureTextField(
                         "Input Text",
                         labelText: "asdf",
@@ -109,6 +114,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: false
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant(""),
@@ -117,6 +123,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: true
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant(""),
@@ -125,6 +132,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: false
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant(""),
@@ -133,6 +141,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: false
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant("1"),
@@ -141,6 +150,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: false
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant("1"),
@@ -149,6 +159,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: true
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant("1"),
@@ -157,6 +168,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: false
                     )
+
                     STSecureTextField(
                         "Input Text",
                         text: .constant("1"),
@@ -165,6 +177,7 @@ public struct SecureTextField_Previews: PreviewProvider {
                         errorText: "errorText",
                         isError: true
                     )
+
                     Spacer()
                 }
             }

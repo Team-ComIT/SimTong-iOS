@@ -12,12 +12,14 @@ public extension TargetDependency {
 
 public extension TargetDependency.Project.Features {
     static let SignupFeature = TargetDependency.feature(name: "SignupFeature")
+    static let FindAuthInfoFeature = TargetDependency.feature(name: "FindAuthInfoFeature")
     static let IntroFeature = TargetDependency.feature(name: "IntroFeature")
-    static let CommonFeature = TargetDependency.feature(name: "CommonFeature")
+    static let BaseFeature = TargetDependency.feature(name: "BaseFeature")
     static let RootFeature = TargetDependency.feature(name: "RootFeature")
 }
 
 public extension TargetDependency.Project.Module {
+    static let KeychainModule = TargetDependency.module(name: "KeychainModule")
     static let ErrorModule = TargetDependency.module(name: "ErrorModule")
     static let FeatureThirdPartyLib = TargetDependency.module(name: "FeatureThirdPartyLib")
     static let ThirdPartyLib = TargetDependency.module(name: "ThirdPartyLib")

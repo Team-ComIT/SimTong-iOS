@@ -2,7 +2,7 @@ import SwiftUI
 
 public extension WideButton {
     enum Style {
-        case disabled, enabled
+        case `default`
     }
 }
 
@@ -11,34 +11,31 @@ struct WideButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         switch style {
-        case .disabled:
-            return AnyView(DisabledButton(configuration: configuration))
-        case .enabled:
-            return AnyView(EnabledButton(configuration: configuration))
+        case .`default`:
+            return AnyView(DefaultButton(configuration: configuration))
         }
     }
 }
 
 extension WideButtonStyle {
-    struct DisabledButton: View {
+    struct DefaultButton: View {
         let configuration: ButtonStyle.Configuration
-        var body: some View {
-            configuration.label
-                .stTypo(.m5, color: .extraWhite)
-                .background(Color.main02)
-        }
-    }
+        @Environment(\.isEnabled) var isEnabled: Bool
 
-    struct EnabledButton: View {
-        let configuration: ButtonStyle.Configuration
+        var stForegroundColor: Color {
+            if isEnabled {
+                return configuration.isPressed ?
+                    Color.main06 :
+                    .main
+            } else {
+                return .main02
+            }
+        }
+
         var body: some View {
             configuration.label
                 .stTypo(.m5, color: .extraWhite)
-                .background(
-                    configuration.isPressed ?
-                    Color.main06 :
-                    Color.main05
-                )
+                .background(stForegroundColor)
         }
     }
 }

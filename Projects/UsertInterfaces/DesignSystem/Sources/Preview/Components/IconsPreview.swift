@@ -11,7 +11,7 @@ struct IconsPreview: View {
                     STIcon(icon)
                 }
                 STIcon(.xmark, color: .extraBlack)
-                STIcon(.heartFill, color: .main05)
+                STIcon(.heartFill, color: .main)
             }
         }
     }

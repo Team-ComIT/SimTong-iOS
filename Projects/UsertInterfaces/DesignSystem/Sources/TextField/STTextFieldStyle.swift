@@ -25,6 +25,7 @@ struct STTextFieldStyle: TextFieldStyle {
                     placeholderText: placeholderText
                 )
             )
+
         case .clear:
             return AnyView(
                 ClearSTTextField(
@@ -33,6 +34,7 @@ struct STTextFieldStyle: TextFieldStyle {
                     placeholderText: placeholderText
                 )
             )
+
         case .button:
             return AnyView(
                 ButtonSTTextField(
@@ -56,6 +58,7 @@ extension STTextFieldStyle {
 
         var body: some View {
             configuration
+                .stTypo(.r5, color: .grayMain)
                 .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                 .multilineTextAlignment(.leading)
                 .focused($focusState)
@@ -70,6 +73,7 @@ extension STTextFieldStyle {
 
         var body: some View {
             configuration
+                .stTypo(.r5, color: .grayMain)
                 .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                 .modifier(STTextFieldClearModifier(text: $text))
                 .multilineTextAlignment(.leading)
@@ -89,14 +93,16 @@ extension STTextFieldStyle {
         var body: some View {
             HStack {
                 configuration
+                    .stTypo(.r5, color: .grayMain)
                     .modifier(PlaceholderStyle(showPlaceHolder: text.isEmpty, placeholder: placeholderText))
                     .multilineTextAlignment(.leading)
                     .tint(.extraError)
+
                 Button(action: buttonAction) {
                     Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
                         .frame(width: 72, height: 54)
-                        .background(!text.isEmpty ? Color.main05 : Color.gray04)
+                        .background(!text.isEmpty ? Color.main : Color.gray04)
                 }
                 .disabled(text.isEmpty)
             }

@@ -2,6 +2,7 @@ import NeedleFoundation
 import SwiftUI
 import RootFeature
 import IntroFeature
+import FindAuthInfoFeature
 import SignupFeature
 
 final class AppComponent: BootstrapComponent {
