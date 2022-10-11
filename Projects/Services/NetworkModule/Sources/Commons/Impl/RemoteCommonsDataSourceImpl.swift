@@ -2,7 +2,7 @@ import DomainModule
 import APIKit
 import DataMappingModule
 
-public final class RemoteCommonDataSourceImpl: BaseRemoteDataSource<CommonsAPI>, RemoteCommonDataSource {
+public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>, RemoteCommonsDataSource {
     public func fetchSpotList() async throws -> [Spot] {
         try await request(.spotList, dto: SpotListResponseDTO.self)
             .toDomain()

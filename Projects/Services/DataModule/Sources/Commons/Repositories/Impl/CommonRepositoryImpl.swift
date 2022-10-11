@@ -2,18 +2,18 @@ import NetworkModule
 import DomainModule
 import DataMappingModule
 
-public struct CommonRepositoryImpl: CommonsRepository {
-    private let commonRemoteDataSource: any RemoteCommonDataSource
+public struct CommonsRepositoryImpl: CommonsRepository {
+    private let remoteCommonsDataSource: any RemoteCommonsDataSource
 
-    public init(commonRemoteDataSource: any RemoteCommonDataSource) {
-        self.commonRemoteDataSource = commonRemoteDataSource
+    public init(remoteCommonsDataSource: any RemoteCommonsDataSource) {
+        self.remoteCommonsDataSource = remoteCommonsDataSource
     }
 
     public func fetchSpotList() async throws -> [Spot] {
-        try await commonRemoteDataSource.fetchSpotList()
+        try await remoteCommonsDataSource.fetchSpotList()
     }
 
     public func findEmployeeNumber(req: FindEmployeeNumberRequestDTO) async throws -> Int {
-        try await commonRemoteDataSource.findEmployeeNumber(req: req)
+        try await remoteCommonsDataSource.findEmployeeNumber(req: req)
     }
 }

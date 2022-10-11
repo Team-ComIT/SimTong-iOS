@@ -3,9 +3,9 @@ import NetworkModule
 
 // MARK: - Common
 extension AppComponent {
-    public var commonRemoteDataSource: any RemoteCommonDataSource {
+    public var commonsRemoteDataSource: any RemoteCommonsDataSource {
         shared {
-            RemoteCommonDataSourceImpl(keychain: keychain)
+            RemoteCommonsDataSourceImpl(keychain: keychain)
         }
     }
 }
