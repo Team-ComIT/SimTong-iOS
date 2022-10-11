@@ -4,14 +4,15 @@ import IntroFeature
 
 @main
 struct SimTongApp: App {
-
     init() {
         registerProviderFactories()
     }
 
     var body: some Scene {
         WindowGroup {
-            AppComponent().makeRootView()
+            NavigationView {
+                AppComponent().findAuthInfoComponent.makeView()
+            }
         }
     }
 }
