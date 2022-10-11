@@ -33,6 +33,7 @@ public enum DesignSystemAsset {
     public static let gray07 = DesignSystemColors(name: "Gray07")
     public static let gray08 = DesignSystemColors(name: "Gray08")
     public static let grayMain = DesignSystemColors(name: "GrayMain")
+    public static let main = DesignSystemColors(name: "Main")
     public static let main01 = DesignSystemColors(name: "Main01")
     public static let main02 = DesignSystemColors(name: "Main02")
     public static let main03 = DesignSystemColors(name: "Main03")
@@ -41,7 +42,6 @@ public enum DesignSystemAsset {
     public static let main07 = DesignSystemColors(name: "Main07")
     public static let main08 = DesignSystemColors(name: "Main08")
     public static let main09 = DesignSystemColors(name: "Main09")
-    public static let mainMain = DesignSystemColors(name: "MainMain")
   }
   public enum Icons {
     public static let deal = DesignSystemImages(name: "deal")

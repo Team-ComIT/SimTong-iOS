@@ -25,14 +25,14 @@ private struct CheckedSTRadioButton: View {
     var body: some View {
         ZStack {
             Circle()
-                .fill(Color.mainMain)
+                .fill(Color.main)
                 .frame(width: 10, height: 10)
             Circle()
                 .fill(Color.clear)
                 .frame(width: 20, height: 20)
                 .overlay(
                     Circle()
-                        .stroke(Color.mainMain, lineWidth: 1.72)
+                        .stroke(Color.main, lineWidth: 1.72)
                 )
         }.onTapGesture(perform: action)
     }

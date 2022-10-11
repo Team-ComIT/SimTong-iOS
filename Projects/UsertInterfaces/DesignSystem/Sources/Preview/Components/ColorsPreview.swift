@@ -3,7 +3,7 @@ import SwiftUI
 struct ColorsPreview: View {
     var body: some View {
         let colors: [[Color]] = [
-            [.main01, .main02, .main03, .main04, .mainMain, .main06, .main07, .main08, .main09],
+            [.main01, .main02, .main03, .main04, .main, .main06, .main07, .main08, .main09],
             [.gray01, .gray02, .gray03, .gray04, .gray05, .gray06, .gray07, .gray08, .grayMain],
             [.extraWhite, .extraBlack, .extraPrimary, .extraCheck, .extraError, .extraBackground]
         ]

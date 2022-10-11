@@ -138,7 +138,7 @@ public struct Icons_Previews: PreviewProvider {
                 STIcon(icon)
             }
             STIcon(.xmark, color: .extraBlack)
-            STIcon(.heartFill, color: .mainMain)
+            STIcon(.heartFill, color: .main)
         }
     }
 }

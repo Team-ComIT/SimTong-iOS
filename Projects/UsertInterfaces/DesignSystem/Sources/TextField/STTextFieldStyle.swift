@@ -102,7 +102,7 @@ extension STTextFieldStyle {
                     Text(buttonText)
                         .stTypo(.m5, color: .extraWhite)
                         .frame(width: 72, height: 54)
-                        .background(!text.isEmpty ? Color.mainMain : Color.gray04)
+                        .background(!text.isEmpty ? Color.main : Color.gray04)
                 }
                 .disabled(text.isEmpty)
             }
