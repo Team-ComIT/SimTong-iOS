@@ -101,6 +101,12 @@ struct SignupView: View {
                 .disabled(!viewModel.isEnableNextButton)
             }
         }
+//        .ada {
+//            TermsView {
+//                viewModel.isPresentedTerms = false
+//                viewModel.isPresentedTerms.toggle()
+//            }
+//        }
         .stBackground()
         .onAppear {
             focusField = .name

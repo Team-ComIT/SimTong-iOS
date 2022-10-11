@@ -8,6 +8,7 @@ public final class SignupViewModel: BaseViewModel {
     @Published var nextButtonTitle = "다음"
     @Published var isNumberStep = false
     @Published var isEmailStep = false
+    @Published var isPresentedTerms = false
 
     var isEnableNextButton: Bool {
         !name.isEmpty && (!number.isEmpty || !isNumberStep) && (!email.isEmpty || !isEmailStep)
