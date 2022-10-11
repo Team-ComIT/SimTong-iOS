@@ -2,7 +2,6 @@ import SwiftUI
 import DesignSystem
 
 public struct FindEmployeeIDView: View {
-    @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: FindEmployeeIDViewModel
     @State var isPresentedSpotList = false
 
@@ -58,6 +57,5 @@ public struct FindEmployeeIDView: View {
             to: employeeIDResultComponent.makeView(username: viewModel.name, resultID: viewModel.resultID),
             when: $viewModel.isNavigateResultID
         )
-        .configBackButton(dismiss: dismiss)
     }
 }

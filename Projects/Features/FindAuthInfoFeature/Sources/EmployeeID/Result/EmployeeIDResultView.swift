@@ -41,6 +41,7 @@ public struct EmployeeIDResultView: View {
             .padding(.horizontal)
             .padding(.bottom, 24)
         }
+        .stBackground()
         .configBackButton(dismiss: dismiss)
     }
 }

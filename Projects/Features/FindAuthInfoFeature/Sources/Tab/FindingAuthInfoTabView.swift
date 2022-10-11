@@ -2,7 +2,9 @@ import SwiftUI
 import DesignSystem
 
 public struct FindAuthInfoTabView: View {
+    @Environment(\.dismiss) var dismiss
     @State var currentTab: Int = 0
+
     let findEmployeeIDComponent: FindEmployeeIDComponent
 
     public init(
@@ -27,6 +29,8 @@ public struct FindAuthInfoTabView: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .ignoresSafeArea()
         }
+        .configBackButton(dismiss: dismiss)
+        .stBackground()
     }
 }
 
