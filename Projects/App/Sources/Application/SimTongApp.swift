@@ -4,14 +4,24 @@ import IntroFeature
 
 @main
 struct SimTongApp: App {
-
+    @State var isRootActive = false
     init() {
         registerProviderFactories()
     }
 
     var body: some Scene {
         WindowGroup {
-            AppComponent().findAuthInfoComponent.makeView()
+            NavigationView {
+                NavigationLink(isActive: $isRootActive) {
+                    AppComponent().findAuthInfoComponent.makeView()
+                } label: {
+                    Text("Asdi")
+                        .onTapGesture {
+                            isRootActive.toggle()
+                        }
+                }
+            }
+            .environment(\.rootPresentationMode, $isRootActive)
         }
     }
 }

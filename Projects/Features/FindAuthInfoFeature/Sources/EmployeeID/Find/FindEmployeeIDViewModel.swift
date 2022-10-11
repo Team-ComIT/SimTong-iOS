@@ -7,7 +7,18 @@ public final class FindEmployeeIDViewModel: BaseViewModel {
     @Published var email = ""
     @Published var spot = ""
     @Published var selectedSpot: Spot?
+    @Published var isNavigateResultID = false
+
     var isFormValid: Bool {
         !name.isEmpty && !email.isEmpty && selectedSpot != nil
+    }
+    var resultID: String = ""
+
+    @MainActor
+    func findID() {
+        Task {
+            resultID = "20050311"
+            isNavigateResultID = true
+        }
     }
 }

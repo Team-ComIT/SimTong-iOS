@@ -38,4 +38,8 @@ extension AppComponent {
     var employeeIDSpotListComponent: EmployeeIDSpotListComponent {
         EmployeeIDSpotListComponent(parent: self)
     }
+
+    var employeeIDResultComponent: EmployeeIDResultComponent {
+        EmployeeIDResultComponent(parent: self)
+    }
 }

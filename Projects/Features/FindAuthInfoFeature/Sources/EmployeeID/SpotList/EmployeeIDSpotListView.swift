@@ -20,20 +20,21 @@ public struct EmployeeIDSpotListView: View {
             VStack {
                 LazyVStack {
                     ForEach(viewModel.spotList, id: \.id) { spot in
-                        VStack(spacing: 16) {
-                            spotItemView(spot: spot)
-
-                            Divider()
-                                .foregroundColor(.gray02)
-                                .frame(height: 0.5)
-                        }
-                        .background(Color.extraWhite)
-                        .padding(.horizontal, 16)
-                        .padding(.top, 8)
-                        .onTapGesture {
-                            completion(spot)
-                            dismiss()
-                        }
+                        spotItemView(spot: spot)
+                            .background(Color.extraWhite)
+                            .padding(.horizontal, 16)
+                            .padding(.top, 8)
+                            .padding(.bottom, 16)
+                            .onTapGesture {
+                                completion(spot)
+                                dismiss()
+                            }
+                            .overlay(alignment: .bottom) {
+                                Divider()
+                                    .foregroundColor(.gray02)
+                                    .frame(height: 0.5)
+                                    .padding(.horizontal, 16)
+                            }
                     }
                 }
                 .navigationTitle("지점선택")
@@ -52,13 +53,14 @@ public struct EmployeeIDSpotListView: View {
     func spotItemView(spot: Spot) -> some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(spot.name)
-                    .multilineTextAlignment(.leading)
-                    .stTypo(.m5, color: .gray09)
-
-                Text(spot.location)
-                    .multilineTextAlignment(.leading)
-                    .stTypo(.r6, color: .gray04)
+                Group {
+                    Text(spot.name)
+                        .stTypo(.m5, color: .gray09)
+                    
+                    Text(spot.location)
+                        .stTypo(.r6, color: .gray04)
+                }
+                .multilineTextAlignment(.center)
             }
 
             Spacer()

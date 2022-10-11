@@ -2,16 +2,21 @@ import SwiftUI
 import DesignSystem
 
 public struct FindEmployeeIDView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: FindEmployeeIDViewModel
     @State var isPresentedSpotList = false
+
     let employeeIDSpotListComponent: EmployeeIDSpotListComponent
+    let employeeIDResultComponent: EmployeeIDResultComponent
 
     public init(
         viewModel: FindEmployeeIDViewModel,
-        employeeIDSpotListComponent: EmployeeIDSpotListComponent
+        employeeIDSpotListComponent: EmployeeIDSpotListComponent,
+        employeeIDResultComponent: EmployeeIDResultComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.employeeIDSpotListComponent = employeeIDSpotListComponent
+        self.employeeIDResultComponent = employeeIDResultComponent
     }
 
     public var body: some View {
@@ -30,6 +35,7 @@ public struct FindEmployeeIDView: View {
             }
 
             CTAButton(text: "확인") {
+                viewModel.findID()
             }
             .padding(.top, 32)
             .disabled(!viewModel.isFormValid)
@@ -43,5 +49,10 @@ public struct FindEmployeeIDView: View {
                 viewModel.spot = spot.name
             }
         }
+        .navigate(
+            to: employeeIDResultComponent.makeView(username: viewModel.name, resultID: viewModel.resultID),
+            when: $viewModel.isNavigateResultID
+        )
+        .configBackButton(dismiss: dismiss)
     }
 }
