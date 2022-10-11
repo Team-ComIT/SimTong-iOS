@@ -1,15 +1,27 @@
 import Combine
-import CommonFeature
+import BaseFeature
 
 public final class SignupViewModel: BaseViewModel {
-    @Published var nameText: String = ""
-    @Published var numberText: String = ""
-    @Published var emailText: String = ""
-    @Published var isNameText: Bool = false
-    @Published var isNumberText: Bool = false
-    @Published var isEmailText: Bool = false
+    @Published var name: String = ""
+    @Published var number: String = ""
+    @Published var email: String = ""
+    @Published var nextButtonTitle = "다음"
+    @Published var isNumberStep = false
+    @Published var isEmailStep = false
 
-    func isShowNumberText() {
-        isNameText == true && isNumberText == true
+    var isEnableNextButton: Bool {
+        !name.isEmpty && (!number.isEmpty || !isNumberStep) && (!email.isEmpty || !isEmailStep)
+    }
+
+    @MainActor
+    func nextButtonDidTap() {
+        if isEmailStep {
+        } else if isNumberStep {
+            isEmailStep = true
+            nextButtonTitle = "인증"
+        } else {
+            isNumberStep = true
+            nextButtonTitle = "확인"
+        }
     }
  }
