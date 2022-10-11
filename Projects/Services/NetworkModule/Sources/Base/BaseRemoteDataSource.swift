@@ -4,13 +4,13 @@ import KeychainModule
 import Moya
 import Utility
 
-class BaseRemoteDataSource<API: SimTongAPI> {
+public class BaseRemoteDataSource<API: SimTongAPI> {
     private let keychain: any Keychain
     private let provider: MoyaProvider<API>
     private let decoder = JSONDecoder()
     private let maxRetryCount = 2
 
-    init(
+    public init(
         keychain: any Keychain,
         provider: MoyaProvider<API>? = nil
     ) {
@@ -24,7 +24,7 @@ class BaseRemoteDataSource<API: SimTongAPI> {
     }
 
     @discardableResult
-    func request<T: Decodable>(_ api: API, dto: T.Type) async throws -> T {
+    public func request<T: Decodable>(_ api: API, dto: T.Type) async throws -> T {
         let res = try await checkIsApiNeedsAuth(api) ? authorizedRequest(api) : defaultRequest(api)
         return try decoder.decode(dto, from: res.data)
     }
