@@ -25,7 +25,12 @@ struct SignupView: View {
                 VStack {
                     Group {
                         if viewModel.isEmailStep {
-                            STTextField(labelText: "이메일", text: $viewModel.email, style: .clear, onCommit: {
+                            STTextField(
+                                "yoonhd81@sungsimdang.co.kr",
+                                labelText: "이메일",
+                                text: $viewModel.email,
+                                style: .clear,
+                                onCommit: {
                                 viewModel.nextButtonDidTap()
                             })
                             .focused($focusField, equals: .email)
@@ -33,7 +38,12 @@ struct SignupView: View {
                         }
 
                         if viewModel.isNumberStep {
-                            STTextField("와!", labelText: "사원번호", text: $viewModel.number, style: .clear, onCommit: {
+                            STTextField(
+                                "1234567890",
+                                labelText: "사원번호",
+                                text: $viewModel.number,
+                                style: .clear,
+                                onCommit: {
                                 withAnimation {
                                     viewModel.nextButtonDidTap()
                                     focusField = .email
@@ -44,7 +54,12 @@ struct SignupView: View {
                             .keyboardType(.numberPad)
                         }
 
-                        STTextField(labelText: "이름", text: $viewModel.name, style: .clear, onCommit: {
+                        STTextField(
+                            "예시: 최형우",
+                            labelText: "이름",
+                            text: $viewModel.name,
+                            style: .clear,
+                            onCommit: {
                             withAnimation {
                                 viewModel.nextButtonDidTap()
                                 focusField = .number
