@@ -12,7 +12,7 @@ public extension Color {
     static let main02 = DesignSystemAsset.Colors.main02.suiColor
     static let main03 = DesignSystemAsset.Colors.main03.suiColor
     static let main04 = DesignSystemAsset.Colors.main04.suiColor
-    static let main05 = DesignSystemAsset.Colors.main05.suiColor
+    static let main = DesignSystemAsset.Colors.main.suiColor
     static let main06 = DesignSystemAsset.Colors.main06.suiColor
     static let main07 = DesignSystemAsset.Colors.main07.suiColor
     static let main08 = DesignSystemAsset.Colors.main08.suiColor
@@ -27,7 +27,7 @@ public extension Color {
     static let gray06 = DesignSystemAsset.Colors.gray06.suiColor
     static let gray07 = DesignSystemAsset.Colors.gray07.suiColor
     static let gray08 = DesignSystemAsset.Colors.gray08.suiColor
-    static let gray09 = DesignSystemAsset.Colors.gray09.suiColor
+    static let grayMain = DesignSystemAsset.Colors.grayMain.suiColor
 
     // MARK: - Extra
     static let extraWhite = DesignSystemAsset.Colors.white.suiColor
@@ -42,8 +42,8 @@ struct Colors_Previews: PreviewProvider {
     static var previews: some View {
         VStack(alignment: .center, spacing: 30) {
             let colors: [[Color]] = [
-                [.main01, .main02, .main03, .main04, .main05, .main06, .main07, .main08, .main09],
-                [.gray01, .gray02, .gray03, .gray04, .gray05, .gray06, .gray07, .gray08, .gray09],
+                [.main01, .main02, .main03, .main04, .main, .main06, .main07, .main08, .main09],
+                [.gray01, .gray02, .gray03, .gray04, .gray05, .gray06, .gray07, .gray08, .grayMain],
                 [.extraWhite, .extraBlack, .extraPrimary, .extraCheck, .extraError, .extraBackground]
             ]
             ForEach(colors, id: \.self) { colors in
