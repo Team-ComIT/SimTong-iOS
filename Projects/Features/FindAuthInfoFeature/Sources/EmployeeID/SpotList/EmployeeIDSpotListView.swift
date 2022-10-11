@@ -55,8 +55,8 @@ public struct EmployeeIDSpotListView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Group {
                     Text(spot.name)
-                        .stTypo(.m5, color: .gray09)
-                    
+                        .stTypo(.m5, color: .grayMain)
+
                     Text(spot.location)
                         .stTypo(.r6, color: .gray04)
                 }

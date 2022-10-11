@@ -23,14 +23,14 @@ public struct EmployeeIDResultView: View {
             Text("\(username) 회원님이\n요청하신 회원번호입니다.")
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .stTypo(.r5, color: .gray09)
+                .stTypo(.r5, color: .grayMain)
 
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.gray02)
                 .frame(width: 205, height: 42)
                 .overlay {
                     Text(resultID)
-                        .stTypo(.s4, color: .gray09)
+                        .stTypo(.s4, color: .grayMain)
                 }
 
             Spacer()
