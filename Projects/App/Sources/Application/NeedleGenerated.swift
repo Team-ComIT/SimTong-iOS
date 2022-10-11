@@ -103,8 +103,8 @@ private func factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb(_ component: Needle
 extension AppComponent: Registration {
     public func registerItems() {
 
-        localTable["commonRemoteDataSource-any RemoteCommonDataSource"] = { self.commonRemoteDataSource as Any }
-        localTable["commonRepository-any CommonRepository"] = { self.commonRepository as Any }
+        localTable["commonsRemoteDataSource-any RemoteCommonsDataSource"] = { self.commonsRemoteDataSource as Any }
+        localTable["commonsRepository-any CommonsRepository"] = { self.commonsRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import DataMappingModule
 import DomainModule
 
-// MARK: - Common
+// MARK: - Commons
 
 // MARK: FetchSpotList
 public extension SingleSpotResponseDTO {
