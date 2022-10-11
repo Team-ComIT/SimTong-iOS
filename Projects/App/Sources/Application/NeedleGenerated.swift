@@ -1,8 +1,12 @@
 
 
+import DataModule
+import DomainModule
 import FindAuthInfoFeature
 import IntroFeature
+import KeychainModule
 import NeedleFoundation
+import NetworkModule
 import RootFeature
 import SwiftUI
 
@@ -57,15 +61,17 @@ private func factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5(_ component: Needle
     return FindEmployeeDependency636344242d29e7292bd9Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class EmployeeIDSpotListDependency9ec4920d77848b463dd3Provider: EmployeeIDSpotListDependency {
-
-
-    init() {
-
+    var fetchSpotListUseCase: any FetchSpotListUseCase {
+        return appComponent.fetchSpotListUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->EmployeeIDSpotListComponent
-private func factory529868f8afc90f854ddce3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return EmployeeIDSpotListDependency9ec4920d77848b463dd3Provider()
+private func factory529868f8afc90f854ddcf47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return EmployeeIDSpotListDependency9ec4920d77848b463dd3Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
 
@@ -83,7 +89,9 @@ private func factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb(_ component: Needle
 extension AppComponent: Registration {
     public func registerItems() {
 
-
+        localTable["commonRemoteDataSource-any RemoteCommonDataSource"] = { self.commonRemoteDataSource as Any }
+        localTable["commonRepository-any CommonRepository"] = { self.commonRepository as Any }
+        localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
     }
 }
 extension RootComponent: Registration {
@@ -103,7 +111,7 @@ extension FindEmployeeIDComponent: Registration {
 }
 extension EmployeeIDSpotListComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\EmployeeIDSpotListDependency.fetchSpotListUseCase] = "fetchSpotListUseCase-any FetchSpotListUseCase"
     }
 }
 extension IntroComponent: Registration {
@@ -131,7 +139,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddce3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
 #endif

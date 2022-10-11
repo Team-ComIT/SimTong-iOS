@@ -25,7 +25,9 @@ public struct EmployeeIDSpotListView: View {
     @ViewBuilder
     func spotItemView() -> some View {
         HStack {
-            
+            VStack {
+                
+            }
         }
     }
 }

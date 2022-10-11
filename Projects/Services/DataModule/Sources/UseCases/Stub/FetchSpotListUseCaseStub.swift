@@ -2,6 +2,8 @@ import DomainModule
 import Foundation
 
 public struct FetchSpotListUseCaseStub: FetchSpotListUseCase {
+    public init() {}
+
     public func execute() async throws -> [Spot] {
         [
             .init(

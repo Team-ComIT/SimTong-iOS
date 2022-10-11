@@ -3,6 +3,7 @@ import SwiftUI
 import RootFeature
 import IntroFeature
 import FindAuthInfoFeature
+import KeychainModule
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -11,6 +12,12 @@ final class AppComponent: BootstrapComponent {
 
     var rootComponent: RootComponent {
         RootComponent(parent: self)
+    }
+
+    var keychain: any Keychain {
+        shared {
+            DefaultKeychain()
+        }
     }
 }
 
