@@ -96,9 +96,7 @@ struct SignupView: View {
                 Spacer()
 
                 WideButton(text: viewModel.nextButtonTitle) {
-                    Task {
-                        await viewModel.signup()
-                    }
+                    viewModel.signup()
                     withAnimation {
                         viewModel.nextButtonDidTap()
                     }
@@ -106,13 +104,13 @@ struct SignupView: View {
                 .disabled(!viewModel.isEnableNextButton)
             }
         }
-        .configBackButton(willDismiss: {
-            viewModel.isPresentedTerms = false
-        }, dismiss: dismiss)
         .stBackground()
         .onAppear {
             focusField = .name
         }
+        .configBackButton(willDismiss: {
+            viewModel.isPresentedTerms = false
+        }, dismiss: dismiss)
         .adaptiveSheet(isPresented: $viewModel.isPresentedTerms, detents: [.medium(), .large()]) {
             TermsView {
                 viewModel.isPresentedTerms = false

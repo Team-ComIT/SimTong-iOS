@@ -18,7 +18,6 @@ struct TermsView: View {
                 STCheckbox(isOn: $allAgreeState, willChange: { isOn in
                     agreedTerms = isOn ? [] : Terms.allCases
                     privacyTerms = !isOn
-                    print(agreedTerms)
                 })
 
                 Text("약관 전체동의")
@@ -27,6 +26,11 @@ struct TermsView: View {
                 Spacer()
             }
             .padding(.top, 24)
+            .onTapGesture {
+                agreedTerms = allAgreeState ? [] : Terms.allCases
+                privacyTerms = !allAgreeState
+                allAgreeState = !allAgreeState
+            }
 
             Divider()
                 .padding(.vertical, 16)
@@ -72,6 +76,17 @@ struct TermsView: View {
                     .frame(width: 9, height: 16)
                     .foregroundColor(Color.gray03)
             }
+        }
+        .onTapGesture {
+            if isOn.wrappedValue {
+                agreedTerms.removeAll { $0 == term }
+            } else {
+                agreedTerms.append(term)
+            }
+            withAnimation {
+                allAgreeState = agreedTerms == Terms.allCases
+            }
+            isOn.wrappedValue.toggle()
         }
     }
 }

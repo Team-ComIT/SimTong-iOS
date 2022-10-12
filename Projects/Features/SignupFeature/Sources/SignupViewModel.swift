@@ -27,11 +27,9 @@ public final class SignupViewModel: BaseViewModel {
         }
     }
 
-    func signup() async {
+    func signup() {
         if !email.isEmpty && isEmailStep {
-            await withAsyncTry(with: self) { owner in
-                owner.isPresentedTerms = true
-            }
+            isPresentedTerms = true
         }
     }
  }
