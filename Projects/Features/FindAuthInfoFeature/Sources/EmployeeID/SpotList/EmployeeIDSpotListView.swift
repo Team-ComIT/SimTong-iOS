@@ -5,14 +5,11 @@ import DesignSystem
 public struct EmployeeIDSpotListView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: EmployeeIDSpotListViewModel
-    private let completion: (Spot) -> Void
 
     public init(
-        viewModel: EmployeeIDSpotListViewModel,
-        completion: @escaping (Spot) -> Void
+        viewModel: EmployeeIDSpotListViewModel
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.completion = completion
     }
 
     public var body: some View {
@@ -26,7 +23,7 @@ public struct EmployeeIDSpotListView: View {
                             .padding(.top, 8)
                             .padding(.bottom, 16)
                             .onTapGesture {
-                                completion(spot)
+                                viewModel.spotDidTap(spot: spot)
                                 dismiss()
                             }
                             .overlay(alignment: .bottom) {
@@ -66,7 +63,7 @@ public struct EmployeeIDSpotListView: View {
             Spacer()
 
             STRadioButton(isChecked: viewModel.selectedSpot == spot) {
-                completion(spot)
+                viewModel.spotDidTap(spot: spot)
                 dismiss()
             }
         }

@@ -7,13 +7,16 @@ public final class EmployeeIDSpotListViewModel: BaseViewModel {
 
     @Published var spotList: [Spot] = []
     @Published var selectedSpot: Spot?
+    private let completion: (Spot) -> Void
 
     public init(
         fetchSpotListUseCase: any FetchSpotListUseCase,
-        selectedSpot: Spot?
+        selectedSpot: Spot?,
+        completion: @escaping (Spot) -> Void
     ) {
         self.fetchSpotListUseCase = fetchSpotListUseCase
         self.selectedSpot = selectedSpot
+        self.completion = completion
         super.init()
     }
 
@@ -22,5 +25,9 @@ public final class EmployeeIDSpotListViewModel: BaseViewModel {
         await withAsyncTry(with: self) { owner in
             owner.spotList = try await owner.fetchSpotListUseCase.execute()
         }
+    }
+
+    public func spotDidTap(spot: Spot) {
+        completion(spot)
     }
 }
