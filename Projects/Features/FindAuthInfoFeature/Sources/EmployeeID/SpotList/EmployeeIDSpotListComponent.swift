@@ -11,9 +11,9 @@ public final class EmployeeIDSpotListComponent: Component<EmployeeIDSpotListDepe
         EmployeeIDSpotListView(
             viewModel: .init(
                 fetchSpotListUseCase: dependency.fetchSpotListUseCase,
-                selectedSpot: selectedSpot
-            ),
-            completion: completion
+                selectedSpot: selectedSpot,
+                completion: completion
+            )
         )
     }
 }
