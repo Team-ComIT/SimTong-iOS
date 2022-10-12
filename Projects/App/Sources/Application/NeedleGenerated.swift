@@ -118,12 +118,24 @@ extension AppComponent: Registration {
 
         localTable["remoteCommonsDataSource-any RemoteCommonsDataSource"] = { self.remoteCommonsDataSource as Any }
         localTable["remoteFilesDataSource-any RemoteFilesDataSource"] = { self.remoteFilesDataSource as Any }
+        localTable["remoteUsersDataSource-any RemoteUsersDataSource"] = { self.remoteUsersDataSource as Any }
         localTable["commonsRepository-any CommonsRepository"] = { self.commonsRepository as Any }
         localTable["filesRepository-any FilesRepository"] = { self.filesRepository as Any }
+        localTable["usersRepository-any UsersRepository"] = { self.usersRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
         localTable["uploadSingleFileUseCase-any UploadSingleFileUseCase"] = { self.uploadSingleFileUseCase as Any }
         localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { self.uploadMultipleFileUseCase as Any }
+        localTable["signinUseCase-any SigninUseCase"] = { self.signinUseCase as Any }
+        localTable["signupUseCase-any SignupUseCase"] = { self.signupUseCase as Any }
+        localTable["existsByNameAndEmployeeNumberUseCase-any ExistsByNameAndEmployeeNumberUseCase"] = { self.existsByNameAndEmployeeNumberUseCase as Any }
+        localTable["existsByEmailUseCase-any ExistsByEmailUseCase"] = { self.existsByEmailUseCase as Any }
+        localTable["fetchMyProfileUseCase-any FetchMyProfileUseCase"] = { self.fetchMyProfileUseCase as Any }
+        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
+        localTable["changeNicknameUseCase-any ChangeNicknameUseCase"] = { self.changeNicknameUseCase as Any }
+        localTable["changeEmailUseCase-any ChangeEmailUseCase"] = { self.changeEmailUseCase as Any }
+        localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { self.changeProfileImageUseCase as Any }
+        localTable["changeSpotUseCase-any ChangeSpotUseCase"] = { self.changeSpotUseCase as Any }
     }
 }
 extension SignupComponent: Registration {

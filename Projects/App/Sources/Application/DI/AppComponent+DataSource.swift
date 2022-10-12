@@ -18,3 +18,12 @@ extension AppComponent {
         }
     }
 }
+
+// MARK: - Users
+extension AppComponent {
+    public var remoteUsersDataSource: any RemoteUsersDataSource {
+        shared {
+            RemoteUsersDataSourceImpl(keychain: keychain)
+        }
+    }
+}

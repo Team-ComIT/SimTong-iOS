@@ -15,3 +15,10 @@ extension AppComponent {
         FilesRepositoryImpl(remoteFilesDataSource: remoteFilesDataSource)
     }
 }
+
+// MARK: - Users
+extension AppComponent {
+    public var usersRepository: any UsersRepository {
+        UsersRepositoryImpl(remoteUsersDataSource: remoteUsersDataSource)
+    }
+}
