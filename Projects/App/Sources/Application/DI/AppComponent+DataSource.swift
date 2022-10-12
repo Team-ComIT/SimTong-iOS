@@ -27,3 +27,12 @@ extension AppComponent {
         }
     }
 }
+
+// MARK: - Emails
+extension AppComponent {
+    public var remoteEmailsDataSource: any RemoteEmailsDataSource {
+        shared {
+            RemoteEmailsDataSourceImpl(keychain: keychain)
+        }
+    }
+}
