@@ -20,6 +20,11 @@ public enum STError: Error {
     case alreadyExistNicknameByChangeNickname
     case alreadyExistEmailByChangeEmail
     case alreadyExistsByEmailOverlap
+
+    // emails
+    case authCodeExpired
+    case alreadyVerifiedEmail
+    case tooManyRequestVerifyEmail
 }
 
 extension STError: LocalizedError {
@@ -63,6 +68,15 @@ extension STError: LocalizedError {
 
         case .alreadyExistsByEmailOverlap:
             return "이메일이 이미 사용중입니다"
+
+        case .authCodeExpired:
+            return "인증코드가 만료되었거나 일치하지 않습니다"
+
+        case .alreadyVerifiedEmail:
+            return "이미 인증된 이메일입니다"
+
+        case .tooManyRequestVerifyEmail:
+            return "인증 요청은 30분에 최대 5번 발급가능합니다"
         }
     }
 }

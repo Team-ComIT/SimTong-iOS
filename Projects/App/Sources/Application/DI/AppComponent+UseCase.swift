@@ -66,3 +66,14 @@ extension AppComponent {
         ChangeSpotUseCaseImpl(usersRepository: usersRepository)
     }
 }
+
+// MARK: - Emails
+extension AppComponent {
+    public var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
+        VerifyAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
+    }
+
+    public var sendAuthCodeUseCase: any SendAuthCodeUseCase {
+        SendAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
+    }
+}

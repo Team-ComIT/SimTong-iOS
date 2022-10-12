@@ -22,3 +22,10 @@ extension AppComponent {
         UsersRepositoryImpl(remoteUsersDataSource: remoteUsersDataSource)
     }
 }
+
+// MARK: - Emails
+extension AppComponent {
+    public var emailsRepository: any EmailsRepository {
+        EmailsRepositoryImpl(remoteEmailsDataSource: remoteEmailsDataSource)
+    }
+}
