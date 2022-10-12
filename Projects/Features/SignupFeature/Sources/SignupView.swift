@@ -77,7 +77,7 @@ struct SignupView: View {
                             .foregroundColor(.gray05)
 
                         NavigationLink {
-                            PasswordView()
+                            Text("안녕하세용")
                         } label: {
                             Text("로그인")
                                 .underline()
@@ -116,13 +116,6 @@ struct SignupView: View {
                 viewModel.isPresentedTerms = false
                 viewModel.isNavigateToVerify.toggle()
             }
-        }
-    }
-}
-
-struct PasswordView: View {
-    var body: some View {
-        HStack {
         }
     }
 }
