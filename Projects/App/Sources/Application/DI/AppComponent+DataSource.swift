@@ -1,11 +1,20 @@
 import NeedleFoundation
 import NetworkModule
 
-// MARK: - Common
+// MARK: - Commons
 extension AppComponent {
-    public var commonsRemoteDataSource: any RemoteCommonsDataSource {
+    public var remoteCommonsDataSource: any RemoteCommonsDataSource {
         shared {
             RemoteCommonsDataSourceImpl(keychain: keychain)
+        }
+    }
+}
+
+// MARK: - Files
+extension AppComponent {
+    public var remoteFilesDataSource: any RemoteFilesDataSource {
+        shared {
+            RemoteFilesDataSourceImpl(keychain: keychain)
         }
     }
 }
