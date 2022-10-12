@@ -15,11 +15,11 @@ struct TermsView: View {
                 .padding(.horizontal, 16)
 
             HStack(spacing: 8) {
-                STCheckbox(isOn: $allAgreeState)
-                    .onChange(of: !allAgreeState) { isOn in
-                        agreedTerms = isOn ? [] : Terms.allCases
-                        privacyTerms = !isOn
-                    }
+                STCheckbox(isOn: $allAgreeState, willChange: { isOn in
+                    agreedTerms = isOn ? [] : Terms.allCases
+                    privacyTerms = !isOn
+                    print(agreedTerms)
+                })
 
                 Text("약관 전체동의")
                     .stTypo(.r5, color: .black)
@@ -40,6 +40,8 @@ struct TermsView: View {
             Spacer()
 
             CTAButton(text: "확인")
+                .disabled(!allAgreeState)
+                .padding(.bottom, 16)
 
         }
         .padding(.horizontal, 16)
@@ -48,7 +50,16 @@ struct TermsView: View {
     @ViewBuilder
     func termsRow(term: Terms, isOn: Binding<Bool>) -> some View {
         HStack {
-            STCheckbox(isOn: isOn)
+            STCheckbox(isOn: isOn, willChange: { isChecked in
+                if isChecked {
+                    agreedTerms.removeAll { $0 == term }
+                } else {
+                    agreedTerms.append(term)
+                }
+                withAnimation {
+                    allAgreeState = agreedTerms == Terms.allCases
+                }
+            })
 
             Text(term.display)
                 .stTypo(.r5, color: .gray05)
