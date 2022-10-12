@@ -1,4 +1,5 @@
 import DomainModule
+import Foundation
 
 public struct FetchMenuListUseCaseImpl: FetchMenuListUseCase {
     private let menuRepository: any MenuRepository

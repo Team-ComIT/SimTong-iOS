@@ -29,3 +29,10 @@ extension AppComponent {
         EmailsRepositoryImpl(remoteEmailsDataSource: remoteEmailsDataSource)
     }
 }
+
+// MARK: - Menu
+extension AppComponent {
+    public var menuRepository: any MenuRepository {
+        MenuRepositoryImpl(remoteMenuDataSource: remoteMenuDataSource)
+    }
+}
