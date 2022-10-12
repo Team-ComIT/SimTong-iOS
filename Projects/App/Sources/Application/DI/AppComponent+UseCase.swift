@@ -23,3 +23,46 @@ extension AppComponent {
         UploadMultipleFileUseCaseImpl(filesRepository: filesRepository)
     }
 }
+
+// MARK: - Users
+extension AppComponent {
+    public var signinUseCase: any SigninUseCase {
+        SigninUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var signupUseCase: any SignupUseCase {
+        SignupUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var existsByNameAndEmployeeNumberUseCase: any ExistsByNameAndEmployeeNumberUseCase {
+        ExistsByNameAndEmployeeNumberUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var existsByEmailUseCase: any ExistsByEmailUseCase {
+        ExistsByEmailUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var fetchMyProfileUseCase: any FetchMyProfileUseCase {
+        FetchMyProfileUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var changePasswordUseCase: any ChangePasswordUseCase {
+        ChangePasswordUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var changeNicknameUseCase: any ChangeNicknameUseCase {
+        ChangeNicknameUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var changeEmailUseCase: any ChangeEmailUseCase {
+        ChangeEmailUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var changeProfileImageUseCase: any ChangeProfileImageUseCase {
+        ChangeProfileImageUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var changeSpotUseCase: any ChangeSpotUseCase {
+        ChangeSpotUseCaseImpl(usersRepository: usersRepository)
+    }
+}

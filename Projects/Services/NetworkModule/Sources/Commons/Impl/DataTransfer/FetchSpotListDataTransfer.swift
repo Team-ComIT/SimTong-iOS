@@ -2,9 +2,7 @@ import Foundation
 import DataMappingModule
 import DomainModule
 
-// MARK: - Commons
-
-// MARK: FetchSpotList
+// MARK: FetchMyProfile
 public extension SingleSpotResponseDTO {
     func toDomain() -> Spot {
         Spot(
