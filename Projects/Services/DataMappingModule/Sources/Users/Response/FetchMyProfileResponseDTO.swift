@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserInfoResponseDTO: Decodable {
+public struct FetchMyProfileResponseDTO: Decodable {
     public init(
         name: String,
         email: String,
