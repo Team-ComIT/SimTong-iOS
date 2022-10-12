@@ -6,6 +6,7 @@ public enum UsersAPI: SimTongAPI {
     case signin(SigninRequestDTO)
     case signup(SignupRequestDTO)
     case existsByNameAndEmployeeNumber(name: String, employeeNumber: Int)
+    case existsByEmail(email: String)
     case fetchMyProfile
     case changePassword(ChangePasswordRequestDTO)
     case changeNickname(nickname: String)
@@ -29,6 +30,9 @@ public extension UsersAPI {
 
         case .existsByNameAndEmployeeNumber:
             return "/verification-employee"
+
+        case .existsByEmail:
+            return "/email/overlap"
 
         case .fetchMyProfile:
             return "/information"
@@ -55,7 +59,7 @@ public extension UsersAPI {
         case .fetchMyProfile:
             return .get
 
-        case .existsByNameAndEmployeeNumber:
+        case .existsByNameAndEmployeeNumber, .existsByEmail:
             return .head
 
         case .signin, .signup:
@@ -78,6 +82,11 @@ public extension UsersAPI {
             return .requestParameters(parameters: [
                 "name": name,
                 "employee_number": employeeNumber
+            ], encoding: URLEncoding.queryString)
+
+        case let .existsByEmail(email):
+            return .requestParameters(parameters: [
+                "email": email
             ], encoding: URLEncoding.queryString)
 
         case let .changePassword(req):
@@ -138,6 +147,12 @@ public extension UsersAPI {
             return [
                 400: .unknown(),
                 401: .notExistsUserByVerifyEmployee
+            ]
+
+        case .existsByEmail:
+            return [
+                400: .unknown(),
+                409: .alreadyExistsByEmailOverlap
             ]
 
         case .fetchMyProfile:

@@ -19,6 +19,7 @@ public enum STError: Error {
     case passwordMismatchByChangePassword
     case alreadyExistNicknameByChangeNickname
     case alreadyExistEmailByChangeEmail
+    case alreadyExistsByEmailOverlap
 }
 
 extension STError: LocalizedError {
@@ -58,6 +59,9 @@ extension STError: LocalizedError {
             return "닉네임이 이미 사용중입니다"
 
         case .alreadyExistEmailByChangeEmail:
+            return "이메일이 이미 사용중입니다"
+
+        case .alreadyExistsByEmailOverlap:
             return "이메일이 이미 사용중입니다"
         }
     }
