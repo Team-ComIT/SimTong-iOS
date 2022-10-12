@@ -36,6 +36,17 @@ private class SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider: SignupEm
 private func factory85693d36827c3c0e8881e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider()
 }
+private class SignupVerifyDependency19890686bff8e77ece06Provider: SignupVerifyDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->SignupVerifyComponent
+private func factoryf7587eff678919fec270e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupVerifyDependency19890686bff8e77ece06Provider()
+}
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 
 
@@ -131,6 +142,11 @@ extension SignupEmployeeInfoComponent: Registration {
 
     }
 }
+extension SignupVerifyComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension RootComponent: Registration {
     public func registerItems() {
 
@@ -180,6 +196,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)

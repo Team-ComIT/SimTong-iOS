@@ -28,8 +28,12 @@ extension AppComponent {
         IntroComponent(parent: self)
     }
 
-    var signupComponent: SignupEmployeeInfoComponent {
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
         SignupEmployeeInfoComponent(parent: self)
+    }
+
+    var signupVerifyComponent: SignupVerifyComponent {
+        SignupVerifyComponent(parent: self)
     }
 
     var findAuthInfoComponent: FindAuthInfoTabComponent {
