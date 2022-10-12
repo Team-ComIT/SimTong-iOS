@@ -1,9 +1,9 @@
 import DomainModule
 
 public struct FetchSpotListUseCaseImpl: FetchSpotListUseCase {
-    private let commonRepository: any CommonRepository
+    private let commonRepository: any CommonsRepository
 
-    public init(commonRepository: any CommonRepository) {
+    public init(commonRepository: any CommonsRepository) {
         self.commonRepository = commonRepository
     }
 
