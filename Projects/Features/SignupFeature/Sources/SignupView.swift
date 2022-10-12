@@ -12,6 +12,7 @@ struct SignupView: View {
 
     @StateObject var viewModel: SignupViewModel
     @FocusState private var focusField: FocusField?
+//    @Environment(\.dismiss) var dismiss
 
     public init(
         viewModel: SignupViewModel
@@ -31,8 +32,8 @@ struct SignupView: View {
                                 text: $viewModel.email,
                                 style: .clear,
                                 onCommit: {
-                                viewModel.nextButtonDidTap()
-                            })
+                                    viewModel.nextButtonDidTap()
+                                })
                             .focused($focusField, equals: .email)
                             .opacity(viewModel.isEmailStep ? 1.0 : 0.0)
                         }
@@ -44,11 +45,11 @@ struct SignupView: View {
                                 text: $viewModel.number,
                                 style: .clear,
                                 onCommit: {
-                                withAnimation {
-                                    viewModel.nextButtonDidTap()
-                                    focusField = .email
-                                }
-                            })
+                                    withAnimation {
+                                        viewModel.nextButtonDidTap()
+                                        focusField = .email
+                                    }
+                                })
                             .focused($focusField, equals: .number)
                             .opacity(viewModel.isNumberStep ? 1.0 : 0.0)
                             .keyboardType(.numberPad)
@@ -60,11 +61,11 @@ struct SignupView: View {
                             text: $viewModel.name,
                             style: .clear,
                             onCommit: {
-                            withAnimation {
-                                viewModel.nextButtonDidTap()
-                                focusField = .number
-                            }
-                        })
+                                withAnimation {
+                                    viewModel.nextButtonDidTap()
+                                    focusField = .number
+                                }
+                            })
                         .focused($focusField, equals: .name)
                     }
                     .padding(.horizontal, 16)
@@ -94,6 +95,9 @@ struct SignupView: View {
                 Spacer()
 
                 WideButton(text: viewModel.nextButtonTitle) {
+                    Task {
+                        await viewModel.signup()
+                    }
                     withAnimation {
                         viewModel.nextButtonDidTap()
                     }
@@ -101,15 +105,18 @@ struct SignupView: View {
                 .disabled(!viewModel.isEnableNextButton)
             }
         }
-//        .ada {
-//            TermsView {
-//                viewModel.isPresentedTerms = false
-//                viewModel.isPresentedTerms.toggle()
-//            }
-//        }
+//        .configBackButton(willDismiss: {
+//            viewModel.isPresentedTerms = false
+//        }, dismiss: dismiss)
         .stBackground()
         .onAppear {
             focusField = .name
+        }
+        .adaptiveSheet(isPresented: $viewModel.isPresentedTerms, detents: [.medium(), .large()]) {
+            TermsView {
+                viewModel.isPresentedTerms = false
+//                viewModel.isNavigateToVerify.toggle()
+            }
         }
     }
 }

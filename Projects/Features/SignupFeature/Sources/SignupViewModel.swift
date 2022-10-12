@@ -25,4 +25,12 @@ public final class SignupViewModel: BaseViewModel {
             nextButtonTitle = "확인"
         }
     }
+
+    func signup() async {
+        if !email.isEmpty && isEmailStep {
+            await withAsyncTry(with: self) { owner in
+                owner.isPresentedTerms = true
+            }
+        }
+    }
  }
