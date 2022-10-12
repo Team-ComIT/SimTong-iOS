@@ -1,7 +1,7 @@
 import Combine
 import BaseFeature
 
-public final class SignupViewModel: BaseViewModel {
+public final class SignupEmployeeInfoViewModel: BaseViewModel {
     @Published var name: String = ""
     @Published var number: String = ""
     @Published var email: String = ""

@@ -3,19 +3,19 @@ import Foundation
 import DesignSystem
 import Combine
 
-struct SignupView: View {
+struct SignupEmployeeInfoView: View {
     private enum FocusField: Hashable {
         case name
         case number
         case email
     }
 
-    @StateObject var viewModel: SignupViewModel
+    @StateObject var viewModel: SignupEmployeeInfoViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
 
     public init(
-        viewModel: SignupViewModel
+        viewModel: SignupEmployeeInfoViewModel
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
