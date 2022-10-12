@@ -3,6 +3,7 @@ import SwiftUI
 import RootFeature
 import IntroFeature
 import FindAuthInfoFeature
+import SignupFeature
 import KeychainModule
 
 final class AppComponent: BootstrapComponent {
@@ -25,6 +26,10 @@ final class AppComponent: BootstrapComponent {
 extension AppComponent {
     var introComponent: IntroComponent {
         IntroComponent(parent: self)
+    }
+
+    var signupComponent: SignupComponent {
+        SignupComponent(parent: self)
     }
 
     var findAuthInfoComponent: FindAuthInfoTabComponent {
