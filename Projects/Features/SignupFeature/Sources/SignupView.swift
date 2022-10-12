@@ -12,7 +12,7 @@ struct SignupView: View {
 
     @StateObject var viewModel: SignupViewModel
     @FocusState private var focusField: FocusField?
-//    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
 
     public init(
         viewModel: SignupViewModel
@@ -89,6 +89,7 @@ struct SignupView: View {
                     Spacer()
                 }
                 .navigationBarTitle("회원가입")
+                .navigationBarTitleDisplayMode(.inline)
             }
 
             VStack {
@@ -105,9 +106,9 @@ struct SignupView: View {
                 .disabled(!viewModel.isEnableNextButton)
             }
         }
-//        .configBackButton(willDismiss: {
-//            viewModel.isPresentedTerms = false
-//        }, dismiss: dismiss)
+        .configBackButton(willDismiss: {
+            viewModel.isPresentedTerms = false
+        }, dismiss: dismiss)
         .stBackground()
         .onAppear {
             focusField = .name
@@ -115,7 +116,7 @@ struct SignupView: View {
         .adaptiveSheet(isPresented: $viewModel.isPresentedTerms, detents: [.medium(), .large()]) {
             TermsView {
                 viewModel.isPresentedTerms = false
-//                viewModel.isNavigateToVerify.toggle()
+                viewModel.isNavigateToVerify.toggle()
             }
         }
     }
