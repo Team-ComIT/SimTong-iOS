@@ -28,6 +28,7 @@ public final class EmployeeIDSpotListViewModel: BaseViewModel {
     }
 
     public func spotDidTap(spot: Spot) {
+        selectedSpot = spot
         completion(spot)
     }
 }
