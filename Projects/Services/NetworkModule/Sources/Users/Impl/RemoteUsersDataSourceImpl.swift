@@ -21,6 +21,10 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
         )
     }
 
+    public func existsByEmail(email: String) async throws {
+        try await request(.existsByEmail(email: email), dto: NoResponse.self)
+    }
+
     public func fetchMyProfile() async throws -> UserInfo {
         try await request(.fetchMyProfile, dto: FetchMyProfileResponseDTO.self)
             .toDomain()
