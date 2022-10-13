@@ -36,3 +36,12 @@ extension AppComponent {
         }
     }
 }
+
+// MARK: - Menu
+extension AppComponent {
+    public var remoteMenuDataSource: any RemoteMenuDataSource {
+        shared {
+            RemoteMenuDataSourceImpl(keychain: keychain)
+        }
+    }
+}

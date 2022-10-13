@@ -77,3 +77,14 @@ extension AppComponent {
         SendAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
     }
 }
+
+// MARK: - Menu
+extension AppComponent {
+    public var fetchMenuListUseCase: any FetchMenuListUseCase {
+        FetchMenuListUseCaseImpl(menuRepository: menuRepository)
+    }
+
+    public var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
+        FetchPublicMenuListUseCaseImpl(menuRepository: menuRepository)
+    }
+}
