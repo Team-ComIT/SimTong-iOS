@@ -11,6 +11,10 @@ extension AppComponent {
     public var findEmployeeNumberUseCase: any FindEmployeeNumberUseCase {
         FindEmployeeNumberUseCaseImpl(commonRepository: commonsRepository)
     }
+
+    public var resetPasswordUseCase: any ResetPasswordUseCase {
+        ResetPasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
 }
 
 // MARK: - Files

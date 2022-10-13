@@ -16,4 +16,8 @@ public struct CommonsRepositoryImpl: CommonsRepository {
     public func findEmployeeNumber(req: FindEmployeeNumberRequestDTO) async throws -> Int {
         try await remoteCommonsDataSource.findEmployeeNumber(req: req)
     }
+
+    public func resetPassword(req: ResetPasswordRequestDTO) async throws {
+        try await remoteCommonsDataSource.resetPassword(req: req)
+    }
 }
