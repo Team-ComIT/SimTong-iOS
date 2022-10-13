@@ -9,6 +9,8 @@ public enum STError: Error {
 
     // common
     case notFoundUserByFindEmployeeNumber
+    case emailIsNotAuthorizedOrMismatch
+    case notFoundUserByResetPassword
 
     // users
     case notFoundUserBySignin
@@ -33,14 +35,20 @@ extension STError: LocalizedError {
         case let .unknown(message):
             return message
 
-        case .notFoundUserByFindEmployeeNumber:
-            return "입력한 정보에 따른 회원을 찾지 못했습니다"
-
         case .internalServerError:
             return "서버에서 문제가 발생했습니다"
 
         case .accessTokenExpired:
             return "세션이 만료되었습니다. 다시 로그인해주세요!"
+
+        case .notFoundUserByFindEmployeeNumber:
+            return "입력한 정보에 따른 회원을 찾지 못했습니다"
+
+        case .emailIsNotAuthorizedOrMismatch:
+            return "이메일이 인증되지 않았거나 계정 이메일과 일치하지 않습니다"
+
+        case .notFoundUserByResetPassword:
+            return "사원번호에 따른 유저를 찾을 수 없습니다"
 
         case .notFoundUserBySignin:
             return "사원번호에 따른 유저를 찾을 수 없습니다"

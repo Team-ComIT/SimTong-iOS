@@ -6,6 +6,7 @@ public enum CommonsAPI: SimTongAPI {
     case reissueToken
     case findEmployeeNumber(FindEmployeeNumberRequestDTO)
     case spotList
+    case resetPassword(ResetPasswordRequestDTO)
 }
 
 public extension CommonsAPI {
@@ -23,6 +24,9 @@ public extension CommonsAPI {
 
         case .spotList:
             return "/spot"
+
+        case .resetPassword:
+            return "/password"
         }
     }
 
@@ -31,7 +35,7 @@ public extension CommonsAPI {
         case .spotList, .findEmployeeNumber:
             return .get
 
-        case .reissueToken:
+        case .reissueToken, .resetPassword:
             return .put
         }
     }
@@ -47,6 +51,9 @@ public extension CommonsAPI {
                 "spotId": req.spotId,
                 "email": req.email
             ], encoding: URLEncoding.queryString)
+
+        case let .resetPassword(req):
+            return .requestJSONEncodable(req)
         }
     }
 
@@ -77,6 +84,13 @@ public extension CommonsAPI {
         case .spotList:
             return [
                 500: .internalServerError
+            ]
+
+        case .resetPassword:
+            return [
+                400: .unknown(),
+                401: .emailIsNotAuthorizedOrMismatch,
+                404: .notFoundUserByResetPassword
             ]
         }
     }
