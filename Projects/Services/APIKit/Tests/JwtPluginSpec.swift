@@ -6,7 +6,7 @@ import Foundation
 @testable import KeychainModule
 
 // swiftlint: disable function_body_length
-final class JwtPluginTests: QuickSpec {
+final class JwtPluginSpec: QuickSpec {
     override func spec() {
         var keychain: Keychain!
         var plugin: JwtPlugin!
