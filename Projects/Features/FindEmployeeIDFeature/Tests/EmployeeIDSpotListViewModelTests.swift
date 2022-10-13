@@ -1,5 +1,5 @@
 import XCTest
-@testable import FindAuthInfoFeature
+@testable import FIndTa
 import DomainModule
 import DataModule
 import Nimble
