@@ -6,6 +6,7 @@ import FindTabFeature
 import FindEmployeeIDFeature
 import SignupFeature
 import KeychainModule
+import FindPasswordFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -47,5 +48,9 @@ extension AppComponent {
 
     var employeeIDResultComponent: EmployeeIDResultComponent {
         EmployeeIDResultComponent(parent: self)
+    }
+
+    var findPasswordComponent: FindPasswordComponent {
+        FindPasswordComponent(parent: self)
     }
 }
