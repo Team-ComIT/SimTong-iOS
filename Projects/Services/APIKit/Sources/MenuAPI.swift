@@ -1,6 +1,7 @@
-import Moya
 import ErrorModule
 import Foundation
+import Utility
+import Moya
 
 public enum MenuAPI: SimTongAPI {
     case fetchMenuList(Date)
@@ -33,7 +34,7 @@ public extension MenuAPI {
         switch self {
         case let .fetchMenuList(date), let .fetchPublicMenuList(date):
             return .requestParameters(parameters: [
-                "date": date
+                "date": date.toSmallSimtongDateString()
             ], encoding: URLEncoding.queryString)
         }
     }
@@ -61,14 +62,5 @@ public extension MenuAPI {
                 400: .unknown()
             ]
         }
-    }
-}
-
-fileprivate extension Date {
-    func toMenuDateString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = .init(identifier: "UTC")
-        return formatter.string(from: self)
     }
 }
