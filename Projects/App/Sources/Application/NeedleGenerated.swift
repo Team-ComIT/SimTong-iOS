@@ -90,15 +90,20 @@ private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: Needle
     return RootDependency3944cc797a4a88956fb5Provider()
 }
 private class FindPasswordDependency542eacce769b9dc25904Provider: FindPasswordDependency {
-
-
-    init() {
-
+    var sendAuthCodeUseCase: any SendAuthCodeUseCase {
+        return appComponent.sendAuthCodeUseCase
+    }
+    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
+        return appComponent.verifyAuthCodeUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->FindPasswordComponent
-private func factory15775d8436b06b9741d1e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return FindPasswordDependency542eacce769b9dc25904Provider()
+private func factory15775d8436b06b9741d1f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindPasswordDependency542eacce769b9dc25904Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
@@ -188,7 +193,8 @@ extension RootComponent: Registration {
 }
 extension FindPasswordComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\FindPasswordDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
+        keyPathToName[\FindPasswordDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
     }
 }
 extension FindAuthInfoTabComponent: Registration {
@@ -223,7 +229,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->FindPasswordComponent", factory15775d8436b06b9741d1e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->FindPasswordComponent", factory15775d8436b06b9741d1f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }

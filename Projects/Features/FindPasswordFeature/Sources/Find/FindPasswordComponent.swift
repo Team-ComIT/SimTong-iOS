@@ -1,12 +1,19 @@
 import NeedleFoundation
 import SwiftUI
+import DomainModule
 
-public protocol FindPasswordDependency: Dependency {}
+public protocol FindPasswordDependency: Dependency {
+    var sendAuthCodeUseCase: any SendAuthCodeUseCase { get }
+    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase { get }
+}
 
 public final class FindPasswordComponent: Component<FindPasswordDependency> {
     public func makeView() -> some View {
         FindPasswordView(
-            viewModel: .init()
+            viewModel: .init(
+                sendAuthCodeUseCase: dependency.sendAuthCodeUseCase,
+                verifyAuthCodeUseCase: dependency.verifyAuthCodeUseCase
+            )
         )
     }
 }

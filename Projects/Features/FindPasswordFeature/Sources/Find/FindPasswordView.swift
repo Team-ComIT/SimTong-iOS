@@ -28,7 +28,7 @@ struct FindPasswordView: View {
                 text: $viewModel.email,
                 style: .button,
                 buttonText: "인증",
-                errorText: "입력하신 정보가 올바르지 않습니다",
+                errorText: viewModel.errorMessage,
                 isError: viewModel.isError,
                 buttonAction: {
                     viewModel.verifyButtonDidTap()
@@ -41,7 +41,7 @@ struct FindPasswordView: View {
                 STTextField(
                     "인증코드를 입력해주세요",
                     text: $viewModel.code,
-                    errorText: "인증 번호가 일치하지 않습니다",
+                    errorText: viewModel.errorMessage,
                     isError: viewModel.isVerifyAuthCodeError,
                     onCommit: {
                         viewModel.completeButtonDidTap()
@@ -73,11 +73,5 @@ struct FindPasswordView: View {
         .onReceive(viewModel.timer) { _ in
             viewModel.remainingTime -= 1
         }
-    }
-}
-
-struct FindPasswordView_Previews: PreviewProvider {
-    static var previews: some View {
-        FindPasswordView(viewModel: .init())
     }
 }
