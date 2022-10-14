@@ -34,8 +34,12 @@ struct FindPasswordView: View {
                     viewModel.verifyButtonDidTap()
                 }, onCommit: {
                     viewModel.verifyButtonDidTap()
-                })
+                }
+            )
             .focused($focusField, equals: .email)
+            .onChange(of: viewModel.email) { _ in
+                viewModel.isError = false
+            }
 
             if viewModel.isTimerStarted {
                 STTextField(
