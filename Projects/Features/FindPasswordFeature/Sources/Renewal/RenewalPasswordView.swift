@@ -10,6 +10,8 @@ struct RenewalPasswordView: View {
     }
 
     var body: some View {
-        Text("Hello, World!")
+        VStack(spacing: 8) {
+            
+        }
     }
 }
