@@ -3,6 +3,9 @@ import Combine
 import DomainModule
 
 public final class RenewalPasswordViewModel: BaseViewModel {
+    @Published var password = ""
+    @Published var passwordCheck = ""
+
     private let resetPasswordUseCase: any ResetPasswordUseCase
 
     public init(
@@ -10,4 +13,7 @@ public final class RenewalPasswordViewModel: BaseViewModel {
     ) {
         self.resetPasswordUseCase = resetPasswordUseCase
     }
+
+    @MainActor
+    func completeButtonDidTap() {}
 }

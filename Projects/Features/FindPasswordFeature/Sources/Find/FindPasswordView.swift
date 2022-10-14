@@ -8,11 +8,16 @@ struct FindPasswordView: View {
         case code
     }
 
-    @StateObject var viewModel: FindPasswordViewModel
+    @StateObject private var viewModel: FindPasswordViewModel
     @FocusState private var focusField: FocusField?
+    private let renewalPasswordComponent: RenewalPasswordComponent
 
-    public init(viewModel: FindPasswordViewModel) {
+    public init(
+        viewModel: FindPasswordViewModel,
+        renewalPasswordComponent: RenewalPasswordComponent
+    ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.renewalPasswordComponent = renewalPasswordComponent
     }
 
     var body: some View {
@@ -68,7 +73,6 @@ struct FindPasswordView: View {
             }
             .padding(.top, 32)
             .disabled(viewModel.code.isEmpty)
-            .transition(.move(edge: .top))
 
             Spacer()
         }
@@ -78,5 +82,6 @@ struct FindPasswordView: View {
         .onReceive(viewModel.timer) { _ in
             viewModel.remainingTime -= 1
         }
+        .navigate(to: renewalPasswordComponent.makeView(), when: $viewModel.isSuccessEmailVerify)
     }
 }

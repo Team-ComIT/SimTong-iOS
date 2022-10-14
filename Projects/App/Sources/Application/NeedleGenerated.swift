@@ -49,19 +49,6 @@ private class EmployeeIDResultDependency17ee22cd492649466e5fProvider: EmployeeID
 private func factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return EmployeeIDResultDependency17ee22cd492649466e5fProvider()
 }
-private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPasswordDependency {
-    var resetPasswordUseCase: any ResetPasswordUseCase {
-        return appComponent.resetPasswordUseCase
-    }
-    private let appComponent: AppComponent
-    init(appComponent: AppComponent) {
-        self.appComponent = appComponent
-    }
-}
-/// ^->AppComponent->RenewalPasswordComponent
-private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
-}
 private class FindEmployeeDependency636344242d29e7292bd9Provider: FindEmployeeDependency {
     var employeeIDSpotListComponent: EmployeeIDSpotListComponent {
         return appComponent.employeeIDSpotListComponent
@@ -102,12 +89,28 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider()
 }
+private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPasswordDependency {
+    var resetPasswordUseCase: any ResetPasswordUseCase {
+        return appComponent.resetPasswordUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->RenewalPasswordComponent
+private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
+}
 private class FindPasswordDependency542eacce769b9dc25904Provider: FindPasswordDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
         return appComponent.sendAuthCodeUseCase
     }
     var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
         return appComponent.verifyAuthCodeUseCase
+    }
+    var renewalPasswordComponent: RenewalPasswordComponent {
+        return appComponent.renewalPasswordComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -191,11 +194,6 @@ extension EmployeeIDResultComponent: Registration {
 
     }
 }
-extension RenewalPasswordComponent: Registration {
-    public func registerItems() {
-        keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
-    }
-}
 extension FindEmployeeIDComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindEmployeeDependency.employeeIDSpotListComponent] = "employeeIDSpotListComponent-EmployeeIDSpotListComponent"
@@ -212,10 +210,16 @@ extension RootComponent: Registration {
 
     }
 }
+extension RenewalPasswordComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
+    }
+}
 extension FindPasswordComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindPasswordDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
         keyPathToName[\FindPasswordDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
+        keyPathToName[\FindPasswordDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
     }
 }
 extension FindAuthInfoTabComponent: Registration {
@@ -248,10 +252,10 @@ private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SignupComponent", factory86602ff0d0dbaf2cb017e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordComponent", factory15775d8436b06b9741d1f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)

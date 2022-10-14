@@ -1,7 +1,15 @@
+import DesignSystem
 import SwiftUI
 
 struct RenewalPasswordView: View {
-    @StateObject var viewModel: RenewalPasswordViewModel
+    private enum FocusField: Hashable {
+        case password
+        case passwordCheck
+    }
+
+    @StateObject private var viewModel: RenewalPasswordViewModel
+    @FocusState private var focusField: FocusField?
+    @Environment(\.dismiss) var dismiss
 
     public init(
         viewModel: RenewalPasswordViewModel
@@ -11,7 +19,32 @@ struct RenewalPasswordView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            
+            STSecureTextField("새 비밀번호를 입력해주세요", text: $viewModel.password, isError: viewModel.isError, onCommit: {
+                focusField = .passwordCheck
+            })
+            .focused($focusField, equals: .password)
+            .padding(.top, 64)
+
+            STSecureTextField(
+                "비밀번호를 다시 확인해주세요",
+                text: $viewModel.passwordCheck,
+                errorText: viewModel.errorMessage,
+                isError: viewModel.isError,
+                onCommit: {
+                    viewModel.completeButtonDidTap()
+                }
+            )
+            .focused($focusField, equals: .passwordCheck)
+
+            CTAButton(text: "확인") {
+                viewModel.completeButtonDidTap()
+            }
+            .padding(.top, 32)
+            .disabled(viewModel.password.isEmpty || viewModel.passwordCheck.isEmpty)
+
+            Spacer()
         }
+        .padding(.horizontal, 16)
+        .configBackButton(dismiss: dismiss)
     }
 }

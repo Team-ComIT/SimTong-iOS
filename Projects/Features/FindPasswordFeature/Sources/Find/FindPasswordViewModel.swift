@@ -9,6 +9,7 @@ final class FindPasswordViewModel: BaseViewModel {
     @Published var code = ""
     @Published var remainingTime = 300
     @Published var isVerifyAuthCodeError = false
+    @Published var isSuccessEmailVerify = false
     let timer = Timer.publish(every: 1, on: .main, in: .common)
     private var timerSubscription: Cancellable?
     var isTimerStarted: Bool = false
@@ -49,6 +50,7 @@ final class FindPasswordViewModel: BaseViewModel {
         Task {
             await withAsyncTry(with: self, action: { owner in
                 try await owner.verifyAuthCodeUseCase.execute(email: owner.email, code: owner.code)
+                owner.isSuccessEmailVerify = true
             }, errorAction: { owner, error in
                 owner.isVerifyAuthCodeError = true
                 owner.errorMessage = error.localizedDescription
