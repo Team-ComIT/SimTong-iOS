@@ -3,7 +3,7 @@ import Lottie
 
 public struct LottieUIView: UIViewRepresentable {
     @Binding var play: Bool
-    let animation: Lottie.Animation?
+    let animation: LottieAnimation?
     let loop: LottieLoopMode
 
     public init(

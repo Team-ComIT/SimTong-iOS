@@ -74,11 +74,13 @@ extension AppComponent {
 // MARK: - Emails
 extension AppComponent {
     public var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
-        VerifyAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
+        VerifyAuthCodeUseCaseDummy()
+//        VerifyAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
     }
 
     public var sendAuthCodeUseCase: any SendAuthCodeUseCase {
-        SendAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
+        SendAuthCodeUseCaseDummy()
+//        SendAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
     }
 }
 

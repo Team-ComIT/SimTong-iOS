@@ -74,6 +74,7 @@ struct FindPasswordView: View {
         }
         .animation(.default, value: viewModel.isTimerStarted)
         .padding(.horizontal, 16)
+        .stLoading(isLoading: $viewModel.isLoading)
         .onReceive(viewModel.timer) { _ in
             viewModel.remainingTime -= 1
         }

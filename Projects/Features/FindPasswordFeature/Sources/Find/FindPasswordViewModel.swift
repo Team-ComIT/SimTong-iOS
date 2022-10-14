@@ -32,10 +32,11 @@ final class FindPasswordViewModel: BaseViewModel {
     @MainActor
     func verifyButtonDidTap() {
         if !isTimerStarted {
+            isTimerStarted = true
             timerSubscription = timer.connect()
         }
-        isTimerStarted = true
         remainingTime = 300
+        guard !email.isEmpty else { return }
         Task {
             await withAsyncTry(with: self) { owner in
                 try await owner.sendAuthCodeUseCase.execute(email: owner.email)
