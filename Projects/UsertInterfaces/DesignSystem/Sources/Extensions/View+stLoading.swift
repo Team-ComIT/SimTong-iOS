@@ -7,10 +7,6 @@ struct STLoadingModifier: ViewModifier {
             content
 
             if isLoading {
-                Color.extraBlack
-                    .opacity(0.3)
-                    .ignoresSafeArea()
-
                 STLoadingView(play: $isLoading)
                     .padding(6)
                     .background(Color.extraWhite)

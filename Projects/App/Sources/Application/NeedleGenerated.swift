@@ -109,6 +109,9 @@ private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInf
     var findEmployeeIDComponent: FindEmployeeIDComponent {
         return appComponent.findEmployeeIDComponent
     }
+    var findPasswordComponent: FindPasswordComponent {
+        return appComponent.findPasswordComponent
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -200,6 +203,7 @@ extension FindPasswordComponent: Registration {
 extension FindAuthInfoTabComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindAuthInfoTabDependency.findEmployeeIDComponent] = "findEmployeeIDComponent-FindEmployeeIDComponent"
+        keyPathToName[\FindAuthInfoTabDependency.findPasswordComponent] = "findPasswordComponent-FindPasswordComponent"
     }
 }
 extension IntroComponent: Registration {
