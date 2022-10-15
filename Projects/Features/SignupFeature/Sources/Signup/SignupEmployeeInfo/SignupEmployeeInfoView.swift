@@ -31,19 +31,20 @@ struct SignupEmployeeInfoView: View {
                                 labelText: "이메일",
                                 text: $viewModel.email,
                                 style: .clear,
+                                errorText: "정보가 일치 하지 않습니다",
                                 onCommit: {
                                     viewModel.nextButtonDidTap()
                                 })
                             .focused($focusField, equals: .email)
                             .opacity(viewModel.isEmailStep ? 1.0 : 0.0)
                         }
-
                         if viewModel.isNumberStep {
                             STTextField(
                                 "1234567890",
                                 labelText: "사원번호",
                                 text: $viewModel.number,
                                 style: .clear,
+                                errorText: "정보가 일치 하지 않습니다",
                                 onCommit: {
                                     withAnimation {
                                         viewModel.nextButtonDidTap()
@@ -60,6 +61,7 @@ struct SignupEmployeeInfoView: View {
                             labelText: "이름",
                             text: $viewModel.name,
                             style: .clear,
+                            errorText: "정보가 일치 하지 않습니다",
                             onCommit: {
                                 withAnimation {
                                     viewModel.nextButtonDidTap()
@@ -89,7 +91,6 @@ struct SignupEmployeeInfoView: View {
                     Spacer()
                 }
                 .navigationBarTitle("회원가입")
-                .navigationBarTitleDisplayMode(.inline)
             }
 
             VStack {
@@ -117,5 +118,6 @@ struct SignupEmployeeInfoView: View {
                 viewModel.isNavigateToVerify.toggle()
             }
         }
+        .navigate(to: SignupVerifyView(viewModel: SignupVerifyViewModel()), when: $viewModel.isNavigateToVerify)
     }
 }
