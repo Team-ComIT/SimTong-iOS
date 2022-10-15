@@ -36,6 +36,10 @@ extension AppComponent {
         SignupVerifyComponent(parent: self)
     }
 
+    var signupPasswordComponent: SignupPasswordComponent {
+        SignupPasswordComponent(parent: self)
+    }
+
     var findAuthInfoComponent: FindAuthInfoTabComponent {
         FindAuthInfoTabComponent(parent: self)
     }

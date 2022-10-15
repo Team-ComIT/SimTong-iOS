@@ -38,6 +38,7 @@ struct SignupEmployeeInfoView: View {
                             .focused($focusField, equals: .email)
                             .opacity(viewModel.isEmailStep ? 1.0 : 0.0)
                         }
+
                         if viewModel.isNumberStep {
                             STTextField(
                                 "1234567890",

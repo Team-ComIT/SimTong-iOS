@@ -25,6 +25,17 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
+private class SignupPasswordDependency778bf5389a70d7df6152Provider: SignupPasswordDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->SignupPasswordComponent
+private func factorye93d1d56840ff97c674ae3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupPasswordDependency778bf5389a70d7df6152Provider()
+}
 private class SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider: SignupEmployeeInfoDependency {
 
 
@@ -137,6 +148,11 @@ extension AppComponent: Registration {
         localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { self.uploadMultipleFileUseCase as Any }
     }
 }
+extension SignupPasswordComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension SignupEmployeeInfoComponent: Registration {
     public func registerItems() {
 
@@ -195,6 +211,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674ae3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
