@@ -21,8 +21,17 @@ public struct STToast: ViewModifier {
     public func body(content: Content) -> some View {
         ZStack {
             content
+
             toastView()
-                .zIndex(0)
+        }
+        .onChange(of: isShowing) { newValue in
+            if isShowing {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        isShowing = false
+                    }
+                }
+            }
         }
     }
 
@@ -43,26 +52,22 @@ public struct STToast: ViewModifier {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16.5)
-                .background(
-                    Color.extraWhite.opacity(0.9)
-                        .background(
-                            Color.extraBlack.opacity(0.07)
-                                .blur(radius: 0.4)
+                .background {
+                    Rectangle()
+                        .fill(Color.extraWhite)
+                        .cornerRadius(8)
+                        .shadow(
+                            color: Color.extraBlack.opacity(0.08),
+                            radius: 30,
+                            x: 0,
+                            y: 4
                         )
-                )
+                }
                 .opacity(isShowing ? 1 : 0)
                 .transition(.move(edge: .top).combined(with: AnyTransition.opacity.animation(.easeInOut)))
-                .cornerRadius(8)
                 .onTapGesture {
                     withAnimation {
                         isShowing = false
-                    }
-                }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        withAnimation {
-                            isShowing = false
-                        }
                     }
                 }
             }
