@@ -24,7 +24,7 @@ public struct STToast: ViewModifier {
 
             toastView()
         }
-        .onChange(of: isShowing) { newValue in
+        .onChange(of: isShowing) { _ in
             if isShowing {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     withAnimation {
