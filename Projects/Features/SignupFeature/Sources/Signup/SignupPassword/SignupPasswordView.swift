@@ -28,7 +28,6 @@ struct SignupPasswordView: View {
                         )
                     .focused($focusField, equals: .passwordCheck)
                     .opacity(viewModel.isShowPasswordCheck ? 1.0 : 0.0)
-                    .keyboardType(.numberPad)
                     .padding()
                 }
 
@@ -62,11 +61,12 @@ struct SignupPasswordView: View {
                 WideButton(text: "다음") {
                     withAnimation {
                         viewModel.nextButtonDidTap()
+                        viewModel.checkPassword()
                     }
                 }
                 .disabled(viewModel.password.isEmpty)
                 .navigate(
-                    to: SignupPasswordView(viewModel: SignupPasswordViewmodel()),
+                    to: SignupInfoView(viewModel: SignupInfoViewModel()),
                     when: $viewModel.isPasswordCheck
                 )
             }

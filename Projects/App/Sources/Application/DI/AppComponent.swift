@@ -40,6 +40,10 @@ extension AppComponent {
         SignupPasswordComponent(parent: self)
     }
 
+    var signupInfoComponent: SignupInfoComponent {
+        SignupInfoComponent(parent: self)
+    }
+    
     var findAuthInfoComponent: FindAuthInfoTabComponent {
         FindAuthInfoTabComponent(parent: self)
     }
