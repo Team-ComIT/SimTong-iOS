@@ -14,6 +14,12 @@ struct SignupInfoView: View {
 
     var body: some View {
             VStack {
+                HStack {
+                    Text("회원가입")
+                        .stTypo(.s3)
+                        .padding()
+                    Spacer()
+                }
                 Button {
                     viewModel.isShowImage.toggle()
                 } label: {
@@ -60,6 +66,5 @@ struct SignupInfoView: View {
             }
         .stBackground()
         .configBackButton(dismiss: dismiss)
-        .navigationTitle("회원가입")
     }
 }

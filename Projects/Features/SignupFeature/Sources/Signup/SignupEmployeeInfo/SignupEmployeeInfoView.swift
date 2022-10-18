@@ -24,6 +24,12 @@ struct SignupEmployeeInfoView: View {
         ZStack {
             ScrollView {
                 VStack {
+                    HStack {
+                        Text("회원가입")
+                            .stTypo(.s3)
+                            .padding()
+                        Spacer()
+                    }
                     Group {
                         if viewModel.isEmailStep {
                             STTextField(
@@ -91,7 +97,6 @@ struct SignupEmployeeInfoView: View {
 
                     Spacer()
                 }
-                .navigationBarTitle("회원가입")
             }
 
             VStack {

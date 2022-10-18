@@ -20,6 +20,12 @@ struct SignupPasswordView: View {
     var body: some View {
         ZStack {
             VStack {
+                HStack {
+                    Text("회원가입")
+                        .stTypo(.s3)
+                        .padding()
+                    Spacer()
+                }
                 if viewModel.isShowPasswordCheck {
                     STSecureTextField(
                         labelText: "비밀번호 재확인",
@@ -73,6 +79,5 @@ struct SignupPasswordView: View {
         }
         .stBackground()
         .configBackButton(dismiss: dismiss)
-        .navigationTitle("회원가입")
     }
 }

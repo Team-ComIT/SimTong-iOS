@@ -15,6 +15,12 @@ struct SignupVerifyView: View {
     var body: some View {
         ZStack {
             VStack {
+                HStack {
+                    Text("회원가입")
+                        .stTypo(.s3)
+                        .padding()
+                    Spacer()
+                }
                 ZStack(alignment: .topTrailing) {
                     STTextField(
                         "이메일을 확인해보세요!",
@@ -74,7 +80,6 @@ struct SignupVerifyView: View {
         }
         .stBackground()
         .configBackButton(dismiss: dismiss)
-        .navigationTitle("회원가입")
         .stToast(isShowing: $viewModel.isToastShow, message: "입력하신 이메일로 인증번호를 전송했어요", icon: .success)
     }
 }
