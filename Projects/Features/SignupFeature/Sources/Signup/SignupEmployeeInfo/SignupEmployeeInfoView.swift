@@ -37,7 +37,7 @@ struct SignupEmployeeInfoView: View {
                                 labelText: "이메일",
                                 text: $viewModel.email,
                                 style: .clear,
-                                errorText: "정보가 일치 하지 않습니다",
+                                isError: viewModel.isMissmatch,
                                 onCommit: {
                                     viewModel.nextButtonDidTap()
                                 })
@@ -51,7 +51,7 @@ struct SignupEmployeeInfoView: View {
                                 labelText: "사원번호",
                                 text: $viewModel.number,
                                 style: .clear,
-                                errorText: "정보가 일치 하지 않습니다",
+                                isError: viewModel.isMissmatch,
                                 onCommit: {
                                     withAnimation {
                                         viewModel.nextButtonDidTap()
@@ -68,7 +68,8 @@ struct SignupEmployeeInfoView: View {
                             labelText: "이름",
                             text: $viewModel.name,
                             style: .clear,
-                            errorText: "정보가 일치 하지 않습니다",
+                            errorText: "이름과 사원 정보가 일치 하지 않습니다.",
+                            isError: viewModel.isMissmatch,
                             onCommit: {
                                 withAnimation {
                                     viewModel.nextButtonDidTap()

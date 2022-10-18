@@ -44,7 +44,7 @@ extension AppComponent {
     var signupInfoComponent: SignupInfoComponent {
         SignupInfoComponent(parent: self)
     }
-    
+
     var findAuthInfoComponent: FindAuthInfoTabComponent {
         FindAuthInfoTabComponent(parent: self)
     }
