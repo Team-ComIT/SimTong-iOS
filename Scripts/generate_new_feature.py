@@ -162,7 +162,6 @@ def write_file_at(file_path, update_file):
 
 print('Input new feature name ', end=': ', flush=True)
 feature_name = sys.stdin.readline().replace("\n", "")
-print(feature_name)
 feature_name = feature_name.replace("Feature", "")
 
 print(f'Feature name = {feature_name}')
