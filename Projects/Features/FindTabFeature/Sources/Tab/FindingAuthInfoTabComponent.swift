@@ -1,5 +1,6 @@
 import NeedleFoundation
 import SwiftUI
+import FindEmployeeIDFeature
 
 public protocol FindAuthInfoTabDependency: Dependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent { get }

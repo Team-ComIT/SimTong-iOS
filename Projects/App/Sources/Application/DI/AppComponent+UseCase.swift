@@ -11,6 +11,10 @@ extension AppComponent {
     public var findEmployeeNumberUseCase: any FindEmployeeNumberUseCase {
         FindEmployeeNumberUseCaseImpl(commonRepository: commonsRepository)
     }
+
+    public var resetPasswordUseCase: any ResetPasswordUseCase {
+        ResetPasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
 }
 
 // MARK: - Files
@@ -75,5 +79,16 @@ extension AppComponent {
 
     public var sendAuthCodeUseCase: any SendAuthCodeUseCase {
         SendAuthCodeUseCaseImpl(emailsRepository: emailsRepository)
+    }
+}
+
+// MARK: - Menu
+extension AppComponent {
+    public var fetchMenuListUseCase: any FetchMenuListUseCase {
+        FetchMenuListUseCaseImpl(menuRepository: menuRepository)
+    }
+
+    public var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
+        FetchPublicMenuListUseCaseImpl(menuRepository: menuRepository)
     }
 }

@@ -1,5 +1,5 @@
 import XCTest
-@testable import FindAuthInfoFeature
+@testable import FindEmployeeIDFeature
 import DomainModule
 import DataModule
 import Nimble
