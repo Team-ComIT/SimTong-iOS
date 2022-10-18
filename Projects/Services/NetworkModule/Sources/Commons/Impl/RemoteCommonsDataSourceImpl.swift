@@ -12,4 +12,8 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
         try await request(.findEmployeeNumber(req), dto: FindEmployeeNumberResponseDTO.self)
             .employeeNumber
     }
+
+    public func resetPassword(req: ResetPasswordRequestDTO) async throws {
+        try await request(.resetPassword(req), dto: NoResponse.self)
+    }
 }

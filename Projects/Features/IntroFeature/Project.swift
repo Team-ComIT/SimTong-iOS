@@ -6,7 +6,7 @@ let project = Project.makeModule(
     product: .staticFramework,
     dependencies: [
         .Project.Features.BaseFeature,
-        .Project.Features.FindAuthInfoFeature,
+        .Project.Features.FindTabFeature,
         .Project.Features.SignupFeature
     ]
 )
