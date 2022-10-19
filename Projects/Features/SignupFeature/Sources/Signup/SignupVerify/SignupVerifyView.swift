@@ -3,9 +3,9 @@ import DesignSystem
 
 struct SignupVerifyView: View {
 
-    private let signupPasswordComponent: SignupPasswordComponent
     @StateObject var viewModel: SignupVerifyViewModel
     @Environment(\.dismiss) var dismiss
+    private let signupPasswordComponent: SignupPasswordComponent
 
     public init(
         viewModel: SignupVerifyViewModel,
@@ -22,8 +22,10 @@ struct SignupVerifyView: View {
                     Text("회원가입")
                         .stTypo(.s3)
                         .padding()
+
                     Spacer()
                 }
+
                 ZStack(alignment: .topTrailing) {
                     STTextField(
                         "이메일을 확인해보세요!",
@@ -36,7 +38,7 @@ struct SignupVerifyView: View {
                     .padding([.top, .horizontal])
                     .padding(.bottom, 8)
 
-                    Text(viewModel.timeRemaining)
+                    Text(viewModel.timeText)
                         .stTypo(.m6, color: .extraError)
                         .padding()
                         .onAppear {
@@ -50,10 +52,9 @@ struct SignupVerifyView: View {
                         }
                 }
 
-                CTAButton(text: "재발송", style: .cancel, action: {
-                    viewModel.futureData = Calendar.current.date(byAdding: .minute, value: 5, to: Date()) ?? Date()
+                CTAButton(text: "재발송", style: .cancel) {
                     viewModel.isToastShow = true
-                })
+                }
                 .padding(.horizontal)
                 .cornerRadius(5)
                 .shadow(color: .gray02, radius: 5, x: 0, y: 5)
@@ -82,7 +83,7 @@ struct SignupVerifyView: View {
                     .disabled(viewModel.certificationNumber.isEmpty)
             }
         }
-        .navigate(to: DeferView { signupPasswordComponent.makeView() }, when: $viewModel.verify)
+        .navigate(to: DeferView { signupPasswordComponent.makeView() }, when: $viewModel.isVerified)
         .stBackground()
         .configBackButton(dismiss: dismiss)
         .stToast(isShowing: $viewModel.isToastShow, message: "입력하신 이메일로 인증번호를 전송했어요", icon: .success)

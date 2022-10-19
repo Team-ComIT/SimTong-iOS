@@ -10,10 +10,10 @@ struct SignupEmployeeInfoView: View {
         case email
     }
 
-    private var signupVerifyComponent: SignupVerifyComponent
     @StateObject var viewModel: SignupEmployeeInfoViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
+    private let signupVerifyComponent: SignupVerifyComponent
 
     public init(
         viewModel: SignupEmployeeInfoViewModel,
@@ -31,8 +31,10 @@ struct SignupEmployeeInfoView: View {
                         Text("회원가입")
                             .stTypo(.s3)
                             .padding()
+
                         Spacer()
                     }
+
                     Group {
                         if viewModel.isEmailStep {
                             STTextField(
@@ -98,6 +100,7 @@ struct SignupEmployeeInfoView: View {
                                 .foregroundColor(.gray05)
                         }
                     }
+
                     Spacer()
                 }
             }
@@ -127,6 +130,9 @@ struct SignupEmployeeInfoView: View {
                 viewModel.isNavigateToVerify.toggle()
             }
         }
-        .navigate(to: DeferView { signupVerifyComponent.makeView() }, when: $viewModel.isNavigateToVerify)
+        .navigate(
+            to: signupVerifyComponent.makeView(),
+            when: $viewModel.isNavigateToVerify
+        )
     }
 }

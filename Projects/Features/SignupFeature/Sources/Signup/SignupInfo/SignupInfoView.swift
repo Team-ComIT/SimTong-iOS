@@ -18,9 +18,10 @@ struct SignupInfoView: View {
                 Text("회원가입")
                     .stTypo(.s3)
                     .padding()
+
                 Spacer()
             }
-            
+
             Button {
                 viewModel.isShowImage.toggle()
             } label: {
@@ -52,6 +53,7 @@ struct SignupInfoView: View {
                 Text("계정이 있으신가요?")
                     .stTypo(.r7)
                     .foregroundColor(.gray05)
+
                 NavigationLink {
                     Text("안녕하세용")
                 } label: {
@@ -65,11 +67,11 @@ struct SignupInfoView: View {
 
             Spacer()
             WideButton(text: viewModel.isSkip ? "건너뛰기" : "다음") {
-                viewModel.isImageType = true
+                viewModel.isNotSupportImageType = true
             }
         }
         .stBackground()
         .configBackButton(dismiss: dismiss)
-        .stSnackbar(isShowing: $viewModel.isImageType, text: "지원하지 않는 파일 형식입니다")
+        .stSnackbar(isShowing: $viewModel.isNotSupportImageType, text: "지원하지 않는 파일 형식입니다")
     }
 }

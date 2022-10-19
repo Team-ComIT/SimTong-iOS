@@ -7,10 +7,10 @@ struct SignupPasswordView: View {
         case passwordCheck
     }
 
-    private let signupInfoComponent: SignupInfoComponent
     @StateObject var viewModel: SignupPasswordViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
+    private let signupInfoComponent: SignupInfoComponent
 
     public init(
         viewModel: SignupPasswordViewModel,
@@ -27,8 +27,10 @@ struct SignupPasswordView: View {
                     Text("회원가입")
                         .stTypo(.s3)
                         .padding()
+
                     Spacer()
                 }
+
                 if viewModel.isShowPasswordCheck {
                     STSecureTextField(
                         labelText: "비밀번호 재확인",
@@ -49,13 +51,15 @@ struct SignupPasswordView: View {
                         withAnimation {
                             viewModel.nextButtonDidTap()
                         }
-                    })
-                    .padding([.top, .horizontal])
+                    }
+                )
+                .padding([.top, .horizontal])
 
                 HStack {
                     Text("계정이 있으신가요?")
                         .stTypo(.r7)
                         .foregroundColor(.gray05)
+
                     NavigationLink {
                         Text("안녕하세용")
                     } label: {
@@ -79,7 +83,7 @@ struct SignupPasswordView: View {
             }
         }
         .navigate(
-            to: DeferView { signupInfoComponent.makeView() },
+            to: signupInfoComponent.makeView(),
             when: $viewModel.isPasswordCheck
         )
         .stBackground()
