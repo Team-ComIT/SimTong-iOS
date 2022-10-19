@@ -43,7 +43,7 @@ struct TermsView: View {
 
             Spacer()
 
-            CTAButton(text: "확인")
+            CTAButton(text: "확인", action: allAgreeAction)
                 .disabled(!allAgreeState)
                 .padding(.bottom, 16)
 

@@ -29,8 +29,20 @@ extension AppComponent {
         IntroComponent(parent: self)
     }
 
-    var signupComponent: SignupComponent {
-        SignupComponent(parent: self)
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
+        SignupEmployeeInfoComponent(parent: self)
+    }
+
+    var signupVerifyComponent: SignupVerifyComponent {
+        SignupVerifyComponent(parent: self)
+    }
+
+    var signupPasswordComponent: SignupPasswordComponent {
+        SignupPasswordComponent(parent: self)
+    }
+
+    var signupInfoComponent: SignupInfoComponent {
+        SignupInfoComponent(parent: self)
     }
 
     var findAuthInfoComponent: FindAuthInfoTabComponent {
