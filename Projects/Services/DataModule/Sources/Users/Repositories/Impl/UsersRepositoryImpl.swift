@@ -21,16 +21,8 @@ public struct UsersRepositoryImpl: UsersRepository {
         try await remoteUsersDataSource.existsByNameAndEmployeeNumber(name: name, employeeNumber: employeeNumber)
     }
 
-    public func existsByEmail(email: String) async throws {
-        try await remoteUsersDataSource.existsByEmail(email: email)
-    }
-
     public func fetchMyProfile() async throws -> UserInfo {
         try await remoteUsersDataSource.fetchMyProfile()
-    }
-
-    public func changePassword(req: ChangePasswordRequestDTO) async throws {
-        try await remoteUsersDataSource.changePassword(req: req)
     }
 
     public func changeNickname(nickname: String) async throws {

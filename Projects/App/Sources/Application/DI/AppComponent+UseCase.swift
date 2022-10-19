@@ -15,6 +15,10 @@ extension AppComponent {
     public var resetPasswordUseCase: any ResetPasswordUseCase {
         ResetPasswordUseCaseImpl(commonsRepository: commonsRepository)
     }
+
+    public var changePasswordUseCase: any ChangePasswordUseCase {
+        ChangePasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
 }
 
 // MARK: - Files
@@ -42,16 +46,12 @@ extension AppComponent {
         ExistsByNameAndEmployeeNumberUseCaseImpl(usersRepository: usersRepository)
     }
 
-    public var existsByEmailUseCase: any ExistsByEmailUseCase {
-        ExistsByEmailUseCaseImpl(usersRepository: usersRepository)
+    public var checkDuplicateEmail: any CheckDuplicateEmailUseCase {
+        CheckDuplicateEmailUseCaseImpl(commonsRepository: commonsRepository)
     }
 
     public var fetchMyProfileUseCase: any FetchMyProfileUseCase {
         FetchMyProfileUseCaseImpl(usersRepository: usersRepository)
-    }
-
-    public var changePasswordUseCase: any ChangePasswordUseCase {
-        ChangePasswordUseCaseImpl(usersRepository: usersRepository)
     }
 
     public var changeNicknameUseCase: any ChangeNicknameUseCase {

@@ -16,4 +16,12 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         try await request(.resetPassword(req), dto: NoResponse.self)
     }
+
+    public func changePassword(req: ChangePasswordRequestDTO) async throws {
+        try await request(.changePassword(req), dto: NoResponse.self)
+    }
+
+    public func checkDuplicateEmail(email: String) async throws {
+        try await request(.checkDuplicateEmail(email: email), dto: NoResponse.self)
+    }
 }

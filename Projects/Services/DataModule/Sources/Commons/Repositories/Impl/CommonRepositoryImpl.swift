@@ -20,4 +20,12 @@ public struct CommonsRepositoryImpl: CommonsRepository {
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         try await remoteCommonsDataSource.resetPassword(req: req)
     }
+
+    public func changePassword(req: ChangePasswordRequestDTO) async throws {
+        try await remoteCommonsDataSource.changePassword(req: req)
+    }
+
+    public func checkDuplicateEmail(email: String) async throws {
+        try await remoteCommonsDataSource.checkDuplicateEmail(email: email)
+    }
 }

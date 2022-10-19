@@ -102,7 +102,7 @@ private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPass
 private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
 }
-private class FindPasswordDependency542eacce769b9dc25904Provider: FindPasswordDependency {
+private class FindPasswordInfoDependency2ddef0504ff382f9d508Provider: FindPasswordInfoDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
         return appComponent.sendAuthCodeUseCase
     }
@@ -117,16 +117,16 @@ private class FindPasswordDependency542eacce769b9dc25904Provider: FindPasswordDe
         self.appComponent = appComponent
     }
 }
-/// ^->AppComponent->FindPasswordComponent
-private func factory15775d8436b06b9741d1f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return FindPasswordDependency542eacce769b9dc25904Provider(appComponent: parent1(component) as! AppComponent)
+/// ^->AppComponent->FindPasswordInfoComponent
+private func factory508fc8f893455de876c5f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindPasswordInfoDependency2ddef0504ff382f9d508Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
         return appComponent.findEmployeeIDComponent
     }
-    var findPasswordComponent: FindPasswordComponent {
-        return appComponent.findPasswordComponent
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        return appComponent.findPasswordInfoComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -166,14 +166,14 @@ extension AppComponent: Registration {
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
         localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { self.resetPasswordUseCase as Any }
+        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
         localTable["uploadSingleFileUseCase-any UploadSingleFileUseCase"] = { self.uploadSingleFileUseCase as Any }
         localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { self.uploadMultipleFileUseCase as Any }
         localTable["signinUseCase-any SigninUseCase"] = { self.signinUseCase as Any }
         localTable["signupUseCase-any SignupUseCase"] = { self.signupUseCase as Any }
         localTable["existsByNameAndEmployeeNumberUseCase-any ExistsByNameAndEmployeeNumberUseCase"] = { self.existsByNameAndEmployeeNumberUseCase as Any }
-        localTable["existsByEmailUseCase-any ExistsByEmailUseCase"] = { self.existsByEmailUseCase as Any }
+        localTable["checkDuplicateEmail-any CheckDuplicateEmailUseCase"] = { self.checkDuplicateEmail as Any }
         localTable["fetchMyProfileUseCase-any FetchMyProfileUseCase"] = { self.fetchMyProfileUseCase as Any }
-        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
         localTable["changeNicknameUseCase-any ChangeNicknameUseCase"] = { self.changeNicknameUseCase as Any }
         localTable["changeEmailUseCase-any ChangeEmailUseCase"] = { self.changeEmailUseCase as Any }
         localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { self.changeProfileImageUseCase as Any }
@@ -215,17 +215,17 @@ extension RenewalPasswordComponent: Registration {
         keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
     }
 }
-extension FindPasswordComponent: Registration {
+extension FindPasswordInfoComponent: Registration {
     public func registerItems() {
-        keyPathToName[\FindPasswordDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
-        keyPathToName[\FindPasswordDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
-        keyPathToName[\FindPasswordDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
+        keyPathToName[\FindPasswordInfoDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
+        keyPathToName[\FindPasswordInfoDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
+        keyPathToName[\FindPasswordInfoDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
     }
 }
 extension FindAuthInfoTabComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindAuthInfoTabDependency.findEmployeeIDComponent] = "findEmployeeIDComponent-FindEmployeeIDComponent"
-        keyPathToName[\FindAuthInfoTabDependency.findPasswordComponent] = "findPasswordComponent-FindPasswordComponent"
+        keyPathToName[\FindAuthInfoTabDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
     }
 }
 extension IntroComponent: Registration {
@@ -256,7 +256,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->FindPasswordComponent", factory15775d8436b06b9741d1f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }

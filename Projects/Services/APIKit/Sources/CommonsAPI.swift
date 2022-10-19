@@ -3,10 +3,12 @@ import ErrorModule
 import DataMappingModule
 
 public enum CommonsAPI: SimTongAPI {
+    case resetPassword(ResetPasswordRequestDTO)
     case reissueToken
     case findEmployeeNumber(FindEmployeeNumberRequestDTO)
     case spotList
-    case resetPassword(ResetPasswordRequestDTO)
+    case changePassword(ChangePasswordRequestDTO)
+    case checkDuplicateEmail(email: String)
 }
 
 public extension CommonsAPI {
@@ -27,15 +29,21 @@ public extension CommonsAPI {
 
         case .resetPassword:
             return "/password"
+
+        case .changePassword:
+            return "/password"
+
+        case .checkDuplicateEmail:
+            return "/email/duplication"
         }
     }
 
     var method: Method {
         switch self {
-        case .spotList, .findEmployeeNumber:
+        case .spotList, .findEmployeeNumber, .checkDuplicateEmail:
             return .get
 
-        case .reissueToken, .resetPassword:
+        case .reissueToken, .resetPassword, .changePassword:
             return .put
         }
     }
@@ -54,11 +62,22 @@ public extension CommonsAPI {
 
         case let .resetPassword(req):
             return .requestJSONEncodable(req)
+
+        case let .changePassword(req):
+            return .requestJSONEncodable(req)
+
+        case let .checkDuplicateEmail(email):
+            return .requestParameters(parameters: [
+                "email": email
+            ], encoding: URLEncoding.queryString)
         }
     }
 
     var jwtTokenType: JwtTokenType {
         switch self {
+        case .changePassword:
+            return .accessToken
+
         case .reissueToken:
             return .refreshToken
 
@@ -91,6 +110,18 @@ public extension CommonsAPI {
                 400: .unknown(),
                 401: .emailIsNotAuthorizedOrMismatch,
                 404: .notFoundUserByResetPassword
+            ]
+
+        case .changePassword:
+            return [
+                400: .unknown(),
+                401: .passwordMismatchByChangePassword
+            ]
+
+        case .checkDuplicateEmail:
+            return [
+                400: .unknown(),
+                409: .alreadyExistsByEmailOverlap
             ]
         }
     }

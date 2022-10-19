@@ -50,8 +50,8 @@ extension AppComponent {
         EmployeeIDResultComponent(parent: self)
     }
 
-    var findPasswordComponent: FindPasswordComponent {
-        FindPasswordComponent(parent: self)
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        FindPasswordInfoComponent(parent: self)
     }
 
     var renewalPasswordComponent: RenewalPasswordComponent {

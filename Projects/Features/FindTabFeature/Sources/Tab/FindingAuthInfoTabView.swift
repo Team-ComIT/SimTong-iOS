@@ -8,14 +8,14 @@ public struct FindAuthInfoTabView: View {
     @State var currentTab: Int = 0
 
     private let findEmployeeIDComponent: FindEmployeeIDComponent
-    private let findPasswordComponent: FindPasswordComponent
+    private let findPasswordInfoComponent: FindPasswordInfoComponent
 
     public init(
         findEmployeeIDComponent: FindEmployeeIDComponent,
-        findPasswordComponent: FindPasswordComponent
+        findPasswordComponent: FindPasswordInfoComponent
     ) {
         self.findEmployeeIDComponent = findEmployeeIDComponent
-        self.findPasswordComponent = findPasswordComponent
+        self.findPasswordInfoComponent = findPasswordComponent
     }
 
     public var body: some View {
@@ -28,7 +28,7 @@ public struct FindAuthInfoTabView: View {
                 findEmployeeIDComponent.makeView()
                     .tag(0)
 
-                findPasswordComponent.makeView()
+                findPasswordInfoComponent.makeView()
                     .tag(1)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
