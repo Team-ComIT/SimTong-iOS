@@ -57,4 +57,8 @@ extension AppComponent {
     var renewalPasswordComponent: RenewalPasswordComponent {
         RenewalPasswordComponent(parent: self)
     }
+
+    var findPasswordVerifyComponent: FindPasswordVerifyComponent {
+        FindPasswordVerifyComponent(parent: self)
+    }
 }
