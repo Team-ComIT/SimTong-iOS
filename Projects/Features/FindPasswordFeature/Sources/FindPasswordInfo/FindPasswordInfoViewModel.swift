@@ -8,12 +8,17 @@ final class FindPasswordInfoViewModel: BaseViewModel {
     @Published var email = ""
     @Published var code = ""
     @Published var remainingTime = 300
+    @Published var isNavigateFindPasswordVerify = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common)
     private var bag = Set<AnyCancellable>()
 
-    override init(
+    private let checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase
 
+    init(
+        checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase
     ) {
+        self.checkExistNameAndEmailUseCase = checkExistNameAndEmailUseCase
+
         super.init()
 
         timer.sink { [weak self] _ in
@@ -25,6 +30,9 @@ final class FindPasswordInfoViewModel: BaseViewModel {
     @MainActor
     func completeButtonDidTap() {
         Task {
+            await withAsyncTry(with: self) { owner in
+                owner.isNavigateFindPasswordVerify = true
+            }
         }
     }
 }

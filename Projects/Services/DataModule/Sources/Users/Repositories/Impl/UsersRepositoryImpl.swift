@@ -25,6 +25,10 @@ public struct UsersRepositoryImpl: UsersRepository {
         try await remoteUsersDataSource.fetchMyProfile()
     }
 
+    public func checkDuplicateNickname(nickname: String) async throws {
+        try await remoteUsersDataSource.checkDuplicateNickname(nickname: nickname)
+    }
+
     public func changeNickname(nickname: String) async throws {
         try await remoteUsersDataSource.changeNickname(nickname: nickname)
     }

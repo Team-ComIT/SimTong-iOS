@@ -103,12 +103,6 @@ private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: Needle
     return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindPasswordInfoDependency2ddef0504ff382f9d508Provider: FindPasswordInfoDependency {
-    var sendAuthCodeUseCase: any SendAuthCodeUseCase {
-        return appComponent.sendAuthCodeUseCase
-    }
-    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
-        return appComponent.verifyAuthCodeUseCase
-    }
     var renewalPasswordComponent: RenewalPasswordComponent {
         return appComponent.renewalPasswordComponent
     }
@@ -178,6 +172,7 @@ extension AppComponent: Registration {
         localTable["changeEmailUseCase-any ChangeEmailUseCase"] = { self.changeEmailUseCase as Any }
         localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { self.changeProfileImageUseCase as Any }
         localTable["changeSpotUseCase-any ChangeSpotUseCase"] = { self.changeSpotUseCase as Any }
+        localTable["checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"] = { self.checkDuplicateNicknameUseCase as Any }
         localTable["verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"] = { self.verifyAuthCodeUseCase as Any }
         localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { self.sendAuthCodeUseCase as Any }
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
@@ -217,8 +212,6 @@ extension RenewalPasswordComponent: Registration {
 }
 extension FindPasswordInfoComponent: Registration {
     public func registerItems() {
-        keyPathToName[\FindPasswordInfoDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
-        keyPathToName[\FindPasswordInfoDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
         keyPathToName[\FindPasswordInfoDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
     }
 }

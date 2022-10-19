@@ -40,7 +40,7 @@ struct FindPasswordInfoView: View {
             CTAButton(text: "확인") {
                 viewModel.completeButtonDidTap()
             }
-            .padding(.top, 16)
+            .padding(.top, 32)
             .disabled(viewModel.code.isEmpty)
 
             Spacer()

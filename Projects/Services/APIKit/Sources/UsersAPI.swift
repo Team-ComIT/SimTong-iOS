@@ -7,6 +7,7 @@ public enum UsersAPI: SimTongAPI {
     case signup(SignupRequestDTO)
     case existsByNameAndEmployeeNumber(name: String, employeeNumber: Int)
     case fetchMyProfile
+    case checkDuplicateNickname(nickname: String)
     case changeNickname(nickname: String)
     case changeEmail(email: String)
     case changeProfileImage(imageURL: String)
@@ -32,6 +33,9 @@ public extension UsersAPI {
         case .fetchMyProfile:
             return "/information"
 
+        case .checkDuplicateNickname:
+            return "/nickname/duplication"
+
         case .changeNickname:
             return "/nickname"
 
@@ -48,11 +52,8 @@ public extension UsersAPI {
 
     var method: Moya.Method {
         switch self {
-        case .fetchMyProfile:
+        case .fetchMyProfile, .existsByNameAndEmployeeNumber, .checkDuplicateNickname:
             return .get
-
-        case .existsByNameAndEmployeeNumber:
-            return .head
 
         case .signin, .signup:
             return .post
@@ -74,6 +75,11 @@ public extension UsersAPI {
             return .requestParameters(parameters: [
                 "name": name,
                 "employee_number": employeeNumber
+            ], encoding: URLEncoding.queryString)
+
+        case let .checkDuplicateNickname(nickname):
+            return .requestParameters(parameters: [
+                "nickname": nickname
             ], encoding: URLEncoding.queryString)
 
         case let .changeNickname(nickname):
@@ -137,6 +143,12 @@ public extension UsersAPI {
             return [
                 400: .unknown(),
                 401: .accessTokenExpired
+            ]
+
+        case .checkDuplicateNickname:
+            return [
+                400: .unknown(),
+                409: .alreadyExistNickname
             ]
 
         case .changeNickname:

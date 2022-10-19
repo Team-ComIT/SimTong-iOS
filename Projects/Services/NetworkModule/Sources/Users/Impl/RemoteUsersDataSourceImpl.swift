@@ -26,6 +26,10 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
             .toDomain()
     }
 
+    public func checkDuplicateNickname(nickname: String) async throws {
+        try await request(.checkDuplicateNickname(nickname: nickname), dto: NoResponse.self)
+    }
+
     public func changeNickname(nickname: String) async throws {
         try await request(.changeNickname(nickname: nickname), dto: NoResponse.self)
     }

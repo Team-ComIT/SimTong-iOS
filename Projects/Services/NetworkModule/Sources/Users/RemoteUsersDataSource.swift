@@ -6,6 +6,7 @@ public protocol RemoteUsersDataSource {
     func signup(req: SignupRequestDTO) async throws
     func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws
     func fetchMyProfile() async throws -> UserInfo
+    func checkDuplicateNickname(nickname: String) async throws
     func changeNickname(nickname: String) async throws
     func changeEmail(email: String) async throws
     func changeProfileImage(imageURL: String) async throws

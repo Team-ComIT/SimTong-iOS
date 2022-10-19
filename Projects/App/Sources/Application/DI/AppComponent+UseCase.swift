@@ -69,6 +69,10 @@ extension AppComponent {
     public var changeSpotUseCase: any ChangeSpotUseCase {
         ChangeSpotUseCaseImpl(usersRepository: usersRepository)
     }
+
+    public var checkDuplicateNicknameUseCase: any CheckDuplicateNicknameUseCase {
+        CheckDuplicateNicknameUseCaseImpl(usersRepository: usersRepository)
+    }
 }
 
 // MARK: - Emails
