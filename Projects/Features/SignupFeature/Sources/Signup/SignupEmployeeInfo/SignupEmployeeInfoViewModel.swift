@@ -10,7 +10,7 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
     @Published var isEmailStep = false
     @Published var isPresentedTerms = false
     @Published var isNavigateToVerify = false
-    @Published var isMissmatch = true
+    @Published var isMissmatch = false
 
     var isEnableNextButton: Bool {
         !name.isEmpty && (!number.isEmpty || !isNumberStep) && (!email.isEmpty || !isEmailStep)

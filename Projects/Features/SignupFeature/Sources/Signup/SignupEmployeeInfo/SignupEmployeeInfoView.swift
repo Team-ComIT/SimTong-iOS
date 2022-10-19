@@ -10,14 +10,17 @@ struct SignupEmployeeInfoView: View {
         case email
     }
 
+    private var signupVerifyComponent: SignupVerifyComponent
     @StateObject var viewModel: SignupEmployeeInfoViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
 
     public init(
-        viewModel: SignupEmployeeInfoViewModel
+        viewModel: SignupEmployeeInfoViewModel,
+        signupVerifyComponent: SignupVerifyComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.signupVerifyComponent = signupVerifyComponent
     }
 
     var body: some View {
@@ -37,7 +40,7 @@ struct SignupEmployeeInfoView: View {
                                 labelText: "이메일",
                                 text: $viewModel.email,
                                 style: .clear,
-                                isError: viewModel.isMissmatch,
+                                isError: viewModel.isError,
                                 onCommit: {
                                     viewModel.nextButtonDidTap()
                                 })
@@ -51,7 +54,7 @@ struct SignupEmployeeInfoView: View {
                                 labelText: "사원번호",
                                 text: $viewModel.number,
                                 style: .clear,
-                                isError: viewModel.isMissmatch,
+                                isError: viewModel.isError,
                                 onCommit: {
                                     withAnimation {
                                         viewModel.nextButtonDidTap()
@@ -68,8 +71,8 @@ struct SignupEmployeeInfoView: View {
                             labelText: "이름",
                             text: $viewModel.name,
                             style: .clear,
-                            errorText: "이름과 사원 정보가 일치 하지 않습니다.",
-                            isError: viewModel.isMissmatch,
+                            errorText: viewModel.errorMessage,
+                            isError: viewModel.isError,
                             onCommit: {
                                 withAnimation {
                                     viewModel.nextButtonDidTap()
@@ -95,7 +98,6 @@ struct SignupEmployeeInfoView: View {
                                 .foregroundColor(.gray05)
                         }
                     }
-
                     Spacer()
                 }
             }
@@ -125,6 +127,6 @@ struct SignupEmployeeInfoView: View {
                 viewModel.isNavigateToVerify.toggle()
             }
         }
-        .navigate(to: SignupVerifyView(viewModel: SignupVerifyViewModel()), when: $viewModel.isNavigateToVerify)
+        .navigate(to: DeferView { signupVerifyComponent.makeView() }, when: $viewModel.isNavigateToVerify)
     }
 }

@@ -7,14 +7,17 @@ struct SignupPasswordView: View {
         case passwordCheck
     }
 
-    @StateObject var viewModel: SignupPasswordViewmodel
+    private let signupInfoComponent: SignupInfoComponent
+    @StateObject var viewModel: SignupPasswordViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
 
     public init(
-        viewModel: SignupPasswordViewmodel
+        viewModel: SignupPasswordViewModel,
+        signupInfoComponent: SignupInfoComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.signupInfoComponent = signupInfoComponent
     }
 
     var body: some View {
@@ -30,8 +33,8 @@ struct SignupPasswordView: View {
                     STSecureTextField(
                         labelText: "비밀번호 재확인",
                         text: $viewModel.passwordCheck,
-                        errorText: "정보가 일치 하지 않습니다"
-                        )
+                        isError: viewModel.isError
+                    )
                     .focused($focusField, equals: .passwordCheck)
                     .opacity(viewModel.isShowPasswordCheck ? 1.0 : 0.0)
                     .padding()
@@ -40,6 +43,8 @@ struct SignupPasswordView: View {
                 STSecureTextField(
                     labelText: "비밀번호 설정",
                     text: $viewModel.password,
+                    errorText: viewModel.errorMessage,
+                    isError: viewModel.isError,
                     onCommit: {
                         withAnimation {
                             viewModel.nextButtonDidTap()
@@ -71,12 +76,12 @@ struct SignupPasswordView: View {
                     }
                 }
                 .disabled(viewModel.password.isEmpty)
-                .navigate(
-                    to: SignupInfoView(viewModel: SignupInfoViewModel()),
-                    when: $viewModel.isPasswordCheck
-                )
             }
         }
+        .navigate(
+            to: DeferView { signupInfoComponent.makeView() },
+            when: $viewModel.isPasswordCheck
+        )
         .stBackground()
         .configBackButton(dismiss: dismiss)
     }

@@ -18,7 +18,7 @@ public final class SignupVerifyViewModel: BaseViewModel {
         timeRemaining = second < 10 ? "남은시간: \(minute):0\(second)" : "남은시간: \(minute):\(second)"
     }
 
-    func certificationNumberVerify() {
+    func authCode() {
         verify = true
     }
 }

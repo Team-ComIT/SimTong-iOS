@@ -1,7 +1,7 @@
 import Combine
 import BaseFeature
 
-final class SignupPasswordViewmodel: BaseViewModel {
+final class SignupPasswordViewModel: BaseViewModel {
     @Published var password = ""
     @Published var passwordCheck = ""
     @Published var isShowPasswordCheck = false

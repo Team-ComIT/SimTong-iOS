@@ -27,15 +27,17 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 #if !NEEDLE_DYNAMIC
 
 private class SignupPasswordDependency778bf5389a70d7df6152Provider: SignupPasswordDependency {
-
-
-    init() {
-
+    var signupInfoComponent: SignupInfoComponent {
+        return appComponent.signupInfoComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->SignupPasswordComponent
-private func factorye93d1d56840ff97c674ae3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return SignupPasswordDependency778bf5389a70d7df6152Provider()
+private func factorye93d1d56840ff97c674af47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupPasswordDependency778bf5389a70d7df6152Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupInfoDependency76f0cca8f78295db6e25Provider: SignupInfoDependency {
 
@@ -49,26 +51,30 @@ private func factoryf65b1c12d971bd932996e3b0c44298fc1c149afb(_ component: Needle
     return SignupInfoDependency76f0cca8f78295db6e25Provider()
 }
 private class SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider: SignupEmployeeInfoDependency {
-
-
-    init() {
-
+    var signupVerifyComponent: SignupVerifyComponent {
+        return appComponent.signupVerifyComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->SignupEmployeeInfoComponent
-private func factory85693d36827c3c0e8881e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider()
+private func factory85693d36827c3c0e8881f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupVerifyDependency19890686bff8e77ece06Provider: SignupVerifyDependency {
-
-
-    init() {
-
+    var signupPasswordComponent: SignupPasswordComponent {
+        return appComponent.signupPasswordComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->SignupVerifyComponent
-private func factoryf7587eff678919fec270e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return SignupVerifyDependency19890686bff8e77ece06Provider()
+private func factoryf7587eff678919fec270f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupVerifyDependency19890686bff8e77ece06Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class EmployeeIDResultDependency17ee22cd492649466e5fProvider: EmployeeIDResultDependency {
 
@@ -183,7 +189,7 @@ extension AppComponent: Registration {
 }
 extension SignupPasswordComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\SignupPasswordDependency.signupInfoComponent] = "signupInfoComponent-SignupInfoComponent"
     }
 }
 extension SignupInfoComponent: Registration {
@@ -193,12 +199,12 @@ extension SignupInfoComponent: Registration {
 }
 extension SignupEmployeeInfoComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\SignupEmployeeInfoDependency.signupVerifyComponent] = "signupVerifyComponent-SignupVerifyComponent"
     }
 }
 extension SignupVerifyComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\SignupVerifyDependency.signupPasswordComponent] = "signupPasswordComponent-SignupPasswordComponent"
     }
 }
 extension EmployeeIDResultComponent: Registration {
@@ -249,10 +255,10 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
-    registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674ae3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)

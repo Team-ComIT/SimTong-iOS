@@ -6,10 +6,7 @@ public final class SignupInfoViewModel: BaseViewModel {
     @Published var nickname = ""
     @Published var isShowImage = false
     @Published var image: UIImage?
-
-    var isEnableNextButton: Bool {
-        !nickname.isEmpty && image != nil
-    }
+    @Published var isImageType = false
 
     var isSkip: Bool {
         nickname.isEmpty && image == nil
