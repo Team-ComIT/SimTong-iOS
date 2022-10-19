@@ -11,7 +11,8 @@ public struct DesignSystemPreview: View {
         ("Typography", AnyView(STTypoPreview())),
         ("Toast", AnyView(STToastPreview())),
         ("RadioButton", AnyView(STRadioButtonPreview())),
-        ("Loading", AnyView(STLoadingPreview()))
+        ("Loading", AnyView(STLoadingPreview())),
+        ("Snackbar", AnyView(STSnackbarPreview()))
     ]
     public var body: some View {
         NavigationView {
