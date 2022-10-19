@@ -38,7 +38,6 @@ struct SignupInfoView: View {
                 .background(Color.gray02)
             }
             .clipShape(Circle())
-            .imagePicker(isShow: $viewModel.isShowImage, uiImage: $viewModel.image)
 
             STTextField(
                 labelText: "닉네임 설정",
@@ -66,10 +65,12 @@ struct SignupInfoView: View {
             .padding(.top, 32)
 
             Spacer()
+
             WideButton(text: viewModel.isSkip ? "건너뛰기" : "다음") {
                 viewModel.isNotSupportImageType = true
             }
         }
+        .imagePicker(isShow: $viewModel.isShowImage, uiImage: $viewModel.image)
         .stBackground()
         .configBackButton(dismiss: dismiss)
         .stSnackbar(isShowing: $viewModel.isNotSupportImageType, text: "지원하지 않는 파일 형식입니다")
