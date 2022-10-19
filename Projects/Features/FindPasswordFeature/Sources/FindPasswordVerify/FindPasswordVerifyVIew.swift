@@ -6,7 +6,7 @@ struct FindPasswordVerifyVIew: View {
     public init(
         viewModel: FindPasswordVerifyViewModel
     ) {
-        _viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
