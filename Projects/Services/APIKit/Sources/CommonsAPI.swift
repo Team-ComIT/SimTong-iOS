@@ -9,6 +9,7 @@ public enum CommonsAPI: SimTongAPI {
     case spotList
     case changePassword(ChangePasswordRequestDTO)
     case checkDuplicateEmail(email: String)
+    case checkExistkNameAndEmail(name: String, email: String)
 }
 
 public extension CommonsAPI {
@@ -28,19 +29,22 @@ public extension CommonsAPI {
             return "/spot"
 
         case .resetPassword:
-            return "/password"
+            return "/password/initialization"
 
         case .changePassword:
             return "/password"
 
         case .checkDuplicateEmail:
             return "/email/duplication"
+
+        case .checkExistkNameAndEmail:
+            return "/account/existence"
         }
     }
 
     var method: Method {
         switch self {
-        case .spotList, .findEmployeeNumber, .checkDuplicateEmail:
+        case .spotList, .findEmployeeNumber, .checkDuplicateEmail, .checkExistkNameAndEmail:
             return .get
 
         case .reissueToken, .resetPassword, .changePassword:
@@ -68,6 +72,12 @@ public extension CommonsAPI {
 
         case let .checkDuplicateEmail(email):
             return .requestParameters(parameters: [
+                "email": email
+            ], encoding: URLEncoding.queryString)
+
+        case let .checkExistkNameAndEmail(name, email):
+            return .requestParameters(parameters: [
+                "name": name,
                 "email": email
             ], encoding: URLEncoding.queryString)
         }
@@ -122,6 +132,12 @@ public extension CommonsAPI {
             return [
                 400: .unknown(),
                 409: .alreadyExistsByEmailOverlap
+            ]
+
+        case .checkExistkNameAndEmail:
+            return [
+                400: .unknown(),
+                404: .notFoundUserByCheckNameAndEmail
             ]
         }
     }

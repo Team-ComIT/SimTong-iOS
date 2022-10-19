@@ -13,6 +13,7 @@ public enum STError: Error {
     case notFoundUserByResetPassword
     case passwordMismatchByChangePassword
     case alreadyExistsByEmailOverlap
+    case notFoundUserByCheckNameAndEmail
 
     // users
     case notFoundUserBySignin
@@ -53,6 +54,9 @@ extension STError: LocalizedError {
 
         case .notFoundUserBySignin:
             return "사원번호에 따른 유저를 찾을 수 없습니다"
+
+        case .notFoundUserByCheckNameAndEmail:
+            return "이름과 이메일에 따른 유저를 찾을 수 없습니다"
 
         // MARK: - Users
         case .passwordMismatch:
