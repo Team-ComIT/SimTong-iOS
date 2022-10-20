@@ -79,7 +79,16 @@ struct SignupVerifyView: View {
         .onAppear {
             focusField = .code
         }
-        .navigate(to: signupPasswordComponent.makeView(), when: $viewModel.isVerified)
+        .navigate(
+            to: signupPasswordComponent.makeView(
+                signupPasswordSceneParam: .init(
+                    name: viewModel.signupVerifySceneParam.name,
+                    employeeID: viewModel.signupVerifySceneParam.employeeID,
+                    email: viewModel.signupVerifySceneParam.email
+                )
+            ),
+            when: $viewModel.isVerified
+        )
         .stBackground()
         .configBackButton(dismiss: dismiss)
         .stToast(isShowing: $viewModel.isToastShow, message: "입력하신 이메일로 인증번호를 전송했어요", icon: .success)

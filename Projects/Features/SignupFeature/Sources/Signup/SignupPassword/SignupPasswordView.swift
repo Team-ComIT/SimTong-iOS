@@ -37,7 +37,10 @@ struct SignupPasswordView: View {
                         text: $viewModel.passwordCheck,
                         isError: viewModel.isError,
                         onCommit: {
-                            viewModel.nextButtonDidTap()
+                            withAnimation {
+                                viewModel.nextButtonDidTap()
+                                viewModel.checkPassword()
+                            }
                         }
                     )
                     .focused($focusField, equals: .passwordCheck)
@@ -57,6 +60,7 @@ struct SignupPasswordView: View {
                         focusField = .passwordCheck
                     }
                 )
+                .focused($focusField, equals: .password)
                 .padding([.top, .horizontal])
 
                 HStack {
@@ -86,8 +90,18 @@ struct SignupPasswordView: View {
                 .disabled(viewModel.password.isEmpty)
             }
         }
+        .onAppear {
+            focusField = .password
+        }
         .navigate(
-            to: signupInfoComponent.makeView(),
+            to: signupInfoComponent.makeView(
+                signupInfoSceneParam: .init(
+                    name: viewModel.signupPasswordSceneParam.name,
+                    employeeID: viewModel.signupPasswordSceneParam.employeeID,
+                    email: viewModel.signupPasswordSceneParam.email,
+                    password: viewModel.password
+                )
+            ),
             when: $viewModel.isNavigateSignupInfo
         )
         .stBackground()

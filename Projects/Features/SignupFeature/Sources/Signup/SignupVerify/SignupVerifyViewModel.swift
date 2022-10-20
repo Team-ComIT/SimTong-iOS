@@ -4,17 +4,19 @@ import Foundation
 import Combine
 
 public final class SignupVerifyViewModel: BaseViewModel {
-    @Published var authCode = ""
+    @Published var authCode = "" {
+        didSet { isError = false }
+    }
     @Published var timeText = ""
     @Published var timeRemaining = 300
     @Published var isVerified = false
     @Published var isToastShow = false
+    let signupVerifySceneParam: SignupVerifySceneParam
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private var bag = Set<AnyCancellable>()
 
     private let sendAuthCodeUseCase: any SendAuthCodeUseCase
     private let verifyAuthCodeUseCase: any VerifyAuthCodeUseCase
-    private let signupVerifySceneParam: SignupVerifySceneParam
 
     init(
         sendAuthCodeUseCase: any SendAuthCodeUseCase,
@@ -58,7 +60,6 @@ public final class SignupVerifyViewModel: BaseViewModel {
     func completeButtonDidTap() {
         Task {
             await withAsyncTry(with: self, action: { owner in
-                print(owner.authCode)
                 try await owner.verifyAuthCodeUseCase.execute(
                     email: owner.signupVerifySceneParam.email,
                     code: owner.authCode

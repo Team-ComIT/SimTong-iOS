@@ -4,7 +4,11 @@ import SwiftUI
 public protocol SignupInfoDependency: Dependency {}
 
 public final class SignupInfoComponent: Component<SignupInfoDependency> {
-    public func makeView() -> some View {
-        SignupInfoView(viewModel: SignupInfoViewModel())
+    public func makeView(signupInfoSceneParam: SignupInfoSceneParam) -> some View {
+        SignupInfoView(
+            viewModel: SignupInfoViewModel(
+                signupInfoSceneParam: signupInfoSceneParam
+            )
+        )
     }
 }
