@@ -4,7 +4,7 @@ import DomainModule
 public protocol RemoteUsersDataSource {
     func signin(req: SigninRequestDTO) async throws
     func signup(req: SignupRequestDTO) async throws
-    func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws
+    func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws
     func fetchMyProfile() async throws -> UserInfo
     func checkDuplicateNickname(nickname: String) async throws
     func changeNickname(nickname: String) async throws

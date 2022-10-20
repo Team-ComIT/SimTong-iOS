@@ -11,11 +11,11 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
         try await request(.signup(req), dto: NoResponse.self)
     }
 
-    public func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws {
+    public func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws {
         try await request(
             .existsByNameAndEmployeeNumber(
                 name: name,
-                employeeNumber: employeeNumber
+                employeeNumber: employeeID
             ),
             dto: NoResponse.self
         )

@@ -17,8 +17,8 @@ public struct UsersRepositoryImpl: UsersRepository {
         try await remoteUsersDataSource.signup(req: req)
     }
 
-    public func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws {
-        try await remoteUsersDataSource.existsByNameAndEmployeeNumber(name: name, employeeNumber: employeeNumber)
+    public func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws {
+        try await remoteUsersDataSource.checkExistNameAndEmployeeID(name: name, employeeID: employeeID)
     }
 
     public func fetchMyProfile() async throws -> UserInfo {

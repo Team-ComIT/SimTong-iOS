@@ -70,7 +70,7 @@ extension STError: LocalizedError {
             return "이메일 또는 사원번호, 또는 닉네임이 이미 사용중입니다"
 
         case .notExistsUserByVerifyEmployee:
-            return "일치하는 정보를 찾을 수 없습니다"
+            return "이름과 사번 정보가 일치하지 않습니다"
 
         case .passwordMismatchByChangePassword:
             return "비밀번호가 일치하지 않습니다"

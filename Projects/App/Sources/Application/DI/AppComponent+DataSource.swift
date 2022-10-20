@@ -5,7 +5,8 @@ import NetworkModule
 extension AppComponent {
     public var remoteCommonsDataSource: any RemoteCommonsDataSource {
         shared {
-            RemoteCommonsDataSourceImpl(keychain: keychain)
+            RemoteCommonsDataSourceFake() // TODO: 나중에 변경
+//            RemoteCommonsDataSourceImpl(keychain: keychain)
         }
     }
 }
@@ -23,7 +24,8 @@ extension AppComponent {
 extension AppComponent {
     public var remoteUsersDataSource: any RemoteUsersDataSource {
         shared {
-            RemoteUsersDataSourceImpl(keychain: keychain)
+            RemoteUsersDataSourceFake() // TODO: 나중에 변경
+//            RemoteUsersDataSourceImpl(keychain: keychain)
         }
     }
 }

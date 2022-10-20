@@ -19,14 +19,15 @@ public struct WideButton: View {
         Button(action: action) {
             HStack {
                 Spacer()
+
                 Text(text)
                     .padding(.top, 19)
                     .padding(.bottom, 15)
+
                 Spacer()
             }
         }
         .buttonStyle(WideButtonStyle(style: style))
-        .frame(height: 48)
     }
 }
 

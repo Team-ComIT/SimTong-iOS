@@ -19,6 +19,10 @@ extension AppComponent {
     public var changePasswordUseCase: any ChangePasswordUseCase {
         ChangePasswordUseCaseImpl(commonsRepository: commonsRepository)
     }
+
+    public var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase {
+        CheckExistNameAndEmailUseCaseImpl(commonsRepository: commonsRepository)
+    }
 }
 
 // MARK: - Files
@@ -42,8 +46,8 @@ extension AppComponent {
         SignupUseCaseImpl(usersRepository: usersRepository)
     }
 
-    public var existsByNameAndEmployeeNumberUseCase: any ExistsByNameAndEmployeeNumberUseCase {
-        ExistsByNameAndEmployeeNumberUseCaseImpl(usersRepository: usersRepository)
+    public var checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase {
+        CheckExistNameAndEmployeeIDUseCaseImpl(usersRepository: usersRepository)
     }
 
     public var checkDuplicateEmail: any CheckDuplicateEmailUseCase {

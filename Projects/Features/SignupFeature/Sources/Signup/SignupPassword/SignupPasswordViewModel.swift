@@ -5,7 +5,7 @@ final class SignupPasswordViewModel: BaseViewModel {
     @Published var password = ""
     @Published var passwordCheck = ""
     @Published var isShowPasswordCheck = false
-    @Published var isPasswordCheck = false
+    @Published var isNavigateSignupInfo = false
 
     var isEnableNextButton: Bool {
         !password.isEmpty && !passwordCheck.isEmpty
@@ -17,6 +17,11 @@ final class SignupPasswordViewModel: BaseViewModel {
     }
 
     func checkPassword() {
-        isPasswordCheck = password == passwordCheck
+        if password == passwordCheck {
+            isNavigateSignupInfo = true
+        } else {
+            isError = true
+            errorMessage = "비밀번호가 일치하지 않습니다."
+        }
     }
 }

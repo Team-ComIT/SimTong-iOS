@@ -5,7 +5,7 @@ import ErrorModule
 public enum UsersAPI: SimTongAPI {
     case signin(SigninRequestDTO)
     case signup(SignupRequestDTO)
-    case existsByNameAndEmployeeNumber(name: String, employeeNumber: Int)
+    case existsByNameAndEmployeeNumber(name: String, employeeNumber: String)
     case fetchMyProfile
     case checkDuplicateNickname(nickname: String)
     case changeNickname(nickname: String)

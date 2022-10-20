@@ -35,7 +35,10 @@ struct SignupPasswordView: View {
                     STSecureTextField(
                         labelText: "비밀번호 재확인",
                         text: $viewModel.passwordCheck,
-                        isError: viewModel.isError
+                        isError: viewModel.isError,
+                        onCommit: {
+                            viewModel.nextButtonDidTap()
+                        }
                     )
                     .focused($focusField, equals: .passwordCheck)
                     .opacity(viewModel.isShowPasswordCheck ? 1.0 : 0.0)
@@ -51,6 +54,7 @@ struct SignupPasswordView: View {
                         withAnimation {
                             viewModel.nextButtonDidTap()
                         }
+                        focusField = .passwordCheck
                     }
                 )
                 .padding([.top, .horizontal])
@@ -84,7 +88,7 @@ struct SignupPasswordView: View {
         }
         .navigate(
             to: signupInfoComponent.makeView(),
-            when: $viewModel.isPasswordCheck
+            when: $viewModel.isNavigateSignupInfo
         )
         .stBackground()
         .configBackButton(dismiss: dismiss)
