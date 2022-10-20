@@ -5,6 +5,7 @@ let project = Project.makeModule(
     name: "MainTabFeature",
     product: .staticFramework,
     dependencies: [
-        .Project.Features.BaseFeature
+        .Project.Features.BaseFeature,
+        .Project.Features.MyPageFeature
     ]
 )
