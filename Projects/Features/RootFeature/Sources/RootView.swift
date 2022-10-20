@@ -26,7 +26,7 @@ public struct RootView: View {
                 Text("SPLASH")
 
             case .main:
-                Text("MAIN")
+                mainTabComponent.makeView()
 
             case .signin:
                 introComponent.makeView()
