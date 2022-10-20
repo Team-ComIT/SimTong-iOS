@@ -1,7 +1,7 @@
 import Combine
 import BaseFeature
 
-public final class SignupViewModel: BaseViewModel {
+public final class SignupEmployeeInfoViewModel: BaseViewModel {
     @Published var name: String = ""
     @Published var number: String = ""
     @Published var email: String = ""
@@ -10,6 +10,7 @@ public final class SignupViewModel: BaseViewModel {
     @Published var isEmailStep = false
     @Published var isPresentedTerms = false
     @Published var isNavigateToVerify = false
+    @Published var isMissmatch = false
 
     var isEnableNextButton: Bool {
         !name.isEmpty && (!number.isEmpty || !isNumberStep) && (!email.isEmpty || !isEmailStep)

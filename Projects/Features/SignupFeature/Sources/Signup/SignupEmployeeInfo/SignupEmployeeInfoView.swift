@@ -3,27 +3,38 @@ import Foundation
 import DesignSystem
 import Combine
 
-struct SignupView: View {
+struct SignupEmployeeInfoView: View {
     private enum FocusField: Hashable {
         case name
         case number
         case email
     }
 
-    @StateObject var viewModel: SignupViewModel
+    @StateObject var viewModel: SignupEmployeeInfoViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
+    private let signupVerifyComponent: SignupVerifyComponent
 
     public init(
-        viewModel: SignupViewModel
+        viewModel: SignupEmployeeInfoViewModel,
+        signupVerifyComponent: SignupVerifyComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.signupVerifyComponent = signupVerifyComponent
     }
 
     var body: some View {
         ZStack {
             ScrollView {
                 VStack {
+                    HStack {
+                        Text("회원가입")
+                            .stTypo(.s3)
+                            .padding()
+
+                        Spacer()
+                    }
+
                     Group {
                         if viewModel.isEmailStep {
                             STTextField(
@@ -31,6 +42,7 @@ struct SignupView: View {
                                 labelText: "이메일",
                                 text: $viewModel.email,
                                 style: .clear,
+                                isError: viewModel.isError,
                                 onCommit: {
                                     viewModel.nextButtonDidTap()
                                 })
@@ -44,6 +56,7 @@ struct SignupView: View {
                                 labelText: "사원번호",
                                 text: $viewModel.number,
                                 style: .clear,
+                                isError: viewModel.isError,
                                 onCommit: {
                                     withAnimation {
                                         viewModel.nextButtonDidTap()
@@ -60,6 +73,8 @@ struct SignupView: View {
                             labelText: "이름",
                             text: $viewModel.name,
                             style: .clear,
+                            errorText: viewModel.errorMessage,
+                            isError: viewModel.isError,
                             onCommit: {
                                 withAnimation {
                                     viewModel.nextButtonDidTap()
@@ -88,8 +103,6 @@ struct SignupView: View {
 
                     Spacer()
                 }
-                .navigationBarTitle("회원가입")
-                .navigationBarTitleDisplayMode(.inline)
             }
 
             VStack {
@@ -117,5 +130,9 @@ struct SignupView: View {
                 viewModel.isNavigateToVerify.toggle()
             }
         }
+        .navigate(
+            to: signupVerifyComponent.makeView(),
+            when: $viewModel.isNavigateToVerify
+        )
     }
 }
