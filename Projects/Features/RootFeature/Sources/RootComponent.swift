@@ -1,12 +1,16 @@
 import NeedleFoundation
 import SwiftUI
+import IntroFeature
 
-public protocol RootDependency: Dependency {}
+public protocol RootDependency: Dependency {
+    var introComponent: IntroComponent { get }
+}
 
 public final class RootComponent: Component<RootDependency> {
     public func makeView() -> some View {
         RootView(
-            viewModel: RootViewModel()
+            introComponent: dependency.introComponent,
+            viewModel: .init()
         )
     }
 }
