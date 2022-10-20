@@ -3,29 +3,29 @@ import SwiftUI
 
 struct FindPasswordInfoView: View {
     private enum FocusField: Hashable {
-        case name
+        case id
         case email
-        case code
     }
 
     @StateObject private var viewModel: FindPasswordInfoViewModel
     @FocusState private var focusField: FocusField?
-    private let renewalPasswordComponent: RenewalPasswordComponent
+    @Environment(\.dismiss) var dismiss
+    private let findPasswordVerifyComponent: FindPasswordVerifyComponent
 
     public init(
         viewModel: FindPasswordInfoViewModel,
-        renewalPasswordComponent: RenewalPasswordComponent
+        findPasswordVerifyComponent: FindPasswordVerifyComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.renewalPasswordComponent = renewalPasswordComponent
+        self.findPasswordVerifyComponent = findPasswordVerifyComponent
     }
 
     var body: some View {
         VStack(spacing: 8) {
-            STTextField("이름을 입력해주세요", text: $viewModel.name, style: .clear, onCommit: {
+            STTextField("사원번호을 입력해주세요", text: $viewModel.employeeID, style: .clear, onCommit: {
                 focusField = .email
             })
-            .focused($focusField, equals: .name)
+            .focused($focusField, equals: .id)
             .padding(.top, 64)
 
             STTextField(
@@ -33,7 +33,10 @@ struct FindPasswordInfoView: View {
                 text: $viewModel.email,
                 buttonText: "인증",
                 errorText: viewModel.errorMessage,
-                isError: viewModel.isError
+                isError: viewModel.isError,
+                onCommit: {
+                    viewModel.completeButtonDidTap()
+                }
             )
             .focused($focusField, equals: .email)
 
@@ -41,11 +44,22 @@ struct FindPasswordInfoView: View {
                 viewModel.completeButtonDidTap()
             }
             .padding(.top, 32)
-            .disabled(viewModel.code.isEmpty)
+            .disabled(viewModel.employeeID.isEmpty || viewModel.email.isEmpty)
 
             Spacer()
         }
         .padding(.horizontal, 16)
+        .stBackground()
         .stLoading(isLoading: $viewModel.isLoading)
+        .configBackButton(dismiss: dismiss)
+        .navigate(
+            to: findPasswordVerifyComponent.makeView(
+                findPasswordVerifySceneParam: .init(
+                    employeeID: viewModel.employeeID,
+                    email: viewModel.email
+                )
+            ),
+            when: $viewModel.isNavigateFindPasswordVerify
+        )
     }
 }

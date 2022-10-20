@@ -138,15 +138,39 @@ private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: Needle
     return RootDependency3944cc797a4a88956fb5Provider()
 }
 private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
-
-
-    init() {
-
+    var sendAuthCodeUseCase: any SendAuthCodeUseCase {
+        return appComponent.sendAuthCodeUseCase
+    }
+    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
+        return appComponent.verifyAuthCodeUseCase
+    }
+    var renewalPasswordComponent: RenewalPasswordComponent {
+        return appComponent.renewalPasswordComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->FindPasswordVerifyComponent
-private func factory573f446f1153613fedd6e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider()
+private func factory573f446f1153613fedd6f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider(appComponent: parent1(component) as! AppComponent)
+}
+private class FindPasswordInfoDependency2ddef0504ff382f9d508Provider: FindPasswordInfoDependency {
+    var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase {
+        return appComponent.checkExistNameAndEmailUseCase
+    }
+    var findPasswordVerifyComponent: FindPasswordVerifyComponent {
+        return appComponent.findPasswordVerifyComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->FindPasswordInfoComponent
+private func factory508fc8f893455de876c5f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindPasswordInfoDependency2ddef0504ff382f9d508Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPasswordDependency {
     var resetPasswordUseCase: any ResetPasswordUseCase {
@@ -160,22 +184,6 @@ private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPass
 /// ^->AppComponent->RenewalPasswordComponent
 private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
-}
-private class FindPasswordInfoDependency2ddef0504ff382f9d508Provider: FindPasswordInfoDependency {
-    var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase {
-        return appComponent.checkExistNameAndEmailUseCase
-    }
-    var renewalPasswordComponent: RenewalPasswordComponent {
-        return appComponent.renewalPasswordComponent
-    }
-    private let appComponent: AppComponent
-    init(appComponent: AppComponent) {
-        self.appComponent = appComponent
-    }
-}
-/// ^->AppComponent->FindPasswordInfoComponent
-private func factory508fc8f893455de876c5f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return FindPasswordInfoDependency2ddef0504ff382f9d508Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
@@ -288,18 +296,20 @@ extension RootComponent: Registration {
 }
 extension FindPasswordVerifyComponent: Registration {
     public func registerItems() {
-
-    }
-}
-extension RenewalPasswordComponent: Registration {
-    public func registerItems() {
-        keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
+        keyPathToName[\FindPasswordVerifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
+        keyPathToName[\FindPasswordVerifyDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
+        keyPathToName[\FindPasswordVerifyDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
     }
 }
 extension FindPasswordInfoComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindPasswordInfoDependency.checkExistNameAndEmailUseCase] = "checkExistNameAndEmailUseCase-any CheckExistNameAndEmailUseCase"
-        keyPathToName[\FindPasswordInfoDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
+        keyPathToName[\FindPasswordInfoDependency.findPasswordVerifyComponent] = "findPasswordVerifyComponent-FindPasswordVerifyComponent"
+    }
+}
+extension RenewalPasswordComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
     }
 }
 extension FindAuthInfoTabComponent: Registration {
@@ -338,9 +348,9 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }

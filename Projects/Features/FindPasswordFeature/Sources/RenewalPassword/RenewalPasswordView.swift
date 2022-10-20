@@ -44,7 +44,12 @@ struct RenewalPasswordView: View {
 
             Spacer()
         }
+        .onAppear {
+            focusField = .password
+        }
+        .stBackground()
         .padding(.horizontal, 16)
         .configBackButton(dismiss: dismiss)
+        .stSnackbar(isShowing: $viewModel.isSuccessRenewal, text: "비밀번호 변경이 완료되었습니다.")
     }
 }

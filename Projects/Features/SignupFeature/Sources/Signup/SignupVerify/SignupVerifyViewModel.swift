@@ -26,7 +26,6 @@ public final class SignupVerifyViewModel: BaseViewModel {
         self.sendAuthCodeUseCase = sendAuthCodeUseCase
         self.verifyAuthCodeUseCase = verifyAuthCodeUseCase
         self.signupVerifySceneParam = signupVerifySceneParam
-        super.init()
     }
 
     deinit {

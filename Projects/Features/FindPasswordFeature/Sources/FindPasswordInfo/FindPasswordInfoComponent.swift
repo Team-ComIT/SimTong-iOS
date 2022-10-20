@@ -4,7 +4,7 @@ import DomainModule
 
 public protocol FindPasswordInfoDependency: Dependency {
     var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase { get }
-    var renewalPasswordComponent: RenewalPasswordComponent { get }
+    var findPasswordVerifyComponent: FindPasswordVerifyComponent { get }
 }
 
 public final class FindPasswordInfoComponent: Component<FindPasswordInfoDependency> {
@@ -13,7 +13,7 @@ public final class FindPasswordInfoComponent: Component<FindPasswordInfoDependen
             viewModel: .init(
                 checkExistNameAndEmailUseCase: dependency.checkExistNameAndEmailUseCase
             ),
-            renewalPasswordComponent: dependency.renewalPasswordComponent
+            findPasswordVerifyComponent: dependency.findPasswordVerifyComponent
         )
     }
 }

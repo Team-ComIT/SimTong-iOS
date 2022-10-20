@@ -4,9 +4,12 @@ import DomainModule
 import SwiftUI
 
 final class FindPasswordInfoViewModel: BaseViewModel {
-    @Published var name = ""
-    @Published var email = ""
-    @Published var code = ""
+    @Published var employeeID = "" {
+        didSet { isError = false }
+    }
+    @Published var email = "" {
+        didSet { isError = false }
+    }
     @Published var isNavigateFindPasswordVerify = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common)
 
