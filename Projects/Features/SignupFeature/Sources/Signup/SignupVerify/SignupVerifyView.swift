@@ -2,10 +2,13 @@ import SwiftUI
 import DesignSystem
 
 struct SignupVerifyView: View {
-
+    private enum FocusField {
+        case code
+    }
     @StateObject var viewModel: SignupVerifyViewModel
     @Environment(\.dismiss) var dismiss
     private let signupPasswordComponent: SignupPasswordComponent
+    @FocusState private var focusField: FocusField?
 
     public init(
         viewModel: SignupVerifyViewModel,
@@ -13,6 +16,7 @@ struct SignupVerifyView: View {
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.signupPasswordComponent = signupPasswordComponent
+        viewModel.timerStart()
     }
 
     var body: some View {
@@ -29,13 +33,14 @@ struct SignupVerifyView: View {
                 STTextField(
                     "이메일을 확인해보세요!",
                     labelText: "인증번호",
-                    text: $viewModel.certificationNumber,
+                    text: $viewModel.authCode,
                     style: .clear,
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError, onCommit: {
                         viewModel.completeButtonDidTap()
                     }
                 )
+                .focused($focusField, equals: .code)
 
                 Text("남은시간 \(viewModel.timeText)")
                     .stTypo(.m6, color: .extraError)
@@ -69,14 +74,14 @@ struct SignupVerifyView: View {
             WideButton(text: "확인") {
                 viewModel.completeButtonDidTap()
             }
-            .disabled(viewModel.certificationNumber.isEmpty)
+            .disabled(viewModel.authCode.isEmpty)
+        }
+        .onAppear {
+            focusField = .code
         }
         .navigate(to: signupPasswordComponent.makeView(), when: $viewModel.isVerified)
         .stBackground()
         .configBackButton(dismiss: dismiss)
         .stToast(isShowing: $viewModel.isToastShow, message: "입력하신 이메일로 인증번호를 전송했어요", icon: .success)
-        .onAppear {
-            viewModel.timerStart()
-        }
     }
 }

@@ -4,7 +4,7 @@ import Foundation
 import Combine
 
 public final class SignupVerifyViewModel: BaseViewModel {
-    @Published var certificationNumber = ""
+    @Published var authCode = ""
     @Published var timeText = ""
     @Published var timeRemaining = 300
     @Published var isVerified = false
@@ -36,6 +36,7 @@ public final class SignupVerifyViewModel: BaseViewModel {
         Task {
             await withAsyncTry(with: self) { owner in
                 try await owner.sendAuthCodeUseCase.execute(email: owner.signupVerifySceneParam.email)
+                owner.isToastShow = true
             }
 
             self.timeText = self.timeRemaining % 60 < 10 ?
@@ -43,7 +44,7 @@ public final class SignupVerifyViewModel: BaseViewModel {
             "\(self.timeRemaining/60):\(self.timeRemaining%60)"
 
             timer.sink { [weak self] _ in
-                guard let self else { return }
+                guard let self, self.timeRemaining > 0 else { return }
                 self.timeRemaining -= 1
                 self.timeText = self.timeRemaining % 60 < 10 ?
                 "\(self.timeRemaining/60):0\(self.timeRemaining%60)" :
@@ -53,11 +54,28 @@ public final class SignupVerifyViewModel: BaseViewModel {
         }
     }
 
+    @MainActor
     func completeButtonDidTap() {
-        isVerified = true
+        Task {
+            await withAsyncTry(with: self, action: { owner in
+                print(owner.authCode)
+                try await owner.verifyAuthCodeUseCase.execute(
+                    email: owner.signupVerifySceneParam.email,
+                    code: owner.authCode
+                )
+                owner.isVerified = true
+            })
+        }
     }
 
+    @MainActor
     func resendCodeButtonDidTap() {
-        isToastShow = true
+        Task {
+            await withAsyncTry(with: self, action: { owner in
+                try await owner.sendAuthCodeUseCase.execute(email: owner.signupVerifySceneParam.email)
+                owner.timeRemaining = 300
+                owner.isToastShow = true
+            })
+        }
     }
 }

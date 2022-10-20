@@ -2,7 +2,7 @@ import DataMappingModule
 import DomainModule
 import ErrorModule
 
-public struct RemoteUsersDataSourceFake: RemoteUsersDataSource {
+public struct RemoteUsersDataSourceMock: RemoteUsersDataSource {
     public init() {}
 
     public func signin(req: SigninRequestDTO) async throws {}

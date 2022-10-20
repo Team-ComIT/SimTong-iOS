@@ -2,7 +2,7 @@ import DataMappingModule
 import DomainModule
 import ErrorModule
 
-public struct RemoteCommonsDataSourceFake: RemoteCommonsDataSource {
+public struct RemoteCommonsDataSourceMock: RemoteCommonsDataSource {
     public init() {}
 
     public func fetchSpotList() async throws -> [Spot] {
