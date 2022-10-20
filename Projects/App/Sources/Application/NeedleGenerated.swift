@@ -7,6 +7,7 @@ import FindEmployeeIDFeature
 import FindTabFeature
 import IntroFeature
 import KeychainModule
+import MainTabFeature
 import NeedleFoundation
 import NetworkModule
 import RootFeature
@@ -36,6 +37,17 @@ private class SignupDependency1ff7d1355204bb65e850Provider: SignupDependency {
 /// ^->AppComponent->SignupComponent
 private func factory86602ff0d0dbaf2cb017e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return SignupDependency1ff7d1355204bb65e850Provider()
+}
+private class MainTabDependency2826cdb310ed0b17a725Provider: MainTabDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->MainTabComponent
+private func factory1ab5a747ddf21e1393f9e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return MainTabDependency2826cdb310ed0b17a725Provider()
 }
 private class EmployeeIDResultDependency17ee22cd492649466e5fProvider: EmployeeIDResultDependency {
 
@@ -80,6 +92,9 @@ private func factory529868f8afc90f854ddcf47b58f8f304c97af4d5(_ component: Needle
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var introComponent: IntroComponent {
         return appComponent.introComponent
+    }
+    var mainTabComponent: MainTabComponent {
+        return appComponent.mainTabComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -155,6 +170,11 @@ extension SignupComponent: Registration {
 
     }
 }
+extension MainTabComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension EmployeeIDResultComponent: Registration {
     public func registerItems() {
 
@@ -174,6 +194,7 @@ extension EmployeeIDSpotListComponent: Registration {
 extension RootComponent: Registration {
     public func registerItems() {
         keyPathToName[\RootDependency.introComponent] = "introComponent-IntroComponent"
+        keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
     }
 }
 extension FindAuthInfoTabComponent: Registration {
@@ -204,6 +225,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SignupComponent", factory86602ff0d0dbaf2cb017e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->MainTabComponent", factory1ab5a747ddf21e1393f9e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
