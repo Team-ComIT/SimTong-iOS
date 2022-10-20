@@ -10,6 +10,7 @@ import KeychainModule
 import NeedleFoundation
 import NetworkModule
 import RootFeature
+import SigninFeature
 import SignupFeature
 import SwiftUI
 
@@ -127,6 +128,17 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider()
 }
+private class SigninDependencyde06a9d0b22764487733Provider: SigninDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->SigninComponent
+private func factory2882a056d84a613debcce3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SigninDependencyde06a9d0b22764487733Provider()
+}
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
         return appComponent.findEmployeeIDComponent
@@ -228,6 +240,11 @@ extension RootComponent: Registration {
 
     }
 }
+extension SigninComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension FindAuthInfoTabComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindAuthInfoTabDependency.findEmployeeIDComponent] = "findEmployeeIDComponent-FindEmployeeIDComponent"
@@ -263,6 +280,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debcce3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
