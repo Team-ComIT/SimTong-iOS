@@ -12,7 +12,7 @@ struct SimTongApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                AppComponent().signupComponent.makeView()
+                AppComponent().signupEmployeeInfoComponent.makeView()
             }
         }
     }

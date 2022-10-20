@@ -60,6 +60,7 @@ public struct STTextField: View {
             if isError && !errorText.isEmpty {
                 Text(errorText)
                     .stTypo(.r7, color: Color.main06)
+                    .padding(.leading, 8)
             }
         }
     }
