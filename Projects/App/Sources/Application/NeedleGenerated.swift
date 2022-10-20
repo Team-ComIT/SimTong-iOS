@@ -7,6 +7,7 @@ import FindEmployeeIDFeature
 import FindTabFeature
 import IntroFeature
 import KeychainModule
+import MainTabFeature
 import NeedleFoundation
 import NetworkModule
 import RootFeature
@@ -76,6 +77,17 @@ private class SignupVerifyDependency19890686bff8e77ece06Provider: SignupVerifyDe
 private func factoryf7587eff678919fec270f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return SignupVerifyDependency19890686bff8e77ece06Provider(appComponent: parent1(component) as! AppComponent)
 }
+private class MainTabDependency2826cdb310ed0b17a725Provider: MainTabDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->MainTabComponent
+private func factory1ab5a747ddf21e1393f9e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return MainTabDependency2826cdb310ed0b17a725Provider()
+}
 private class EmployeeIDResultDependency17ee22cd492649466e5fProvider: EmployeeIDResultDependency {
 
 
@@ -117,15 +129,20 @@ private func factory529868f8afc90f854ddcf47b58f8f304c97af4d5(_ component: Needle
     return EmployeeIDSpotListDependency9ec4920d77848b463dd3Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
-
-
-    init() {
-
+    var introComponent: IntroComponent {
+        return appComponent.introComponent
+    }
+    var mainTabComponent: MainTabComponent {
+        return appComponent.mainTabComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->RootComponent
-private func factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return RootDependency3944cc797a4a88956fb5Provider()
+private func factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return RootDependency3944cc797a4a88956fb5Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
@@ -197,6 +214,10 @@ extension SignupInfoComponent: Registration {
 
     }
 }
+
+extension MainTabComponent: Registration {
+    public func registerItems() {
+}
 extension SignupEmployeeInfoComponent: Registration {
     public func registerItems() {
         keyPathToName[\SignupEmployeeInfoDependency.signupVerifyComponent] = "signupVerifyComponent-SignupVerifyComponent"
@@ -205,6 +226,7 @@ extension SignupEmployeeInfoComponent: Registration {
 extension SignupVerifyComponent: Registration {
     public func registerItems() {
         keyPathToName[\SignupVerifyDependency.signupPasswordComponent] = "signupPasswordComponent-SignupPasswordComponent"
+
     }
 }
 extension EmployeeIDResultComponent: Registration {
@@ -225,7 +247,8 @@ extension EmployeeIDSpotListComponent: Registration {
 }
 extension RootComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\RootDependency.introComponent] = "introComponent-IntroComponent"
+        keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
     }
 }
 extension FindAuthInfoTabComponent: Registration {
@@ -255,6 +278,8 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->AppComponent->SignupComponent", factory86602ff0d0dbaf2cb017e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->MainTabComponent", factory1ab5a747ddf21e1393f9e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881f47b58f8f304c97af4d5)
@@ -262,7 +287,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
