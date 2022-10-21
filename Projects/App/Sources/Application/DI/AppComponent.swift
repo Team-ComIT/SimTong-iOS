@@ -6,6 +6,8 @@ import FindTabFeature
 import FindEmployeeIDFeature
 import SignupFeature
 import KeychainModule
+import FindPasswordFeature
+import MainTabFeature
 import SigninFeature
 
 final class AppComponent: BootstrapComponent {
@@ -62,7 +64,26 @@ extension AppComponent {
         EmployeeIDResultComponent(parent: self)
     }
 
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        FindPasswordInfoComponent(parent: self)
+    }
+
+    var renewalPasswordComponent: RenewalPasswordComponent {
+        RenewalPasswordComponent(parent: self)
+    }
+
+    var findPasswordVerifyComponent: FindPasswordVerifyComponent {
+        FindPasswordVerifyComponent(parent: self)
+    }
+
     var signinComponent: SigninComponent {
         SigninComponent(parent: self)
+    }
+}
+
+// MARK: - Main
+extension AppComponent {
+    var mainTabComponent: MainTabComponent {
+        MainTabComponent(parent: self)
     }
 }

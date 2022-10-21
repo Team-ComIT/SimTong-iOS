@@ -1,19 +1,32 @@
-import Combine
 import BaseFeature
+import Combine
+import DomainModule
 
 public final class SignupEmployeeInfoViewModel: BaseViewModel {
-    @Published var name: String = ""
-    @Published var number: String = ""
-    @Published var email: String = ""
+    @Published var name: String = "" {
+        didSet { isError = false }
+    }
+    @Published var number: String = "" {
+        didSet { isError = false }
+    }
+    @Published var email: String = "" {
+        didSet { isError = false }
+    }
     @Published var nextButtonTitle = "다음"
     @Published var isNumberStep = false
     @Published var isEmailStep = false
     @Published var isPresentedTerms = false
     @Published var isNavigateToVerify = false
-    @Published var isMissmatch = false
 
     var isEnableNextButton: Bool {
         !name.isEmpty && (!number.isEmpty || !isNumberStep) && (!email.isEmpty || !isEmailStep)
+    }
+    private let checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase
+
+    public init(
+        checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase
+    ) {
+        self.checkExistNameAndEmployeeIDUseCase = checkExistNameAndEmployeeIDUseCase
     }
 
     @MainActor
@@ -28,9 +41,18 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
         }
     }
 
+    @MainActor
     func signup() {
         if !email.isEmpty && isEmailStep {
-            isPresentedTerms = true
+            Task {
+                await withAsyncTry(with: self) { owner in
+                    try await owner.checkExistNameAndEmployeeIDUseCase.execute(
+                        name: owner.name,
+                        employeeNumber: owner.number
+                    )
+                    owner.isNavigateToVerify = true
+                }
+            }
         }
     }
  }

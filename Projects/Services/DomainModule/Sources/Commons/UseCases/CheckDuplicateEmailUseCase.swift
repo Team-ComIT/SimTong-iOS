@@ -1,3 +1,3 @@
-public protocol ExistsByEmailUseCase {
+public protocol CheckDuplicateEmailUseCase {
     func execute(email: String) async throws
 }
