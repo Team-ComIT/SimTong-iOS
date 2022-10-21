@@ -7,6 +7,7 @@ import FindEmployeeIDFeature
 import SignupFeature
 import KeychainModule
 import MainTabFeature
+import MyPageFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -67,5 +68,9 @@ extension AppComponent {
 extension AppComponent {
     var mainTabComponent: MainTabComponent {
         MainTabComponent(parent: self)
+    }
+
+    var myPageComponent: MyPageComponent {
+        MyPageComponent(parent: self)
     }
 }
