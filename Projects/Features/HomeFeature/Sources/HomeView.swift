@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct HomeView: View {
-    var body: some View {
-        Text("Hello, World!")
-    }
-}
+    @StateObject var viewModel: HomeViewModel
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
+    public init(viewModel: HomeViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        ScrollView(showsIndicators: false) {
+            
+        }
     }
 }
