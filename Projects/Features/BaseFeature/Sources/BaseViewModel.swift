@@ -12,7 +12,7 @@ open class BaseViewModel: ObservableObject {
     public func withAsyncTry<Object: AnyObject>(
         with object: Object,
         action: @escaping (Object) async throws -> Void,
-        errorAction: ((STError) -> Void)? = nil
+        errorAction: ((Object, STError) -> Void)? = nil
     ) async {
         isLoading = true
         do {
@@ -20,7 +20,7 @@ open class BaseViewModel: ObservableObject {
             isLoading = false
         } catch {
             if let errorAction = errorAction {
-                errorAction(error.asSTError)
+                errorAction(object, error.asSTError)
             } else {
                 isError = true
                 errorMessage = error.asSTError.localizedDescription

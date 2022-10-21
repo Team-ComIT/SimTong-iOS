@@ -13,6 +13,7 @@ struct CTAButtonStyle: ButtonStyle {
         switch style {
         case .`default`:
             return AnyView(DefaultButton(configuration: configuration))
+
         case .cancel:
             return AnyView(CancelButton(configuration: configuration))
         }
@@ -55,19 +56,18 @@ extension CTAButtonStyle {
         let configuration: ButtonStyle.Configuration
         var body: some View {
             configuration.label
-                .stTypo(.m5, color: .gray05)
-                .background(
-                    configuration.isPressed ?
-                    Color.gray02 :
-                    Color.gray01
-                )
-                .shadow(
-                    color: .extraBlack.opacity(configuration.isPressed ? 0 : 0.02),
-                    radius: configuration.isPressed ? 0 : 4,
-                    x: 0,
-                    y: configuration.isPressed ? 0 : 4
-                )
-                .cornerRadius(5)
+                .stTypo(.m5, color: configuration.isPressed ? .gray05 : .gray04)
+                .background {
+                    Rectangle()
+                        .fill(configuration.isPressed ? Color.gray02 : .gray01)
+                        .cornerRadius(5)
+                        .shadow(
+                            color: .extraBlack.opacity(configuration.isPressed ? 0 : 0.02),
+                            radius: 6,
+                            x: 0,
+                            y: 4
+                        )
+                }
         }
     }
 }

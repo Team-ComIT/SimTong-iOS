@@ -46,9 +46,8 @@ public struct STSnackbar: ViewModifier {
                 }
                 .background {
                     Color.grayMain
-                        .opacity(0.6)
+                        .cornerRadius(5)
                 }
-                .cornerRadius(5)
                 .padding(.bottom, 16)
                 .padding(.horizontal, 16)
                 .transition(.opacity.animation(.easeOut(duration: 0.3)))

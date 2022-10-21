@@ -4,6 +4,7 @@ import BaseFeature
 import DataModule
 import DomainModule
 import FindEmployeeIDFeature
+import FindPasswordFeature
 import FindTabFeature
 import IntroFeature
 import KeychainModule
@@ -52,6 +53,9 @@ private func factoryf65b1c12d971bd932996e3b0c44298fc1c149afb(_ component: Needle
     return SignupInfoDependency76f0cca8f78295db6e25Provider()
 }
 private class SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider: SignupEmployeeInfoDependency {
+    var checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase {
+        return appComponent.checkExistNameAndEmployeeIDUseCase
+    }
     var signupVerifyComponent: SignupVerifyComponent {
         return appComponent.signupVerifyComponent
     }
@@ -65,6 +69,12 @@ private func factory85693d36827c3c0e8881f47b58f8f304c97af4d5(_ component: Needle
     return SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupVerifyDependency19890686bff8e77ece06Provider: SignupVerifyDependency {
+    var sendAuthCodeUseCase: any SendAuthCodeUseCase {
+        return appComponent.sendAuthCodeUseCase
+    }
+    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
+        return appComponent.verifyAuthCodeUseCase
+    }
     var signupPasswordComponent: SignupPasswordComponent {
         return appComponent.signupPasswordComponent
     }
@@ -144,9 +154,60 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 private func factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider(appComponent: parent1(component) as! AppComponent)
 }
+private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
+    var sendAuthCodeUseCase: any SendAuthCodeUseCase {
+        return appComponent.sendAuthCodeUseCase
+    }
+    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
+        return appComponent.verifyAuthCodeUseCase
+    }
+    var renewalPasswordComponent: RenewalPasswordComponent {
+        return appComponent.renewalPasswordComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->FindPasswordVerifyComponent
+private func factory573f446f1153613fedd6f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider(appComponent: parent1(component) as! AppComponent)
+}
+private class FindPasswordInfoDependency2ddef0504ff382f9d508Provider: FindPasswordInfoDependency {
+    var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase {
+        return appComponent.checkExistNameAndEmailUseCase
+    }
+    var findPasswordVerifyComponent: FindPasswordVerifyComponent {
+        return appComponent.findPasswordVerifyComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->FindPasswordInfoComponent
+private func factory508fc8f893455de876c5f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return FindPasswordInfoDependency2ddef0504ff382f9d508Provider(appComponent: parent1(component) as! AppComponent)
+}
+private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPasswordDependency {
+    var resetPasswordUseCase: any ResetPasswordUseCase {
+        return appComponent.resetPasswordUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->RenewalPasswordComponent
+private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
+}
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
         return appComponent.findEmployeeIDComponent
+    }
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        return appComponent.findPasswordInfoComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -186,18 +247,20 @@ extension AppComponent: Registration {
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
         localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { self.resetPasswordUseCase as Any }
+        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
+        localTable["checkExistNameAndEmailUseCase-any CheckExistNameAndEmailUseCase"] = { self.checkExistNameAndEmailUseCase as Any }
         localTable["uploadSingleFileUseCase-any UploadSingleFileUseCase"] = { self.uploadSingleFileUseCase as Any }
         localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { self.uploadMultipleFileUseCase as Any }
         localTable["signinUseCase-any SigninUseCase"] = { self.signinUseCase as Any }
         localTable["signupUseCase-any SignupUseCase"] = { self.signupUseCase as Any }
-        localTable["existsByNameAndEmployeeNumberUseCase-any ExistsByNameAndEmployeeNumberUseCase"] = { self.existsByNameAndEmployeeNumberUseCase as Any }
-        localTable["existsByEmailUseCase-any ExistsByEmailUseCase"] = { self.existsByEmailUseCase as Any }
+        localTable["checkExistNameAndEmployeeIDUseCase-any CheckExistNameAndEmployeeIDUseCase"] = { self.checkExistNameAndEmployeeIDUseCase as Any }
+        localTable["checkDuplicateEmail-any CheckDuplicateEmailUseCase"] = { self.checkDuplicateEmail as Any }
         localTable["fetchMyProfileUseCase-any FetchMyProfileUseCase"] = { self.fetchMyProfileUseCase as Any }
-        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
         localTable["changeNicknameUseCase-any ChangeNicknameUseCase"] = { self.changeNicknameUseCase as Any }
         localTable["changeEmailUseCase-any ChangeEmailUseCase"] = { self.changeEmailUseCase as Any }
         localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { self.changeProfileImageUseCase as Any }
         localTable["changeSpotUseCase-any ChangeSpotUseCase"] = { self.changeSpotUseCase as Any }
+        localTable["checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"] = { self.checkDuplicateNicknameUseCase as Any }
         localTable["verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"] = { self.verifyAuthCodeUseCase as Any }
         localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { self.sendAuthCodeUseCase as Any }
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
@@ -220,11 +283,14 @@ extension MainTabComponent: Registration {
 }
 extension SignupEmployeeInfoComponent: Registration {
     public func registerItems() {
+        keyPathToName[\SignupEmployeeInfoDependency.checkExistNameAndEmployeeIDUseCase] = "checkExistNameAndEmployeeIDUseCase-any CheckExistNameAndEmployeeIDUseCase"
         keyPathToName[\SignupEmployeeInfoDependency.signupVerifyComponent] = "signupVerifyComponent-SignupVerifyComponent"
     }
 }
 extension SignupVerifyComponent: Registration {
     public func registerItems() {
+        keyPathToName[\SignupVerifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
+        keyPathToName[\SignupVerifyDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
         keyPathToName[\SignupVerifyDependency.signupPasswordComponent] = "signupPasswordComponent-SignupPasswordComponent"
 
     }
@@ -251,9 +317,28 @@ extension RootComponent: Registration {
         keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
     }
 }
+extension FindPasswordVerifyComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\FindPasswordVerifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
+        keyPathToName[\FindPasswordVerifyDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
+        keyPathToName[\FindPasswordVerifyDependency.renewalPasswordComponent] = "renewalPasswordComponent-RenewalPasswordComponent"
+    }
+}
+extension FindPasswordInfoComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\FindPasswordInfoDependency.checkExistNameAndEmailUseCase] = "checkExistNameAndEmailUseCase-any CheckExistNameAndEmailUseCase"
+        keyPathToName[\FindPasswordInfoDependency.findPasswordVerifyComponent] = "findPasswordVerifyComponent-FindPasswordVerifyComponent"
+    }
+}
+extension RenewalPasswordComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
+    }
+}
 extension FindAuthInfoTabComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindAuthInfoTabDependency.findEmployeeIDComponent] = "findEmployeeIDComponent-FindEmployeeIDComponent"
+        keyPathToName[\FindAuthInfoTabDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
     }
 }
 extension IntroComponent: Registration {
@@ -287,7 +372,10 @@ private func register1() {
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }

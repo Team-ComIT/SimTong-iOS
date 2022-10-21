@@ -61,6 +61,7 @@ private extension BaseRemoteDataSource {
                 switch result {
                 case let .success(res):
                     config.resume(returning: res)
+
                 case let .failure(err):
                     let code = err.response?.statusCode ?? 500
                     config.resume(

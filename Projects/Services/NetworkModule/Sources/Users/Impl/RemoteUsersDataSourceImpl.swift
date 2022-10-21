@@ -11,18 +11,14 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
         try await request(.signup(req), dto: NoResponse.self)
     }
 
-    public func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws {
+    public func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws {
         try await request(
             .existsByNameAndEmployeeNumber(
                 name: name,
-                employeeNumber: employeeNumber
+                employeeNumber: employeeID
             ),
             dto: NoResponse.self
         )
-    }
-
-    public func existsByEmail(email: String) async throws {
-        try await request(.existsByEmail(email: email), dto: NoResponse.self)
     }
 
     public func fetchMyProfile() async throws -> UserInfo {
@@ -30,8 +26,8 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
             .toDomain()
     }
 
-    public func changePassword(req: ChangePasswordRequestDTO) async throws {
-        try await request(.changePassword(req), dto: NoResponse.self)
+    public func checkDuplicateNickname(nickname: String) async throws {
+        try await request(.checkDuplicateNickname(nickname: nickname), dto: NoResponse.self)
     }
 
     public func changeNickname(nickname: String) async throws {
