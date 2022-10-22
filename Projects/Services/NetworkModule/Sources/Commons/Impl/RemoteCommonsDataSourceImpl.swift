@@ -3,7 +3,7 @@ import APIKit
 import DataMappingModule
 
 public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>, RemoteCommonsDataSource {
-    public func fetchSpotList() async throws -> [Spot] {
+    public func fetchSpotList() async throws -> [SpotEntity] {
         try await request(.spotList, dto: SpotListResponseDTO.self)
             .toDomain()
     }
