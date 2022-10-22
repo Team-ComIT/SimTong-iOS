@@ -80,6 +80,8 @@ public enum DesignSystemAsset {
     public static let place3 = DesignSystemImages(name: "place3")
     public static let place4 = DesignSystemImages(name: "place4")
     public static let place5 = DesignSystemImages(name: "place5")
+    public static let holiday = DesignSystemImages(name: "holiday")
+    public static let pay = DesignSystemImages(name: "pay")
     public static let rice = DesignSystemImages(name: "rice")
   }
 }

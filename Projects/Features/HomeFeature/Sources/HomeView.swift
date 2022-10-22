@@ -30,36 +30,34 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
                         ForEach(viewModel.menus, id: \.date) { menu in
-                            menuColumnView(menu: menu)
+                            MenuCardView(menu: menu)
                         }
                     }
                 }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    WideCardView(image: STImage(.pay), title: "나의 급여 정보", description: "나의 급여 정보를 손쉽게 확인하세요.")
+
+                    WideCardView(image: STImage(.holiday), title: "휴무표 작성", description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요.")
+                }
+                .padding(.top)
+                .padding(.bottom, 30)
             }
             .padding(.horizontal, 16)
         }
         .stBackground()
-    }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                } label: {
+                    STIcon(.bell, color: .gray03)
+                }
 
-    @ViewBuilder
-    func menuColumnView(menu: MenuEntity) -> some View {
-        VStack(alignment: .leading) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("\(menu.date.toSmallSimtongDate().month)월 \(menu.date.toSmallSimtongDate().day)일")
-                    .stTypo(.r7, color: .extraBlack)
-                    .padding(.bottom, 8)
-
-                ForEach(menu.meal, id: \.self) { meal in
-                    Text(meal)
-                        .stTypo(.m5, color: .grayMain)
-                        .frame(maxHeight: .infinity)
+                Button {
+                } label: {
+                    STIcon(.person, color: .gray03)
                 }
             }
-            .padding(20)
         }
-        .frame(width: 168, height: 272)
-        .background {
-            STImage(.rice, renderingMode: .original)
-        }
-        .cornerRadius(16)
     }
 }

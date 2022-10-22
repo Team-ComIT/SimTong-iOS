@@ -57,6 +57,15 @@ struct CalendarView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 24)
         }
+        .gesture(
+            DragGesture(minimumDistance: 3, coordinateSpace: .global)
+                .onEnded { value in
+                    let horizontalAmount = value.translation.width
+                    withAnimation {
+                        currentMonth = currentMonth.adding(by: .month, value: horizontalAmount < 0 ? 1 : -1)
+                    }
+                }
+        )
         .background {
             Color.extraWhite
                 .cornerRadius(16)
