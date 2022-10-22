@@ -21,7 +21,9 @@ struct HomeView: View {
                         .foregroundColor(.extraBlack)
                 }
 
-                CalendarView(holidaysDict: $viewModel.holidaysDict)
+                CalendarView(holidaysDict: $viewModel.holidaysDict) { date in
+                    viewModel.onDateTap(date: date)
+                }
 
                 Text("직원 식당 메뉴")
                     .stTypo(.r4, color: .extraBlack)

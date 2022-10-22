@@ -61,4 +61,7 @@ public final class HomeViewModel: BaseViewModel {
             ]
         )
     ]
+
+    func onDateTap(date: Date) {
+    }
 }

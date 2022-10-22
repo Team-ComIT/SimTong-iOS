@@ -6,6 +6,7 @@ import Utility
 struct CalendarView: View {
     @State var currentMonth = Date()
     @Binding var holidaysDict: [String: HolidayType]
+    var onDateTap: (Date) -> Void
     let days = ["일", "월", "화", "수", "목", "금", "토"]
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
 
@@ -50,6 +51,9 @@ struct CalendarView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(fetchAllDates(), id: \.self) { date in
                         dateRowView(date: date)
+                            .onTapGesture {
+                                onDateTap(date)
+                            }
                     }
                 }
                 .animation(nil, value: currentMonth)
@@ -58,7 +62,7 @@ struct CalendarView: View {
             .padding(.vertical, 24)
         }
         .gesture(
-            DragGesture(minimumDistance: 3, coordinateSpace: .global)
+            DragGesture(minimumDistance: 1, coordinateSpace: .global)
                 .onEnded { value in
                     let horizontalAmount = value.translation.width
                     withAnimation {
