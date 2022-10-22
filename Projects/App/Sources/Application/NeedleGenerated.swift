@@ -155,6 +155,17 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 private func factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider(appComponent: parent1(component) as! AppComponent)
 }
+private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->HomeComponent
+private func factory67229cdf0f755562b2b1e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return HomeDependency443c4e1871277bd8432aProvider()
+}
 private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
         return appComponent.sendAuthCodeUseCase
@@ -202,17 +213,6 @@ private class RenewalPasswordDependencya722dc02d5f3ad3403cfProvider: RenewalPass
 /// ^->AppComponent->RenewalPasswordComponent
 private func factory236a429a80d834e1f370f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RenewalPasswordDependencya722dc02d5f3ad3403cfProvider(appComponent: parent1(component) as! AppComponent)
-}
-private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
-
-
-    init() {
-
-    }
-}
-/// ^->AppComponent->HomeComponent
-private func factory67229cdf0f755562b2b1e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return HomeDependency443c4e1871277bd8432aProvider()
 }
 private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInfoTabDependency {
     var findEmployeeIDComponent: FindEmployeeIDComponent {
@@ -329,6 +329,11 @@ extension RootComponent: Registration {
         keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
     }
 }
+extension HomeComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension FindPasswordVerifyComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindPasswordVerifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
@@ -345,11 +350,6 @@ extension FindPasswordInfoComponent: Registration {
 extension RenewalPasswordComponent: Registration {
     public func registerItems() {
         keyPathToName[\RenewalPasswordDependency.resetPasswordUseCase] = "resetPasswordUseCase-any ResetPasswordUseCase"
-    }
-}
-extension HomeComponent: Registration {
-    public func registerItems() {
-
     }
 }
 extension FindAuthInfoTabComponent: Registration {
@@ -389,10 +389,10 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
 }
