@@ -12,7 +12,7 @@ public extension SingleMenuResponseDTO {
     func toDomain() -> MenuEntity {
         MenuEntity(
             date: date,
-            meal: meal
+            meal: meal.components(separatedBy: ",")
         )
     }
 }

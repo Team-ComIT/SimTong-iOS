@@ -5,7 +5,7 @@ import ErrorModule
 public struct RemoteCommonsDataSourceMock: RemoteCommonsDataSource {
     public init() {}
 
-    public func fetchSpotList() async throws -> [Spot] {
+    public func fetchSpotList() async throws -> [SpotEntity] {
         [
             .init(
                 id: "ADMLWLQ",

@@ -15,8 +15,8 @@ public struct RemoteUsersDataSourceMock: RemoteUsersDataSource {
         }
     }
 
-    public func fetchMyProfile() async throws -> UserInfo {
-        UserInfo(
+    public func fetchMyProfile() async throws -> UserInfoEntity {
+        UserInfoEntity(
             name: "실험자",
             email: "test@gmail.com",
             nickname: "실험용",
