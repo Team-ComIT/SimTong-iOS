@@ -9,7 +9,7 @@ public struct CommonsRepositoryImpl: CommonsRepository {
         self.remoteCommonsDataSource = remoteCommonsDataSource
     }
 
-    public func fetchSpotList() async throws -> [Spot] {
+    public func fetchSpotList() async throws -> [SpotEntity] {
         try await remoteCommonsDataSource.fetchSpotList()
     }
 

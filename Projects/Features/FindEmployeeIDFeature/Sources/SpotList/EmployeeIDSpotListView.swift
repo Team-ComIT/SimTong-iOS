@@ -47,7 +47,7 @@ public struct EmployeeIDSpotListView: View {
     }
 
     @ViewBuilder
-    func spotItemView(spot: Spot) -> some View {
+    func spotItemView(spot: SpotEntity) -> some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 6) {
                 Group {
