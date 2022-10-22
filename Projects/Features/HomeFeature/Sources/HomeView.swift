@@ -36,7 +36,9 @@ struct HomeView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    WideCardView(image: STImage(.pay), title: "나의 급여 정보", description: "나의 급여 정보를 손쉽게 확인하세요.")
+                    Link(destination: URL(string: "https://www.google.com")!) {
+                        WideCardView(image: STImage(.pay), title: "나의 급여 정보", description: "나의 급여 정보를 손쉽게 확인하세요.")
+                    }
 
                     WideCardView(image: STImage(.holiday), title: "휴무표 작성", description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요.")
                 }
