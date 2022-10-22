@@ -1,3 +1,4 @@
+import DesignSystem
 import SwiftUI
 
 struct HomeView: View {
@@ -9,7 +10,9 @@ struct HomeView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            
+            CalendarView(holidayDict: $viewModel.holidaysDict)
+                .padding(.horizontal, 16)
         }
+        .stBackground()
     }
 }
