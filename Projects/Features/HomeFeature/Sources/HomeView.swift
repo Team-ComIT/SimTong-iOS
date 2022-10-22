@@ -10,8 +10,22 @@ struct HomeView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            CalendarView(holidaysDict: $viewModel.holidaysDict)
-                .padding(.horizontal, 16)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 12) {
+                    Text("캘린더")
+                        .stTypo(.r3, color: .extraBlack)
+
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.extraBlack)
+                }
+
+                CalendarView(holidaysDict: $viewModel.holidaysDict)
+
+                Text("직원 식당 메뉴")
+                    .stTypo(.r4, color: .extraBlack)
+                    .padding(.top, 32)
+            }
+            .padding(.horizontal, 16)
         }
         .stBackground()
     }
