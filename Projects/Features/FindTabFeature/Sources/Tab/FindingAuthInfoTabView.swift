@@ -1,17 +1,21 @@
 import SwiftUI
 import DesignSystem
 import FindEmployeeIDFeature
+import FindPasswordFeature
 
 public struct FindAuthInfoTabView: View {
     @Environment(\.dismiss) var dismiss
     @State var currentTab: Int = 0
 
-    let findEmployeeIDComponent: FindEmployeeIDComponent
+    private let findEmployeeIDComponent: FindEmployeeIDComponent
+    private let findPasswordInfoComponent: FindPasswordInfoComponent
 
     public init(
-        findEmployeeIDComponent: FindEmployeeIDComponent
+        findEmployeeIDComponent: FindEmployeeIDComponent,
+        findPasswordComponent: FindPasswordInfoComponent
     ) {
         self.findEmployeeIDComponent = findEmployeeIDComponent
+        self.findPasswordInfoComponent = findPasswordComponent
     }
 
     public var body: some View {
@@ -24,7 +28,7 @@ public struct FindAuthInfoTabView: View {
                 findEmployeeIDComponent.makeView()
                     .tag(0)
 
-                Text("1")
+                findPasswordInfoComponent.makeView()
                     .tag(1)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))

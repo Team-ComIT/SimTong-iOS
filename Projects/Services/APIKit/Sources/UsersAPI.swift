@@ -5,10 +5,9 @@ import ErrorModule
 public enum UsersAPI: SimTongAPI {
     case signin(SigninRequestDTO)
     case signup(SignupRequestDTO)
-    case existsByNameAndEmployeeNumber(name: String, employeeNumber: Int)
-    case existsByEmail(email: String)
+    case existsByNameAndEmployeeNumber(name: String, employeeNumber: String)
     case fetchMyProfile
-    case changePassword(ChangePasswordRequestDTO)
+    case checkDuplicateNickname(nickname: String)
     case changeNickname(nickname: String)
     case changeEmail(email: String)
     case changeProfileImage(imageURL: String)
@@ -31,14 +30,11 @@ public extension UsersAPI {
         case .existsByNameAndEmployeeNumber:
             return "/verification-employee"
 
-        case .existsByEmail:
-            return "/email/overlap"
-
         case .fetchMyProfile:
             return "/information"
 
-        case .changePassword:
-            return "/password"
+        case .checkDuplicateNickname:
+            return "/nickname/duplication"
 
         case .changeNickname:
             return "/nickname"
@@ -56,16 +52,13 @@ public extension UsersAPI {
 
     var method: Moya.Method {
         switch self {
-        case .fetchMyProfile:
+        case .fetchMyProfile, .existsByNameAndEmployeeNumber, .checkDuplicateNickname:
             return .get
-
-        case .existsByNameAndEmployeeNumber, .existsByEmail:
-            return .head
 
         case .signin, .signup:
             return .post
 
-        case .changePassword, .changeNickname, .changeEmail, .changeProfileImage, .changeSpot:
+        case .changeNickname, .changeEmail, .changeProfileImage, .changeSpot:
             return .put
         }
     }
@@ -84,13 +77,10 @@ public extension UsersAPI {
                 "employee_number": employeeNumber
             ], encoding: URLEncoding.queryString)
 
-        case let .existsByEmail(email):
+        case let .checkDuplicateNickname(nickname):
             return .requestParameters(parameters: [
-                "email": email
+                "nickname": nickname
             ], encoding: URLEncoding.queryString)
-
-        case let .changePassword(req):
-            return .requestJSONEncodable(req)
 
         case let .changeNickname(nickname):
             return .requestParameters(parameters: [
@@ -119,7 +109,7 @@ public extension UsersAPI {
 
     var jwtTokenType: JwtTokenType {
         switch self {
-        case .fetchMyProfile, .changePassword, .changeNickname, .changeEmail, .changeProfileImage:
+        case .fetchMyProfile, .changeNickname, .changeEmail, .changeProfileImage:
             return .accessToken
 
         default:
@@ -149,22 +139,16 @@ public extension UsersAPI {
                 401: .notExistsUserByVerifyEmployee
             ]
 
-        case .existsByEmail:
-            return [
-                400: .unknown(),
-                409: .alreadyExistsByEmailOverlap
-            ]
-
         case .fetchMyProfile:
             return [
                 400: .unknown(),
                 401: .accessTokenExpired
             ]
 
-        case .changePassword:
+        case .checkDuplicateNickname:
             return [
                 400: .unknown(),
-                401: .passwordMismatchByChangePassword
+                409: .alreadyExistNickname
             ]
 
         case .changeNickname:

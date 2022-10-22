@@ -6,9 +6,11 @@ public protocol SignupPasswordDependency: Dependency {
 }
 
 public final class SignupPasswordComponent: Component<SignupPasswordDependency> {
-    public func makeView() -> some View {
+    public func makeView(signupPasswordSceneParam: SignupPasswordSceneParam) -> some View {
         SignupPasswordView(
-            viewModel: SignupPasswordViewModel(),
+            viewModel: SignupPasswordViewModel(
+                signupPasswordSceneParam: signupPasswordSceneParam
+            ),
             signupInfoComponent: dependency.signupInfoComponent
         )
     }

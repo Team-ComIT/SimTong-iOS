@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Spot: Equatable {
+public struct SpotEntity: Equatable {
     public init(
         id: String,
         name: String,

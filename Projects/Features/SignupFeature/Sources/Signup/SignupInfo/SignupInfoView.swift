@@ -2,9 +2,9 @@ import SwiftUI
 import DesignSystem
 
 struct SignupInfoView: View {
-
     @StateObject var viewModel: SignupInfoViewModel
     @Environment(\.dismiss) var dismiss
+    @State var isPresentedImagePicker = false
 
     public init(
         viewModel: SignupInfoViewModel
@@ -23,7 +23,7 @@ struct SignupInfoView: View {
             }
 
             Button {
-                viewModel.isShowImage.toggle()
+                isPresentedImagePicker.toggle()
             } label: {
                 Group {
                     if let image = viewModel.image {
@@ -70,7 +70,7 @@ struct SignupInfoView: View {
                 viewModel.isNotSupportImageType = true
             }
         }
-        .imagePicker(isShow: $viewModel.isShowImage, uiImage: $viewModel.image)
+        .imagePicker(isShow: $isPresentedImagePicker, uiImage: $viewModel.image)
         .stBackground()
         .configBackButton(dismiss: dismiss)
         .stSnackbar(isShowing: $viewModel.isNotSupportImageType, text: "지원하지 않는 파일 형식입니다")

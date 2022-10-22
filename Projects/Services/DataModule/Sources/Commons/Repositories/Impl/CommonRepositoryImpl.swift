@@ -9,7 +9,7 @@ public struct CommonsRepositoryImpl: CommonsRepository {
         self.remoteCommonsDataSource = remoteCommonsDataSource
     }
 
-    public func fetchSpotList() async throws -> [Spot] {
+    public func fetchSpotList() async throws -> [SpotEntity] {
         try await remoteCommonsDataSource.fetchSpotList()
     }
 
@@ -19,5 +19,17 @@ public struct CommonsRepositoryImpl: CommonsRepository {
 
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         try await remoteCommonsDataSource.resetPassword(req: req)
+    }
+
+    public func changePassword(req: ChangePasswordRequestDTO) async throws {
+        try await remoteCommonsDataSource.changePassword(req: req)
+    }
+
+    public func checkDuplicateEmail(email: String) async throws {
+        try await remoteCommonsDataSource.checkDuplicateEmail(email: email)
+    }
+
+    public func checkExistNameAndEmail(name: String, email: String) async throws {
+        try await remoteCommonsDataSource.checkExistNameAndEmail(name: name, email: email)
     }
 }

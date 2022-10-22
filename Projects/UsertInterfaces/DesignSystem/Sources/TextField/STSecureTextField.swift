@@ -68,9 +68,10 @@ public struct STSecureTextField: View {
             .cornerRadius(5)
             .onSubmit(onCommit)
 
-            if isError == true {
+            if isError && !errorText.isEmpty {
                 Text(errorText)
-                    .stTypo(.r7, color: .main06)
+                    .stTypo(.r7, color: Color.main06)
+                    .padding(.leading, 8)
             }
         }
     }

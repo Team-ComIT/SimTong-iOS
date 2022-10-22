@@ -7,7 +7,7 @@ public struct FetchSpotListUseCaseImpl: FetchSpotListUseCase {
         self.commonRepository = commonRepository
     }
 
-    public func execute() async throws -> [Spot] {
+    public func execute() async throws -> [SpotEntity] {
         try await commonRepository.fetchSpotList()
     }
 }

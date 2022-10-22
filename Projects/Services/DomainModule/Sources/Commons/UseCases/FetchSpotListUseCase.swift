@@ -1,3 +1,3 @@
 public protocol FetchSpotListUseCase {
-    func execute() async throws -> [Spot]
+    func execute() async throws -> [SpotEntity]
 }

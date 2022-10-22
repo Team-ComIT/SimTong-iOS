@@ -45,14 +45,16 @@ struct SignupEmployeeInfoView: View {
                                 isError: viewModel.isError,
                                 onCommit: {
                                     viewModel.nextButtonDidTap()
-                                })
+                                    viewModel.signup()
+                                }
+                            )
                             .focused($focusField, equals: .email)
                             .opacity(viewModel.isEmailStep ? 1.0 : 0.0)
                         }
 
                         if viewModel.isNumberStep {
                             STTextField(
-                                "1234567890",
+                                "1201603003",
                                 labelText: "사원번호",
                                 text: $viewModel.number,
                                 style: .clear,
@@ -62,14 +64,15 @@ struct SignupEmployeeInfoView: View {
                                         viewModel.nextButtonDidTap()
                                         focusField = .email
                                     }
-                                })
+                                }
+                            )
                             .focused($focusField, equals: .number)
                             .opacity(viewModel.isNumberStep ? 1.0 : 0.0)
                             .keyboardType(.numberPad)
                         }
 
                         STTextField(
-                            "예시: 최형우",
+                            "김민지",
                             labelText: "이름",
                             text: $viewModel.name,
                             style: .clear,
@@ -109,10 +112,10 @@ struct SignupEmployeeInfoView: View {
                 Spacer()
 
                 WideButton(text: viewModel.nextButtonTitle) {
-                    viewModel.signup()
                     withAnimation {
                         viewModel.nextButtonDidTap()
                     }
+                    viewModel.signup()
                 }
                 .disabled(!viewModel.isEnableNextButton)
             }
@@ -131,7 +134,13 @@ struct SignupEmployeeInfoView: View {
             }
         }
         .navigate(
-            to: signupVerifyComponent.makeView(),
+            to: signupVerifyComponent.makeView(
+                signupVerifySceneParam: .init(
+                    name: viewModel.name,
+                    employeeID: viewModel.number,
+                    email: viewModel.email
+                )
+            ),
             when: $viewModel.isNavigateToVerify
         )
     }
