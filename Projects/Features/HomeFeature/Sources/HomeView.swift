@@ -10,7 +10,7 @@ struct HomeView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            CalendarView(holidayDict: $viewModel.holidaysDict)
+            CalendarView(holidaysDict: $viewModel.holidaysDict)
                 .padding(.horizontal, 16)
         }
         .stBackground()

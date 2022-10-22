@@ -5,7 +5,7 @@ import Utility
 
 struct CalendarView: View {
     @State var currentMonth = Date()
-    @Binding var holidayDict: [String: HolidayType]
+    @Binding var holidaysDict: [String: HolidayType]
     let days = ["일", "월", "화", "수", "목", "금", "토"]
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
 
@@ -95,7 +95,7 @@ struct CalendarView: View {
     }
 
     func dateForground(date: Date) -> Color {
-        guard let holiday = holidayDict[date.toSmallSimtongDateString()] else {
+        guard let holiday = holidaysDict[date.toSmallSimtongDateString()] else {
             return .gray02
         }
 
@@ -130,15 +130,5 @@ struct CalendarView: View {
         }
 
         return days
-    }
-}
-
-struct CalendarView_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarView(
-            holidayDict: .constant([
-                "2022-10-22": .annual
-            ])
-        )
     }
 }
