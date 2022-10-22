@@ -1,4 +1,5 @@
 import DesignSystem
+import DomainModule
 import SwiftUI
 
 struct HomeView: View {
@@ -28,5 +29,13 @@ struct HomeView: View {
             .padding(.horizontal, 16)
         }
         .stBackground()
+    }
+
+    @ViewBuilder
+    func menuColumnView() -> some View {
+        VStack {
+            
+        }
+        .frame(height: 272)
     }
 }
