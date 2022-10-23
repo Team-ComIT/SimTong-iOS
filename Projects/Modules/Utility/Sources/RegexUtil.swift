@@ -24,4 +24,3 @@ public extension String {
         return regex.firstMatch(in: lhs, options: [], range: range) != nil
     }
 }
-

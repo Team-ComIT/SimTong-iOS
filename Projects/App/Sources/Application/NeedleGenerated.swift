@@ -174,8 +174,8 @@ private func factory573f446f1153613fedd6f47b58f8f304c97af4d5(_ component: Needle
     return FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindPasswordInfoDependency2ddef0504ff382f9d508Provider: FindPasswordInfoDependency {
-    var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase {
-        return appComponent.checkExistNameAndEmailUseCase
+    var checkExistEmployeeIDAndEmailUseCase: any CheckExistEmployeeIDAndEmailUseCase {
+        return appComponent.checkExistEmployeeIDAndEmailUseCase
     }
     var findPasswordVerifyComponent: FindPasswordVerifyComponent {
         return appComponent.findPasswordVerifyComponent
@@ -248,7 +248,7 @@ extension AppComponent: Registration {
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
         localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { self.resetPasswordUseCase as Any }
         localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
-        localTable["checkExistNameAndEmailUseCase-any CheckExistNameAndEmailUseCase"] = { self.checkExistNameAndEmailUseCase as Any }
+        localTable["checkExistEmployeeIDAndEmailUseCase-any CheckExistEmployeeIDAndEmailUseCase"] = { self.checkExistEmployeeIDAndEmailUseCase as Any }
         localTable["uploadSingleFileUseCase-any UploadSingleFileUseCase"] = { self.uploadSingleFileUseCase as Any }
         localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { self.uploadMultipleFileUseCase as Any }
         localTable["signinUseCase-any SigninUseCase"] = { self.signinUseCase as Any }
@@ -326,7 +326,7 @@ extension FindPasswordVerifyComponent: Registration {
 }
 extension FindPasswordInfoComponent: Registration {
     public func registerItems() {
-        keyPathToName[\FindPasswordInfoDependency.checkExistNameAndEmailUseCase] = "checkExistNameAndEmailUseCase-any CheckExistNameAndEmailUseCase"
+        keyPathToName[\FindPasswordInfoDependency.checkExistEmployeeIDAndEmailUseCase] = "checkExistEmployeeIDAndEmailUseCase-any CheckExistEmployeeIDAndEmailUseCase"
         keyPathToName[\FindPasswordInfoDependency.findPasswordVerifyComponent] = "findPasswordVerifyComponent-FindPasswordVerifyComponent"
     }
 }

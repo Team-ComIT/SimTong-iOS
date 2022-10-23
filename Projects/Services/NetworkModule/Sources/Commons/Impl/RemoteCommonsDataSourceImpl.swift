@@ -25,7 +25,7 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
         try await request(.checkDuplicateEmail(email: email), dto: NoResponse.self)
     }
 
-    public func checkExistNameAndEmail(name: String, email: String) async throws {
-        try await request(.checkExistkNameAndEmail(name: name, email: email), dto: NoResponse.self)
+    public func checkExistEmployeeIDAndEmail(id: String, email: String) async throws {
+        try await request(.checkExistEmployeeIDAndEmail(id: id, email: email), dto: NoResponse.self)
     }
 }

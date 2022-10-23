@@ -13,12 +13,12 @@ final class FindPasswordInfoViewModel: BaseViewModel {
     @Published var isNavigateFindPasswordVerify = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common)
 
-    private let checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase
+    private let checkExistEmployeeIDAndEmailUseCase: any CheckExistEmployeeIDAndEmailUseCase
 
     init(
-        checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase
+        checkExistEmployeeIDAndEmailUseCase: any CheckExistEmployeeIDAndEmailUseCase
     ) {
-        self.checkExistNameAndEmailUseCase = checkExistNameAndEmailUseCase
+        self.checkExistEmployeeIDAndEmailUseCase = checkExistEmployeeIDAndEmailUseCase
     }
 
     @MainActor

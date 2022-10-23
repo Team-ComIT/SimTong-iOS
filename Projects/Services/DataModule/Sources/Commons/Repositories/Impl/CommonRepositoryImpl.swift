@@ -29,7 +29,7 @@ public struct CommonsRepositoryImpl: CommonsRepository {
         try await remoteCommonsDataSource.checkDuplicateEmail(email: email)
     }
 
-    public func checkExistNameAndEmail(name: String, email: String) async throws {
-        try await remoteCommonsDataSource.checkExistNameAndEmail(name: name, email: email)
+    public func checkExistEmployeeIDAndEmail(id: String, email: String) async throws {
+        try await remoteCommonsDataSource.checkExistEmployeeIDAndEmail(id: id, email: email)
     }
 }

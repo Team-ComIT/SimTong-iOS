@@ -20,8 +20,8 @@ extension AppComponent {
         ChangePasswordUseCaseImpl(commonsRepository: commonsRepository)
     }
 
-    public var checkExistNameAndEmailUseCase: any CheckExistNameAndEmailUseCase {
-        CheckExistNameAndEmailUseCaseImpl(commonsRepository: commonsRepository)
+    public var checkExistEmployeeIDAndEmailUseCase: any CheckExistEmployeeIDAndEmailUseCase {
+        CheckExistEmployeeIDAndEmailUseCaseImpl(commonsRepository: commonsRepository)
     }
 }
 
