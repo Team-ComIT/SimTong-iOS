@@ -48,7 +48,11 @@ extension AppComponent {
         SignupInfoComponent(parent: self)
     }
 
-    var findAuthInfoComponent: FindAuthInfoTabComponent {
+    var signinComponent: SigninComponent {
+        SigninComponent(parent: self)
+    }
+
+    var findAuthInfoTabComponent: FindAuthInfoTabComponent {
         FindAuthInfoTabComponent(parent: self)
     }
 
@@ -74,10 +78,6 @@ extension AppComponent {
 
     var findPasswordVerifyComponent: FindPasswordVerifyComponent {
         FindPasswordVerifyComponent(parent: self)
-    }
-
-    var signinComponent: SigninComponent {
-        SigninComponent(parent: self)
     }
 }
 
