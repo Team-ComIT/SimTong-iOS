@@ -7,7 +7,7 @@ public struct FetchMyProfileUseCaseImpl: FetchMyProfileUseCase {
         self.usersRepository = usersRepository
     }
 
-    public func execute() async throws -> UserInfo {
+    public func execute() async throws -> UserInfoEntity {
         try await usersRepository.fetchMyProfile()
     }
 }

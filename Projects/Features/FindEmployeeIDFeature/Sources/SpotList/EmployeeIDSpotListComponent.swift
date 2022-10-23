@@ -7,7 +7,7 @@ public protocol EmployeeIDSpotListDependency: Dependency {
 }
 
 public final class EmployeeIDSpotListComponent: Component<EmployeeIDSpotListDependency> {
-    public func makeView(selectedSpot: Spot?, completion: @escaping (Spot) -> Void) -> some View {
+    public func makeView(selectedSpot: SpotEntity?, completion: @escaping (SpotEntity) -> Void) -> some View {
         EmployeeIDSpotListView(
             viewModel: .init(
                 fetchSpotListUseCase: dependency.fetchSpotListUseCase,

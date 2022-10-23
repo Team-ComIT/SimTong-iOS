@@ -21,7 +21,7 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
         )
     }
 
-    public func fetchMyProfile() async throws -> UserInfo {
+    public func fetchMyProfile() async throws -> UserInfoEntity {
         try await request(.fetchMyProfile, dto: FetchMyProfileResponseDTO.self)
             .toDomain()
     }

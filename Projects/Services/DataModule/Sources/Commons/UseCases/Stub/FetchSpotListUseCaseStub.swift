@@ -4,7 +4,7 @@ import Foundation
 public struct FetchSpotListUseCaseStub: FetchSpotListUseCase {
     public init() {}
 
-    public func execute() async throws -> [Spot] {
+    public func execute() async throws -> [SpotEntity] {
         [
             .init(
                 id: "ADMLWLQ",

@@ -4,8 +4,8 @@ import DomainModule
 
 // MARK: FetchMyProfile
 public extension SingleSpotResponseDTO {
-    func toDomain() -> Spot {
-        Spot(
+    func toDomain() -> SpotEntity {
+        SpotEntity(
             id: id,
             name: name,
             location: location
@@ -14,7 +14,7 @@ public extension SingleSpotResponseDTO {
 }
 
 public extension SpotListResponseDTO {
-    func toDomain() -> [Spot] {
+    func toDomain() -> [SpotEntity] {
         spotList.map { $0.toDomain() }
     }
 }

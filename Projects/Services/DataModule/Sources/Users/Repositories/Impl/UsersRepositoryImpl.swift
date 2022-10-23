@@ -21,7 +21,7 @@ public struct UsersRepositoryImpl: UsersRepository {
         try await remoteUsersDataSource.checkExistNameAndEmployeeID(name: name, employeeID: employeeID)
     }
 
-    public func fetchMyProfile() async throws -> UserInfo {
+    public func fetchMyProfile() async throws -> UserInfoEntity {
         try await remoteUsersDataSource.fetchMyProfile()
     }
 
