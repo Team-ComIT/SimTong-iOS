@@ -26,10 +26,11 @@ final class SigninViewModel: BaseViewModel {
     func signin() {
         Task {
             await withAsyncTry(with: self) { owner in
+                print(self.employeeID.hashValue)
                 try await
                 owner.signinUseCase.execute(
                     req: .init(
-                        employeeID: self.employeeID.hashValue,
+                        employeeID: Int(self.employeeID) ?? 0,
                         password: self.password
                     )
                 )
