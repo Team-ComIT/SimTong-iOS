@@ -17,20 +17,16 @@ public struct UsersRepositoryImpl: UsersRepository {
         try await remoteUsersDataSource.signup(req: req)
     }
 
-    public func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws {
-        try await remoteUsersDataSource.existsByNameAndEmployeeNumber(name: name, employeeNumber: employeeNumber)
+    public func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws {
+        try await remoteUsersDataSource.checkExistNameAndEmployeeID(name: name, employeeID: employeeID)
     }
 
-    public func existsByEmail(email: String) async throws {
-        try await remoteUsersDataSource.existsByEmail(email: email)
-    }
-
-    public func fetchMyProfile() async throws -> UserInfo {
+    public func fetchMyProfile() async throws -> UserInfoEntity {
         try await remoteUsersDataSource.fetchMyProfile()
     }
 
-    public func changePassword(req: ChangePasswordRequestDTO) async throws {
-        try await remoteUsersDataSource.changePassword(req: req)
+    public func checkDuplicateNickname(nickname: String) async throws {
+        try await remoteUsersDataSource.checkDuplicateNickname(nickname: nickname)
     }
 
     public func changeNickname(nickname: String) async throws {

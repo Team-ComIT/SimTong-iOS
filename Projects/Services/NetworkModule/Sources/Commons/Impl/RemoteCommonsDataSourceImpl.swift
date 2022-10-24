@@ -3,7 +3,7 @@ import APIKit
 import DataMappingModule
 
 public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>, RemoteCommonsDataSource {
-    public func fetchSpotList() async throws -> [Spot] {
+    public func fetchSpotList() async throws -> [SpotEntity] {
         try await request(.spotList, dto: SpotListResponseDTO.self)
             .toDomain()
     }
@@ -15,5 +15,17 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
 
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         try await request(.resetPassword(req), dto: NoResponse.self)
+    }
+
+    public func changePassword(req: ChangePasswordRequestDTO) async throws {
+        try await request(.changePassword(req), dto: NoResponse.self)
+    }
+
+    public func checkDuplicateEmail(email: String) async throws {
+        try await request(.checkDuplicateEmail(email: email), dto: NoResponse.self)
+    }
+
+    public func checkExistNameAndEmail(name: String, email: String) async throws {
+        try await request(.checkExistkNameAndEmail(name: name, email: email), dto: NoResponse.self)
     }
 }

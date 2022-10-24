@@ -4,8 +4,8 @@ import DomainModule
 
 // MARK: FetchMyProfile
 public extension FetchMyProfileResponseDTO {
-    func toDomain() -> UserInfo {
-        UserInfo(
+    func toDomain() -> UserInfoEntity {
+        UserInfoEntity(
             name: name,
             email: email,
             nickname: nickname,

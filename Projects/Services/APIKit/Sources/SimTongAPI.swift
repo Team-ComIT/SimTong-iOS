@@ -17,6 +17,10 @@ public extension SimTongAPI {
         domain.asURLString + urlPath
     }
 
+    var validationType: ValidationType {
+        .successCodes
+    }
+
     var headers: [String: String]? {
         ["Content-Type": "application/json"]
     }

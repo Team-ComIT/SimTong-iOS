@@ -11,6 +11,9 @@ public enum STError: Error {
     case notFoundUserByFindEmployeeNumber
     case emailIsNotAuthorizedOrMismatch
     case notFoundUserByResetPassword
+    case passwordMismatchByChangePassword
+    case alreadyExistsByEmailOverlap
+    case notFoundUserByCheckNameAndEmail
 
     // users
     case notFoundUserBySignin
@@ -18,10 +21,9 @@ public enum STError: Error {
     case emailIsNotAuthorized
     case userInfoIsAlreadyExistBySignup
     case notExistsUserByVerifyEmployee
-    case passwordMismatchByChangePassword
     case alreadyExistNicknameByChangeNickname
     case alreadyExistEmailByChangeEmail
-    case alreadyExistsByEmailOverlap
+    case alreadyExistNickname
 
     // emails
     case authCodeExpired
@@ -41,6 +43,7 @@ extension STError: LocalizedError {
         case .accessTokenExpired:
             return "세션이 만료되었습니다. 다시 로그인해주세요!"
 
+        // MARK: - Common
         case .notFoundUserByFindEmployeeNumber:
             return "입력한 정보에 따른 회원을 찾지 못했습니다"
 
@@ -53,6 +56,10 @@ extension STError: LocalizedError {
         case .notFoundUserBySignin:
             return "사원번호에 따른 유저를 찾을 수 없습니다"
 
+        case .notFoundUserByCheckNameAndEmail:
+            return "이름과 이메일에 따른 유저를 찾을 수 없습니다"
+
+        // MARK: - Users
         case .passwordMismatch:
             return "비밀번호가 일치하지 않습니다"
 
@@ -63,7 +70,7 @@ extension STError: LocalizedError {
             return "이메일 또는 사원번호, 또는 닉네임이 이미 사용중입니다"
 
         case .notExistsUserByVerifyEmployee:
-            return "일치하는 정보를 찾을 수 없습니다"
+            return "이름과 사번 정보가 일치하지 않습니다"
 
         case .passwordMismatchByChangePassword:
             return "비밀번호가 일치하지 않습니다"
@@ -77,6 +84,10 @@ extension STError: LocalizedError {
         case .alreadyExistsByEmailOverlap:
             return "이메일이 이미 사용중입니다"
 
+        case .alreadyExistNickname:
+            return "닉네임이 이미 사용중입니다"
+
+        // MARK: - Emails
         case .authCodeExpired:
             return "인증코드가 만료되었거나 일치하지 않습니다"
 

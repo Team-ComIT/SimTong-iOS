@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserInfo: Equatable {
+public struct UserInfoEntity: Equatable {
     public init(
         name: String,
         email: String,

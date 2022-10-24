@@ -6,6 +6,7 @@ let project = Project.makeModule(
     product: .staticFramework,
     dependencies: [
         .Project.Features.BaseFeature,
-        .Project.Features.FindEmployeeIDFeature
+        .Project.Features.FindEmployeeIDFeature,
+        .Project.Features.FindPasswordFeature
     ]
 )
