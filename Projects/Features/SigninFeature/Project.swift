@@ -2,12 +2,10 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-    name: "IntroFeature",
+    name: "SigninFeature",
     product: .staticFramework,
     dependencies: [
         .Project.Features.BaseFeature,
-        .Project.Features.FindTabFeature,
-        .Project.Features.SignupFeature,
-        .Project.Features.SigninFeature
+        .Project.Features.FindTabFeature
     ]
 )
