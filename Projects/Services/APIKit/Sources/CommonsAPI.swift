@@ -77,7 +77,7 @@ public extension CommonsAPI {
 
         case let .checkExistEmployeeIDAndEmail(id, email):
             return .requestParameters(parameters: [
-                "id": id,
+                "employee_number": id,
                 "email": email
             ], encoding: URLEncoding.queryString)
         }
