@@ -78,29 +78,3 @@ public extension View {
     }
 }
 
-struct BottomSheet_Previews: PreviewProvider {
-    static var previews: some View {
-        TestView()
-    }
-}
-
-struct TestView: View {
-    @State var isShowing = false
-    var body: some View {
-        VStack {
-            Button {
-                withAnimation {
-                    isShowing.toggle()
-                }
-            } label: {
-                Text("A")
-            }
-        }
-        .bottomSheet(isShowing: $isShowing) {
-            VStack {
-                Text("BB")
-                    .padding(.bottom, 320)
-            }
-        }
-    }
-}
