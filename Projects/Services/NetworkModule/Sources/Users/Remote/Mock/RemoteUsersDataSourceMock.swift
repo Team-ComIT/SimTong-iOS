@@ -5,7 +5,11 @@ import ErrorModule
 public struct RemoteUsersDataSourceMock: RemoteUsersDataSource {
     public init() {}
 
-    public func signin(req: SigninRequestDTO) async throws {}
+    public func signin(req: SigninRequestDTO) async throws {
+        if req.password != "최형우바보" || req.employeeID != 12345678 {
+            throw STError.notFoundUserBySignin
+        }
+    }
 
     public func signup(req: SignupRequestDTO) async throws {}
 
