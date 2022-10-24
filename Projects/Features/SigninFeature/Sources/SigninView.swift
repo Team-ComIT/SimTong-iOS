@@ -89,6 +89,7 @@ struct SigninView: View {
                     signupEmployeeInfoComponent.makeView()
                 } label: {
                     Text("회원가입")
+                        .underline()
                         .stTypo(.r7, color: .gray04)
                 }
             }
