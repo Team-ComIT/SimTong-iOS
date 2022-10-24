@@ -24,7 +24,7 @@ final class SigninViewModel: BaseViewModel {
 
     @MainActor
     func signin() {
-        guard isDisabledSignin else { return }
+        guard !isDisabledSignin else { return }
 
         Task {
             await withAsyncTry(with: self) { owner in
