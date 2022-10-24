@@ -4,8 +4,13 @@ import FindTabFeature
 import SignupFeature
 
 struct SigninView: View {
+    private enum FoucusField: Hashable {
+        case employeeID
+        case password
+    }
 
     @StateObject var viewModel: SigninViewModel
+    @FocusState private var focusField: FoucusField?
     @Environment(\.dismiss) var dismiss
     private let findAuthInfoTabComponent: FindAuthInfoTabComponent
     private let signupEmployeeInfoComponent: SignupEmployeeInfoComponent
@@ -40,10 +45,14 @@ struct SigninView: View {
                 STTextField(
                     "사원번호를 입력해주세요.",
                     text: $viewModel.employeeID,
-                    isError: viewModel.isError
+                    isError: viewModel.isError,
+                    onCommit: {
+                        focusField = .password
+                    }
                 )
                 .padding(.horizontal, 16)
                 .padding(.bottom, 8)
+                .focused($focusField, equals: .employeeID)
 
                 STSecureTextField(
                     "비밀번호를 입력해주세요.",
@@ -53,6 +62,7 @@ struct SigninView: View {
                 )
                 .padding(.horizontal, 16)
                 .padding(.bottom, 32)
+                .focused($focusField, equals: .password)
 
                 CTAButton(text: "로그인") {
                     viewModel.signin()
