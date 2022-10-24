@@ -3,11 +3,12 @@ import DomainModule
 import BaseFeature
 
 final class SigninViewModel: BaseViewModel {
-    @Published var authCode = "" {
+    @Published var employeeID = "" {
         didSet { isError = false }
     }
-    @Published var employeeID = ""
-    @Published var password = ""
+    @Published var password = "" {
+        didSet { isError = false }
+    }
     @Published var isSignin = false
     private let signinUseCase: any SigninUseCase
 
