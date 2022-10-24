@@ -12,6 +12,7 @@ import MainTabFeature
 import NeedleFoundation
 import NetworkModule
 import RootFeature
+import SigninFeature
 import SignupFeature
 import SwiftUI
 
@@ -153,6 +154,25 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
 /// ^->AppComponent->RootComponent
 private func factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return RootDependency3944cc797a4a88956fb5Provider(appComponent: parent1(component) as! AppComponent)
+}
+private class SigninDependencyde06a9d0b22764487733Provider: SigninDependency {
+    var findAuthInfoTabComponent: FindAuthInfoTabComponent {
+        return appComponent.findAuthInfoTabComponent
+    }
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
+        return appComponent.signupEmployeeInfoComponent
+    }
+    var signinUseCase: any SigninUseCase {
+        return appComponent.signinUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->SigninComponent
+private func factory2882a056d84a613debccf47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SigninDependencyde06a9d0b22764487733Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
@@ -317,6 +337,13 @@ extension RootComponent: Registration {
         keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
     }
 }
+extension SigninComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\SigninDependency.findAuthInfoTabComponent] = "findAuthInfoTabComponent-FindAuthInfoTabComponent"
+        keyPathToName[\SigninDependency.signupEmployeeInfoComponent] = "signupEmployeeInfoComponent-SignupEmployeeInfoComponent"
+        keyPathToName[\SigninDependency.signinUseCase] = "signinUseCase-any SigninUseCase"
+    }
+}
 extension FindPasswordVerifyComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindPasswordVerifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
@@ -372,6 +399,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
