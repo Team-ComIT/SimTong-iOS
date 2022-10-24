@@ -9,7 +9,7 @@ public enum CommonsAPI: SimTongAPI {
     case spotList
     case changePassword(ChangePasswordRequestDTO)
     case checkDuplicateEmail(email: String)
-    case checkExistEmployeeIDAndEmail(id: String, email: String)
+    case checkExistEmployeeIDAndEmail(id: Int, email: String)
 }
 
 public extension CommonsAPI {
@@ -75,9 +75,9 @@ public extension CommonsAPI {
                 "email": email
             ], encoding: URLEncoding.queryString)
 
-        case let .checkExistEmployeeIDAndEmail(name, email):
+        case let .checkExistEmployeeIDAndEmail(id, email):
             return .requestParameters(parameters: [
-                "name": name,
+                "id": id,
                 "email": email
             ], encoding: URLEncoding.queryString)
         }

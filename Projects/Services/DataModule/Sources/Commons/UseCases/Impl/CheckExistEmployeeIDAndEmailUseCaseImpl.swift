@@ -7,7 +7,7 @@ public struct CheckExistEmployeeIDAndEmailUseCaseImpl: CheckExistEmployeeIDAndEm
         self.commonsRepository = commonsRepository
     }
 
-    public func execute(id: String, email: String) async throws {
+    public func execute(id: Int, email: String) async throws {
         try await commonsRepository.checkExistEmployeeIDAndEmail(id: id, email: email)
     }
 }

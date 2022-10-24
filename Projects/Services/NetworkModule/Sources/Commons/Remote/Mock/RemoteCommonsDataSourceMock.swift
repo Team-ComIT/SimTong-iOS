@@ -48,8 +48,8 @@ public struct RemoteCommonsDataSourceMock: RemoteCommonsDataSource {
         }
     }
 
-    public func checkExistEmployeeIDAndEmail(id: String, email: String) async throws {
-        if id == "실험용" && email == "test@gmail.com" {
+    public func checkExistEmployeeIDAndEmail(id: Int, email: String) async throws {
+        if id == 12345678 && email == "test@gmail.com" {
             throw STError.notFoundUserByCheckNameAndEmail
         }
     }
