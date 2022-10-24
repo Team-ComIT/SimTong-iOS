@@ -36,7 +36,7 @@ struct SigninView: View {
                         ) ?? .init())
                     )
                     .foregroundColor(.gray05)
-                    .padding([.horizontal, .top], 16)
+                    .padding(.top, 16)
 
                 STImage(.signinLogo)
                     .frame(width: 156, height: 53)
@@ -50,7 +50,6 @@ struct SigninView: View {
                         focusField = .password
                     }
                 )
-                .padding(.horizontal, 16)
                 .padding(.bottom, 8)
                 .focused($focusField, equals: .employeeID)
 
@@ -60,17 +59,17 @@ struct SigninView: View {
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError
                 )
-                .padding(.horizontal, 16)
                 .padding(.bottom, 32)
                 .focused($focusField, equals: .password)
 
                 CTAButton(text: "로그인") {
                     viewModel.signin()
                 }
-                .padding([.horizontal, .bottom], 16)
+                .padding(.bottom, 16)
                 .stTypo(.m5)
-                .disabled(viewModel.isDisabledSigninButton)
+                .disabled(viewModel.isDisabledSignin)
             }
+            .padding(.horizontal, 16)
 
             NavigationLink {
                 findAuthInfoTabComponent.makeView()

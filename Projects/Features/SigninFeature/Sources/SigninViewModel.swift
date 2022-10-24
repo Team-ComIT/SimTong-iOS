@@ -18,13 +18,13 @@ final class SigninViewModel: BaseViewModel {
         self.signinUseCase = signinUseCase
     }
 
-    var isDisabledSigninButton: Bool {
+    var isDisabledSignin: Bool {
         employeeID.isEmpty || password.isEmpty
     }
 
     @MainActor
     func signin() {
-        guard isDisabledSigninButton else { return }
+        guard isDisabledSignin else { return }
 
         Task {
             await withAsyncTry(with: self) { owner in
