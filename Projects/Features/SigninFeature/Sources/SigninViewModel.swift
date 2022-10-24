@@ -9,7 +9,7 @@ final class SigninViewModel: BaseViewModel {
     @Published var password = "" {
         didSet { isError = false }
     }
-    @Published var isSignin = false
+    @Published var isSuccessSignin = false
     private let signinUseCase: any SigninUseCase
 
     init(
@@ -18,23 +18,24 @@ final class SigninViewModel: BaseViewModel {
         self.signinUseCase = signinUseCase
     }
 
-    var isCheckSignin: Bool {
+    var isDisabledSigninButton: Bool {
         employeeID.isEmpty || password.isEmpty
     }
 
     @MainActor
     func signin() {
+        guard isDisabledSigninButton else { return }
+
         Task {
             await withAsyncTry(with: self) { owner in
-                print(self.employeeID.hashValue)
-                try await
-                owner.signinUseCase.execute(
+                guard let id = Int(owner.employeeID) else { return }
+                try await owner.signinUseCase.execute(
                     req: .init(
-                        employeeID: Int(self.employeeID) ?? 0,
-                        password: self.password
+                        employeeID: id,
+                        password: owner.password
                     )
                 )
-                owner.isSignin = true
+                owner.isSuccessSignin = true
             }
         }
     }

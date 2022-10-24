@@ -35,7 +35,7 @@ struct SigninView: View {
                             size: 18
                         ) ?? .init())
                     )
-                    .foregroundColor(.gray04)
+                    .foregroundColor(.gray05)
                     .padding([.horizontal, .top], 16)
 
                 STImage(.signinLogo)
@@ -67,35 +67,36 @@ struct SigninView: View {
                 CTAButton(text: "로그인") {
                     viewModel.signin()
                 }
-                    .padding([.horizontal, .bottom], 16)
-                    .stTypo(.m5)
-                    .disabled(viewModel.isCheckSignin)
+                .padding([.horizontal, .bottom], 16)
+                .stTypo(.m5)
+                .disabled(viewModel.isDisabledSigninButton)
             }
 
             NavigationLink {
                 findAuthInfoTabComponent.makeView()
             } label: {
                 Text("사원번호 ∙ 비밀번호 찾기")
-                    .stTypo(.r7, color: .gray04)
+                    .stTypo(.r7, color: .gray05)
             }
 
             Spacer()
 
             HStack {
                 Text("계정이 없으신가요?")
-                    .stTypo(.r7, color: .gray04)
+                    .stTypo(.r7, color: .gray05)
 
                 NavigationLink {
                     signupEmployeeInfoComponent.makeView()
                 } label: {
                     Text("회원가입")
                         .underline()
-                        .stTypo(.r7, color: .gray04)
+                        .stTypo(.r7, color: .gray05)
                 }
             }
             .padding(.bottom, 24)
         }
-        .navigate(to: Text("asdf"), when: $viewModel.isSignin)
+        .stBackground()
+        .navigate(to: Text("asdf"), when: $viewModel.isSuccessSignin)
         .configBackButton(dismiss: dismiss)
         .navigationBarTitleDisplayMode(.inline)
     }
