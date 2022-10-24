@@ -40,7 +40,7 @@ struct SigninView: View {
 
                 STImage(.signinLogo)
                     .frame(width: 156, height: 53)
-                    .padding([.horizontal, .bottom], 16)
+                    .padding(.bottom, 16)
 
                 STTextField(
                     "사원번호를 입력해주세요.",
