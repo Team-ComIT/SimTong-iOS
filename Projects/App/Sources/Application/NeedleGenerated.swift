@@ -159,6 +159,12 @@ private class SigninDependencyde06a9d0b22764487733Provider: SigninDependency {
     var findAuthInfoTabComponent: FindAuthInfoTabComponent {
         return appComponent.findAuthInfoTabComponent
     }
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
+        return appComponent.signupEmployeeInfoComponent
+    }
+    var signinUseCase: any SigninUseCase {
+        return appComponent.signinUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -334,6 +340,8 @@ extension RootComponent: Registration {
 extension SigninComponent: Registration {
     public func registerItems() {
         keyPathToName[\SigninDependency.findAuthInfoTabComponent] = "findAuthInfoTabComponent-FindAuthInfoTabComponent"
+        keyPathToName[\SigninDependency.signupEmployeeInfoComponent] = "signupEmployeeInfoComponent-SignupEmployeeInfoComponent"
+        keyPathToName[\SigninDependency.signinUseCase] = "signinUseCase-any SigninUseCase"
     }
 }
 extension FindPasswordVerifyComponent: Registration {
