@@ -77,4 +77,3 @@ public extension View {
         modifier(BottomSheet(isShowing: isShowing, content: content))
     }
 }
-
