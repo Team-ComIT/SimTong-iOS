@@ -11,6 +11,7 @@ public final class HomeViewModel: BaseViewModel {
         "2022-10-24": .dayoff,
         "2022-10-25": .annual
     ]
+    @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = [
         .init(
             date: "2022-10.22",
@@ -62,6 +63,61 @@ public final class HomeViewModel: BaseViewModel {
         )
     ]
 
+    public override init() {
+        super.init()
+    }
+
     func onDateTap(date: Date) {
+    }
+
+    @MainActor
+    func onMonthChanged() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                let schedules = [
+                    ScheduleEntity(
+                        id: UUID().uuidString,
+                        title: "asdafa",
+                        startAt: "2022-10-23",
+                        endAt: "2022-10-30"
+                    ),
+                    ScheduleEntity(
+                        id: UUID().uuidString,
+                        title: "asdafa",
+                        startAt: "2022-10-30",
+                        endAt: "2022-11-28"
+                    ),
+                    ScheduleEntity(
+                        id: UUID().uuidString,
+                        title: "asdafa",
+                        startAt: "2022-10-23",
+                        endAt: "2022-12-12"
+                    ),
+                    ScheduleEntity(
+                        id: UUID().uuidString,
+                        title: "asdafa",
+                        startAt: "2022-10-23",
+                        endAt: "2023-01-02"
+                    ),
+                ]
+                for schedule in schedules {
+                    var start = schedule.startAt.toSmallSimtongDate()
+                    let end = schedule.endAt.toSmallSimtongDate()
+                    if owner.schedules[schedule.startAt] == nil {
+                        owner.schedules[schedule.startAt] = [schedule]
+                    }
+                    start = start.adding(by: .day, value: 1)
+                    while !start.isSameDay(end) {
+                        if owner.schedules[start.toSmallSimtongDateString()] == nil {
+                            owner.schedules[start.toSmallSimtongDateString()] = [schedule]
+                        } else {
+                            owner.schedules[start.toSmallSimtongDateString()]?.append(schedule)
+                        }
+
+                        start = start.adding(by: .day, value: 1)
+                    }
+                }
+            }
+        }
     }
 }

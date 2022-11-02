@@ -21,7 +21,7 @@ struct HomeView: View {
                         .foregroundColor(.extraBlack)
                 }
 
-                CalendarView(holidaysDict: $viewModel.holidaysDict) { date in
+                CalendarView(holidaysDict: $viewModel.holidaysDict, scheduleDict: $viewModel.schedules) { date in
                     viewModel.onDateTap(date: date)
                 }
 
@@ -48,6 +48,9 @@ struct HomeView: View {
                 .padding(.bottom, 30)
             }
             .padding(.horizontal, 16)
+        }
+        .onAppear {
+            viewModel.onMonthChanged()
         }
         .stBackground()
         .toolbar {

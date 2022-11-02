@@ -6,6 +6,7 @@ import Utility
 struct CalendarView: View {
     @State var currentMonth = Date()
     @Binding var holidaysDict: [String: HolidayType]
+    @Binding var scheduleDict: [String: [ScheduleEntity]]
     var onDateTap: (Date) -> Void
     let days = ["일", "월", "화", "수", "목", "금", "토"]
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
@@ -87,8 +88,16 @@ struct CalendarView: View {
             Spacer()
 
             RoundedRectangle(cornerRadius: 8)
-                .fill(dateForground(date: date))
+                .fill(dateCapsuleForground(date: date))
                 .frame(width: 24, height: 24)
+                .overlay {
+                    if let holi = dateText(date: date) {
+                        Text(holi)
+                            .stTypo(.m7, color: dateForground(date: date))
+                    } else {
+                        EmptyView()
+                    }
+                }
         }
         .frame(height: 46)
         .padding(.vertical, 4)
@@ -107,7 +116,7 @@ struct CalendarView: View {
         day == "일" || day == "토" ? .gray05 : .extraBlack
     }
 
-    func dateForground(date: Date) -> Color {
+    func dateCapsuleForground(date: Date) -> Color {
         guard let holiday = holidaysDict[date.toSmallSimtongDateString()] else {
             return .gray02
         }
@@ -121,6 +130,39 @@ struct CalendarView: View {
 
         case .work:
             return .gray02
+        }
+    }
+
+    func dateForground(date: Date) -> Color {
+        guard let holiday = holidaysDict[date.toSmallSimtongDateString()] else {
+            return .gray06
+        }
+
+        switch holiday {
+        case .dayoff, .annual:
+            return .extraWhite
+
+        case .work:
+            return .gray06
+        }
+    }
+
+    func dateText(date: Date) -> String? {
+        guard let holiday = holidaysDict[date.toSmallSimtongDateString()] else {
+            let scheduleCount = scheduleDict[date.toSmallSimtongDateString()]?.count ?? 0
+            return scheduleCount == 0 ? nil : "\(scheduleCount)"
+        }
+
+        switch holiday {
+        case .dayoff:
+            return "휴"
+
+        case .annual:
+            return "연"
+
+        case .work:
+            let scheduleCount = scheduleDict[date.toSmallSimtongDateString()]?.count ?? 0
+            return scheduleCount == 0 ? nil : "\(scheduleCount)"
         }
     }
 
