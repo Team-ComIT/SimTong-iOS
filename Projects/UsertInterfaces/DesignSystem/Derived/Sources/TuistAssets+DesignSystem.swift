@@ -83,6 +83,7 @@ public enum DesignSystemAsset {
     public static let holiday = DesignSystemImages(name: "holiday")
     public static let pay = DesignSystemImages(name: "pay")
     public static let rice = DesignSystemImages(name: "rice")
+    public static let signinLogo = DesignSystemImages(name: "SigninLogo")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

@@ -8,6 +8,7 @@ import SignupFeature
 import KeychainModule
 import FindPasswordFeature
 import MainTabFeature
+import SigninFeature
 import HomeFeature
 
 final class AppComponent: BootstrapComponent {
@@ -48,7 +49,11 @@ extension AppComponent {
         SignupInfoComponent(parent: self)
     }
 
-    var findAuthInfoComponent: FindAuthInfoTabComponent {
+    var signinComponent: SigninComponent {
+        SigninComponent(parent: self)
+    }
+
+    var findAuthInfoTabComponent: FindAuthInfoTabComponent {
         FindAuthInfoTabComponent(parent: self)
     }
 
