@@ -8,6 +8,7 @@ let project = Project.makeModule(
         .Project.Module.ThirdPartyLib,
         .Project.Module.ErrorModule,
         .Project.Module.KeychainModule,
+        .Project.Module.Utility,
         .Project.Service.DataMappingModule,
 
         .SPM.Moya

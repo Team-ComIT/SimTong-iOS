@@ -9,6 +9,7 @@ import KeychainModule
 import FindPasswordFeature
 import MainTabFeature
 import SigninFeature
+import HomeFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -85,5 +86,9 @@ extension AppComponent {
 extension AppComponent {
     var mainTabComponent: MainTabComponent {
         MainTabComponent(parent: self)
+    }
+
+    var homeComponent: HomeComponent {
+        HomeComponent(parent: self)
     }
 }
