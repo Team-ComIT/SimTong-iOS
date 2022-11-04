@@ -2,7 +2,7 @@ import NeedleFoundation
 import SwiftUI
 import RootFeature
 import IntroFeature
-import FindTabFeature
+import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
 import SignupFeature
 import KeychainModule

@@ -1,6 +1,6 @@
 import SwiftUI
 import DesignSystem
-import FindTabFeature
+import FindAuthInfoTabFeature
 import SignupFeature
 
 struct SigninView: View {
