@@ -17,7 +17,7 @@ public extension TargetDependency.Project.Features {
     static let FindPasswordFeature = TargetDependency.feature(name: "FindPasswordFeature")
     static let FindEmployeeIDFeature = TargetDependency.feature(name: "FindEmployeeIDFeature")
     static let SignupFeature = TargetDependency.feature(name: "SignupFeature")
-    static let FindTabFeature = TargetDependency.feature(name: "FindTabFeature")
+    static let FindAuthInfoTabFeature = TargetDependency.feature(name: "FindAuthInfoTabFeature")
     static let IntroFeature = TargetDependency.feature(name: "IntroFeature")
     static let BaseFeature = TargetDependency.feature(name: "BaseFeature")
     static let RootFeature = TargetDependency.feature(name: "RootFeature")
