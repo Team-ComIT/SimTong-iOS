@@ -5,6 +5,7 @@ import Foundation
 import Utility
 
 public final class HomeViewModel: BaseViewModel {
+    @Published var isPresentedHoliday = false
     @Published var holidaysDict: [String: HolidayType] = [
         "2022-10-23": .annual,
         "2022-10-05": .dayoff,
@@ -98,7 +99,7 @@ public final class HomeViewModel: BaseViewModel {
                         title: "asdafa",
                         startAt: "2022-10-23",
                         endAt: "2023-01-02"
-                    ),
+                    )
                 ]
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()
