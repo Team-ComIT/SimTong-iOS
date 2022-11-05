@@ -6,6 +6,7 @@ struct WriteHolidayView: View {
     @Binding var isPresented: Bool
     @State var isHiddenNavigation = true
     @State var offset: CGSize = .init(width: 0, height: 0)
+    @State var isPresentedHolidayPicker = false
     var calendarAnimation: Namespace.ID
 
     init(
@@ -45,9 +46,14 @@ struct WriteHolidayView: View {
                     CalendarView(
                         holidaysDict: $viewModel.holidaysDict,
                         scheduleDict: $viewModel.scheduleDict
-                    ) { _ in }
-                        .matchedGeometryEffect(id: "CALENDAR", in: calendarAnimation)
-                        .padding(.top, 8)
+                    ) { date in
+                        viewModel.selectedDate = date
+                        withAnimation {
+                            isPresentedHolidayPicker = true
+                        }
+                    }
+                    .matchedGeometryEffect(id: "CALENDAR", in: calendarAnimation)
+                    .padding(.top, 8)
                 }
             }
             .padding(.top, 12)
@@ -59,6 +65,9 @@ struct WriteHolidayView: View {
         .navigationBarHidden(isHiddenNavigation)
         .stBackground()
         .offset(x: offset.width, y: offset.height)
+        .bottomSheet(isShowing: $isPresentedHolidayPicker) {
+            holidayPickerView()
+        }
         .gesture(
             DragGesture()
                 .onChanged { value in
@@ -78,5 +87,26 @@ struct WriteHolidayView: View {
                     }
                 }
         )
+    }
+
+    @ViewBuilder
+    func holidayPickerView() -> some View {
+        VStack {
+            HStack {
+                Text(viewModel.selectedDateHolidayText)
+                    .stTypo(.r6, color: .extraBlack)
+
+                Spacer()
+
+                Button {
+                } label: {
+                    Text("저장")
+                        .stTypo(.r6, color: .main)
+                }
+            }
+            .padding(.bottom, 130)
+        }
+        .padding(.top, 16)
+        .padding(.horizontal, 24)
     }
 }
