@@ -64,11 +64,16 @@ struct HomeView: View {
         .overlay {
             if viewModel.isPresentedHoliday {
                 writeHolidayComponent.makeView(
-                    holidaysDict: $viewModel.holidaysDict,
-                    scheduleDict: $viewModel.schedules,
+                    holidaysDict: viewModel.holidaysDict,
+                    scheduleDict: viewModel.schedules,
                     isPresented: $viewModel.isPresentedHoliday,
                     calendarAnimation: calendarAnimation
-                )
+                ) { holidayDict, scheduleDict in
+                    viewModel.holidaysDict = holidayDict
+                    viewModel.schedules = scheduleDict
+                }
+            } else {
+                EmptyView()
             }
         }
         .onAppear {

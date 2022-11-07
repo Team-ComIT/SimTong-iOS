@@ -1,5 +1,7 @@
 import DesignSystem
+import DomainModule
 import SwiftUI
+import Utility
 
 struct WriteHolidayView: View {
     @StateObject var viewModel: WriteHolidayViewModel
@@ -8,15 +10,24 @@ struct WriteHolidayView: View {
     @State var offset: CGSize = .init(width: 0, height: 0)
     @State var isPresentedHolidayPicker = false
     var calendarAnimation: Namespace.ID
+    let onFinished: (
+        [String: HolidayType],
+        [String: [ScheduleEntity]]
+    ) -> Void
 
     init(
         viewModel: WriteHolidayViewModel,
         isPresented: Binding<Bool>,
-        calendarAnimation: Namespace.ID
+        calendarAnimation: Namespace.ID,
+        onFinished: @escaping (
+            [String: HolidayType],
+            [String: [ScheduleEntity]]
+        ) -> Void
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _isPresented = isPresented
         self.calendarAnimation = calendarAnimation
+        self.onFinished = onFinished
     }
 
     var body: some View {
@@ -61,6 +72,7 @@ struct WriteHolidayView: View {
         }
         .onDisappear {
             isHiddenNavigation = false
+            onFinished(viewModel.holidaysDict, viewModel.scheduleDict)
         }
         .navigationBarHidden(isHiddenNavigation)
         .stBackground()
@@ -97,16 +109,61 @@ struct WriteHolidayView: View {
                     .stTypo(.r6, color: .extraBlack)
 
                 Spacer()
+            }
 
-                Button {
-                } label: {
-                    Text("저장")
-                        .stTypo(.r6, color: .main)
+            HStack(spacing: 32) {
+                holidayColumnView(holiday: .annual) {
+                    viewModel.holidaysDict[viewModel.selectedDate.toSmallSimtongDateString()] = $0
+                    isPresentedHolidayPicker = false
+                }
+
+                holidayColumnView(holiday: .dayoff) {
+                    viewModel.holidaysDict[viewModel.selectedDate.toSmallSimtongDateString()] = $0
+                    isPresentedHolidayPicker = false
+                }
+
+                holidayColumnView(holiday: .work) {
+                    viewModel.holidaysDict[viewModel.selectedDate.toSmallSimtongDateString()] = $0
+                    isPresentedHolidayPicker = false
                 }
             }
-            .padding(.bottom, 130)
+            .padding(.top, 32)
+            .padding(.bottom, 24)
         }
         .padding(.top, 16)
         .padding(.horizontal, 24)
+    }
+
+    @ViewBuilder
+    func holidayColumnView(holiday: HolidayType, onTap: @escaping (HolidayType) -> Void) -> some View {
+        Button {
+            onTap(holiday)
+        } label: {
+            VStack(spacing: 8) {
+                RoundedRectangle(cornerRadius: 18)
+                    .fill(holidayColor(holiday: holiday))
+                    .frame(width: 56, height: 56)
+                    .overlay {
+                        Text(holiday.shortDisplay)
+                            .stTypo(.r5, color: .extraWhite)
+                    }
+
+                Text(holiday.display)
+                    .stTypo(.r7, color: .gray07)
+            }
+        }
+    }
+
+    func holidayColor(holiday: HolidayType) -> Color {
+        switch holiday {
+        case .dayoff:
+            return .extraPrimary
+
+        case .annual:
+            return .main
+
+        case .work:
+            return .gray04
+        }
     }
 }

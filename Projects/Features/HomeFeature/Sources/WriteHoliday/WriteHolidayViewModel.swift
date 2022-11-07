@@ -5,8 +5,8 @@ import SwiftUI
 import Utility
 
 final class WriteHolidayViewModel: BaseViewModel {
-    @Binding var holidaysDict: [String: HolidayType]
-    @Binding var scheduleDict: [String: [ScheduleEntity]]
+    @Published var holidaysDict: [String: HolidayType]
+    @Published var scheduleDict: [String: [ScheduleEntity]]
     @Published var selectedDate = Date()
     var selectedDateHolidayText: String {
         "\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day)일은" +
@@ -14,10 +14,10 @@ final class WriteHolidayViewModel: BaseViewModel {
     }
 
     init(
-        holidaysDict: Binding<[String: HolidayType]>,
-        scheduleDict: Binding<[String: [ScheduleEntity]]>
+        holidaysDict: [String: HolidayType],
+        scheduleDict: [String: [ScheduleEntity]]
     ) {
-        _holidaysDict = holidaysDict
-        _scheduleDict = scheduleDict
+        self.holidaysDict = holidaysDict
+        self.scheduleDict = scheduleDict
     }
 }

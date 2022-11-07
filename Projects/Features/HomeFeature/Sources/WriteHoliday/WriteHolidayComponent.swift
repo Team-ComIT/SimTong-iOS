@@ -6,10 +6,14 @@ public protocol WriteHolidayDependency: Dependency {}
 
 public final class WriteHolidayComponent: Component<WriteHolidayDependency> {
     public func makeView(
-        holidaysDict: Binding<[String: HolidayType]>,
-        scheduleDict: Binding<[String: [ScheduleEntity]]>,
+        holidaysDict: [String: HolidayType],
+        scheduleDict: [String: [ScheduleEntity]],
         isPresented: Binding<Bool>,
-        calendarAnimation: Namespace.ID
+        calendarAnimation: Namespace.ID,
+        onFinished: @escaping (
+            [String: HolidayType],
+            [String: [ScheduleEntity]]
+        ) -> Void
     ) -> some View {
         WriteHolidayView(
             viewModel: .init(
@@ -17,7 +21,8 @@ public final class WriteHolidayComponent: Component<WriteHolidayDependency> {
                 scheduleDict: scheduleDict
             ),
             isPresented: isPresented,
-            calendarAnimation: calendarAnimation
+            calendarAnimation: calendarAnimation,
+            onFinished: onFinished
         )
     }
 }
