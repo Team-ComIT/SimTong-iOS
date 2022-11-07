@@ -264,15 +264,20 @@ private func factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5(_ component: Needle
     return FindAuthInfoTabDependency79082cf44b62999fcee0Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
-
-
-    init() {
-
+    var signinComponent: SigninComponent {
+        return appComponent.signinComponent
+    }
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
+        return appComponent.signupEmployeeInfoComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->IntroComponent
-private func factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return IntroDependencye04a89d39c733d937499Provider()
+private func factoryaf0e1f54bae4c77ad4acf47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return IntroDependencye04a89d39c733d937499Provider(appComponent: parent1(component) as! AppComponent)
 }
 
 #else
@@ -405,7 +410,8 @@ extension FindAuthInfoTabComponent: Registration {
 }
 extension IntroComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\IntroDependency.signinComponent] = "signinComponent-SigninComponent"
+        keyPathToName[\IntroDependency.signupEmployeeInfoComponent] = "signupEmployeeInfoComponent-SignupEmployeeInfoComponent"
     }
 }
 
@@ -441,7 +447,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4ace3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4acf47b58f8f304c97af4d5)
 }
 #endif
 

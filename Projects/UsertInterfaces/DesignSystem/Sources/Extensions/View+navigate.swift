@@ -8,7 +8,7 @@ public extension View {
     ) -> some View {
         self.background {
             NavigationLink(isActive: binding) {
-                DeferView {
+                LinkPresenter(isPresented: binding) {
                     view
                 }
             } label: {
@@ -19,16 +19,24 @@ public extension View {
     }
 }
 
-public struct DeferView<Content: View>: View {
+struct LinkPresenter<Content: View>: View {
     let content: () -> Content
 
-    public init(
+    @Binding var isPresented: Bool
+    init(
+        isPresented: Binding<Bool>,
         @ViewBuilder _ content: @escaping () -> Content
     ) {
+        _isPresented = isPresented
         self.content = content
     }
-
-    public var body: some View {
-        content()
+    var body: some View {
+        Group {
+            if isPresented {
+                EmptyView()
+            } else {
+                content()
+            }
+        }
     }
 }

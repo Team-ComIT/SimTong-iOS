@@ -1,13 +1,21 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
+import SigninFeature
+import SignupFeature
 
 struct IntroView: View {
     @StateObject var viewModel: IntroViewModel
+    private let signinComponent: SigninComponent
+    private let signupEmployeeInfoComponent: SignupEmployeeInfoComponent
 
     public init(
-        viewModel: IntroViewModel
+        viewModel: IntroViewModel,
+        signinComponent: SigninComponent,
+        signupEmployeeInfoComponent: SignupEmployeeInfoComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.signinComponent = signinComponent
+        self.signupEmployeeInfoComponent = signupEmployeeInfoComponent
     }
 
     var body: some View {
@@ -34,20 +42,25 @@ struct IntroView: View {
                 Spacer()
 
                 VStack(spacing: 16) {
-                    CTAButton(text: "회원가입") {}
+                    CTAButton(text: "회원가입") {
+                        viewModel.isNavigateSignup = true
+                    }
 
-                    CTAButton(text: "로그인", style: .cancel) {}
+                    CTAButton(text: "로그인", style: .cancel) {
+                        viewModel.isNavigateSignin = true
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 8)
             }
         }
-        .preferredColorScheme(.dark)
-    }
-}
-
-struct IntroView_Previews: PreviewProvider {
-    static var previews: some View {
-        IntroView(viewModel: IntroViewModel())
+        .navigate(
+            to: signinComponent.makeView(),
+            when: $viewModel.isNavigateSignin
+        )
+        .navigate(
+            to: signupEmployeeInfoComponent.makeView(),
+            when: $viewModel.isNavigateSignup
+        )
     }
 }
