@@ -2,8 +2,12 @@ import SwiftUI
 import DesignSystem
 
 public struct FindEmployeeIDView: View {
+    private enum FocusField: Hashable {
+        case name
+        case email
+    }
     @StateObject var viewModel: FindEmployeeIDViewModel
-    @State var isPresentedSpotList = false
+    @FocusState private var focusField: FocusField?
 
     let employeeIDSpotListComponent: EmployeeIDSpotListComponent
     let employeeIDResultComponent: EmployeeIDResultComponent
@@ -20,10 +24,17 @@ public struct FindEmployeeIDView: View {
 
     public var body: some View {
         VStack(spacing: 8) {
-            STTextField("이름을 입력해주세요", text: $viewModel.name, style: .clear, isError: viewModel.isError)
-                .padding(.top, 64)
+            STTextField("이름을 입력해주세요", text: $viewModel.name, style: .clear, isError: viewModel.isError, onCommit: {
+                focusField = .email
+            })
+            .focused($focusField, equals: .name)
+            .padding(.top, 64)
 
-            STTextField("E-mail을 입력해주세요", text: $viewModel.email, style: .clear, isError: viewModel.isError)
+            STTextField("E-mail을 입력해주세요", text: $viewModel.email, style: .clear, isError: viewModel.isError, onCommit: {
+                focusField = nil
+                viewModel.isPresentedSpotList = true
+            })
+            .focused($focusField, equals: .email)
 
             Group {
                 STTextField(
@@ -35,7 +46,7 @@ public struct FindEmployeeIDView: View {
                 .disabled(true)
             }
             .onTapGesture {
-                isPresentedSpotList.toggle()
+                viewModel.isPresentedSpotList.toggle()
             }
 
             CTAButton(text: "확인") {
@@ -47,7 +58,7 @@ public struct FindEmployeeIDView: View {
             Spacer()
         }
         .padding(.horizontal, 16)
-        .sheet(isPresented: $isPresentedSpotList) {
+        .sheet(isPresented: $viewModel.isPresentedSpotList) {
             employeeIDSpotListComponent.makeView(selectedSpot: viewModel.selectedSpot) { spot in
                 viewModel.selectedSpot = spot
                 viewModel.spot = spot.name
