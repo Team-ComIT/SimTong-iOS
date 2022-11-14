@@ -5,11 +5,14 @@ struct MyPageView: View {
     @StateObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) var dismiss
     @State var isPresentedImagePicker = false
+    private let nicknameModifyComponent: NicknameModifyComponent
 
     public init(
-        viewModel: MyPageViewModel
+        viewModel: MyPageViewModel,
+        nicknameModifyComponent: NicknameModifyComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.nicknameModifyComponent = nicknameModifyComponent
     }
 
     var body: some View {
@@ -49,13 +52,21 @@ struct MyPageView: View {
             .padding(.top, 24)
 
             VStack(spacing: 24) {
-                formTextRow(key: "닉네임", text: viewModel.myProfile.nickname) {}
+                formTextRow(key: "닉네임", text: viewModel.myProfile.nickname) {
+                    viewModel.nicknameButtonDidTap()
+                }
 
-                formTextRow(key: "이름", text: viewModel.myProfile.name) {}
+                formTextRow(key: "이름", text: viewModel.myProfile.name) {
+                    print("이름 누름")
+                }
 
-                formTextRow(key: "이메일", text: viewModel.myProfile.email) {}
+                formTextRow(key: "이메일", text: viewModel.myProfile.email) {
+                    print("이메일 누름")
+                }
 
-                formTextRow(key: "근무 지점", text: viewModel.myProfile.spot) {}
+                formTextRow(key: "근무 지점", text: viewModel.myProfile.spot) {
+                    print("근무 지점 누름")
+                }
 
                 formImageRow(key: "비밀번호 변경") {
                     Image(systemName: "chevron.right")
@@ -66,7 +77,7 @@ struct MyPageView: View {
 
                 HStack {
                     Text("로그아웃")
-                        .stTypo(.r5, color: .extraError)
+                        .stTypo(.r5, color: .main)
                         .unredacted()
 
                     Spacer()
@@ -86,9 +97,26 @@ struct MyPageView: View {
         .imagePicker(isShow: $isPresentedImagePicker, uiImage: $viewModel.selectedImage)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text("프로필"))
+        .navigationBarItems(trailing:
+            Button {
+                viewModel.modify()
+            } label: {
+                Text(viewModel.isModify ? "완료" : "수정")
+                    .stTypo(.m6, color: .main)
+            }
+        )
         .configBackButton(dismiss: dismiss)
         .padding(.horizontal, 24)
         .stBackground()
+        .onAppear {
+            Task {
+                await viewModel.loadMyInfo()
+            }
+        }
+        .navigate(to: nicknameModifyComponent.makeView(), when: $viewModel.isNavigateNickname)
+//        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
+//        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
+//        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
     }
 
     @ViewBuilder

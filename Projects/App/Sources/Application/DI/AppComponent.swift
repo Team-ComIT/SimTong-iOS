@@ -80,6 +80,10 @@ extension AppComponent {
     var findPasswordVerifyComponent: FindPasswordVerifyComponent {
         FindPasswordVerifyComponent(parent: self)
     }
+
+    var nicknameModifyComponent: NicknameModifyComponent {
+        NicknameModifyComponent(parent: self)
+    }
 }
 
 // MARK: - Main

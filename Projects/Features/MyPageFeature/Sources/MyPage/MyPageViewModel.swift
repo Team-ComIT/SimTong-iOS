@@ -5,7 +5,7 @@ import UIKit
 
 public final class MyPageViewModel: BaseViewModel {
     private let fetchMyProfileUseCase: any FetchMyProfileUseCase
-    @Published var myProfile: UserInfo = .init(
+    @Published var myProfile: UserInfoEntity = .init(
         name: "김이름",
         email: "test@gmail.com",
         nickname: "멋있는_이름",
@@ -14,6 +14,8 @@ public final class MyPageViewModel: BaseViewModel {
     )
     @Published var selectedImage: UIImage?
     @Published var isSkeleton = false
+    @Published var isModify = false
+    @Published var isNavigateNickname = false
 
     init(
         fetchMyProfileUseCase: any FetchMyProfileUseCase
@@ -21,17 +23,25 @@ public final class MyPageViewModel: BaseViewModel {
         self.fetchMyProfileUseCase = fetchMyProfileUseCase
         super.init()
         self.isSkeleton = true
+    }
 
-        Task {
-            await withAsyncTry(with: self) { owner in
-                let user = try await owner.fetchMyProfileUseCase.execute()
-                owner.myProfile = user
-                owner.isSkeleton = false
-            } errorAction: { [weak self] error in
-                self?.isError = true
-                self?.errorMessage = error.localizedDescription
-                self?.isSkeleton = false
-            }
+    @MainActor
+    func loadMyInfo() async {
+        await withAsyncTry(with: self) { owner in
+            let user = try await owner.fetchMyProfileUseCase.execute()
+            owner.myProfile = user
+            owner.isSkeleton = false
         }
     }
+
+    func modify() {
+        isModify.toggle()
+    }
+
+    func nicknameButtonDidTap() {
+        if isModify {
+            isNavigateNickname = true
+        }
+    }
+
 }
