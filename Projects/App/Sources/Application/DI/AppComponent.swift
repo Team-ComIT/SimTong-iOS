@@ -84,6 +84,14 @@ extension AppComponent {
     var nicknameModifyComponent: NicknameModifyComponent {
         NicknameModifyComponent(parent: self)
     }
+
+    var emailModifyComponent: EmailModifyComponent {
+        EmailModifyComponent(parent: self)
+    }
+
+    var emailVerifyComponent: EmailVerifyComponent {
+        EmailVerifyComponent(parent: self)
+    }
 }
 
 // MARK: - Main

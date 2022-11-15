@@ -16,6 +16,7 @@ public final class MyPageViewModel: BaseViewModel {
     @Published var isSkeleton = false
     @Published var isModify = false
     @Published var isNavigateNickname = false
+    @Published var isNavigateEmail = false
 
     init(
         fetchMyProfileUseCase: any FetchMyProfileUseCase
@@ -41,6 +42,12 @@ public final class MyPageViewModel: BaseViewModel {
     func nicknameButtonDidTap() {
         if isModify {
             isNavigateNickname = true
+        }
+    }
+
+    func emailButtonDidTap() {
+        if isModify {
+            isNavigateEmail = true
         }
     }
 

@@ -6,13 +6,16 @@ struct MyPageView: View {
     @Environment(\.dismiss) var dismiss
     @State var isPresentedImagePicker = false
     private let nicknameModifyComponent: NicknameModifyComponent
+    private let emailModifyComponent: EmailModifyComponent
 
     public init(
         viewModel: MyPageViewModel,
-        nicknameModifyComponent: NicknameModifyComponent
+        nicknameModifyComponent: NicknameModifyComponent,
+        emailModifyComponent: EmailModifyComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.nicknameModifyComponent = nicknameModifyComponent
+        self.emailModifyComponent = emailModifyComponent
     }
 
     var body: some View {
@@ -56,12 +59,10 @@ struct MyPageView: View {
                     viewModel.nicknameButtonDidTap()
                 }
 
-                formTextRow(key: "이름", text: viewModel.myProfile.name) {
-                    print("이름 누름")
-                }
+                formTextRow(key: "이름", text: viewModel.myProfile.name) {}
 
                 formTextRow(key: "이메일", text: viewModel.myProfile.email) {
-                    print("이메일 누름")
+                    viewModel.emailButtonDidTap()
                 }
 
                 formTextRow(key: "근무 지점", text: viewModel.myProfile.spot) {
@@ -114,7 +115,7 @@ struct MyPageView: View {
             }
         }
         .navigate(to: nicknameModifyComponent.makeView(), when: $viewModel.isNavigateNickname)
-//        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
+        .navigate(to: emailModifyComponent.makeView(), when: $viewModel.isNavigateEmail)
 //        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
 //        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
     }
