@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-    name: "FindTabFeature",
+    name: "FindAuthInfoTabFeature",
     product: .staticFramework,
     dependencies: [
         .Project.Features.BaseFeature,

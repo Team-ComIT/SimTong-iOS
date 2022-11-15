@@ -1,6 +1,6 @@
 import NeedleFoundation
 import SwiftUI
-import FindTabFeature
+import FindAuthInfoTabFeature
 import SignupFeature
 import DomainModule
 

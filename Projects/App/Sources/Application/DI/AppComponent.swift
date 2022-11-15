@@ -2,7 +2,7 @@ import NeedleFoundation
 import SwiftUI
 import RootFeature
 import IntroFeature
-import FindTabFeature
+import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
 import SignupFeature
 import KeychainModule
@@ -10,6 +10,7 @@ import FindPasswordFeature
 import MainTabFeature
 import MyPageFeature
 import SigninFeature
+import HomeFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -98,6 +99,10 @@ extension AppComponent {
 extension AppComponent {
     var mainTabComponent: MainTabComponent {
         MainTabComponent(parent: self)
+    }
+
+    var homeComponent: HomeComponent {
+        HomeComponent(parent: self)
     }
 
     var myPageComponent: MyPageComponent {

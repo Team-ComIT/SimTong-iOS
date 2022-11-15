@@ -3,9 +3,10 @@
 import BaseFeature
 import DataModule
 import DomainModule
+import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
 import FindPasswordFeature
-import FindTabFeature
+import HomeFeature
 import IntroFeature
 import KeychainModule
 import MainTabFeature
@@ -229,6 +230,17 @@ private class SigninDependencyde06a9d0b22764487733Provider: SigninDependency {
 private func factory2882a056d84a613debccf47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return SigninDependencyde06a9d0b22764487733Provider(appComponent: parent1(component) as! AppComponent)
 }
+private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->HomeComponent
+private func factory67229cdf0f755562b2b1e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return HomeDependency443c4e1871277bd8432aProvider()
+}
 private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
         return appComponent.sendAuthCodeUseCase
@@ -421,6 +433,11 @@ extension SigninComponent: Registration {
         keyPathToName[\SigninDependency.signinUseCase] = "signinUseCase-any SigninUseCase"
     }
 }
+extension HomeComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension FindPasswordVerifyComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindPasswordVerifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
@@ -481,6 +498,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->EmailVerifyComponent", factory0bd89edc8a1f0255a6d4e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)

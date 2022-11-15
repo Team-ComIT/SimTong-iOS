@@ -11,8 +11,14 @@ struct SimTongApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                AppComponent().signupEmployeeInfoComponent.makeView()
+            if #available(iOS 16.0, *) {
+                NavigationStack {
+                    AppComponent().homeComponent.makeView()
+                }
+            } else {
+                NavigationView {
+                    AppComponent().homeComponent.makeView()
+                }
             }
         }
     }
