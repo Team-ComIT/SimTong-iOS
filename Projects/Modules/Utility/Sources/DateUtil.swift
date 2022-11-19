@@ -50,6 +50,13 @@ public extension Date {
         }
     }
 
+    func fetchAllDatesInCurrentWeek() -> [Date] {
+        let calendar = Calendar.current
+        let dayOfWeek = calendar.component(.weekday, from: self)
+        return calendar.range(of: .weekday, in: .weekOfYear, for: self)!
+            .compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: self) }
+    }
+
     func dayOfWeek() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEEEE"

@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-import DesignSystem
 
 public enum HolidayType {
     case dayoff
@@ -32,19 +31,6 @@ public extension HolidayType {
 
         case .work:
             return "근"
-        }
-    }
-
-    var primaryColor: Color {
-        switch self {
-        case .dayoff:
-            return .extraPrimary
-
-        case .annual:
-            return .main
-
-        case .work:
-            return .gray04
         }
     }
 }

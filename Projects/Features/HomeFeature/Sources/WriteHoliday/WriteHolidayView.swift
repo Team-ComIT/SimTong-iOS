@@ -99,6 +99,11 @@ struct WriteHolidayView: View {
                     }
                 }
         )
+        .alert(viewModel.errorMessage, isPresented: $viewModel.isError) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text(viewModel.errorSubMessage)
+        }
     }
 
     @ViewBuilder
@@ -112,19 +117,8 @@ struct WriteHolidayView: View {
             }
 
             HStack(spacing: 32) {
-                holidayColumnView(holiday: .annual) {
-                    viewModel.holidaysDict[viewModel.selectedDate.toSmallSimtongDateString()] = $0
-                    isPresentedHolidayPicker = false
-                }
-
-                holidayColumnView(holiday: .dayoff) {
-                    viewModel.holidaysDict[viewModel.selectedDate.toSmallSimtongDateString()] = $0
-                    isPresentedHolidayPicker = false
-                }
-
-                holidayColumnView(holiday: .work) {
-                    viewModel.holidaysDict[viewModel.selectedDate.toSmallSimtongDateString()] = $0
-                    isPresentedHolidayPicker = false
+                ForEach([HolidayType.annual, .dayoff, .work], id: \.hashValue) {
+                    holidayColumnView(holiday: $0)
                 }
             }
             .padding(.top, 32)
@@ -135,9 +129,10 @@ struct WriteHolidayView: View {
     }
 
     @ViewBuilder
-    func holidayColumnView(holiday: HolidayType, onTap: @escaping (HolidayType) -> Void) -> some View {
+    func holidayColumnView(holiday: HolidayType) -> some View {
         Button {
-            onTap(holiday)
+            viewModel.writeHoliday(type: holiday)
+            isPresentedHolidayPicker = false
         } label: {
             VStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 18)

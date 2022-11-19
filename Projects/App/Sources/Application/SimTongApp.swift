@@ -13,7 +13,7 @@ struct SimTongApp: App {
         WindowGroup {
             if #available(iOS 16.0, *) {
                 NavigationStack {
-                    AppComponent().introComponent.makeView()
+                    AppComponent().homeComponent.makeView()
                 }
             } else {
                 NavigationView {

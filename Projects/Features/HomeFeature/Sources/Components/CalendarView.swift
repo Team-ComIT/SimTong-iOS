@@ -174,3 +174,18 @@ struct CalendarView: View {
         return days
     }
 }
+
+private extension HolidayType {
+    var primaryColor: Color {
+        switch self {
+        case .dayoff:
+            return .extraPrimary
+
+        case .annual:
+            return .main
+
+        case .work:
+            return .gray02
+        }
+    }
+}
