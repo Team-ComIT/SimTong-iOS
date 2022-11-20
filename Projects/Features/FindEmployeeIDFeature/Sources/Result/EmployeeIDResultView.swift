@@ -1,8 +1,8 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
+import Utility
 
 public struct EmployeeIDResultView: View {
-    @Environment(\.rootPresentationMode) var rootPresentationMode
     @Environment(\.dismiss) var dismiss
 
     let username: String
@@ -36,7 +36,7 @@ public struct EmployeeIDResultView: View {
             Spacer()
 
             CTAButton(text: "로그인으로 이동하기") {
-                rootPresentationMode.wrappedValue.toggle()
+                NavigationUtil.popToRootView()
             }
             .padding(.horizontal)
             .padding(.bottom, 24)

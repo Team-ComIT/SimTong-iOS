@@ -6,6 +6,8 @@ import SwiftUI
 public final class IntroViewModel: BaseViewModel {
     @Published var places: [STImage.Image] = [.place1, .place2, .place3, .place4, .place5]
     @Published var currentIndex = 0
+    @Published var isNavigateSignin = false
+    @Published var isNavigateSignup = false
 
     public override init() {
         super.init()
