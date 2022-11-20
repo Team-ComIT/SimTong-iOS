@@ -120,17 +120,7 @@ struct CalendarView: View {
         guard let holiday = holidaysDict[date.toSmallSimtongDateString()] else {
             return .gray02
         }
-
-        switch holiday {
-        case .dayoff:
-            return .main
-
-        case .annual:
-            return .extraPrimary
-
-        case .work:
-            return .gray02
-        }
+        return holiday.primaryColor
     }
 
     func dateForground(date: Date) -> Color {
@@ -154,11 +144,8 @@ struct CalendarView: View {
         }
 
         switch holiday {
-        case .dayoff:
-            return "휴"
-
-        case .annual:
-            return "연"
+        case .dayoff, .annual:
+            return holiday.shortDisplay
 
         case .work:
             let scheduleCount = scheduleDict[date.toSmallSimtongDateString()]?.count ?? 0
@@ -185,5 +172,20 @@ struct CalendarView: View {
         }
 
         return days
+    }
+}
+
+private extension HolidayType {
+    var primaryColor: Color {
+        switch self {
+        case .dayoff:
+            return .extraPrimary
+
+        case .annual:
+            return .main
+
+        case .work:
+            return .gray02
+        }
     }
 }

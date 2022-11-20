@@ -91,4 +91,8 @@ extension AppComponent {
     var homeComponent: HomeComponent {
         HomeComponent(parent: self)
     }
+
+    var writeHolidayComponent: WriteHolidayComponent {
+        WriteHolidayComponent(parent: self)
+    }
 }
