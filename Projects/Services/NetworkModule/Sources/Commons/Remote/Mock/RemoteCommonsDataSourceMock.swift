@@ -34,6 +34,8 @@ public struct RemoteCommonsDataSourceMock: RemoteCommonsDataSource {
         return 1234567890
     }
 
+    public func reissueToken() async throws {}
+
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         return
     }

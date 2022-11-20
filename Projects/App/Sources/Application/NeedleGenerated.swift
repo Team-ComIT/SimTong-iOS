@@ -15,6 +15,7 @@ import NetworkModule
 import RootFeature
 import SigninFeature
 import SignupFeature
+import SplashFeature
 import SwiftUI
 
 // swiftlint:disable unused_declaration
@@ -30,6 +31,19 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
+private class SplashDependencye0cb7136f2ec3edfd60aProvider: SplashDependency {
+    var reissueTokenUseCase: any ReissueTokenUseCase {
+        return appComponent.reissueTokenUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->SplashComponent
+private func factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SplashDependencye0cb7136f2ec3edfd60aProvider(appComponent: parent1(component) as! AppComponent)
+}
 private class SignupPasswordDependency778bf5389a70d7df6152Provider: SignupPasswordDependency {
     var signupInfoComponent: SignupInfoComponent {
         return appComponent.signupInfoComponent
@@ -90,15 +104,17 @@ private func factoryf7587eff678919fec270f47b58f8f304c97af4d5(_ component: Needle
     return SignupVerifyDependency19890686bff8e77ece06Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class MainTabDependency2826cdb310ed0b17a725Provider: MainTabDependency {
-
-
-    init() {
-
+    var homeComponent: HomeComponent {
+        return appComponent.homeComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->MainTabComponent
-private func factory1ab5a747ddf21e1393f9e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return MainTabDependency2826cdb310ed0b17a725Provider()
+private func factory1ab5a747ddf21e1393f9f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return MainTabDependency2826cdb310ed0b17a725Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class EmployeeIDResultDependency17ee22cd492649466e5fProvider: EmployeeIDResultDependency {
 
@@ -146,6 +162,9 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     }
     var mainTabComponent: MainTabComponent {
         return appComponent.mainTabComponent
+    }
+    var splashComponent: SplashComponent {
+        return appComponent.splashComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -296,6 +315,7 @@ extension AppComponent: Registration {
         localTable["menuRepository-any MenuRepository"] = { self.menuRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
+        localTable["reissueTokenUseCase-any ReissueTokenUseCase"] = { self.reissueTokenUseCase as Any }
         localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { self.resetPasswordUseCase as Any }
         localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
         localTable["checkExistEmployeeIDAndEmailUseCase-any CheckExistEmployeeIDAndEmailUseCase"] = { self.checkExistEmployeeIDAndEmailUseCase as Any }
@@ -315,6 +335,11 @@ extension AppComponent: Registration {
         localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { self.sendAuthCodeUseCase as Any }
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
         localTable["fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"] = { self.fetchPublicMenuListUseCase as Any }
+    }
+}
+extension SplashComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\SplashDependency.reissueTokenUseCase] = "reissueTokenUseCase-any ReissueTokenUseCase"
     }
 }
 extension SignupPasswordComponent: Registration {
@@ -342,7 +367,7 @@ extension SignupVerifyComponent: Registration {
 }
 extension MainTabComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\MainTabDependency.homeComponent] = "homeComponent-HomeComponent"
     }
 }
 extension EmployeeIDResultComponent: Registration {
@@ -365,6 +390,7 @@ extension RootComponent: Registration {
     public func registerItems() {
         keyPathToName[\RootDependency.introComponent] = "introComponent-IntroComponent"
         keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
+        keyPathToName[\RootDependency.splashComponent] = "splashComponent-SplashComponent"
     }
 }
 extension SigninComponent: Registration {
@@ -431,11 +457,12 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 @inline(never) private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->MainTabComponent", factory1ab5a747ddf21e1393f9e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->MainTabComponent", factory1ab5a747ddf21e1393f9f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)

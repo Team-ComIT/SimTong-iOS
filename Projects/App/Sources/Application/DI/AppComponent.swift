@@ -10,6 +10,7 @@ import FindPasswordFeature
 import MainTabFeature
 import SigninFeature
 import HomeFeature
+import SplashFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -94,5 +95,12 @@ extension AppComponent {
 
     var writeHolidayComponent: WriteHolidayComponent {
         WriteHolidayComponent(parent: self)
+    }
+}
+
+// MARK: - Splash
+extension AppComponent {
+    var splashComponent: SplashComponent {
+        SplashComponent(parent: self)
     }
 }
