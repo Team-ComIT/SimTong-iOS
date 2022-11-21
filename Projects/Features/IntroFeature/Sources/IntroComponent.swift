@@ -5,7 +5,7 @@ import SignupFeature
 
 public protocol IntroDependency: Dependency {
     var signinComponent: SigninComponent { get }
-    var signupVerifyComponent: SignupVerifyComponent { get }
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent { get }
 }
 
 public final class IntroComponent: Component<IntroDependency> {
