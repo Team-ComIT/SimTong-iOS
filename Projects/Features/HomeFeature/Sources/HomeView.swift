@@ -2,11 +2,17 @@ import DesignSystem
 import DomainModule
 import SwiftUI
 import Utility
+import MyPageFeature
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    private let myPageComponent: MyPageComponent
 
-    public init(viewModel: HomeViewModel) {
+    public init(
+        myPageComponent: MyPageComponent,
+        viewModel: HomeViewModel
+    ) {
+        self.myPageComponent = myPageComponent
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -61,10 +67,15 @@ struct HomeView: View {
                 }
 
                 Button {
+                    viewModel.isPresentedMyPage = true
                 } label: {
                     STIcon(.person, color: .gray03)
                 }
             }
         }
+        .navigate(
+            to: myPageComponent.makeView(),
+            when: $viewModel.isPresentedMyPage
+        )
     }
 }

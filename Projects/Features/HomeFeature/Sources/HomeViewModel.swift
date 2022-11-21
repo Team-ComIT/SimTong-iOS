@@ -11,6 +11,7 @@ public final class HomeViewModel: BaseViewModel {
         "2022-10-24": .dayoff,
         "2022-10-25": .annual
     ]
+    @Published var isPresentedMyPage = false
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = [
         .init(

@@ -5,6 +5,7 @@ struct EmailModifyView: View {
     @StateObject var viewModel: EmailModifyViewModel
     @FocusState var focusField: Bool
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var test: MyPageRouteBuilder
     private let emailVerifyComponent: EmailVerifyComponent
 
     public init(
@@ -44,7 +45,11 @@ struct EmailModifyView: View {
         }
         .navigationTitle("이메일 수정하기")
         .navigationBarTitleDisplayMode(.inline)
-        .navigate(to: emailVerifyComponent.makeView(), when: $viewModel.isSuccessNicknameModify)
+        .navigate(
+            to: emailVerifyComponent.makeView()
+                .environmentObject(test),
+            when: $viewModel.isSuccessNicknameModify
+        )
         .stBackground()
         .configBackButton(willDismiss: {
             viewModel.isPresentedTerms = true

@@ -5,6 +5,7 @@ struct MyPageView: View {
     @StateObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) var dismiss
     @State var isPresentedImagePicker = false
+    @StateObject var test = MyPageRouteBuilder()
     private let nicknameModifyComponent: NicknameModifyComponent
     private let emailModifyComponent: EmailModifyComponent
 
@@ -62,6 +63,7 @@ struct MyPageView: View {
                 formTextRow(key: "이름", text: viewModel.myProfile.name) {}
 
                 formTextRow(key: "이메일", text: viewModel.myProfile.email) {
+                    test.routeBuilder = true
                     viewModel.emailButtonDidTap()
                 }
 
@@ -109,15 +111,22 @@ struct MyPageView: View {
         .configBackButton(dismiss: dismiss)
         .padding(.horizontal, 24)
         .stBackground()
-        .onAppear {
-            Task {
-                await viewModel.loadMyInfo()
-            }
+        .task {
+            await viewModel.loadMyInfo()
         }
         .navigate(to: nicknameModifyComponent.makeView(), when: $viewModel.isNavigateNickname)
-        .navigate(to: emailModifyComponent.makeView(), when: $viewModel.isNavigateEmail)
-//        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
-//        .navigate(to: NicknameModifyView(), when: $viewModel.isNavigateNickname)
+        .navigate(
+            to: emailModifyComponent.makeView()
+                .environmentObject(test),
+            when: $test.routeBuilder
+        )
+//        .onChange(of: viewModel.isNavigateEmail) { newValue in
+//            print(newValue)
+//            test.routeBuilder = newValue
+//        }
+        .onChange(of: test.routeBuilder) { newValue in
+            print("rou", newValue)
+        }
     }
 
     @ViewBuilder

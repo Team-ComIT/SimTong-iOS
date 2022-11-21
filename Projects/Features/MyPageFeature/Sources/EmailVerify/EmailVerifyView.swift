@@ -5,6 +5,7 @@ struct EmailVerifyView: View {
 
     @StateObject var viewModel: EmailVerifyViewModel
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var test: MyPageRouteBuilder
     @FocusState private var focusField: Bool
 
     public init(
@@ -50,7 +51,7 @@ struct EmailVerifyView: View {
         }
         .onChange(of: viewModel.isVerified) { newValue in
             if newValue {
-                dismiss()
+                test.routeBuilder = false
             }
         }
         .stBackground()
