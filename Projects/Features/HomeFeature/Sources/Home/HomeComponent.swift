@@ -1,5 +1,6 @@
 import NeedleFoundation
 import SwiftUI
+import MyPageFeature
 
 public protocol HomeDependency: Dependency {
     var writeHolidayComponent: WriteHolidayComponent { get }

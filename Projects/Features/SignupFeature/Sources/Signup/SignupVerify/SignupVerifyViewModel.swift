@@ -32,7 +32,6 @@ public final class SignupVerifyViewModel: BaseViewModel {
         bag.removeAll()
     }
 
-    @MainActor
     func timerStart() {
         Task {
             await withAsyncTry(with: self) { owner in
@@ -63,12 +62,11 @@ public final class SignupVerifyViewModel: BaseViewModel {
                     email: owner.signupVerifySceneParam.email,
                     code: owner.authCode
                 )
-                owner.isVerified = true
             })
         }
+        self.isVerified = true
     }
 
-    @MainActor
     func resendCodeButtonDidTap() {
         Task {
             await withAsyncTry(with: self, action: { owner in

@@ -6,16 +6,16 @@ import SignupFeature
 struct IntroView: View {
     @StateObject var viewModel: IntroViewModel
     private let signinComponent: SigninComponent
-    private let signupEmployeeInfoComponent: SignupEmployeeInfoComponent
+    private let signupVerifyComponent: SignupVerifyComponent
 
     public init(
         viewModel: IntroViewModel,
         signinComponent: SigninComponent,
-        signupEmployeeInfoComponent: SignupEmployeeInfoComponent
+        signupVerifyComponent: SignupVerifyComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.signinComponent = signinComponent
-        self.signupEmployeeInfoComponent = signupEmployeeInfoComponent
+        self.signupVerifyComponent = signupVerifyComponent
     }
 
     var body: some View {
@@ -59,7 +59,14 @@ struct IntroView: View {
             when: $viewModel.isNavigateSignin
         )
         .navigate(
-            to: signupEmployeeInfoComponent.makeView(),
+            to: VStack(content: {
+                NavigationLink {
+                    signupVerifyComponent.makeView(signupVerifySceneParam: .init(name: "", employeeID: "", email: ""))
+                } label: {
+                    Text("A")
+                }
+
+            }),
             when: $viewModel.isNavigateSignup
         )
     }

@@ -70,7 +70,7 @@ struct BottomSheet<T: View>: ViewModifier {
 }
 
 public extension View {
-    func bottomSheet<Content: View>(
+    func    bottomSheet<Content: View>(
         isShowing: Binding<Bool>,
         content: @escaping () -> Content
     ) -> some View {

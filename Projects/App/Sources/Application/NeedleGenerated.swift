@@ -234,6 +234,9 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
+    var myPageComponent: MyPageComponent {
+        return appComponent.myPageComponent
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -248,20 +251,11 @@ private class WriteHolidayDependencyf70374d71937da494a07Provider: WriteHolidayDe
 
     init() {
 
-    var myPageComponent: MyPageComponent {
-        return appComponent.myPageComponent
-    }
-    private let appComponent: AppComponent
-    init(appComponent: AppComponent) {
-        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->WriteHolidayComponent
 private func factory231bc78685abe84d7b9fe3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return WriteHolidayDependencyf70374d71937da494a07Provider()
-/// ^->AppComponent->HomeComponent
-private func factory67229cdf0f755562b2b1f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return HomeDependency443c4e1871277bd8432aProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
@@ -331,8 +325,8 @@ private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
     var signinComponent: SigninComponent {
         return appComponent.signinComponent
     }
-    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
-        return appComponent.signupEmployeeInfoComponent
+    var signupVerifyComponent: SignupVerifyComponent {
+        return appComponent.signupVerifyComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -463,12 +457,12 @@ extension SigninComponent: Registration {
 extension HomeComponent: Registration {
     public func registerItems() {
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
+        keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
     }
 }
 extension WriteHolidayComponent: Registration {
     public func registerItems() {
 
-        keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
     }
 }
 extension FindPasswordVerifyComponent: Registration {
@@ -498,7 +492,7 @@ extension FindAuthInfoTabComponent: Registration {
 extension IntroComponent: Registration {
     public func registerItems() {
         keyPathToName[\IntroDependency.signinComponent] = "signinComponent-SigninComponent"
-        keyPathToName[\IntroDependency.signupEmployeeInfoComponent] = "signupEmployeeInfoComponent-SignupEmployeeInfoComponent"
+        keyPathToName[\IntroDependency.signupVerifyComponent] = "signupVerifyComponent-SignupVerifyComponent"
     }
 }
 
@@ -516,7 +510,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 #if !NEEDLE_DYNAMIC
 
-@inline(never) private func register1() {
+private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996e3b0c44298fc1c149afb)
@@ -534,7 +528,6 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->WriteHolidayComponent", factory231bc78685abe84d7b9fe3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)

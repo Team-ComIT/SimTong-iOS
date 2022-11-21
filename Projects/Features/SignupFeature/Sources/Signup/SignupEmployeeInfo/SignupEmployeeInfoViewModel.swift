@@ -50,7 +50,7 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
                         name: owner.name,
                         employeeNumber: owner.number
                     )
-                    owner.isNavigateToVerify = true
+                    owner.isPresentedTerms = true
                 }
             }
         }

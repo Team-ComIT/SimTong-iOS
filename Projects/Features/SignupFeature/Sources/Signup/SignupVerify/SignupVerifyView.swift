@@ -78,7 +78,12 @@ struct SignupVerifyView: View {
         }
         .onAppear {
             focusField = .code
+            print(viewModel.isVerified)
         }
+        .onChange(of: viewModel.isVerified) { newValue in
+            print(newValue)
+        }
+//        .imagePicker(isShow: $viewModel.isVerified, uiImage: .constant(nil))
         .navigate(
             to: signupPasswordComponent.makeView(
                 signupPasswordSceneParam: .init(

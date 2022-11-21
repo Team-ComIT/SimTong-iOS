@@ -12,12 +12,12 @@ struct SimTongApp: App {
     var body: some Scene {
         WindowGroup {
             if #available(iOS 16.0, *) {
-                NavigationView {
-                    AppComponent().homeComponent.makeView()
+                NavigationStack {
+                    AppComponent().introComponent.makeView()
                 }
             } else {
                 NavigationView {
-                    AppComponent().homeComponent.makeView()
+                    AppComponent().rootComponent.makeView()
                 }
             }
         }

@@ -23,7 +23,7 @@ struct SignupInfoView: View {
             }
 
             Button {
-                isPresentedImagePicker.toggle()
+                isPresentedImagePicker = true
             } label: {
                 Group {
                     if let image = viewModel.image {
@@ -74,5 +74,11 @@ struct SignupInfoView: View {
         .stBackground()
         .configBackButton(dismiss: dismiss)
         .stSnackbar(isShowing: $viewModel.isNotSupportImageType, text: "지원하지 않는 파일 형식입니다")
+        .onChange(of: isPresentedImagePicker) { newValue in
+            print(newValue)
+        }
+        .onAppear {
+            print(isPresentedImagePicker)
+        }
     }
 }

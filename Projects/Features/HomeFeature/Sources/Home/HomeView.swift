@@ -13,7 +13,7 @@ struct HomeView: View {
     public init(
         viewModel: HomeViewModel,
         writeHolidayComponent: WriteHolidayComponent,
-        myPageComponent: MyPageComponent,
+        myPageComponent: MyPageComponent
     ) {
         self.myPageComponent = myPageComponent
         _viewModel = StateObject(wrappedValue: viewModel)
