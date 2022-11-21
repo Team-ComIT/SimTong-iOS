@@ -13,6 +13,10 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
             .employeeNumber
     }
 
+    public func reissueToken() async throws {
+        try await request(.reissueToken, dto: NoResponse.self)
+    }
+
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         try await request(.resetPassword(req), dto: NoResponse.self)
     }

@@ -11,6 +11,7 @@ import MainTabFeature
 import MyPageFeature
 import SigninFeature
 import HomeFeature
+import SplashFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -111,5 +112,12 @@ extension AppComponent {
 
     var myPageComponent: MyPageComponent {
         MyPageComponent(parent: self)
+    }
+}
+
+// MARK: - Splash
+extension AppComponent {
+    var splashComponent: SplashComponent {
+        SplashComponent(parent: self)
     }
 }

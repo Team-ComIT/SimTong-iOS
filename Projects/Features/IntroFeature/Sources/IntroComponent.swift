@@ -10,10 +10,12 @@ public protocol IntroDependency: Dependency {
 
 public final class IntroComponent: Component<IntroDependency> {
     public func makeView() -> some View {
-        IntroView(
-            viewModel: .init(),
-            signinComponent: dependency.signinComponent,
-            signupVerifyComponent: dependency.signupVerifyComponent
-        )
+        NavigationView {
+            IntroView(
+                viewModel: .init(),
+                signinComponent: dependency.signinComponent,
+                signupEmployeeInfoComponent: dependency.signupEmployeeInfoComponent
+            )
+        }
     }
 }
