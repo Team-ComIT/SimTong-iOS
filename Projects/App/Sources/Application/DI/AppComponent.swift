@@ -105,6 +105,10 @@ extension AppComponent {
         HomeComponent(parent: self)
     }
 
+    var writeHolidayComponent: WriteHolidayComponent {
+        WriteHolidayComponent(parent: self)
+    }
+
     var myPageComponent: MyPageComponent {
         MyPageComponent(parent: self)
     }

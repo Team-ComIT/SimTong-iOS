@@ -9,7 +9,6 @@ struct FindPasswordInfoView: View {
 
     @StateObject private var viewModel: FindPasswordInfoViewModel
     @FocusState private var focusField: FocusField?
-    @Environment(\.dismiss) var dismiss
     private let findPasswordVerifyComponent: FindPasswordVerifyComponent
 
     public init(
@@ -51,7 +50,6 @@ struct FindPasswordInfoView: View {
         .padding(.horizontal, 16)
         .stBackground()
         .stLoading(isLoading: $viewModel.isLoading)
-        .configBackButton(dismiss: dismiss)
         .navigate(
             to: findPasswordVerifyComponent.makeView(
                 findPasswordVerifySceneParam: .init(

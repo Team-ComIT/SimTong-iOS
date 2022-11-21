@@ -6,14 +6,18 @@ import MyPageFeature
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    @Namespace var calendarAnimation
+    private let writeHolidayComponent: WriteHolidayComponent
     private let myPageComponent: MyPageComponent
 
     public init(
+        viewModel: HomeViewModel,
+        writeHolidayComponent: WriteHolidayComponent,
         myPageComponent: MyPageComponent,
-        viewModel: HomeViewModel
     ) {
         self.myPageComponent = myPageComponent
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.writeHolidayComponent = writeHolidayComponent
     }
 
     var body: some View {
@@ -30,6 +34,7 @@ struct HomeView: View {
                 CalendarView(holidaysDict: $viewModel.holidaysDict, scheduleDict: $viewModel.schedules) { date in
                     viewModel.onDateTap(date: date)
                 }
+                .matchedGeometryEffect(id: "CALENDAR", in: calendarAnimation)
 
                 Text("직원 식당 메뉴")
                     .stTypo(.r4, color: .extraBlack)
@@ -49,11 +54,31 @@ struct HomeView: View {
                     }
 
                     WideCardView(image: STImage(.holiday), title: "휴무표 작성", description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요.")
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                viewModel.isPresentedHoliday = true
+                            }
+                        }
                 }
                 .padding(.top)
                 .padding(.bottom, 30)
             }
             .padding(.horizontal, 16)
+        }
+        .overlay {
+            if viewModel.isPresentedHoliday {
+                writeHolidayComponent.makeView(
+                    holidaysDict: viewModel.holidaysDict,
+                    scheduleDict: viewModel.schedules,
+                    isPresented: $viewModel.isPresentedHoliday,
+                    calendarAnimation: calendarAnimation
+                ) { holidayDict, scheduleDict in
+                    viewModel.holidaysDict = holidayDict
+                    viewModel.schedules = scheduleDict
+                }
+            } else {
+                EmptyView()
+            }
         }
         .onAppear {
             viewModel.onMonthChanged()
