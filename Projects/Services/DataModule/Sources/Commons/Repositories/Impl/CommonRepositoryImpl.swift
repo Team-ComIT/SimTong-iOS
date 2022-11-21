@@ -17,6 +17,10 @@ public struct CommonsRepositoryImpl: CommonsRepository {
         try await remoteCommonsDataSource.findEmployeeNumber(req: req)
     }
 
+    public func reissueToken() async throws {
+        try await remoteCommonsDataSource.reissueToken()
+    }
+
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
         try await remoteCommonsDataSource.resetPassword(req: req)
     }

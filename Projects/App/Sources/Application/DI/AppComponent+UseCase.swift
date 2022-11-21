@@ -12,6 +12,11 @@ extension AppComponent {
         FindEmployeeNumberUseCaseImpl(commonRepository: commonsRepository)
     }
 
+    public var reissueTokenUseCase: any ReissueTokenUseCase {
+        ReissueTokenUseCaseDummy()
+//        ReissueTokenUseCaseImpl(commonsRepository: commonsRepository)
+    }
+
     public var resetPasswordUseCase: any ResetPasswordUseCase {
         ResetPasswordUseCaseImpl(commonsRepository: commonsRepository)
     }
