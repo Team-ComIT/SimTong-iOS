@@ -19,6 +19,7 @@ struct SplashView: View {
             }
             .onChange(of: viewModel.isAutoSignin) { newValue in
                 withAnimation {
+                    print("newValue", newValue)
                     if let newValue, newValue {
                         appState.sceneFlow = .main
                     } else {

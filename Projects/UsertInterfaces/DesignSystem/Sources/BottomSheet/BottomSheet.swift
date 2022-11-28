@@ -2,8 +2,27 @@ import SwiftUI
 
 struct BottomSheet<T: View>: ViewModifier {
     @Binding var isShowing: Bool
-    var content: () -> T
     @State var dragHeight: CGFloat = 0
+    var content: () -> T
+    var sheetDragging: some Gesture {
+        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+            .onChanged { value in
+                withAnimation(.spring()) {
+                    dragHeight = min(30, -value.translation.height)
+                }
+            }
+            .onEnded { value in
+                withAnimation(.spring()) {
+                    dragHeight = 0
+                }
+                let verticalAmount = value.translation.height
+                if verticalAmount > 100 {
+                    withAnimation {
+                        isShowing = false
+                    }
+                }
+            }
+    }
 
     init(
         isShowing: Binding<Bool>,
@@ -27,38 +46,23 @@ struct BottomSheet<T: View>: ViewModifier {
                                 isShowing = false
                             }
                         }
-                        .gesture(
-                            DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                                .onChanged { value in
-                                    withAnimation {
-                                        dragHeight = -value.translation.height
-                                    }
-                                }
-                                .onEnded { value in
-                                    withAnimation {
-                                        dragHeight = 0
-                                    }
-                                    let verticalAmount = value.translation.height
-                                    if verticalAmount > -100 {
-                                        withAnimation {
-                                            isShowing = false
-                                        }
-                                    }
-                                }
-                        )
+                        .gesture(sheetDragging)
                         .transition(.opacity)
 
                     ZStack {
                         Color.extraWhite
                             .cornerRadius(24, corners: [.topLeft, .topRight])
                             .padding(.top, -dragHeight)
+                            .gesture(sheetDragging)
 
-                        self.content()
-                            .offset(y: -dragHeight)
-                            .frame(maxWidth: .infinity)
-                            .padding(.bottom, 42)
+                        VStack {
+                            self.content()
+                                .frame(maxWidth: .infinity)
+                                .transition(.move(edge: .bottom))
+                        }
+                        .padding(.bottom, 42)
+                        .offset(y: -dragHeight)
                     }
-                    .frame(maxHeight: .infinity)
                     .fixedSize(horizontal: false, vertical: true)
                     .transition(.move(edge: .bottom))
                 }
@@ -66,6 +70,7 @@ struct BottomSheet<T: View>: ViewModifier {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .ignoresSafeArea()
         }
+        .animation(.default, value: isShowing)
     }
 }
 

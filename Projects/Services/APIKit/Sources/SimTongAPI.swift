@@ -10,7 +10,7 @@ public protocol SimTongAPI: TargetType, JwtAuthorizable {
 
 public extension SimTongAPI {
     var baseURL: URL {
-        URL(string: "https://www.google.com")!
+        URL(string: "http://3.39.162.197:8888") ?? URL(string: "https://www.google.com")!
     }
 
     var path: String {
@@ -39,5 +39,29 @@ public enum SimTongDomain: String {
 extension SimTongDomain {
     var asURLString: String {
         "/\(self.rawValue)"
+    }
+}
+
+public struct AnyCodingKey : CodingKey {
+
+    public var stringValue: String
+    public var intValue: Int?
+
+    public init(_ base: CodingKey) {
+        self.init(stringValue: base.stringValue, intValue: base.intValue)
+    }
+
+    public init(stringValue: String) {
+        self.stringValue = stringValue
+    }
+
+    public init(intValue: Int) {
+        self.stringValue = "\(intValue)"
+        self.intValue = intValue
+    }
+
+    public init(stringValue: String, intValue: Int?) {
+        self.stringValue = stringValue
+        self.intValue = intValue
     }
 }

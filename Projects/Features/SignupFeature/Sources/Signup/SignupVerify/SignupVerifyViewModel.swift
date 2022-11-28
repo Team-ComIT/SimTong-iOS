@@ -7,12 +7,17 @@ public final class SignupVerifyViewModel: BaseViewModel {
     @Published var authCode = "" {
         didSet { isError = false }
     }
-    @Published var timeText = ""
-    @Published var timeRemaining = 300
+    @Published var timeRemaining = 0
     @Published var isVerified = false
     @Published var isToastShow = false
+    @Published var isInitial = true
     let signupVerifySceneParam: SignupVerifySceneParam
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var timeText: String {
+        timeRemaining % 60 < 10 ?
+            "\(timeRemaining/60):0\(timeRemaining%60)" :
+            "\(timeRemaining/60):\(timeRemaining%60)"
+    }
     private var bag = Set<AnyCancellable>()
 
     private let sendAuthCodeUseCase: any SendAuthCodeUseCase
@@ -34,22 +39,17 @@ public final class SignupVerifyViewModel: BaseViewModel {
 
     @MainActor
     func timerStart() {
+        guard isInitial else { return }
+        isInitial = false
         Task {
             await withAsyncTry(with: self) { owner in
                 try await owner.sendAuthCodeUseCase.execute(email: owner.signupVerifySceneParam.email)
                 owner.isToastShow = true
             }
 
-            self.timeText = self.timeRemaining % 60 < 10 ?
-            "\(self.timeRemaining/60):0\(self.timeRemaining%60)" :
-            "\(self.timeRemaining/60):\(self.timeRemaining%60)"
-
             timer.sink { [weak self] _ in
                 guard let self, self.timeRemaining > 0 else { return }
                 self.timeRemaining -= 1
-                self.timeText = self.timeRemaining % 60 < 10 ?
-                "\(self.timeRemaining/60):0\(self.timeRemaining%60)" :
-                "\(self.timeRemaining/60):\(self.timeRemaining%60)"
             }
             .store(in: &bag)
         }

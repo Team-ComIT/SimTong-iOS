@@ -63,6 +63,7 @@ private extension BaseRemoteDataSource {
                     config.resume(returning: res)
 
                 case let .failure(err):
+                    print("BaseRemoteError", try? err.response?.mapJSON())
                     let code = err.response?.statusCode ?? 500
                     config.resume(
                         throwing: api.errorMap[code] ?? .unknown(message: "알 수 없는 에러가 발생했습니다.")
@@ -81,6 +82,20 @@ private extension BaseRemoteDataSource {
     }
 
     func tokenRefresh() async throws {
-        _ = try await performRequest(CommonsAPI.reissueToken as! API)
+        let provider = MoyaProvider<CommonsAPI>(plugins: [JwtPlugin(keychain: keychain)])
+        try await withCheckedThrowingContinuation { config in
+            provider.request(.reissueToken) { result in
+                switch result {
+                case .success:
+                    config.resume()
+
+                case let .failure(err):
+                    let code = err.response?.statusCode ?? 500
+                    config.resume(
+                        throwing: CommonsAPI.reissueToken.errorMap[code] ?? .unknown(message: "알 수 없는 에러가 발생했습니다.")
+                    )
+                }
+            }
+        }
     }
 }
