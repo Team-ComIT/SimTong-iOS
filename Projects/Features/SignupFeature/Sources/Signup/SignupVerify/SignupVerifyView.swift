@@ -16,7 +16,6 @@ struct SignupVerifyView: View {
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.signupPasswordComponent = signupPasswordComponent
-        viewModel.timerStart()
     }
 
     var body: some View {
@@ -78,7 +77,7 @@ struct SignupVerifyView: View {
         }
         .onAppear {
             focusField = .code
-            print(viewModel.isVerified)
+            viewModel.timerStart()
         }
         .onChange(of: viewModel.isVerified) { newValue in
             print(newValue)

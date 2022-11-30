@@ -5,7 +5,7 @@ import DataModule
 // MARK: - Commons
 extension AppComponent {
     public var fetchSpotListUseCase: any FetchSpotListUseCase {
-        FetchSpotListUseCaseStub()
+        FetchSpotListUseCaseImpl(commonRepository: commonsRepository)
     }
 
     public var findEmployeeNumberUseCase: any FindEmployeeNumberUseCase {
@@ -13,8 +13,7 @@ extension AppComponent {
     }
 
     public var reissueTokenUseCase: any ReissueTokenUseCase {
-        ReissueTokenUseCaseDummy()
-//        ReissueTokenUseCaseImpl(commonsRepository: commonsRepository)
+        ReissueTokenUseCaseImpl(commonsRepository: commonsRepository)
     }
 
     public var resetPasswordUseCase: any ResetPasswordUseCase {
@@ -103,5 +102,12 @@ extension AppComponent {
 
     public var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
         FetchPublicMenuListUseCaseImpl(menuRepository: menuRepository)
+    }
+}
+
+// MARK: - Scheduls
+extension AppComponent {
+    public var fetchScheduleUseCase: any FetchScheduleUseCase {
+        FetchScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
     }
 }

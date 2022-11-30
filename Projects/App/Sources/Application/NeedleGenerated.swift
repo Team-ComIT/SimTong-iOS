@@ -250,6 +250,12 @@ private func factory2882a056d84a613debccf47b58f8f304c97af4d5(_ component: Needle
     return SigninDependencyde06a9d0b22764487733Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
+    var fetchMenuListUseCase: any FetchMenuListUseCase {
+        return appComponent.fetchMenuListUseCase
+    }
+    var fetchScheduleUseCase: any FetchScheduleUseCase {
+        return appComponent.fetchScheduleUseCase
+    }
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
@@ -366,11 +372,13 @@ extension AppComponent: Registration {
         localTable["remoteUsersDataSource-any RemoteUsersDataSource"] = { self.remoteUsersDataSource as Any }
         localTable["remoteEmailsDataSource-any RemoteEmailsDataSource"] = { self.remoteEmailsDataSource as Any }
         localTable["remoteMenuDataSource-any RemoteMenuDataSource"] = { self.remoteMenuDataSource as Any }
+        localTable["remoteScheduleDataSource-any RemoteScheduleDataSource"] = { self.remoteScheduleDataSource as Any }
         localTable["commonsRepository-any CommonsRepository"] = { self.commonsRepository as Any }
         localTable["filesRepository-any FilesRepository"] = { self.filesRepository as Any }
         localTable["usersRepository-any UsersRepository"] = { self.usersRepository as Any }
         localTable["emailsRepository-any EmailsRepository"] = { self.emailsRepository as Any }
         localTable["menuRepository-any MenuRepository"] = { self.menuRepository as Any }
+        localTable["scheduleRepository-any ScheduleRepository"] = { self.scheduleRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
         localTable["reissueTokenUseCase-any ReissueTokenUseCase"] = { self.reissueTokenUseCase as Any }
@@ -393,6 +401,7 @@ extension AppComponent: Registration {
         localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { self.sendAuthCodeUseCase as Any }
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
         localTable["fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"] = { self.fetchPublicMenuListUseCase as Any }
+        localTable["fetchScheduleUseCase-any FetchScheduleUseCase"] = { self.fetchScheduleUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -482,6 +491,8 @@ extension SigninComponent: Registration {
 }
 extension HomeComponent: Registration {
     public func registerItems() {
+        keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
+        keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
         keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
     }

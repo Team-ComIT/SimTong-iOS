@@ -1,8 +1,11 @@
+import DomainModule
 import NeedleFoundation
 import SwiftUI
 import MyPageFeature
 
 public protocol HomeDependency: Dependency {
+    var fetchMenuListUseCase: any FetchMenuListUseCase { get }
+    var fetchScheduleUseCase: any FetchScheduleUseCase { get }
     var writeHolidayComponent: WriteHolidayComponent { get }
     var myPageComponent: MyPageComponent { get }
 }
@@ -10,9 +13,12 @@ public protocol HomeDependency: Dependency {
 public final class HomeComponent: Component<HomeDependency> {
     public func makeView() -> some View {
         HomeView(
-            viewModel: .init(),
-            writeHolidayComponent: dependency.writeHolidayComponent,
-            myPageComponent: dependency.myPageComponent
+            viewModel: .init(
+                fetchMenuListUseCase: dependency.fetchMenuListUseCase,
+                fetchScheduleUseCase: dependency.fetchScheduleUseCase,
+                myPageComponent: dependency.myPageComponent
+            ),
+            writeHolidayComponent: dependency.writeHolidayComponent
         )
     }
 }

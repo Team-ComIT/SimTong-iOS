@@ -80,9 +80,6 @@ struct HomeView: View {
                 EmptyView()
             }
         }
-        .onAppear {
-            viewModel.onMonthChanged()
-        }
         .stBackground()
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {

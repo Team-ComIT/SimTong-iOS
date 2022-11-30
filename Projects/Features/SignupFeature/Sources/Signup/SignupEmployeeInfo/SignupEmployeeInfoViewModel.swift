@@ -1,6 +1,7 @@
 import BaseFeature
 import Combine
 import DomainModule
+import SwiftUI
 
 public final class SignupEmployeeInfoViewModel: BaseViewModel {
     @Published var name: String = "" {
@@ -52,6 +53,7 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
                     )
                     owner.isPresentedTerms = true
                 }
+                self.isPresentedTerms = true
             }
         }
     }

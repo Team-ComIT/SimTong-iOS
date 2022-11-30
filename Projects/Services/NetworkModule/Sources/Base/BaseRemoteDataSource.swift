@@ -82,11 +82,11 @@ private extension BaseRemoteDataSource {
 
     func tokenRefresh() async throws {
         let provider = MoyaProvider<CommonsAPI>(plugins: [JwtPlugin(keychain: keychain)])
-        _ = try await withCheckedThrowingContinuation { config in
+        try await withCheckedThrowingContinuation { config in
             provider.request(.reissueToken) { result in
                 switch result {
-                case let .success(res):
-                    config.resume(returning: res)
+                case .success:
+                    config.resume()
 
                 case let .failure(err):
                     let code = err.response?.statusCode ?? 500
