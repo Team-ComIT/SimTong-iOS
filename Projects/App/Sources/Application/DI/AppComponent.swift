@@ -96,6 +96,10 @@ extension AppComponent {
     var writeHolidayComponent: WriteHolidayComponent {
         WriteHolidayComponent(parent: self)
     }
+
+    var writeScheduleComponent: WriteScheduleComponent {
+        WriteScheduleComponent(parent: self)
+    }
 }
 
 // MARK: - Splash

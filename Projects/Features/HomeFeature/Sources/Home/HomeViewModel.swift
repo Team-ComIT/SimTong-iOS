@@ -6,6 +6,7 @@ import Utility
 
 public final class HomeViewModel: BaseViewModel {
     @Published var isPresentedHoliday = false
+    @Published var isPresentedSchedule = false
     @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = []

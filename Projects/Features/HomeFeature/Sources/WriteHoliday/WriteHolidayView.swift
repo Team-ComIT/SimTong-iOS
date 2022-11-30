@@ -33,25 +33,7 @@ struct WriteHolidayView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                ZStack {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                            .resizable()
-                            .frame(width: 9, height: 16)
-                            .onTapGesture {
-                                withAnimation(.spring()) {
-                                    isPresented = false
-                                }
-                            }
-
-                        Spacer()
-                    }
-
-                    Text("휴무표 작성")
-                        .stTypo(.r5, color: .grayMain)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 16)
+                navigationBarView()
 
                 if isPresented {
                     CalendarView(
@@ -104,6 +86,29 @@ struct WriteHolidayView: View {
         } message: {
             Text(viewModel.errorSubMessage)
         }
+    }
+
+    @ViewBuilder
+    func navigationBarView() -> some View {
+        ZStack {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .resizable()
+                    .frame(width: 9, height: 16)
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            isPresented = false
+                        }
+                    }
+
+                Spacer()
+            }
+
+            Text("휴무표 작성")
+                .stTypo(.r5, color: .grayMain)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
     }
 
     @ViewBuilder

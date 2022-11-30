@@ -6,14 +6,18 @@ import Utility
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @Namespace var calendarAnimation
+    @Namespace var scheduleAnimation
     private let writeHolidayComponent: WriteHolidayComponent
+    private let writeScheduleComponent: WriteScheduleComponent
 
     public init(
         viewModel: HomeViewModel,
-        writeHolidayComponent: WriteHolidayComponent
+        writeHolidayComponent: WriteHolidayComponent,
+        writeScheduleComponent: WriteScheduleComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.writeHolidayComponent = writeHolidayComponent
+        self.writeScheduleComponent = writeScheduleComponent
     }
 
     var body: some View {
@@ -26,17 +30,24 @@ struct HomeView: View {
                     Image(systemName: "chevron.right")
                         .foregroundColor(.extraBlack)
                 }
+                .padding(.top, 8)
+                .onTapGesture {
+                    withAnimation {
+                        viewModel.isPresentedSchedule = true
+                    }
+                }
 
                 CalendarView(holidaysDict: $viewModel.holidaysDict, scheduleDict: $viewModel.schedules) { date in
                     viewModel.onDateTap(date: date)
                 }
                 .matchedGeometryEffect(id: "CALENDAR", in: calendarAnimation)
+                .matchedGeometryEffect(id: "SCHEDULE", in: scheduleAnimation, properties: .position)
 
                 Text("직원 식당 메뉴")
                     .stTypo(.r4, color: .extraBlack)
                     .padding(.top, 32)
 
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 8) {
                         ForEach(viewModel.menus, id: \.date) { menu in
                             MenuCardView(menu: menu)
@@ -72,6 +83,16 @@ struct HomeView: View {
                     viewModel.holidaysDict = holidayDict
                     viewModel.schedules = scheduleDict
                 }
+            } else if viewModel.isPresentedSchedule {
+                writeScheduleComponent.makeView(
+                    holidaysDict: viewModel.holidaysDict,
+                    scheduleDict: viewModel.schedules,
+                    isPresented: $viewModel.isPresentedSchedule,
+                    scheduleAnimation: scheduleAnimation
+                ) { holidayDict, scheduleDict in
+                    viewModel.holidaysDict = holidayDict
+                    viewModel.schedules = scheduleDict
+                }
             } else {
                 EmptyView()
             }
@@ -79,9 +100,11 @@ struct HomeView: View {
         .stBackground()
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                } label: {
-                    STIcon(.person, color: .gray03)
+                if !viewModel.isPresentedHoliday || !viewModel.isPresentedSchedule {
+                    Button {
+                    } label: {
+                        STIcon(.person, color: .gray03)
+                    }
                 }
             }
         }
