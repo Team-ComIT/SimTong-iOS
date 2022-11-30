@@ -76,17 +76,9 @@ struct HomeView: View {
                 EmptyView()
             }
         }
-        .onAppear {
-            viewModel.onMonthChanged()
-        }
         .stBackground()
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                } label: {
-                    STIcon(.bell, color: .gray03)
-                }
-
                 Button {
                 } label: {
                     STIcon(.person, color: .gray03)

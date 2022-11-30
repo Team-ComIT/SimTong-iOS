@@ -1,4 +1,5 @@
 import SwiftUI
+import BaseFeature
 import DesignSystem
 import FindAuthInfoTabFeature
 import SignupFeature
@@ -12,6 +13,7 @@ struct SigninView: View {
     @StateObject var viewModel: SigninViewModel
     @FocusState private var focusField: FoucusField?
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var appState: AppState
     private let findAuthInfoTabComponent: FindAuthInfoTabComponent
     private let signupEmployeeInfoComponent: SignupEmployeeInfoComponent
 
@@ -95,8 +97,12 @@ struct SigninView: View {
             .padding(.bottom, 24)
         }
         .stBackground()
-        .navigate(to: Text("asdf"), when: $viewModel.isSuccessSignin)
         .configBackButton(dismiss: dismiss)
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: viewModel.isSuccessSignin) { newValue in
+            if newValue {
+                appState.sceneFlow = .main
+            }
+        }
     }
 }

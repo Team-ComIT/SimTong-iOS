@@ -9,7 +9,7 @@ public struct SigninRequestDTO: Encodable {
     public let employeeID: Int
     public let password: String
 
-    enum Codingkeys: String, CodingKey {
+    public enum Codingkeys: String, CodingKey {
         case employeeID = "employee_number"
         case password = "password"
     }

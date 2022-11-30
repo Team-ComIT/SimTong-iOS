@@ -66,10 +66,20 @@ public extension UsersAPI {
     var task: Moya.Task {
         switch self {
         case let .signin(req):
-            return .requestJSONEncodable(req)
+            return .requestParameters(parameters: [
+                "employee_number": req.employeeID,
+                "password": req.password
+            ], encoding: JSONEncoding.default)
 
         case let .signup(req):
-            return .requestJSONEncodable(req)
+            return .requestParameters(parameters: [
+                "name": req.name,
+                "employee_number": req.employeeNumber,
+                "email": req.email,
+                "password": req.password,
+                "nickname": req.nickname as Any,
+                "profile_image_path": req.profileImagePath as Any
+            ], encoding: JSONEncoding.default)
 
         case let .existsByNameAndEmployeeNumber(name, employeeNumber):
             return .requestParameters(parameters: [

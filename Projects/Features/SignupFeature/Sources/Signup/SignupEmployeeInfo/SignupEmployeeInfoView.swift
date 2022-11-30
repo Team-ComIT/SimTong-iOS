@@ -1,7 +1,9 @@
-import SwiftUI
-import Foundation
-import DesignSystem
+import BaseFeature
 import Combine
+import DesignSystem
+import Foundation
+import SwiftUI
+import Utility
 
 struct SignupEmployeeInfoView: View {
     private enum FocusField: Hashable {
@@ -44,8 +46,9 @@ struct SignupEmployeeInfoView: View {
                                 style: .clear,
                                 isError: viewModel.isError,
                                 onCommit: {
-                                    viewModel.nextButtonDidTap()
-                                    viewModel.signup()
+                                    withAnimation {
+                                        viewModel.signup()
+                                    }
                                 }
                             )
                             .focused($focusField, equals: .email)
@@ -94,8 +97,8 @@ struct SignupEmployeeInfoView: View {
                             .stTypo(.r7)
                             .foregroundColor(.gray05)
 
-                        NavigationLink {
-                            Text("안녕하세용")
+                        Button {
+                            NavigationUtil.popToRootView()
                         } label: {
                             Text("로그인")
                                 .underline()
@@ -127,10 +130,10 @@ struct SignupEmployeeInfoView: View {
         .configBackButton(willDismiss: {
             viewModel.isPresentedTerms = false
         }, dismiss: dismiss)
-        .adaptiveSheet(isPresented: $viewModel.isPresentedTerms, detents: [.medium(), .large()]) {
+        .bottomSheet(isShowing: $viewModel.isPresentedTerms) {
             TermsView {
                 viewModel.isPresentedTerms = false
-                viewModel.isNavigateToVerify.toggle()
+                viewModel.isNavigateToVerify = true
             }
         }
         .navigate(
