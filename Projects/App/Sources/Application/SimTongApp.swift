@@ -14,8 +14,10 @@ struct SimTongApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppComponent().rootComponent.makeView()
-                .environmentObject(appState)
+            NavigationView {
+                AppComponent().rootComponent.makeView()
+                    .environmentObject(appState)
+            }
         }
     }
 }

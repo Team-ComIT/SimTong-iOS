@@ -344,8 +344,8 @@ private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
     var signinComponent: SigninComponent {
         return appComponent.signinComponent
     }
-    var signupVerifyComponent: SignupVerifyComponent {
-        return appComponent.signupVerifyComponent
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
+        return appComponent.signupEmployeeInfoComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -518,7 +518,7 @@ extension FindAuthInfoTabComponent: Registration {
 extension IntroComponent: Registration {
     public func registerItems() {
         keyPathToName[\IntroDependency.signinComponent] = "signinComponent-SigninComponent"
-        keyPathToName[\IntroDependency.signupVerifyComponent] = "signupVerifyComponent-SignupVerifyComponent"
+        keyPathToName[\IntroDependency.signupEmployeeInfoComponent] = "signupEmployeeInfoComponent-SignupEmployeeInfoComponent"
     }
 }
 

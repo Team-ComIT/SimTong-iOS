@@ -32,6 +32,7 @@ public final class SignupVerifyViewModel: BaseViewModel {
         bag.removeAll()
     }
 
+    @MainActor
     func timerStart() {
         Task {
             await withAsyncTry(with: self) { owner in

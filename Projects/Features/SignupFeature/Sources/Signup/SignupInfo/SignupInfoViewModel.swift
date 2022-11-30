@@ -8,8 +8,6 @@ public final class SignupInfoViewModel: BaseViewModel {
     }
     @Published var image: UIImage?
     @Published var isNotSupportImageType = false
-    @Published var isPresentedImagePicker = false
-
     let signupInfoSceneParam: SignupInfoSceneParam
 
     init(signupInfoSceneParam: SignupInfoSceneParam) {
