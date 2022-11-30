@@ -84,11 +84,6 @@ struct HomeView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
-                } label: {
-                    STIcon(.bell, color: .gray03)
-                }
-
-                Button {
                     viewModel.isPresentedMyPage = true
                 } label: {
                     STIcon(.person, color: .gray03)

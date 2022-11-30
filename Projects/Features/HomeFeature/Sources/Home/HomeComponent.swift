@@ -15,10 +15,10 @@ public final class HomeComponent: Component<HomeDependency> {
         HomeView(
             viewModel: .init(
                 fetchMenuListUseCase: dependency.fetchMenuListUseCase,
-                fetchScheduleUseCase: dependency.fetchScheduleUseCase,
-                myPageComponent: dependency.myPageComponent
+                fetchScheduleUseCase: dependency.fetchScheduleUseCase
             ),
-            writeHolidayComponent: dependency.writeHolidayComponent
+            writeHolidayComponent: dependency.writeHolidayComponent,
+            myPageComponent: dependency.myPageComponent
         )
     }
 }

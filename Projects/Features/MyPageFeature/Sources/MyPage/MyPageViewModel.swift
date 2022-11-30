@@ -30,6 +30,8 @@ public final class MyPageViewModel: BaseViewModel {
     func loadMyInfo() async {
         await withAsyncTry(with: self) { owner in
             let user = try await owner.fetchMyProfileUseCase.execute()
+            print("asfsadf")
+            print(user)
             owner.myProfile = user
             owner.isSkeleton = false
         }

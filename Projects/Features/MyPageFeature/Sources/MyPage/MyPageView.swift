@@ -120,10 +120,6 @@ struct MyPageView: View {
                 .environmentObject(test),
             when: $test.routeBuilder
         )
-//        .onChange(of: viewModel.isNavigateEmail) { newValue in
-//            print(newValue)
-//            test.routeBuilder = newValue
-//        }
         .onChange(of: test.routeBuilder) { newValue in
             print("rou", newValue)
         }
