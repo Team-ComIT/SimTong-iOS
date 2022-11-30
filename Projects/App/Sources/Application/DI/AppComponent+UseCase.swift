@@ -104,3 +104,10 @@ extension AppComponent {
         FetchPublicMenuListUseCaseImpl(menuRepository: menuRepository)
     }
 }
+
+// MARK: - Scheduls
+extension AppComponent {
+    public var fetchScheduleUseCase: any FetchScheduleUseCase {
+        FetchScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
+}

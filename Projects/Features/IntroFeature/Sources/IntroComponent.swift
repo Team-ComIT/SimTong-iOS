@@ -17,5 +17,6 @@ public final class IntroComponent: Component<IntroDependency> {
                 signupEmployeeInfoComponent: dependency.signupEmployeeInfoComponent
             )
         }
+        .navigationViewStyle(.stack)
     }
 }

@@ -45,6 +45,7 @@ public final class SignupVerifyViewModel: BaseViewModel {
             await withAsyncTry(with: self) { owner in
                 try await owner.sendAuthCodeUseCase.execute(email: owner.signupVerifySceneParam.email)
                 owner.isToastShow = true
+                owner.timeRemaining = 300
             }
 
             timer.sink { [weak self] _ in

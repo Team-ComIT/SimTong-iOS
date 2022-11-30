@@ -36,3 +36,10 @@ extension AppComponent {
         MenuRepositoryImpl(remoteMenuDataSource: remoteMenuDataSource)
     }
 }
+
+// MARK: - Schedule
+extension AppComponent {
+    public var scheduleRepository: any ScheduleRepository {
+        ScheduleRepositoryImpl(remoteScheduleDataSource: remoteScheduleDataSource)
+    }
+}

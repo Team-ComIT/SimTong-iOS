@@ -48,3 +48,12 @@ extension AppComponent {
         }
     }
 }
+
+// MARK: - Schedule
+extension AppComponent {
+    public var remoteScheduleDataSource: any RemoteScheduleDataSource {
+        shared {
+            RemoteScheduleDataSourceImpl(keychain: keychain)
+        }
+    }
+}
