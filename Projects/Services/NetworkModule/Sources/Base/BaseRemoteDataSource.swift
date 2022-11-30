@@ -63,7 +63,6 @@ private extension BaseRemoteDataSource {
                     config.resume(returning: res)
 
                 case let .failure(err):
-                    print("BaseRemoteError", try? err.response?.mapJSON())
                     let code = err.response?.statusCode ?? 500
                     config.resume(
                         throwing: api.errorMap[code] ?? .unknown(message: "알 수 없는 에러가 발생했습니다.")
