@@ -15,7 +15,6 @@ struct SignupEmployeeInfoView: View {
     @StateObject var viewModel: SignupEmployeeInfoViewModel
     @FocusState private var focusField: FocusField?
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var appState: AppState
     private let signupVerifyComponent: SignupVerifyComponent
 
     public init(
