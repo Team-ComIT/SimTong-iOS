@@ -9,7 +9,7 @@ public struct ChangePasswordRequestDTO: Encodable {
     public let password: String
     public let newPassword: String
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case password
         case newPassword = "new_password"
     }

@@ -4,7 +4,7 @@ import PhotosUI
 public extension View {
     func imagePicker(isShow: Binding<Bool>, uiImage: Binding<UIImage?>) -> some View {
         self
-            .fullScreenCover(isPresented: isShow) {
+            .sheet(isPresented: isShow) {
                 ImagePicker(configuration: .init(photoLibrary: .shared()), requests: uiImage)
             }
     }

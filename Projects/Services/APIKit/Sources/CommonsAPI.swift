@@ -65,10 +65,17 @@ public extension CommonsAPI {
             ], encoding: URLEncoding.queryString)
 
         case let .resetPassword(req):
-            return .requestJSONEncodable(req)
+            return .requestParameters(parameters: [
+                "email": req.email,
+                "employee_number": req.employeeNumber,
+                "new_password": req.newPassword
+            ], encoding: JSONEncoding.default)
 
         case let .changePassword(req):
-            return .requestJSONEncodable(req)
+            return .requestParameters(parameters: [
+                "password": req.password,
+                "new_password": req.newPassword
+            ], encoding: JSONEncoding.default)
 
         case let .checkDuplicateEmail(email):
             return .requestParameters(parameters: [
@@ -77,7 +84,7 @@ public extension CommonsAPI {
 
         case let .checkExistEmployeeIDAndEmail(id, email):
             return .requestParameters(parameters: [
-                "employee_number": id,
+                "employeeNumber": id,
                 "email": email
             ], encoding: URLEncoding.queryString)
         }
