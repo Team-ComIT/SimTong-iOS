@@ -53,7 +53,6 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
                     )
                     owner.isPresentedTerms = true
                 }
-                self.isPresentedTerms = true
             }
         }
     }
