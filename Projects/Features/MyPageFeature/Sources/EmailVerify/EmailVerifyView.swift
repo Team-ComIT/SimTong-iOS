@@ -1,11 +1,11 @@
 import SwiftUI
 import DesignSystem
+import Utility
 
 struct EmailVerifyView: View {
 
     @StateObject var viewModel: EmailVerifyViewModel
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var test: MyPageRouteBuilder
     @FocusState private var focusField: Bool
 
     public init(
@@ -45,16 +45,15 @@ struct EmailVerifyView: View {
             Spacer()
 
             WideButton(text: "확인") {
-                viewModel.completeButtonDidTap()
+                NavigationUtil.popToRootView()
             }
             .disabled(viewModel.authCode.isEmpty)
         }
-        .onChange(of: viewModel.isVerified) { newValue in
-            if newValue {
-                test.routeBuilder = false
-            }
+        .onAppear {
+            viewModel.isToastShow = true
         }
         .stBackground()
         .configBackButton(dismiss: dismiss)
+        .stToast(isShowing: $viewModel.isToastShow, message: "이메일로 인증번호를 발송했어요")
     }
 }

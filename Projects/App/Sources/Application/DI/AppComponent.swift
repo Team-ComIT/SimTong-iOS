@@ -94,6 +94,10 @@ extension AppComponent {
     var emailVerifyComponent: EmailVerifyComponent {
         EmailVerifyComponent(parent: self)
     }
+
+    var spotChangeComponent: SpotChangeComponent {
+        SpotChangeComponent(parent: self)
+    }
 }
 
 // MARK: - Main

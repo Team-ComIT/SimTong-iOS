@@ -5,18 +5,20 @@ struct MyPageView: View {
     @StateObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) var dismiss
     @State var isPresentedImagePicker = false
-    @StateObject var test = MyPageRouteBuilder()
     private let nicknameModifyComponent: NicknameModifyComponent
     private let emailModifyComponent: EmailModifyComponent
+    private let spotChangeComponent: SpotChangeComponent
 
     public init(
         viewModel: MyPageViewModel,
         nicknameModifyComponent: NicknameModifyComponent,
-        emailModifyComponent: EmailModifyComponent
+        emailModifyComponent: EmailModifyComponent,
+        spotChangeComponent: SpotChangeComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.nicknameModifyComponent = nicknameModifyComponent
         self.emailModifyComponent = emailModifyComponent
+        self.spotChangeComponent = spotChangeComponent
     }
 
     var body: some View {
@@ -32,6 +34,7 @@ struct MyPageView: View {
                             .frame(width: 100, height: 100)
                     } placeholder: {
                         Color.gray01
+                            .frame(width: 100, height: 100)
                     }
                     .clipShape(Circle())
 
@@ -63,7 +66,6 @@ struct MyPageView: View {
                 formTextRow(key: "이름", text: viewModel.myProfile.name) {}
 
                 formTextRow(key: "이메일", text: viewModel.myProfile.email) {
-                    test.routeBuilder = true
                     viewModel.emailButtonDidTap()
                 }
 
@@ -114,15 +116,20 @@ struct MyPageView: View {
         .task {
             await viewModel.loadMyInfo()
         }
-        .navigate(to: nicknameModifyComponent.makeView(), when: $viewModel.isNavigateNickname)
         .navigate(
-            to: emailModifyComponent.makeView()
-                .environmentObject(test),
-            when: $test.routeBuilder
+            to: nicknameModifyComponent.makeView(),
+            when: $viewModel.isNavigateNickname
         )
-        .onChange(of: test.routeBuilder) { newValue in
-            print("rou", newValue)
-        }
+        .navigate(
+            to: emailModifyComponent.makeView(),
+            when: $viewModel.isNavigateEmail
+        )
+        .fullScreenCover(
+            isPresented: $viewModel.isNaivgateSpot) {
+                spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
+                    viewModel.spotCopy(spotName: spot.name)
+                }
+            }
     }
 
     @ViewBuilder

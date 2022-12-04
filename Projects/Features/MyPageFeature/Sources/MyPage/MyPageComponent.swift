@@ -6,6 +6,7 @@ public protocol MyPageDependency: Dependency {
     var fetchMyProfileUseCase: any FetchMyProfileUseCase { get }
     var nicknameModifyComponent: NicknameModifyComponent { get }
     var emailModifyComponent: EmailModifyComponent { get }
+    var spotChangeComponent: SpotChangeComponent { get }
 }
 
 public final class MyPageComponent: Component<MyPageDependency> {
@@ -15,7 +16,8 @@ public final class MyPageComponent: Component<MyPageDependency> {
                 fetchMyProfileUseCase: dependency.fetchMyProfileUseCase
             ),
             nicknameModifyComponent: dependency.nicknameModifyComponent,
-            emailModifyComponent: dependency.emailModifyComponent
+            emailModifyComponent: dependency.emailModifyComponent,
+            spotChangeComponent: dependency.spotChangeComponent
         )
     }
 }

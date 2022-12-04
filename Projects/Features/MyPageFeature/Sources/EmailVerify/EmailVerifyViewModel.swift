@@ -10,6 +10,7 @@ final class EmailVerifyViewModel: BaseViewModel {
     @Published var timeText = ""
     @Published var timeRemaining = 300
     @Published var isVerified = false
+    @Published var isToastShow = false
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private var bag = Set<AnyCancellable>()
 
@@ -46,6 +47,7 @@ final class EmailVerifyViewModel: BaseViewModel {
     func resendCodeButtonDidTap() {
         Task {
             await withAsyncTry(with: self, action: { owner in
+                owner.isToastShow = true
                 owner.timeRemaining = 300
             })
         }
