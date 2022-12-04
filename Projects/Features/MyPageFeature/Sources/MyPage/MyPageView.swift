@@ -1,10 +1,12 @@
 import DesignSystem
+import BaseFeature
 import SwiftUI
 
 struct MyPageView: View {
     @StateObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) var dismiss
     @State var isPresentedImagePicker = false
+    @EnvironmentObject var appState: AppState
     private let nicknameModifyComponent: NicknameModifyComponent
     private let emailModifyComponent: EmailModifyComponent
     private let spotChangeComponent: SpotChangeComponent
@@ -70,7 +72,7 @@ struct MyPageView: View {
                 }
 
                 formTextRow(key: "근무 지점", text: viewModel.myProfile.spot) {
-                    print("근무 지점 누름")
+                    viewModel.spotButtonDidTap()
                 }
 
                 formImageRow(key: "비밀번호 변경") {
@@ -81,17 +83,21 @@ struct MyPageView: View {
                 }
 
                 HStack {
-                    Text("로그아웃")
-                        .stTypo(.r5, color: .main)
-                        .unredacted()
+                    Button {
+                        viewModel.logoutButtonDidTap()
+                    } label: {
+                        Text("로그아웃")
+                            .stTypo(.r5, color: .main)
+                            .unredacted()
 
-                    Spacer()
+                        Spacer()
 
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 13)
-                        .foregroundColor(.gray07)
-                        .unredacted()
+                        Image(systemName: "chevron.right")
+                            .resizable()
+                            .frame(width: 8, height: 13)
+                            .foregroundColor(.gray07)
+                            .unredacted()
+                    }
                 }
             }
             .padding(.top, 24)
@@ -124,12 +130,16 @@ struct MyPageView: View {
             to: emailModifyComponent.makeView(),
             when: $viewModel.isNavigateEmail
         )
-        .fullScreenCover(
-            isPresented: $viewModel.isNaivgateSpot) {
+        .fullScreenCover(isPresented: $viewModel.isNaivgateSpot) {
                 spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
                     viewModel.spotCopy(spotName: spot.name)
                 }
             }
+        .onChange(of: viewModel.isLogout) { newValue in
+            if newValue {
+                appState.sceneFlow = .intro
+            }
+        }
     }
 
     @ViewBuilder

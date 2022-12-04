@@ -4,6 +4,7 @@ import SwiftUI
 
 public protocol SpotChangeDependency: Dependency {
     var fetchSpotListUseCase: any FetchSpotListUseCase { get }
+    var changeSpotUseCase: any ChangeSpotUseCase { get }
 }
 
 public final class SpotChangeComponent: Component<SpotChangeDependency> {
@@ -11,6 +12,7 @@ public final class SpotChangeComponent: Component<SpotChangeDependency> {
         SpotChangeView(
             viewModel: .init(
                 fetchSpotListUseCase: dependency.fetchSpotListUseCase,
+                changeSpotUseCase: dependency.changeSpotUseCase,
                 selectedSpot: selectedSpot,
                 completion: completion
             )

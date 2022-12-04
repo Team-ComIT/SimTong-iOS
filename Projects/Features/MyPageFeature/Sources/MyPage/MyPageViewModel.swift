@@ -18,6 +18,7 @@ public final class MyPageViewModel: BaseViewModel {
     @Published var isNavigateNickname = false
     @Published var isNavigateEmail = false
     @Published var isNaivgateSpot = false
+    @Published var isLogout = false
 
     init(
         fetchMyProfileUseCase: any FetchMyProfileUseCase
@@ -55,6 +56,12 @@ public final class MyPageViewModel: BaseViewModel {
     func spotButtonDidTap() {
         if isModify {
             isNaivgateSpot = true
+        }
+    }
+
+    func logoutButtonDidTap() {
+        if isModify {
+            isLogout = true
         }
     }
 

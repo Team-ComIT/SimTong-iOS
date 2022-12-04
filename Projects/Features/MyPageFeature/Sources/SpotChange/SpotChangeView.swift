@@ -2,17 +2,17 @@ import SwiftUI
 import DomainModule
 import DesignSystem
 
-public struct SpotChangeView: View {
+struct SpotChangeView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: SpotChangeViewModel
 
-    public init(
+    init(
         viewModel: SpotChangeViewModel
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
-    public var body: some View {
+    var body: some View {
         NavigationView {
             VStack {
                 LazyVStack {
@@ -24,7 +24,6 @@ public struct SpotChangeView: View {
                             .padding(.bottom, 16)
                             .onTapGesture {
                                 viewModel.spotDidTap(spot: spot)
-                                dismiss()
                             }
                             .overlay(alignment: .bottom) {
                                 Divider()
@@ -34,8 +33,23 @@ public struct SpotChangeView: View {
                             }
                     }
                 }
+                .configBackButton(dismiss: dismiss)
                 .navigationTitle("지점선택")
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button {
+                            Task {
+                                await viewModel.changeSpot()
+                            }
+                            dismiss()
+                        } label: {
+                            Text("저장")
+                                .stTypo(.m6, color: viewModel.saveButtonDisable ? .main : .main02)
+                        }
+                        .disabled(!viewModel.saveButtonDisable)
+                    }
+                }
                 .task {
                     await viewModel.onAppear()
                 }
@@ -62,9 +76,8 @@ public struct SpotChangeView: View {
 
             Spacer()
 
-            STRadioButton(isChecked: viewModel.selectedSpot == spot.name) {
+            STRadioButton(isChecked: viewModel.selectedSpot == spot) {
                 viewModel.spotDidTap(spot: spot)
-                dismiss()
             }
         }
     }

@@ -161,6 +161,9 @@ private class SpotChangeDependency30d33cd8aff43535c9bcProvider: SpotChangeDepend
     var fetchSpotListUseCase: any FetchSpotListUseCase {
         return appComponent.fetchSpotListUseCase
     }
+    var changeSpotUseCase: any ChangeSpotUseCase {
+        return appComponent.changeSpotUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -472,6 +475,7 @@ extension EmployeeIDSpotListComponent: Registration {
 extension SpotChangeComponent: Registration {
     public func registerItems() {
         keyPathToName[\SpotChangeDependency.fetchSpotListUseCase] = "fetchSpotListUseCase-any FetchSpotListUseCase"
+        keyPathToName[\SpotChangeDependency.changeSpotUseCase] = "changeSpotUseCase-any ChangeSpotUseCase"
     }
 }
 extension MyPageComponent: Registration {
