@@ -75,12 +75,17 @@ struct MyPageView: View {
                     viewModel.spotButtonDidTap()
                 }
 
-                formImageRow(key: "비밀번호 변경") {
+                Button {
+                    viewModel.changePasswordButtonDidTap()
+                } label: {
+                    formImageRow(key: "비밀번호 변경") {
                     Image(systemName: "chevron.right")
                         .resizable()
                         .frame(width: 8, height: 13)
                         .foregroundColor(.gray07)
+                    }
                 }
+                .disabled(!viewModel.isModify)
 
                 HStack {
                     Button {
@@ -135,6 +140,11 @@ struct MyPageView: View {
                     viewModel.spotCopy(spotName: spot.name)
                 }
             }
+//        .navigate(
+//            to: spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
+//                viewModel.spotCopy(spotName: spot.name)
+//            }, when: $viewModel.isNaivgateSpot
+//        )
         .onChange(of: viewModel.isLogout) { newValue in
             if newValue {
                 appState.sceneFlow = .intro

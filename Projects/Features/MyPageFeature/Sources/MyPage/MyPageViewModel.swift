@@ -18,6 +18,7 @@ public final class MyPageViewModel: BaseViewModel {
     @Published var isNavigateNickname = false
     @Published var isNavigateEmail = false
     @Published var isNaivgateSpot = false
+    @Published var isNavigatePassword = false
     @Published var isLogout = false
 
     init(
@@ -62,6 +63,12 @@ public final class MyPageViewModel: BaseViewModel {
     func logoutButtonDidTap() {
         if isModify {
             isLogout = true
+        }
+    }
+
+    func changePasswordButtonDidTap() {
+        if isModify {
+            isNavigatePassword = true
         }
     }
 
