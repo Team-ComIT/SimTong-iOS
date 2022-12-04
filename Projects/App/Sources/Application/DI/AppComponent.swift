@@ -83,8 +83,8 @@ extension AppComponent {
         FindPasswordVerifyComponent(parent: self)
     }
 
-    var nicknameModifyComponent: NicknameModifyComponent {
-        NicknameModifyComponent(parent: self)
+    var nicknameChangeComponent: NicknameChangeComponent {
+        NicknameChangeComponent(parent: self)
     }
 
     var emailModifyComponent: EmailModifyComponent {

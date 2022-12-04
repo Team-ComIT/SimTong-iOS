@@ -177,8 +177,8 @@ private class MyPageDependency48d84b530313b3ee40feProvider: MyPageDependency {
     var fetchMyProfileUseCase: any FetchMyProfileUseCase {
         return appComponent.fetchMyProfileUseCase
     }
-    var nicknameModifyComponent: NicknameModifyComponent {
-        return appComponent.nicknameModifyComponent
+    var nicknameChangeComponent: NicknameChangeComponent {
+        return appComponent.nicknameChangeComponent
     }
     var emailModifyComponent: EmailModifyComponent {
         return appComponent.emailModifyComponent
@@ -208,17 +208,6 @@ private class EmailModifyDependencya827d736d14366f73f84Provider: EmailModifyDepe
 private func factory810e2c1d0c4bfa11ed69f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return EmailModifyDependencya827d736d14366f73f84Provider(appComponent: parent1(component) as! AppComponent)
 }
-private class NicknameModifyDependency1c1ee21c87694f1a411fProvider: NicknameModifyDependency {
-
-
-    init() {
-
-    }
-}
-/// ^->AppComponent->NicknameModifyComponent
-private func factory8d810071db1bc4953e3fe3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return NicknameModifyDependency1c1ee21c87694f1a411fProvider()
-}
 private class EmailVerifyDependency07369df20cfae6e66015Provider: EmailVerifyDependency {
 
 
@@ -229,6 +218,17 @@ private class EmailVerifyDependency07369df20cfae6e66015Provider: EmailVerifyDepe
 /// ^->AppComponent->EmailVerifyComponent
 private func factory0bd89edc8a1f0255a6d4e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return EmailVerifyDependency07369df20cfae6e66015Provider()
+}
+private class NicknameChangeDependency36c769a4a51e0288197dProvider: NicknameChangeDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->NicknameChangeComponent
+private func factorya664c7df07497c0791c4e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return NicknameChangeDependency36c769a4a51e0288197dProvider()
 }
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var introComponent: IntroComponent {
@@ -481,7 +481,7 @@ extension SpotChangeComponent: Registration {
 extension MyPageComponent: Registration {
     public func registerItems() {
         keyPathToName[\MyPageDependency.fetchMyProfileUseCase] = "fetchMyProfileUseCase-any FetchMyProfileUseCase"
-        keyPathToName[\MyPageDependency.nicknameModifyComponent] = "nicknameModifyComponent-NicknameModifyComponent"
+        keyPathToName[\MyPageDependency.nicknameChangeComponent] = "nicknameChangeComponent-NicknameChangeComponent"
         keyPathToName[\MyPageDependency.emailModifyComponent] = "emailModifyComponent-EmailModifyComponent"
         keyPathToName[\MyPageDependency.spotChangeComponent] = "spotChangeComponent-SpotChangeComponent"
     }
@@ -491,12 +491,12 @@ extension EmailModifyComponent: Registration {
         keyPathToName[\EmailModifyDependency.emailVerifyComponent] = "emailVerifyComponent-EmailVerifyComponent"
     }
 }
-extension NicknameModifyComponent: Registration {
+extension EmailVerifyComponent: Registration {
     public func registerItems() {
 
     }
 }
-extension EmailVerifyComponent: Registration {
+extension NicknameChangeComponent: Registration {
     public func registerItems() {
 
     }
@@ -587,8 +587,8 @@ private func register1() {
     registerProviderFactory("^->AppComponent->SpotChangeComponent", factory39a20509ab61b108ebf6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->MyPageComponent", factory0f6f456ebf157d02dfb3f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmailModifyComponent", factory810e2c1d0c4bfa11ed69f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->NicknameModifyComponent", factory8d810071db1bc4953e3fe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->EmailVerifyComponent", factory0bd89edc8a1f0255a6d4e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->NicknameChangeComponent", factorya664c7df07497c0791c4e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)

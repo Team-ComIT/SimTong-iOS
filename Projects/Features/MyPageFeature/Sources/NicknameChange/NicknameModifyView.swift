@@ -1,13 +1,13 @@
 import SwiftUI
 import DesignSystem
 
-struct NicknameModifyView: View {
-    @StateObject var viewModel: NicknameModifyViewModel
+struct NicknameChangeView: View {
+    @StateObject var viewModel: NicknameChangeViewModel
     @FocusState var focusField: Bool
     @Environment(\.dismiss) var dismiss
 
     public init(
-        viewModel: NicknameModifyViewModel
+        viewModel: NicknameChangeViewModel
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -23,7 +23,7 @@ struct NicknameModifyView: View {
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError,
                     onCommit: {
-                        viewModel.modifyButtonDidTap()
+                        viewModel.changeButtonDidTap()
                     }
                 )
                 .focused($focusField)
@@ -32,7 +32,7 @@ struct NicknameModifyView: View {
                 Spacer()
 
                 WideButton(text: "닉네임 변경") {
-                    viewModel.modifyButtonDidTap()
+                    viewModel.changeButtonDidTap()
                 }
                 .disabled(viewModel.nickname.isEmpty)
             }
@@ -40,7 +40,7 @@ struct NicknameModifyView: View {
         .onAppear {
             focusField = true
         }
-        .onChange(of: viewModel.isSuccessNicknameModify) { newValue in
+        .onChange(of: viewModel.isSuccessNicknameChange) { newValue in
             if newValue {
                 dismiss()
             }

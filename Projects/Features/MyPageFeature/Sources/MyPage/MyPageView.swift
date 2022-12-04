@@ -7,18 +7,18 @@ struct MyPageView: View {
     @Environment(\.dismiss) var dismiss
     @State var isPresentedImagePicker = false
     @EnvironmentObject var appState: AppState
-    private let nicknameModifyComponent: NicknameModifyComponent
+    private let nicknameChangeComponent: NicknameChangeComponent
     private let emailModifyComponent: EmailModifyComponent
     private let spotChangeComponent: SpotChangeComponent
 
     public init(
         viewModel: MyPageViewModel,
-        nicknameModifyComponent: NicknameModifyComponent,
+        nicknameChangeComponent: NicknameChangeComponent,
         emailModifyComponent: EmailModifyComponent,
         spotChangeComponent: SpotChangeComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.nicknameModifyComponent = nicknameModifyComponent
+        self.nicknameChangeComponent = nicknameChangeComponent
         self.emailModifyComponent = emailModifyComponent
         self.spotChangeComponent = spotChangeComponent
     }
@@ -128,7 +128,7 @@ struct MyPageView: View {
             await viewModel.loadMyInfo()
         }
         .navigate(
-            to: nicknameModifyComponent.makeView(),
+            to: nicknameChangeComponent.makeView(),
             when: $viewModel.isNavigateNickname
         )
         .navigate(

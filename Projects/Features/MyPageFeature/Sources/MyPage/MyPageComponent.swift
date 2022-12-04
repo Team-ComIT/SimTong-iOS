@@ -4,7 +4,7 @@ import SwiftUI
 
 public protocol MyPageDependency: Dependency {
     var fetchMyProfileUseCase: any FetchMyProfileUseCase { get }
-    var nicknameModifyComponent: NicknameModifyComponent { get }
+    var nicknameChangeComponent: NicknameChangeComponent { get }
     var emailModifyComponent: EmailModifyComponent { get }
     var spotChangeComponent: SpotChangeComponent { get }
 }
@@ -15,7 +15,7 @@ public final class MyPageComponent: Component<MyPageDependency> {
             viewModel: .init(
                 fetchMyProfileUseCase: dependency.fetchMyProfileUseCase
             ),
-            nicknameModifyComponent: dependency.nicknameModifyComponent,
+            nicknameChangeComponent: dependency.nicknameChangeComponent,
             emailModifyComponent: dependency.emailModifyComponent,
             spotChangeComponent: dependency.spotChangeComponent
         )
