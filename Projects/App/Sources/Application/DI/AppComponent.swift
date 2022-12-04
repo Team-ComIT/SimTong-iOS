@@ -99,6 +99,10 @@ extension AppComponent {
         SpotChangeComponent(parent: self)
     }
 
+    var passwordCheckComponent: PasswordCheckComponent {
+        PasswordCheckComponent(parent: self)
+    }
+
     var passwordChangeComponent: PasswordChangeComponent {
         PasswordChangeComponent(parent: self)
     }

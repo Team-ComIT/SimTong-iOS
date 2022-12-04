@@ -6,8 +6,13 @@ final class PasswordChangeViewModel: BaseViewModel {
     @Published var password = "" {
         didSet { isError = false }
     }
+    @Published var checkPassword = "" {
+        didSet { isError = false }
+    }
     @Published var isSuccessPasswordChange = false
-//    private let 
+    @Published var isNavigateFindPassword = false
+//    @Published var
+//    private let
 
     @MainActor
     func changeButtonDidTap() {

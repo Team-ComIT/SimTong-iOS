@@ -157,6 +157,22 @@ private class EmployeeIDSpotListDependency9ec4920d77848b463dd3Provider: Employee
 private func factory529868f8afc90f854ddcf47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return EmployeeIDSpotListDependency9ec4920d77848b463dd3Provider(appComponent: parent1(component) as! AppComponent)
 }
+private class PasswordCheckDependency4bd2ae8c0710233d4ac8Provider: PasswordCheckDependency {
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        return appComponent.findPasswordInfoComponent
+    }
+    var passwordChangeComponent: PasswordChangeComponent {
+        return appComponent.passwordChangeComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->PasswordCheckComponent
+private func factoryf1f022b246cf38f69790f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return PasswordCheckDependency4bd2ae8c0710233d4ac8Provider(appComponent: parent1(component) as! AppComponent)
+}
 private class SpotChangeDependency30d33cd8aff43535c9bcProvider: SpotChangeDependency {
     var fetchSpotListUseCase: any FetchSpotListUseCase {
         return appComponent.fetchSpotListUseCase
@@ -186,8 +202,8 @@ private class MyPageDependency48d84b530313b3ee40feProvider: MyPageDependency {
     var spotChangeComponent: SpotChangeComponent {
         return appComponent.spotChangeComponent
     }
-    var passwordChangeComponent: PasswordChangeComponent {
-        return appComponent.passwordChangeComponent
+    var passwordCheckComponent: PasswordCheckComponent {
+        return appComponent.passwordCheckComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -488,6 +504,12 @@ extension EmployeeIDSpotListComponent: Registration {
         keyPathToName[\EmployeeIDSpotListDependency.fetchSpotListUseCase] = "fetchSpotListUseCase-any FetchSpotListUseCase"
     }
 }
+extension PasswordCheckComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\PasswordCheckDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
+        keyPathToName[\PasswordCheckDependency.passwordChangeComponent] = "passwordChangeComponent-PasswordChangeComponent"
+    }
+}
 extension SpotChangeComponent: Registration {
     public func registerItems() {
         keyPathToName[\SpotChangeDependency.fetchSpotListUseCase] = "fetchSpotListUseCase-any FetchSpotListUseCase"
@@ -500,7 +522,7 @@ extension MyPageComponent: Registration {
         keyPathToName[\MyPageDependency.nicknameChangeComponent] = "nicknameChangeComponent-NicknameChangeComponent"
         keyPathToName[\MyPageDependency.emailModifyComponent] = "emailModifyComponent-EmailModifyComponent"
         keyPathToName[\MyPageDependency.spotChangeComponent] = "spotChangeComponent-SpotChangeComponent"
-        keyPathToName[\MyPageDependency.passwordChangeComponent] = "passwordChangeComponent-PasswordChangeComponent"
+        keyPathToName[\MyPageDependency.passwordCheckComponent] = "passwordCheckComponent-PasswordCheckComponent"
     }
 }
 extension EmailModifyComponent: Registration {
@@ -606,6 +628,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->EmployeeIDResultComponent", factory7e57080bfb497fcb08dbe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindEmployeeIDComponent", factoryfbe97e441ca213085fa6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmployeeIDSpotListComponent", factory529868f8afc90f854ddcf47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->PasswordCheckComponent", factoryf1f022b246cf38f69790f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SpotChangeComponent", factory39a20509ab61b108ebf6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->MyPageComponent", factory0f6f456ebf157d02dfb3f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmailModifyComponent", factory810e2c1d0c4bfa11ed69f47b58f8f304c97af4d5)

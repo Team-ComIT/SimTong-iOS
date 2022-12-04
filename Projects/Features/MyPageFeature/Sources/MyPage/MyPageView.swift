@@ -10,20 +10,20 @@ struct MyPageView: View {
     private let nicknameChangeComponent: NicknameChangeComponent
     private let emailModifyComponent: EmailModifyComponent
     private let spotChangeComponent: SpotChangeComponent
-    private let passwordChangeComponent: PasswordChangeComponent
+    private let passwordCheckComponent: PasswordCheckComponent
 
     public init(
         viewModel: MyPageViewModel,
         nicknameChangeComponent: NicknameChangeComponent,
         emailModifyComponent: EmailModifyComponent,
         spotChangeComponent: SpotChangeComponent,
-        passwordChangeComponent: PasswordChangeComponent
+        passwordCheckComponent: PasswordCheckComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.nicknameChangeComponent = nicknameChangeComponent
         self.emailModifyComponent = emailModifyComponent
         self.spotChangeComponent = spotChangeComponent
-        self.passwordChangeComponent = passwordChangeComponent
+        self.passwordCheckComponent = passwordCheckComponent
     }
 
     var body: some View {
@@ -149,7 +149,7 @@ struct MyPageView: View {
 //            }, when: $viewModel.isNaivgateSpot
 //        )
         .navigate(
-            to: passwordChangeComponent.makeView(),
+            to: passwordCheckComponent.makeView(),
             when: $viewModel.isNavigatePassword
         )
         .onChange(of: viewModel.isLogout) { newValue in

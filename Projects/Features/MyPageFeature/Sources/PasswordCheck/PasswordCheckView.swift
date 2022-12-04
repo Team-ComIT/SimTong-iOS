@@ -2,57 +2,36 @@ import SwiftUI
 import FindPasswordFeature
 import DesignSystem
 
-struct PasswordChangeView: View {
-    private enum FocusField: Hashable {
-        case password
-        case checkPassword
-    }
-    @StateObject var viewModel: PasswordChangeViewModel
-    @FocusState private var focusField: FocusField?
+struct PasswordCheckView: View {
+    @StateObject var viewModel: PasswordCheckViewModel
+    @FocusState var focusField: Bool
     @Environment(\.dismiss) var dismiss
     private let findPasswordInfoComponent: FindPasswordInfoComponent
+    private let passwordChangeComponent: PasswordChangeComponent
 
     public init(
-        viewModel: PasswordChangeViewModel,
-        findPasswordInfoComponent: FindPasswordInfoComponent
+        viewModel: PasswordCheckViewModel,
+        findPasswordInfoComponent: FindPasswordInfoComponent,
+        passwordChangeComponent: PasswordChangeComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.findPasswordInfoComponent = findPasswordInfoComponent
+        self.passwordChangeComponent = passwordChangeComponent
     }
 
     var body: some View {
         ZStack {
             VStack {
-
-                if viewModel.isSuccessPasswordChange {
-                    STSecureTextField(
-                        labelText: "비밀번호 재확인",
-                        text: $viewModel.checkPassword,
-                        errorText: viewModel.errorMessage,
-                        isError: viewModel.isError,
-                        onCommit: {
-                            viewModel.changeButtonDidTap()
-                        }
-                    )
-                    .focused($focusField, equals: .checkPassword)
-                    .opacity(viewModel.isSuccessPasswordChange ? 1.0 : 0.0)
-                    .padding([.top, .horizontal])
-                }
-
                 STSecureTextField(
-                    "새로운 비밀번호를 입력해주세요.",
-                    labelText: "비밀번호 변경",
+                    labelText: "비밀번호",
                     text: $viewModel.password,
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError,
                     onCommit: {
-                        withAnimation {
-                            viewModel.changeButtonDidTap()
-                            focusField = .checkPassword
-                        }
+                        viewModel.checkButtonDidTap()
                     }
                 )
-                .focused($focusField, equals: .password)
+                .focused($focusField)
                 .padding([.top, .horizontal])
 
                 HStack {
@@ -75,20 +54,28 @@ struct PasswordChangeView: View {
                 Spacer()
 
                 WideButton(text: "다음") {
-                    withAnimation {
-                        viewModel.changeButtonDidTap()
-                    }
+                    viewModel.checkButtonDidTap()
                 }
                 .disabled(viewModel.password.isEmpty)
             }
         }
         .onAppear {
-            focusField = .password
+            focusField = true
         }
         .navigate(
             to: findPasswordInfoComponent.makeView(),
             when: $viewModel.isNavigateFindPassword
         )
+        .navigate(
+            to: passwordChangeComponent.makeView(),
+            when: $viewModel.isSuccessPasswordCheck
+        )
+//        .na/
+//        .onChange(of: viewModel.isSuccessPasswordChange) { newValue in
+//            if newValue {
+//                dismiss()
+//            }
+//        }
         .navigationTitle("비밀번호 수정하기")
         .navigationBarTitleDisplayMode(.inline)
         .stBackground()
