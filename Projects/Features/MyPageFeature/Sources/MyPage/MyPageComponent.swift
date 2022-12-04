@@ -7,6 +7,7 @@ public protocol MyPageDependency: Dependency {
     var nicknameChangeComponent: NicknameChangeComponent { get }
     var emailModifyComponent: EmailModifyComponent { get }
     var spotChangeComponent: SpotChangeComponent { get }
+    var passwordChangeComponent: PasswordChangeComponent { get }
 }
 
 public final class MyPageComponent: Component<MyPageDependency> {
@@ -17,7 +18,8 @@ public final class MyPageComponent: Component<MyPageDependency> {
             ),
             nicknameChangeComponent: dependency.nicknameChangeComponent,
             emailModifyComponent: dependency.emailModifyComponent,
-            spotChangeComponent: dependency.spotChangeComponent
+            spotChangeComponent: dependency.spotChangeComponent,
+            passwordChangeComponent: dependency.passwordChangeComponent
         )
     }
 }

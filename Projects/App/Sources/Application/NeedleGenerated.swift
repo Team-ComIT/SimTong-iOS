@@ -186,6 +186,9 @@ private class MyPageDependency48d84b530313b3ee40feProvider: MyPageDependency {
     var spotChangeComponent: SpotChangeComponent {
         return appComponent.spotChangeComponent
     }
+    var passwordChangeComponent: PasswordChangeComponent {
+        return appComponent.passwordChangeComponent
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -229,6 +232,19 @@ private class NicknameChangeDependency36c769a4a51e0288197dProvider: NicknameChan
 /// ^->AppComponent->NicknameChangeComponent
 private func factorya664c7df07497c0791c4e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return NicknameChangeDependency36c769a4a51e0288197dProvider()
+}
+private class PasswordChangeDependencyfb8e0245942548352385Provider: PasswordChangeDependency {
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        return appComponent.findPasswordInfoComponent
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->PasswordChangeComponent
+private func factory04d7da095dc45d830f04f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return PasswordChangeDependencyfb8e0245942548352385Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var introComponent: IntroComponent {
@@ -484,6 +500,7 @@ extension MyPageComponent: Registration {
         keyPathToName[\MyPageDependency.nicknameChangeComponent] = "nicknameChangeComponent-NicknameChangeComponent"
         keyPathToName[\MyPageDependency.emailModifyComponent] = "emailModifyComponent-EmailModifyComponent"
         keyPathToName[\MyPageDependency.spotChangeComponent] = "spotChangeComponent-SpotChangeComponent"
+        keyPathToName[\MyPageDependency.passwordChangeComponent] = "passwordChangeComponent-PasswordChangeComponent"
     }
 }
 extension EmailModifyComponent: Registration {
@@ -499,6 +516,11 @@ extension EmailVerifyComponent: Registration {
 extension NicknameChangeComponent: Registration {
     public func registerItems() {
 
+    }
+}
+extension PasswordChangeComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\PasswordChangeDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
     }
 }
 extension RootComponent: Registration {
@@ -589,6 +611,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->EmailModifyComponent", factory810e2c1d0c4bfa11ed69f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmailVerifyComponent", factory0bd89edc8a1f0255a6d4e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->NicknameChangeComponent", factorya664c7df07497c0791c4e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->PasswordChangeComponent", factory04d7da095dc45d830f04f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)

@@ -51,6 +51,7 @@ struct EmailVerifyView: View {
         }
         .onAppear {
             viewModel.isToastShow = true
+            focusField = true
         }
         .stBackground()
         .configBackButton(dismiss: dismiss)

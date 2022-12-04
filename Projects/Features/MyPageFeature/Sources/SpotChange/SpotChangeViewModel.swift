@@ -41,7 +41,6 @@ final class SpotChangeViewModel: BaseViewModel {
     @MainActor
     func changeSpot() async {
         await withAsyncTry(with: self) { owner in
-            print(owner.selectedSpot!.id)
             try await owner.changeSpotUseCase.execute(spotID: owner.selectedSpot?.id ?? "")
         }
     }

@@ -98,6 +98,10 @@ extension AppComponent {
     var spotChangeComponent: SpotChangeComponent {
         SpotChangeComponent(parent: self)
     }
+
+    var passwordChangeComponent: PasswordChangeComponent {
+        PasswordChangeComponent(parent: self)
+    }
 }
 
 // MARK: - Main

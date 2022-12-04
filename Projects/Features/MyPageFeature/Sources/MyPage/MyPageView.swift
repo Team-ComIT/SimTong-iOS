@@ -10,17 +10,20 @@ struct MyPageView: View {
     private let nicknameChangeComponent: NicknameChangeComponent
     private let emailModifyComponent: EmailModifyComponent
     private let spotChangeComponent: SpotChangeComponent
+    private let passwordChangeComponent: PasswordChangeComponent
 
     public init(
         viewModel: MyPageViewModel,
         nicknameChangeComponent: NicknameChangeComponent,
         emailModifyComponent: EmailModifyComponent,
-        spotChangeComponent: SpotChangeComponent
+        spotChangeComponent: SpotChangeComponent,
+        passwordChangeComponent: PasswordChangeComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.nicknameChangeComponent = nicknameChangeComponent
         self.emailModifyComponent = emailModifyComponent
         self.spotChangeComponent = spotChangeComponent
+        self.passwordChangeComponent = passwordChangeComponent
     }
 
     var body: some View {
@@ -145,6 +148,10 @@ struct MyPageView: View {
 //                viewModel.spotCopy(spotName: spot.name)
 //            }, when: $viewModel.isNaivgateSpot
 //        )
+        .navigate(
+            to: passwordChangeComponent.makeView(),
+            when: $viewModel.isNavigatePassword
+        )
         .onChange(of: viewModel.isLogout) { newValue in
             if newValue {
                 appState.sceneFlow = .intro
