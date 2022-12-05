@@ -139,23 +139,23 @@ struct MyPageView: View {
             when: $viewModel.isNavigateEmail
         )
         .fullScreenCover(isPresented: $viewModel.isNaivgateSpot) {
-                spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
-                    viewModel.spotCopy(spotName: spot.name)
-                }
+            spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
+                viewModel.spotCopy(spotName: spot.name)
             }
-//        .navigate(
-//            to: spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
-//                viewModel.spotCopy(spotName: spot.name)
-//            }, when: $viewModel.isNaivgateSpot
-//        )
+        }
         .navigate(
             to: passwordCheckComponent.makeView(),
             when: $viewModel.isNavigatePassword
         )
-        .onChange(of: viewModel.isLogout) { newValue in
-            if newValue {
-                appState.sceneFlow = .intro
+        .alert("Asdf", isPresented: $viewModel.isLogout) {
+            Button("확인", role: .destructive) {
+                withAnimation {
+                    appState.sceneFlow = .intro
+                }
             }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text("ㅁㄴㅇㄹ")
         }
     }
 

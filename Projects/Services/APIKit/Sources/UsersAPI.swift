@@ -119,7 +119,7 @@ public extension UsersAPI {
 
     var jwtTokenType: JwtTokenType {
         switch self {
-        case .fetchMyProfile, .changeNickname, .changeEmail, .changeProfileImage:
+        case .fetchMyProfile, .changeNickname, .changeEmail, .changeProfileImage, .changeSpot:
             return .accessToken
 
         default:

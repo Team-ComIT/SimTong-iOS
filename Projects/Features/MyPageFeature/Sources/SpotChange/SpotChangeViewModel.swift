@@ -33,6 +33,7 @@ final class SpotChangeViewModel: BaseViewModel {
         }
     }
 
+    @MainActor
     func spotDidTap(spot: SpotEntity) {
         selectedSpot = spot
         saveButtonDisable = selectedSpot?.name != selectedSpotName

@@ -10,4 +10,5 @@ public protocol UsersRepository {
     func changeEmail(email: String) async throws
     func changeProfileImage(imageURL: String) async throws
     func changeSpot(spotID: String) async throws
+    func logout()
 }

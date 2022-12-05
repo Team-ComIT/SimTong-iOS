@@ -4,6 +4,7 @@ import SwiftUI
 
 public protocol MyPageDependency: Dependency {
     var fetchMyProfileUseCase: any FetchMyProfileUseCase { get }
+    var logoutUseCase: any LogoutUseCase { get }
     var nicknameChangeComponent: NicknameChangeComponent { get }
     var emailModifyComponent: EmailModifyComponent { get }
     var spotChangeComponent: SpotChangeComponent { get }
@@ -14,7 +15,8 @@ public final class MyPageComponent: Component<MyPageDependency> {
     public func makeView() -> some View {
         MyPageView(
             viewModel: .init(
-                fetchMyProfileUseCase: dependency.fetchMyProfileUseCase
+                fetchMyProfileUseCase: dependency.fetchMyProfileUseCase,
+                logoutUseCase: dependency.logoutUseCase
             ),
             nicknameChangeComponent: dependency.nicknameChangeComponent,
             emailModifyComponent: dependency.emailModifyComponent,

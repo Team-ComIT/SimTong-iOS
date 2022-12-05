@@ -2,6 +2,7 @@
 
 import BaseFeature
 import DataModule
+import DatabaseModule
 import DomainModule
 import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
@@ -192,6 +193,9 @@ private func factory39a20509ab61b108ebf6f47b58f8f304c97af4d5(_ component: Needle
 private class MyPageDependency48d84b530313b3ee40feProvider: MyPageDependency {
     var fetchMyProfileUseCase: any FetchMyProfileUseCase {
         return appComponent.fetchMyProfileUseCase
+    }
+    var logoutUseCase: any LogoutUseCase {
+        return appComponent.logoutUseCase
     }
     var nicknameChangeComponent: NicknameChangeComponent {
         return appComponent.nicknameChangeComponent
@@ -421,6 +425,7 @@ extension AppComponent: Registration {
         localTable["remoteCommonsDataSource-any RemoteCommonsDataSource"] = { self.remoteCommonsDataSource as Any }
         localTable["remoteFilesDataSource-any RemoteFilesDataSource"] = { self.remoteFilesDataSource as Any }
         localTable["remoteUsersDataSource-any RemoteUsersDataSource"] = { self.remoteUsersDataSource as Any }
+        localTable["localUsersDataSource-any LocalUsersDataSource"] = { self.localUsersDataSource as Any }
         localTable["remoteEmailsDataSource-any RemoteEmailsDataSource"] = { self.remoteEmailsDataSource as Any }
         localTable["remoteMenuDataSource-any RemoteMenuDataSource"] = { self.remoteMenuDataSource as Any }
         localTable["remoteScheduleDataSource-any RemoteScheduleDataSource"] = { self.remoteScheduleDataSource as Any }
@@ -448,6 +453,7 @@ extension AppComponent: Registration {
         localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { self.changeProfileImageUseCase as Any }
         localTable["changeSpotUseCase-any ChangeSpotUseCase"] = { self.changeSpotUseCase as Any }
         localTable["checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"] = { self.checkDuplicateNicknameUseCase as Any }
+        localTable["logoutUseCase-any LogoutUseCase"] = { self.logoutUseCase as Any }
         localTable["verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"] = { self.verifyAuthCodeUseCase as Any }
         localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { self.sendAuthCodeUseCase as Any }
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
@@ -519,6 +525,7 @@ extension SpotChangeComponent: Registration {
 extension MyPageComponent: Registration {
     public func registerItems() {
         keyPathToName[\MyPageDependency.fetchMyProfileUseCase] = "fetchMyProfileUseCase-any FetchMyProfileUseCase"
+        keyPathToName[\MyPageDependency.logoutUseCase] = "logoutUseCase-any LogoutUseCase"
         keyPathToName[\MyPageDependency.nicknameChangeComponent] = "nicknameChangeComponent-NicknameChangeComponent"
         keyPathToName[\MyPageDependency.emailModifyComponent] = "emailModifyComponent-EmailModifyComponent"
         keyPathToName[\MyPageDependency.spotChangeComponent] = "spotChangeComponent-SpotChangeComponent"

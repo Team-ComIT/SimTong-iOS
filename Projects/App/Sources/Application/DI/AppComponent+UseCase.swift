@@ -1,6 +1,7 @@
 import NeedleFoundation
 import DomainModule
 import DataModule
+import DatabaseModule
 
 // MARK: - Commons
 extension AppComponent {
@@ -80,6 +81,10 @@ extension AppComponent {
 
     public var checkDuplicateNicknameUseCase: any CheckDuplicateNicknameUseCase {
         CheckDuplicateNicknameUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var logoutUseCase: any LogoutUseCase {
+        LogoutUseCaseImpl(usersRepository: usersRepository)
     }
 }
 

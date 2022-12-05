@@ -5,6 +5,7 @@ import UIKit
 
 public final class MyPageViewModel: BaseViewModel {
     private let fetchMyProfileUseCase: any FetchMyProfileUseCase
+    private let logoutUseCase: any LogoutUseCase
     @Published var myProfile: UserInfoEntity = .init(
         name: "김이름",
         email: "test@gmail.com",
@@ -22,9 +23,11 @@ public final class MyPageViewModel: BaseViewModel {
     @Published var isLogout = false
 
     init(
-        fetchMyProfileUseCase: any FetchMyProfileUseCase
+        fetchMyProfileUseCase: any FetchMyProfileUseCase,
+        logoutUseCase: any LogoutUseCase
     ) {
         self.fetchMyProfileUseCase = fetchMyProfileUseCase
+        self.logoutUseCase = logoutUseCase
         super.init()
         self.isSkeleton = true
     }
@@ -61,9 +64,8 @@ public final class MyPageViewModel: BaseViewModel {
     }
 
     func logoutButtonDidTap() {
-        if isModify {
-            isLogout = true
-        }
+        isLogout = true
+        self.logoutUseCase.execute()
     }
 
     func changePasswordButtonDidTap() {
@@ -81,5 +83,4 @@ public final class MyPageViewModel: BaseViewModel {
             profileImagePath: myProfile.profileImagePath
         )
     }
-
 }
