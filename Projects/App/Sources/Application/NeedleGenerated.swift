@@ -204,8 +204,8 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
-    var writeScheduleComponent: WriteScheduleComponent {
-        return appComponent.writeScheduleComponent
+    var scheduleCalendarComponent: ScheduleCalendarComponent {
+        return appComponent.scheduleCalendarComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -216,16 +216,16 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
 private func factory67229cdf0f755562b2b1f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return HomeDependency443c4e1871277bd8432aProvider(appComponent: parent1(component) as! AppComponent)
 }
-private class WriteScheduleDependency12f70547a546e39724a9Provider: WriteScheduleDependency {
+private class ScheduleCalendarDependency82957fd936f8392eba72Provider: ScheduleCalendarDependency {
 
 
     init() {
 
     }
 }
-/// ^->AppComponent->WriteScheduleComponent
-private func factory9625a3ea3c4e7a6d943de3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return WriteScheduleDependency12f70547a546e39724a9Provider()
+/// ^->AppComponent->ScheduleCalendarComponent
+private func factory435d771786798070a01be3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return ScheduleCalendarDependency82957fd936f8392eba72Provider()
 }
 private class WriteHolidayDependencyf70374d71937da494a07Provider: WriteHolidayDependency {
 
@@ -428,10 +428,10 @@ extension HomeComponent: Registration {
         keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
         keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
-        keyPathToName[\HomeDependency.writeScheduleComponent] = "writeScheduleComponent-WriteScheduleComponent"
+        keyPathToName[\HomeDependency.scheduleCalendarComponent] = "scheduleCalendarComponent-ScheduleCalendarComponent"
     }
 }
-extension WriteScheduleComponent: Registration {
+extension ScheduleCalendarComponent: Registration {
     public func registerItems() {
 
     }
@@ -500,7 +500,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->WriteScheduleComponent", factory9625a3ea3c4e7a6d943de3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->ScheduleCalendarComponent", factory435d771786798070a01be3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->WriteHolidayComponent", factory231bc78685abe84d7b9fe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)

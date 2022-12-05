@@ -4,7 +4,7 @@ import DomainModule
 import Foundation
 import Utility
 
-final class WriteScheduleViewModel: BaseViewModel {
+final class ScheduleCalendarViewModel: BaseViewModel {
     @Published var holidaysDict: [String: HolidayType]
     @Published var scheduleDict: [String: [ScheduleEntity]]
     @Published var selectedDate: Date?

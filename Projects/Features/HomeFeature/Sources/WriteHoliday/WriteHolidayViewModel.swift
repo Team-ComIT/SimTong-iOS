@@ -25,7 +25,7 @@ final class WriteHolidayViewModel: BaseViewModel {
 
     func writeHoliday(type: HolidayType) {
         let thisWeek = selectedDate.fetchAllDatesInCurrentWeek()
-        if type == .annual, thisWeek.filter { holidaysDict[$0.toSmallSimtongDateString()] == .annual }.count >= 2 {
+        if type == .annual, thisWeek.filter({ holidaysDict[$0.toSmallSimtongDateString()] == .annual }).count >= 2 {
             errorMessage = "주간 휴무 정보 불일치"
             errorSubMessage = "일주일 최대 2회 휴무 정보를\n등록할 수 있습니다."
             isError = true

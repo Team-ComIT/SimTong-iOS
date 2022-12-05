@@ -2,9 +2,9 @@ import DomainModule
 import SwiftUI
 import NeedleFoundation
 
-public protocol WriteScheduleDependency: Dependency {}
+public protocol ScheduleCalendarDependency: Dependency {}
 
-public final class WriteScheduleComponent: Component<WriteScheduleDependency> {
+public final class ScheduleCalendarComponent: Component<ScheduleCalendarDependency> {
     public func makeView(
         holidaysDict: [String: HolidayType],
         scheduleDict: [String: [ScheduleEntity]],
@@ -15,7 +15,7 @@ public final class WriteScheduleComponent: Component<WriteScheduleDependency> {
             [String: [ScheduleEntity]]
         ) -> Void
     ) -> some View {
-        WriteScheduleView(
+        ScheduleCalendarView(
             viewModel: .init(
                 holidaysDict: holidaysDict,
                 scheduleDict: scheduleDict

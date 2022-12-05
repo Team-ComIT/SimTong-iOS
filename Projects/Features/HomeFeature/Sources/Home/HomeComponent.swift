@@ -6,7 +6,7 @@ public protocol HomeDependency: Dependency {
     var fetchMenuListUseCase: any FetchMenuListUseCase { get }
     var fetchScheduleUseCase: any FetchScheduleUseCase { get }
     var writeHolidayComponent: WriteHolidayComponent { get }
-    var writeScheduleComponent: WriteScheduleComponent { get }
+    var scheduleCalendarComponent: ScheduleCalendarComponent { get }
 }
 
 public final class HomeComponent: Component<HomeDependency> {
@@ -17,7 +17,7 @@ public final class HomeComponent: Component<HomeDependency> {
                 fetchScheduleUseCase: dependency.fetchScheduleUseCase
             ),
             writeHolidayComponent: dependency.writeHolidayComponent,
-            writeScheduleComponent: dependency.writeScheduleComponent
+            scheduleCalendarComponent: dependency.scheduleCalendarComponent
         )
     }
 }

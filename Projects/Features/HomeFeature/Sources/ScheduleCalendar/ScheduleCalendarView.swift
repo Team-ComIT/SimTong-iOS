@@ -3,8 +3,8 @@ import DomainModule
 import SwiftUI
 import Utility
 
-struct WriteScheduleView: View {
-    @StateObject var viewModel: WriteScheduleViewModel
+struct ScheduleCalendarView: View {
+    @StateObject var viewModel: ScheduleCalendarViewModel
     @State var offset: CGSize = .init(width: 0, height: 0)
     @Binding var isPresented: Bool
     var scheduleAnimation: Namespace.ID
@@ -14,7 +14,7 @@ struct WriteScheduleView: View {
     ) -> Void
 
     init(
-        viewModel: WriteScheduleViewModel,
+        viewModel: ScheduleCalendarViewModel,
         isPresented: Binding<Bool>,
         scheduleAnimation: Namespace.ID,
         onFinished: @escaping (

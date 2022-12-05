@@ -4,7 +4,6 @@ import KeychainModule
 import Moya
 import Utility
 
-// swiftlint: disable force_cast
 public class BaseRemoteDataSource<API: SimTongAPI> {
     private let keychain: any Keychain
     private let provider: MoyaProvider<API>

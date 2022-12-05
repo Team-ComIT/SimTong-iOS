@@ -97,8 +97,8 @@ extension AppComponent {
         WriteHolidayComponent(parent: self)
     }
 
-    var writeScheduleComponent: WriteScheduleComponent {
-        WriteScheduleComponent(parent: self)
+    var scheduleCalendarComponent: ScheduleCalendarComponent {
+        ScheduleCalendarComponent(parent: self)
     }
 }
 

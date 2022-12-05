@@ -8,16 +8,16 @@ struct HomeView: View {
     @Namespace var calendarAnimation
     @Namespace var scheduleAnimation
     private let writeHolidayComponent: WriteHolidayComponent
-    private let writeScheduleComponent: WriteScheduleComponent
+    private let scheduleCalendarComponent: ScheduleCalendarComponent
 
     public init(
         viewModel: HomeViewModel,
         writeHolidayComponent: WriteHolidayComponent,
-        writeScheduleComponent: WriteScheduleComponent
+        scheduleCalendarComponent: ScheduleCalendarComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.writeHolidayComponent = writeHolidayComponent
-        self.writeScheduleComponent = writeScheduleComponent
+        self.scheduleCalendarComponent = scheduleCalendarComponent
     }
 
     var body: some View {
@@ -84,7 +84,7 @@ struct HomeView: View {
                     viewModel.schedules = scheduleDict
                 }
             } else if viewModel.isPresentedSchedule {
-                writeScheduleComponent.makeView(
+                scheduleCalendarComponent.makeView(
                     holidaysDict: viewModel.holidaysDict,
                     scheduleDict: viewModel.schedules,
                     isPresented: $viewModel.isPresentedSchedule,
