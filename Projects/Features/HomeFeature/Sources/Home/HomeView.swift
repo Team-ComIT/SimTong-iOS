@@ -97,10 +97,12 @@ struct HomeView: View {
                 EmptyView()
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("")
         .stBackground()
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                if !viewModel.isPresentedHoliday || !viewModel.isPresentedSchedule {
+                if !viewModel.isPresentedHoliday && !viewModel.isPresentedSchedule {
                     Button {
                     } label: {
                         STIcon(.person, color: .gray03)

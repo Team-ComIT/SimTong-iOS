@@ -34,7 +34,21 @@ public final class HomeViewModel: BaseViewModel {
     func fetchSchedules() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
+//                let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
+                let schedules: [ScheduleEntity] = [
+                    .init(
+                        id: UUID().uuidString,
+                        title: "새로운 아이디어 제시",
+                        startAt: "2022-12-01",
+                        endAt: "2022-12-05"
+                    ),
+                    .init(
+                        id: UUID().uuidString,
+                        title: "혁신적인 아이디어 제시",
+                        startAt: "2022-12-02",
+                        endAt: "2022-12-05"
+                    )
+                ]
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()
                     let end = schedule.endAt.toSmallSimtongDate()

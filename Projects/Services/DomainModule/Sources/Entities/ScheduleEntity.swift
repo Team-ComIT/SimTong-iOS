@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ScheduleEntity: Equatable {
+public struct ScheduleEntity: Equatable, Hashable {
     public init(id: String, title: String, startAt: String, endAt: String) {
         self.id = id
         self.title = title

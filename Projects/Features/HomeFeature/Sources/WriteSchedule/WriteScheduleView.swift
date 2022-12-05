@@ -1,10 +1,11 @@
 import DesignSystem
 import DomainModule
 import SwiftUI
+import Utility
 
 struct WriteScheduleView: View {
     @StateObject var viewModel: WriteScheduleViewModel
-    @Environment(\.dismiss) var dismiss
+    @State var offset: CGSize = .init(width: 0, height: 0)
     @Binding var isPresented: Bool
     var scheduleAnimation: Namespace.ID
     let onFinished: (
@@ -35,18 +36,51 @@ struct WriteScheduleView: View {
                         holidaysDict: $viewModel.holidaysDict,
                         scheduleDict: $viewModel.scheduleDict
                     ) { date in
-                        viewModel.selectedDate = date
+                        withAnimation {
+                            viewModel.dateOnTap(date: date)
+                        }
                     }
                     .matchedGeometryEffect(id: "SCHEDULE", in: scheduleAnimation)
                     .padding(.top, 8)
+                }
+
+                HStack {
+                    if let selectedDate = viewModel.selectedDate {
+                        Text(scheduleDateFormatting(date: selectedDate))
+                            .stTypo(.m5, color: .extraBlack)
+                    } else {
+                        Text("전체일정")
+                            .stTypo(.m5, color: .extraBlack)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "plus")
+                        .foregroundColor(.gray05)
+                }
+                .padding(.top, 8)
+
+                LazyVStack(spacing: 16) {
+                    ForEach(viewModel.filteredScheduleList, id: \.id) { schedule in
+                        scheduleRowView(schedule: schedule)
+                    }
                 }
             }
             .padding(.top, 12)
             .padding(.horizontal, 16)
         }
-        .navigationTitle(isPresented ? "일정 작성" : "")
+        .offset(x: offset.width)
+        .onBackSwipe(offset: $offset) {
+            withAnimation(.spring()) {
+                isPresented = false
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("일정 작성")
+                    .font(.headline)
+            }
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button {
                     withAnimation(.spring()) {
@@ -67,25 +101,52 @@ struct WriteScheduleView: View {
     }
 
     @ViewBuilder
-    func navigationBarView() -> some View {
-        ZStack {
-            HStack {
-                Image(systemName: "chevron.left")
-                    .resizable()
-                    .frame(width: 9, height: 16)
-                    .onTapGesture {
-                        withAnimation(.spring()) {
-                            isPresented = false
-                        }
-                    }
+    func scheduleRowView(schedule: ScheduleEntity) -> some View {
+        HStack(alignment: .center, spacing: 8) {
+            VStack {
+                Circle()
+                    .fill(Color.main)
+                    .frame(width: 8, height: 8)
+                    .offset(y: 4)
 
                 Spacer()
             }
 
-            Text("휴무표 작성")
-                .stTypo(.r5, color: .grayMain)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(schedule.title)
+                    .stTypo(.r6, color: .extraBlack)
+
+                Text(
+                    scheduleDateString(
+                        start: schedule.startAt.toSmallSimtongDate(),
+                        end: schedule.endAt.toSmallSimtongDate()
+                    )
+                )
+                .stTypo(.r7, color: .main)
+            }
+
+            Spacer()
+
+            Image(systemName: "ellipsis")
+                .foregroundColor(.gray05)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 16)
+    }
+
+    func scheduleDateString(start: Date, end: Date) -> String {
+        let startString: String
+        if start.compare(Date()) == .orderedAscending || start.compare(Date()) == .orderedSame {
+            startString = "today"
+        } else {
+            startString = scheduleDateFormatting(date: start)
+        }
+
+        return "\(startString) ~ \(scheduleDateFormatting(date: end))"
+    }
+
+    func scheduleDateFormatting(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        return formatter.string(from: date)
     }
 }
