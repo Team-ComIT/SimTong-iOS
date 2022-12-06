@@ -8,7 +8,7 @@ final class PasswordCheckViewModel: BaseViewModel {
     }
     @Published var isSuccessPasswordCheck = false
     @Published var isNavigateFindPassword = false
-    private let passwordCheckUseCase = any passwordCheckUseCase
+    private let passwordCheckUseCase = any passwordusecase
 
     @MainActor
     func checkButtonDidTap() {
