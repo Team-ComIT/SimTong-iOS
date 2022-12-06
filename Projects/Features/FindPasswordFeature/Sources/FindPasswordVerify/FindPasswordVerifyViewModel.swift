@@ -34,10 +34,10 @@ final class FindPasswordVerifyViewModel: BaseViewModel {
     @MainActor
     func timerStart() {
         Task {
-            await withAsyncTry(with: self) { owner in
-                try await owner.sendAuthCodeUseCase.execute(email: owner.findPasswordVerifySceneParam.email)
-                owner.isToastShow = true
-            }
+//            await withAsyncTry(with: self) { owner in
+//                try await owner.sendAuthCodeUseCase.execute(email: owner.findPasswordVerifySceneParam.email)
+//                owner.isToastShow = true
+//            }
 
             self.timeText = self.remaingTime % 60 < 10 ?
             "\(self.remaingTime/60):0\(self.remaingTime%60)" :

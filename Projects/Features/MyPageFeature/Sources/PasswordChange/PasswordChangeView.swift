@@ -24,10 +24,10 @@ struct PasswordChangeView: View {
         ZStack {
             VStack {
 
-                if viewModel.isSuccessPasswordChange {
+                if viewModel.isCheckPasswordStep {
                     STSecureTextField(
                         labelText: "비밀번호 재확인",
-                        text: $viewModel.checkPassword,
+                        text: $viewModel.confirmPassword,
                         errorText: viewModel.errorMessage,
                         isError: viewModel.isError,
                         onCommit: {
@@ -35,14 +35,14 @@ struct PasswordChangeView: View {
                         }
                     )
                     .focused($focusField, equals: .checkPassword)
-                    .opacity(viewModel.isSuccessPasswordChange ? 1.0 : 0.0)
+                    .opacity(viewModel.isCheckPasswordStep ? 1.0 : 0.0)
                     .padding([.top, .horizontal])
                 }
 
                 STSecureTextField(
                     "새로운 비밀번호를 입력해주세요.",
                     labelText: "비밀번호 변경",
-                    text: $viewModel.password,
+                    text: $viewModel.newPassword,
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError,
                     onCommit: {
@@ -61,7 +61,6 @@ struct PasswordChangeView: View {
                         .foregroundColor(.gray05)
 
                     Button {
-//                        NavigationUtil.popToRootView()
                         viewModel.isNavigateFindPassword = true
                     } label: {
                         Text("비밀번호 찾기")
@@ -79,7 +78,7 @@ struct PasswordChangeView: View {
                         viewModel.changeButtonDidTap()
                     }
                 }
-                .disabled(viewModel.password.isEmpty)
+                .disabled(!viewModel.isEnableChangeButton)
             }
         }
         .onAppear {

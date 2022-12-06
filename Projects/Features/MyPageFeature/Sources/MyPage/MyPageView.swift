@@ -147,15 +147,15 @@ struct MyPageView: View {
             to: passwordCheckComponent.makeView(),
             when: $viewModel.isNavigatePassword
         )
-        .alert("Asdf", isPresented: $viewModel.isLogout) {
+        .alert("로그아웃", isPresented: $viewModel.isLogout) {
+            Button("취소", role: .cancel) {}
             Button("확인", role: .destructive) {
                 withAnimation {
                     appState.sceneFlow = .intro
                 }
             }
-            Button("취소", role: .cancel) {}
         } message: {
-            Text("ㅁㄴㅇㄹ")
+            Text("로그아웃을 하더라도 데이터가 삭제되지 않습니다.")
         }
     }
 

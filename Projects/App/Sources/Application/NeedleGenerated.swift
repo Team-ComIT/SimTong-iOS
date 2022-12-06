@@ -260,6 +260,9 @@ private class PasswordChangeDependencyfb8e0245942548352385Provider: PasswordChan
     var findPasswordInfoComponent: FindPasswordInfoComponent {
         return appComponent.findPasswordInfoComponent
     }
+    var changePasswordUseCase: any ChangePasswordUseCase {
+        return appComponent.changePasswordUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -555,6 +558,7 @@ extension NicknameChangeComponent: Registration {
 extension PasswordChangeComponent: Registration {
     public func registerItems() {
         keyPathToName[\PasswordChangeDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
+        keyPathToName[\PasswordChangeDependency.changePasswordUseCase] = "changePasswordUseCase-any ChangePasswordUseCase"
     }
 }
 extension RootComponent: Registration {

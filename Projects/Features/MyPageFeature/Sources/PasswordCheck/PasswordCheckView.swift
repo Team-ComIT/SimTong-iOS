@@ -29,9 +29,7 @@ struct PasswordCheckView: View {
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError,
                     onCommit: {
-                        Task {
-                            await viewModel.checkButtonDidTap()
-                        }
+                        viewModel.checkButtonDidTap()
                     }
                 )
                 .focused($focusField)
@@ -56,9 +54,7 @@ struct PasswordCheckView: View {
                 Spacer()
 
                 WideButton(text: "다음") {
-                    Task {
-                        await viewModel.checkButtonDidTap()
-                    }
+                    viewModel.checkButtonDidTap()
                 }
                 .disabled(viewModel.password.isEmpty)
             }
@@ -71,7 +67,7 @@ struct PasswordCheckView: View {
             when: $viewModel.isNavigateFindPassword
         )
         .navigate(
-            to: passwordChangeComponent.makeView(),
+            to: passwordChangeComponent.makeView(password: viewModel.password),
             when: $viewModel.isSuccessPasswordCheck
         )
         .navigationTitle("비밀번호 수정하기")

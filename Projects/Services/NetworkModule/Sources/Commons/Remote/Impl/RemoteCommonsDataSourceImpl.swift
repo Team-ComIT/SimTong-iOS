@@ -14,7 +14,9 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
     }
 
     public func comparePassword(password: String) async throws {
+        print("1231312312312312312312312312312312313")
         try await request(.comparePassword(password: password), dto: NoResponse.self)
+        print("1111111111111112222222222222223333333333")
     }
 
     public func reissueToken() async throws {

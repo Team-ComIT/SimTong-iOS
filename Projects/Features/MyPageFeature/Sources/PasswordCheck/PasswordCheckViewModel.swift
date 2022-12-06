@@ -18,11 +18,14 @@ final class PasswordCheckViewModel: BaseViewModel {
     }
 
     @MainActor
-    func checkButtonDidTap() async {
-        await withAsyncTry(with: self) { owner in
-            try await owner.comparePasswordUseCase.execute(password: owner.password)
-        } errorAction: { _, error in
-            print(error)
+    func checkButtonDidTap() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                try await owner.comparePasswordUseCase.execute(password: owner.password)
+            } errorAction: { _, error in
+                print(error)
+            }
+            self.isSuccessPasswordCheck = true
         }
     }
 }
