@@ -3,15 +3,26 @@ import BaseFeature
 import DomainModule
 
 final class PasswordCheckViewModel: BaseViewModel {
+    private let comparePasswordUseCase: any ComparePasswordUseCase
     @Published var password = "" {
         didSet { isError = false }
     }
     @Published var isSuccessPasswordCheck = false
     @Published var isNavigateFindPassword = false
-    private let passwordCheckUseCase = any passwordusecase
+
+    init(
+        comparePasswordUseCase: any ComparePasswordUseCase
+    ) {
+        self.comparePasswordUseCase = comparePasswordUseCase
+        super.init()
+    }
 
     @MainActor
-    func checkButtonDidTap() {
-        isSuccessPasswordCheck = true
+    func checkButtonDidTap() async {
+        await withAsyncTry(with: self) { owner in
+            try await owner.comparePasswordUseCase.execute(password: owner.password)
+        } errorAction: { _, error in
+            print(error)
+        }
     }
 }

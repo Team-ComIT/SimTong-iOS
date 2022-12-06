@@ -165,6 +165,9 @@ private class PasswordCheckDependency4bd2ae8c0710233d4ac8Provider: PasswordCheck
     var passwordChangeComponent: PasswordChangeComponent {
         return appComponent.passwordChangeComponent
     }
+    var comparePasswordUseCase: any ComparePasswordUseCase {
+        return appComponent.comparePasswordUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -437,6 +440,7 @@ extension AppComponent: Registration {
         localTable["scheduleRepository-any ScheduleRepository"] = { self.scheduleRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
+        localTable["comparePasswordUseCase-any ComparePasswordUseCase"] = { self.comparePasswordUseCase as Any }
         localTable["reissueTokenUseCase-any ReissueTokenUseCase"] = { self.reissueTokenUseCase as Any }
         localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { self.resetPasswordUseCase as Any }
         localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
@@ -514,6 +518,7 @@ extension PasswordCheckComponent: Registration {
     public func registerItems() {
         keyPathToName[\PasswordCheckDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
         keyPathToName[\PasswordCheckDependency.passwordChangeComponent] = "passwordChangeComponent-PasswordChangeComponent"
+        keyPathToName[\PasswordCheckDependency.comparePasswordUseCase] = "comparePasswordUseCase-any ComparePasswordUseCase"
     }
 }
 extension SpotChangeComponent: Registration {

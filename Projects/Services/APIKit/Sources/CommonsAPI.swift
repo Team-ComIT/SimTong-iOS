@@ -101,7 +101,7 @@ public extension CommonsAPI {
 
     var jwtTokenType: JwtTokenType {
         switch self {
-        case .changePassword:
+        case .changePassword, .comparePassword:
             return .accessToken
 
         case .reissueToken:

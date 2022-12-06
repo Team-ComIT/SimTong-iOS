@@ -13,6 +13,10 @@ extension AppComponent {
         FindEmployeeNumberUseCaseImpl(commonRepository: commonsRepository)
     }
 
+    public var comparePasswordUseCase: any ComparePasswordUseCase {
+        ComparePasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
+
     public var reissueTokenUseCase: any ReissueTokenUseCase {
         ReissueTokenUseCaseImpl(commonsRepository: commonsRepository)
     }

@@ -3,7 +3,7 @@ import DataMappingModule
 public protocol CommonsRepository {
     func fetchSpotList() async throws -> [SpotEntity]
     func findEmployeeNumber(req: FindEmployeeNumberRequestDTO) async throws -> Int
-    func comparePasswrod(password: String) async throws
+    func comparePassword(password: String) async throws
     func reissueToken() async throws
     func changePassword(req: ChangePasswordRequestDTO) async throws
     func resetPassword(req: ResetPasswordRequestDTO) async throws

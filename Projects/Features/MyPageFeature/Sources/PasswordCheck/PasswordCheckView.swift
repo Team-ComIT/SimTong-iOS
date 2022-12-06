@@ -1,6 +1,7 @@
 import SwiftUI
 import FindPasswordFeature
 import DesignSystem
+import DomainModule
 
 struct PasswordCheckView: View {
     @StateObject var viewModel: PasswordCheckViewModel
@@ -28,7 +29,9 @@ struct PasswordCheckView: View {
                     errorText: viewModel.errorMessage,
                     isError: viewModel.isError,
                     onCommit: {
-                        viewModel.checkButtonDidTap()
+                        Task {
+                            await viewModel.checkButtonDidTap()
+                        }
                     }
                 )
                 .focused($focusField)
@@ -40,7 +43,6 @@ struct PasswordCheckView: View {
                         .foregroundColor(.gray05)
 
                     Button {
-//                        NavigationUtil.popToRootView()
                         viewModel.isNavigateFindPassword = true
                     } label: {
                         Text("비밀번호 찾기")
@@ -54,7 +56,9 @@ struct PasswordCheckView: View {
                 Spacer()
 
                 WideButton(text: "다음") {
-                    viewModel.checkButtonDidTap()
+                    Task {
+                        await viewModel.checkButtonDidTap()
+                    }
                 }
                 .disabled(viewModel.password.isEmpty)
             }
