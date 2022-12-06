@@ -32,13 +32,15 @@ struct HomeView: View {
                 }
                 .padding(.top, 8)
                 .onTapGesture {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         viewModel.isPresentedSchedule = true
                     }
                 }
 
                 CalendarView(holidaysDict: $viewModel.holidaysDict, scheduleDict: $viewModel.schedules) { date in
-                    viewModel.onDateTap(date: date)
+                    withAnimation {
+                        viewModel.onDateTap(date: date)
+                    }
                 }
                 .matchedGeometryEffect(id: "CALENDAR", in: calendarAnimation)
                 .matchedGeometryEffect(id: "SCHEDULE", in: scheduleAnimation, properties: .position)
@@ -56,7 +58,7 @@ struct HomeView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Link(destination: URL(string: "https://www.google.com")!) {
+                    Link(destination: viewModel.salaryURL) {
                         WideCardView(image: STImage(.pay), title: "나의 급여 정보", description: "나의 급여 정보를 손쉽게 확인하세요.")
                     }
 
@@ -99,7 +101,6 @@ struct HomeView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("")
-        .stBackground()
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if !viewModel.isPresentedHoliday && !viewModel.isPresentedSchedule {
@@ -109,6 +110,28 @@ struct HomeView: View {
                     }
                 }
             }
+        }
+        .stBackground()
+    }
+
+    @ViewBuilder
+    func scheduleOptionPickerView() -> some View {
+        VStack(spacing: 20) {
+            scheduleOptionRowView(system: "pencil", title: "수정")
+                .foregroundColor(.grayMain)
+
+            scheduleOptionRowView(system: "trash", title: "삭제")
+                .foregroundColor(.main)
+        }
+        .padding(24)
+    }
+
+    @ViewBuilder
+    func scheduleOptionRowView(system: String, title: String) -> some View {
+        HStack {
+            Image(systemName: system)
+
+            Text(title)
         }
     }
 }

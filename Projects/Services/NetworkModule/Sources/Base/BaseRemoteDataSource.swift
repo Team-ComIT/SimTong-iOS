@@ -32,25 +32,25 @@ public class BaseRemoteDataSource<API: SimTongAPI> {
 
 private extension BaseRemoteDataSource {
     func defaultRequest(_ api: API) async throws -> Response {
-        for _ in 0..<maxRetryCount {
-            do {
-                return try await performRequest(api)
-            } catch {
-                continue
-            }
-        }
+//        for _ in 0..<maxRetryCount {
+//            do {
+//                return try await performRequest(api)
+//            } catch {
+//                continue
+//            }
+//        }
         return try await performRequest(api)
     }
 
     func authorizedRequest(_ api: API) async throws -> Response {
-        for _ in 0..<maxRetryCount {
-            do {
-                return try await performRequest(api)
-            } catch {
-                if checkTokenIsExpired() { try await tokenRefresh() }
-                continue
-            }
-        }
+//        for _ in 0..<maxRetryCount {
+//            do {
+//                return try await performRequest(api)
+//            } catch {
+//                if checkTokenIsExpired() { try await tokenRefresh() }
+//                continue
+//            }
+//        }
         return try await performRequest(api)
     }
 

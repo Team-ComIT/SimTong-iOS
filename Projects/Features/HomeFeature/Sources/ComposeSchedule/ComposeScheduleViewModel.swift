@@ -24,6 +24,7 @@ final class ComposeScheduleViewModel: BaseViewModel {
     @Published var isPresentedStartAtDatePicker = false
     @Published var isPresentedEndAtDatePicker = false
     @Published var isPresentedAlarmDatePicker = false
+    @Published var isSuccessComposeSchedule = false
     let isUpdate: Bool
     private let id: String
     private let createNewScheduleUseCase: any CreateNewScheduleUseCase
@@ -50,6 +51,9 @@ final class ComposeScheduleViewModel: BaseViewModel {
             isUpdate = false
             super.init()
         }
+        let defaultAlarmTime = DateComponents(calendar: .current, hour: 8, minute: 30).date ?? .init()
+        alarmTime = defaultAlarmTime
+        alarmTimeString = timeFormattingString(date: defaultAlarmTime)
     }
 
     func dateFormattingString(date: Date) -> String {
@@ -60,7 +64,7 @@ final class ComposeScheduleViewModel: BaseViewModel {
     }
     func timeFormattingString(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "a HH시 mm분"
+        formatter.dateFormat = "a hh시 mm분"
         formatter.amSymbol = "오전"
         formatter.pmSymbol = "오후"
         formatter.locale = Locale(identifier: "ko_kr")
@@ -71,13 +75,13 @@ final class ComposeScheduleViewModel: BaseViewModel {
     func completeButtonDidTap() {
         Task {
             await withAsyncTry(with: self) { owner in
-                if owner.isUpdate {
+                if !owner.isUpdate {
                     try await owner.createNewScheduleUseCase.execute(
                         req: .init(
                             title: owner.title,
                             startAt: owner.startAt.toSmallSimtongDateString(),
                             endAt: owner.endAt.toSmallSimtongDateString(),
-                            alarm: "\(owner.alarmTime.hour):\(owner.alarmTime.minute):\(owner.alarmTime.second)"
+                            alarm: owner.alarmRequestFormatting(date: owner.alarmTime)
                         )
                     )
                 } else {
@@ -87,11 +91,18 @@ final class ComposeScheduleViewModel: BaseViewModel {
                             title: owner.title,
                             startAt: owner.startAt.toSmallSimtongDateString(),
                             endAt: owner.endAt.toSmallSimtongDateString(),
-                            alarm: "\(owner.alarmTime.hour):\(owner.alarmTime.minute):\(owner.alarmTime.second)"
+                            alarm: owner.alarmRequestFormatting(date: owner.alarmTime)
                         )
                     )
                 }
             }
         }
+    }
+
+    func alarmRequestFormatting(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.locale = Locale(identifier: "ko_kr")
+        return formatter.string(from: date)
     }
 }

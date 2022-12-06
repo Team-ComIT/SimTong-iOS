@@ -70,8 +70,16 @@ struct ComposeScheduleView: View {
 
             Spacer()
 
-            CTAButton(text: viewModel.isUpdate ? "수정" : "추가")
-                .padding(.bottom, 16)
+            CTAButton(text: viewModel.isUpdate ? "수정" : "추가") {
+                viewModel.completeButtonDidTap()
+            }
+            .disabled(viewModel.title.isEmpty)
+            .padding(.bottom, 16)
+        }
+        .onChange(of: viewModel.isSuccessComposeSchedule) { newValue in
+            if newValue {
+                dismiss()
+            }
         }
         .padding(.horizontal, 16)
         .stBackground()
