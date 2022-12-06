@@ -66,4 +66,32 @@ final class ComposeScheduleViewModel: BaseViewModel {
         formatter.locale = Locale(identifier: "ko_kr")
         return formatter.string(from: date)
     }
+
+    @MainActor
+    func completeButtonDidTap() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                if owner.isUpdate {
+                    try await owner.createNewScheduleUseCase.execute(
+                        req: .init(
+                            title: owner.title,
+                            startAt: owner.startAt.toSmallSimtongDateString(),
+                            endAt: owner.endAt.toSmallSimtongDateString(),
+                            alarm: "\(owner.alarmTime.hour):\(owner.alarmTime.minute):\(owner.alarmTime.second)"
+                        )
+                    )
+                } else {
+                    try await owner.updateScheduleUseCase.execute(
+                        id: owner.id,
+                        req: .init(
+                            title: owner.title,
+                            startAt: owner.startAt.toSmallSimtongDateString(),
+                            endAt: owner.endAt.toSmallSimtongDateString(),
+                            alarm: "\(owner.alarmTime.hour):\(owner.alarmTime.minute):\(owner.alarmTime.second)"
+                        )
+                    )
+                }
+            }
+        }
+    }
 }

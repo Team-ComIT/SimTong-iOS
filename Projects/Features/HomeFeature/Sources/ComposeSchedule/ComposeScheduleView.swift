@@ -1,3 +1,4 @@
+import Combine
 import DesignSystem
 import SwiftUI
 import Utility
@@ -92,6 +93,11 @@ struct ComposeScheduleView: View {
                 .labelsHidden()
                 .padding()
                 .accentColor(.main)
+        }
+        .onReceive(Just(viewModel.$title)) { _ in
+            if viewModel.title.count > 20 {
+                viewModel.title = String(viewModel.title.prefix(20))
+            }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
