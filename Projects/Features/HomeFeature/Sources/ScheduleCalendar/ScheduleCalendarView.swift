@@ -12,6 +12,7 @@ struct ScheduleCalendarView: View {
         [String: HolidayType],
         [String: [ScheduleEntity]]
     ) -> Void
+    private let composeScheduleComponent: ComposeScheduleComponent
 
     init(
         viewModel: ScheduleCalendarViewModel,
@@ -20,12 +21,14 @@ struct ScheduleCalendarView: View {
         onFinished: @escaping (
             [String: HolidayType],
             [String: [ScheduleEntity]]
-        ) -> Void
+        ) -> Void,
+        composeScheduleComponent: ComposeScheduleComponent
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _isPresented = isPresented
         self.scheduleAnimation = scheduleAnimation
         self.onFinished = onFinished
+        self.composeScheduleComponent = composeScheduleComponent
     }
 
     var body: some View {
@@ -55,8 +58,15 @@ struct ScheduleCalendarView: View {
 
                     Spacer()
 
-                    Image(systemName: "plus")
-                        .foregroundColor(.gray05)
+                    NavigationLink {
+                        DeferView {
+                            composeScheduleComponent.makeView()
+                        }
+                    } label: {
+                        Image(systemName: "plus")
+                            .foregroundColor(.gray05)
+                    }
+
                 }
                 .padding(.top, 8)
 
@@ -146,7 +156,7 @@ struct ScheduleCalendarView: View {
     func scheduleDateFormatting(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd"
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.locale = Locale(identifier: "ko_kr")
         return formatter.string(from: date)
     }
 }

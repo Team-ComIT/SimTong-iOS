@@ -15,6 +15,7 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         } else {
             list = scheduleDict
         }
+        print(list)
         return list.sorted {
             $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedDescending ||
             $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedSame

@@ -4,14 +4,14 @@ public extension String {
     func toSimtongDate() -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.locale = Locale(identifier: "ko_kr")
         return formatter.date(from: self) ?? .init()
     }
 
     func toSmallSimtongDate() -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.locale = Locale(identifier: "ko_kr")
         return formatter.date(from: self) ?? .init()
     }
 }
@@ -20,14 +20,14 @@ public extension Date {
     func toSimtongDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        formatter.timeZone = .init(identifier: "UTC")
+        formatter.locale = Locale(identifier: "ko_kr")
         return formatter.string(from: self)
     }
 
     func toSmallSimtongDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = .init(identifier: "UTC")
+        formatter.locale = Locale(identifier: "ko_kr")
         return formatter.string(from: self)
     }
 
@@ -60,7 +60,8 @@ public extension Date {
     func dayOfWeek() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEEEE"
-        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.locale = Locale(identifier: "ko_kr")
+        formatter.timeZone = .init(identifier: "UTC")
         return formatter.string(from: self)
     }
 }
@@ -76,5 +77,13 @@ public extension Date {
 
     var day: Int {
         return Calendar.current.component(.day, from: self)
+    }
+
+    var hour: Int {
+        return Calendar.current.component(.hour, from: self)
+    }
+
+    var minute: Int {
+        return Calendar.current.component(.minute, from: self)
     }
 }

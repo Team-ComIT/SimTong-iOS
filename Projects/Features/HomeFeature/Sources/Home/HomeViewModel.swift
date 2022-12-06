@@ -51,7 +51,7 @@ public final class HomeViewModel: BaseViewModel {
                 ]
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()
-                    let end = schedule.endAt.toSmallSimtongDate()
+                    let end = schedule.endAt.toSmallSimtongDate().adding(by: .day, value: 1)
                     if owner.schedules[schedule.startAt] == nil {
                         owner.schedules[schedule.startAt] = [schedule]
                     }

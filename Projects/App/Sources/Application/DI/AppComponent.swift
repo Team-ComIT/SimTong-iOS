@@ -100,6 +100,10 @@ extension AppComponent {
     var scheduleCalendarComponent: ScheduleCalendarComponent {
         ScheduleCalendarComponent(parent: self)
     }
+
+    var composeScheduleComponent: ComposeScheduleComponent {
+        ComposeScheduleComponent(parent: self)
+    }
 }
 
 // MARK: - Splash

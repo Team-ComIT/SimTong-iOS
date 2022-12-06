@@ -2,7 +2,9 @@ import DomainModule
 import SwiftUI
 import NeedleFoundation
 
-public protocol ScheduleCalendarDependency: Dependency {}
+public protocol ScheduleCalendarDependency: Dependency {
+    var composeScheduleComponent: ComposeScheduleComponent { get }
+}
 
 public final class ScheduleCalendarComponent: Component<ScheduleCalendarDependency> {
     public func makeView(
@@ -22,7 +24,8 @@ public final class ScheduleCalendarComponent: Component<ScheduleCalendarDependen
             ),
             isPresented: isPresented,
             scheduleAnimation: scheduleAnimation,
-            onFinished: onFinished
+            onFinished: onFinished,
+            composeScheduleComponent: dependency.composeScheduleComponent
         )
     }
 }
