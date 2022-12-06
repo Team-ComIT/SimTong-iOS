@@ -217,15 +217,20 @@ private func factory67229cdf0f755562b2b1f47b58f8f304c97af4d5(_ component: Needle
     return HomeDependency443c4e1871277bd8432aProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class ComposeScheduleDependency534591f9c4f254e49500Provider: ComposeScheduleDependency {
-
-
-    init() {
-
+    var createNewScheduleUseCase: any CreateNewScheduleUseCase {
+        return appComponent.createNewScheduleUseCase
+    }
+    var updateScheduleUseCase: any UpdateScheduleUseCase {
+        return appComponent.updateScheduleUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->ComposeScheduleComponent
-private func factory18d959497033aa79a250e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return ComposeScheduleDependency534591f9c4f254e49500Provider()
+private func factory18d959497033aa79a250f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return ComposeScheduleDependency534591f9c4f254e49500Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class ScheduleCalendarDependency82957fd936f8392eba72Provider: ScheduleCalendarDependency {
     var composeScheduleComponent: ComposeScheduleComponent {
@@ -371,6 +376,9 @@ extension AppComponent: Registration {
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
         localTable["fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"] = { self.fetchPublicMenuListUseCase as Any }
         localTable["fetchScheduleUseCase-any FetchScheduleUseCase"] = { self.fetchScheduleUseCase as Any }
+        localTable["createNewScheduleUseCase-any CreateNewScheduleUseCase"] = { self.createNewScheduleUseCase as Any }
+        localTable["updateScheduleUseCase-any UpdateScheduleUseCase"] = { self.updateScheduleUseCase as Any }
+        localTable["deleteScheduleUseCase-any DeleteScheduleUseCase"] = { self.deleteScheduleUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -446,7 +454,8 @@ extension HomeComponent: Registration {
 }
 extension ComposeScheduleComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\ComposeScheduleDependency.createNewScheduleUseCase] = "createNewScheduleUseCase-any CreateNewScheduleUseCase"
+        keyPathToName[\ComposeScheduleDependency.updateScheduleUseCase] = "updateScheduleUseCase-any UpdateScheduleUseCase"
     }
 }
 extension ScheduleCalendarComponent: Registration {
@@ -518,7 +527,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->ComposeScheduleComponent", factory18d959497033aa79a250e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->ComposeScheduleComponent", factory18d959497033aa79a250f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->ScheduleCalendarComponent", factory435d771786798070a01bf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->WriteHolidayComponent", factory231bc78685abe84d7b9fe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)

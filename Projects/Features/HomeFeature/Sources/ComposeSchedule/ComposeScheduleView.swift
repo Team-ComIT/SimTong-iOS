@@ -69,7 +69,7 @@ struct ComposeScheduleView: View {
 
             Spacer()
 
-            CTAButton(text: "추가")
+            CTAButton(text: viewModel.isUpdate ? "수정" : "추가")
                 .padding(.bottom, 16)
         }
         .padding(.horizontal, 16)

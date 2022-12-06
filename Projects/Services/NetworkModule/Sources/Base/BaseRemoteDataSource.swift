@@ -17,7 +17,7 @@ public class BaseRemoteDataSource<API: SimTongAPI> {
         self.keychain = keychain
 
         #if DEBUG
-        self.provider = provider ?? MoyaProvider(plugins: [JwtPlugin(keychain: keychain), NetworkLoggerPlugin()])
+        self.provider = provider ?? MoyaProvider(plugins: [JwtPlugin(keychain: keychain), MoyaLoggingPlugin()])
         #else
         self.provider = provider ?? MoyaProvider(plugins: [JwtPlugin(keychain: keychain)])
         #endif

@@ -25,10 +25,20 @@ final class ComposeScheduleViewModel: BaseViewModel {
     @Published var isPresentedEndAtDatePicker = false
     @Published var isPresentedAlarmDatePicker = false
     let isUpdate: Bool
+    private let id: String
+    private let createNewScheduleUseCase: any CreateNewScheduleUseCase
+    private let updateScheduleUseCase: any UpdateScheduleUseCase
 
-    init(updateTarget: ScheduleEntity? = nil) {
+    init(
+        updateTarget: ScheduleEntity? = nil,
+        createNewScheduleUseCase: any CreateNewScheduleUseCase,
+        updateScheduleUseCase: any UpdateScheduleUseCase
+    ) {
+        self.createNewScheduleUseCase = createNewScheduleUseCase
+        self.updateScheduleUseCase = updateScheduleUseCase
         if let updateTarget {
             isUpdate = true
+            id = updateTarget.id
             title = updateTarget.title
             startAt = updateTarget.startAt.toSmallSimtongDate()
             endAt = updateTarget.endAt.toSmallSimtongDate()
@@ -36,6 +46,7 @@ final class ComposeScheduleViewModel: BaseViewModel {
             startAtString = dateFormattingString(date: startAt)
             endAtString = dateFormattingString(date: endAt)
         } else {
+            id = ""
             isUpdate = false
             super.init()
         }
