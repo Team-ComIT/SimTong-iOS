@@ -13,6 +13,10 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
             .employeeNumber
     }
 
+    public func comparePassword(password: String) async throws {
+        try await request(.comparePassword(password: password), dto: NoResponse.self)
+    }
+
     public func reissueToken() async throws {
         try await request(.reissueToken, dto: NoResponse.self)
     }

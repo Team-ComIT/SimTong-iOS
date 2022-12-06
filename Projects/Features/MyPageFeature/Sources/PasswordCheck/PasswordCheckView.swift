@@ -70,12 +70,6 @@ struct PasswordCheckView: View {
             to: passwordChangeComponent.makeView(),
             when: $viewModel.isSuccessPasswordCheck
         )
-//        .na/
-//        .onChange(of: viewModel.isSuccessPasswordChange) { newValue in
-//            if newValue {
-//                dismiss()
-//            }
-//        }
         .navigationTitle("비밀번호 수정하기")
         .navigationBarTitleDisplayMode(.inline)
         .stBackground()
