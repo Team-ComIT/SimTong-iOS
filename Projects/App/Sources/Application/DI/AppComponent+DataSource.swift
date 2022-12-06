@@ -5,8 +5,8 @@ import NetworkModule
 extension AppComponent {
     public var remoteCommonsDataSource: any RemoteCommonsDataSource {
         shared {
-            RemoteCommonsDataSourceMock() // TODO: 나중에 변경
-//            RemoteCommonsDataSourceImpl(keychain: keychain)
+//            RemoteCommonsDataSourceMock() // TODO: 나중에 변경
+            RemoteCommonsDataSourceImpl(keychain: keychain)
         }
     }
 }
@@ -24,8 +24,8 @@ extension AppComponent {
 extension AppComponent {
     public var remoteUsersDataSource: any RemoteUsersDataSource {
         shared {
-            RemoteUsersDataSourceMock() // TODO: 나중에 변경
-//            RemoteUsersDataSourceImpl(keychain: keychain)
+//            RemoteUsersDataSourceMock() // TODO: 나중에 변경
+            RemoteUsersDataSourceImpl(keychain: keychain)
         }
     }
 }
@@ -53,8 +53,8 @@ extension AppComponent {
 extension AppComponent {
     public var remoteScheduleDataSource: any RemoteScheduleDataSource {
         shared {
-            RemoteScheduleDataSourceFake() // TODO: 나중에 변경
-//            RemoteScheduleDataSourceImpl(keychain: keychain)
+//            RemoteScheduleDataSourceFake() // TODO: 나중에 변경
+            RemoteScheduleDataSourceImpl(keychain: keychain)
         }
     }
 }

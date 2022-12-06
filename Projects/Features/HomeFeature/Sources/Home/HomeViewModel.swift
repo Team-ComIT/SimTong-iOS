@@ -10,9 +10,9 @@ public final class HomeViewModel: BaseViewModel {
     @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = []
-    @Published var salaryURL: URL = URL(string: """
-https://em.sungsimdang.co.kr:8443/account?error_msg=this+bean+name+is+undefined&productCode=erpiu&langText=%7B%7D&headerLoginBI=%2FcustomImage%2Fh_logo_en_rosso.png&centerLoginImage=%2FcustomImage%2Fimg_visual_en_rosso.jpg&defaultCompanyCode=&defaultGroupCode=&defaultUserId=&defaultPassword=&lang=ko&headerBI=%2FcustomImage%2Fh_logo_rosso.png&headerTitleText=ERP-iU+Web&scriptBaseRoot=%2Fdews%2F&contextRoot=%2F&dateFormat=yyyy%2FMM%2Fdd&dateTimeFormat=yyyy%2FMM%2Fdd+HH%3Amm%3Ass&monthFormat=yyyy%2FMM&defaultMainImage=%2FcustomImage%2Fmain_visual_rosso.jpg&defaultMainImageHeight=850
-""") ?? URL(string: "https://www.google.com")!
+    @Published var salaryURL: URL = URL(
+        string: Bundle.main.object(forInfoDictionaryKey: "SALARY_URL") as? String ?? ""
+    ) ?? URL(string: "https://www.google.com")!
 
     private let fetchMenuListUseCase: any FetchMenuListUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
