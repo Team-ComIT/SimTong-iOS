@@ -6,15 +6,21 @@ public extension View {
         when binding: Binding<Bool>,
         isDetailLink: Bool = false
     ) -> some View {
-        self.background {
-            NavigationLink(isActive: binding) {
-                DeferView {
-                    view
-                }
-            } label: {
-                EmptyView()
+        if #available(iOS 16.0, *) {
+            return self.navigationDestination(isPresented: binding) {
+                view
             }
-            .isDetailLink(isDetailLink)
+        } else {
+            return self.background {
+                NavigationLink(isActive: binding) {
+                    DeferView {
+                        view
+                    }
+                } label: {
+                    EmptyView()
+                }
+                .isDetailLink(isDetailLink)
+            }
         }
     }
 }

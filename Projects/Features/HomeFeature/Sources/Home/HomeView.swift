@@ -4,7 +4,6 @@ import SwiftUI
 import Utility
 import MyPageFeature
 
-
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @Namespace var calendarAnimation
