@@ -3,10 +3,14 @@ import ErrorModule
 import DataMappingModule
 
 public enum CommonsAPI: SimTongAPI {
+    case resetPassword(ResetPasswordRequestDTO)
     case reissueToken
+    case comparePassword(password: String)
     case findEmployeeNumber(FindEmployeeNumberRequestDTO)
     case spotList
-    case resetPassword(ResetPasswordRequestDTO)
+    case changePassword(ChangePasswordRequestDTO)
+    case checkDuplicateEmail(email: String)
+    case checkExistEmployeeIDAndEmail(id: Int, email: String)
 }
 
 public extension CommonsAPI {
@@ -26,16 +30,28 @@ public extension CommonsAPI {
             return "/spot"
 
         case .resetPassword:
+            return "/password/initialization"
+
+        case .changePassword:
             return "/password"
+
+        case .checkDuplicateEmail:
+            return "/email/duplication"
+
+        case .checkExistEmployeeIDAndEmail:
+            return "/account/existence"
+
+        case .comparePassword:
+            return "/password/compare"
         }
     }
 
     var method: Method {
         switch self {
-        case .spotList, .findEmployeeNumber:
+        case .spotList, .findEmployeeNumber, .checkDuplicateEmail, .checkExistEmployeeIDAndEmail, .comparePassword:
             return .get
 
-        case .reissueToken, .resetPassword:
+        case .reissueToken, .resetPassword, .changePassword:
             return .put
         }
     }
@@ -53,12 +69,41 @@ public extension CommonsAPI {
             ], encoding: URLEncoding.queryString)
 
         case let .resetPassword(req):
-            return .requestJSONEncodable(req)
+            return .requestParameters(parameters: [
+                "email": req.email,
+                "employee_number": req.employeeNumber,
+                "new_password": req.newPassword
+            ], encoding: JSONEncoding.default)
+
+        case let .changePassword(req):
+            return .requestParameters(parameters: [
+                "password": req.password,
+                "new_password": req.newPassword
+            ], encoding: JSONEncoding.default)
+
+        case let .checkDuplicateEmail(email):
+            return .requestParameters(parameters: [
+                "email": email
+            ], encoding: URLEncoding.queryString)
+
+        case let .checkExistEmployeeIDAndEmail(id, email):
+            return .requestParameters(parameters: [
+                "employeeNumber": id,
+                "email": email
+            ], encoding: URLEncoding.queryString)
+
+        case let .comparePassword(password):
+            return .requestParameters(parameters: [
+                "password": password
+            ], encoding: URLEncoding.queryString)
         }
     }
 
     var jwtTokenType: JwtTokenType {
         switch self {
+        case .changePassword, .comparePassword:
+            return .accessToken
+
         case .reissueToken:
             return .refreshToken
 
@@ -91,6 +136,30 @@ public extension CommonsAPI {
                 400: .unknown(),
                 401: .emailIsNotAuthorizedOrMismatch,
                 404: .notFoundUserByResetPassword
+            ]
+
+        case .changePassword:
+            return [
+                400: .unknown(),
+                401: .passwordMismatchByChangePassword
+            ]
+
+        case .checkDuplicateEmail:
+            return [
+                400: .unknown(),
+                409: .alreadyExistsByEmailOverlap
+            ]
+
+        case .checkExistEmployeeIDAndEmail:
+            return [
+                400: .unknown(),
+                404: .notFoundUserByCheckNameAndEmail
+            ]
+        case .comparePassword:
+            return [
+                400: .unknown(),
+                401: .passwordMismatch,
+                404: .notFoundUserByComparePassword
             ]
         }
     }

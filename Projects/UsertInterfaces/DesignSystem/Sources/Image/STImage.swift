@@ -25,6 +25,10 @@ public struct STImage: View {
         case place4
         case place5
         case introLogo
+        case rice
+        case pay
+        case holiday
+        case signinLogo
     }
 
     public var body: some View {
@@ -47,6 +51,14 @@ public struct STImage: View {
             return DesignSystemAsset.Images.place5.suiImage
         case .introLogo:
             return DesignSystemAsset.Images.introLogo.suiImage
+        case .rice:
+            return DesignSystemAsset.Images.rice.suiImage
+        case .pay:
+            return DesignSystemAsset.Images.pay.suiImage
+        case .holiday:
+            return DesignSystemAsset.Images.holiday.suiImage
+        case .signinLogo:
+            return DesignSystemAsset.Images.signinLogo.suiImage
         }
     }
 }

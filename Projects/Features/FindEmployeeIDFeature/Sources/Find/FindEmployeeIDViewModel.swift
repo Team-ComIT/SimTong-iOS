@@ -6,8 +6,9 @@ public final class FindEmployeeIDViewModel: BaseViewModel {
     @Published var name = ""
     @Published var email = ""
     @Published var spot = ""
-    @Published var selectedSpot: Spot?
+    @Published var selectedSpot: SpotEntity?
     @Published var isNavigateResultID = false
+    @Published var isPresentedSpotList = false
 
     var isFormValid: Bool {
         !name.isEmpty && !email.isEmpty && selectedSpot != nil

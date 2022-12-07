@@ -19,7 +19,10 @@ extension AppComponent {
 // MARK: - Users
 extension AppComponent {
     public var usersRepository: any UsersRepository {
-        UsersRepositoryImpl(remoteUsersDataSource: remoteUsersDataSource)
+        UsersRepositoryImpl(
+            remoteUsersDataSource: remoteUsersDataSource,
+            localUsersDataSource: localUsersDataSource
+        )
     }
 }
 
@@ -34,5 +37,12 @@ extension AppComponent {
 extension AppComponent {
     public var menuRepository: any MenuRepository {
         MenuRepositoryImpl(remoteMenuDataSource: remoteMenuDataSource)
+    }
+}
+
+// MARK: - Schedule
+extension AppComponent {
+    public var scheduleRepository: any ScheduleRepository {
+        ScheduleRepositoryImpl(remoteScheduleDataSource: remoteScheduleDataSource)
     }
 }

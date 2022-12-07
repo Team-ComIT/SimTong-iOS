@@ -15,10 +15,10 @@ public extension EmailsAPI {
     var urlPath: String {
         switch self {
         case .sendAuthCode:
-            return ""
+            return "/code"
 
         case .verifyAuthCode:
-            return "/code"
+            return ""
         }
     }
 

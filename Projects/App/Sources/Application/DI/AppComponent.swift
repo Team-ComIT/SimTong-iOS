@@ -2,10 +2,16 @@ import NeedleFoundation
 import SwiftUI
 import RootFeature
 import IntroFeature
-import FindTabFeature
+import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
 import SignupFeature
 import KeychainModule
+import FindPasswordFeature
+import MainTabFeature
+import MyPageFeature
+import SigninFeature
+import HomeFeature
+import SplashFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -29,11 +35,27 @@ extension AppComponent {
         IntroComponent(parent: self)
     }
 
-    var signupComponent: SignupComponent {
-        SignupComponent(parent: self)
+    var signupEmployeeInfoComponent: SignupEmployeeInfoComponent {
+        SignupEmployeeInfoComponent(parent: self)
     }
 
-    var findAuthInfoComponent: FindAuthInfoTabComponent {
+    var signupVerifyComponent: SignupVerifyComponent {
+        SignupVerifyComponent(parent: self)
+    }
+
+    var signupPasswordComponent: SignupPasswordComponent {
+        SignupPasswordComponent(parent: self)
+    }
+
+    var signupInfoComponent: SignupInfoComponent {
+        SignupInfoComponent(parent: self)
+    }
+
+    var signinComponent: SigninComponent {
+        SigninComponent(parent: self)
+    }
+
+    var findAuthInfoTabComponent: FindAuthInfoTabComponent {
         FindAuthInfoTabComponent(parent: self)
     }
 
@@ -47,5 +69,75 @@ extension AppComponent {
 
     var employeeIDResultComponent: EmployeeIDResultComponent {
         EmployeeIDResultComponent(parent: self)
+    }
+
+    var findPasswordInfoComponent: FindPasswordInfoComponent {
+        FindPasswordInfoComponent(parent: self)
+    }
+
+    var renewalPasswordComponent: RenewalPasswordComponent {
+        RenewalPasswordComponent(parent: self)
+    }
+
+    var findPasswordVerifyComponent: FindPasswordVerifyComponent {
+        FindPasswordVerifyComponent(parent: self)
+    }
+
+    var nicknameChangeComponent: NicknameChangeComponent {
+        NicknameChangeComponent(parent: self)
+    }
+
+    var emailModifyComponent: EmailModifyComponent {
+        EmailModifyComponent(parent: self)
+    }
+
+    var emailVerifyComponent: EmailVerifyComponent {
+        EmailVerifyComponent(parent: self)
+    }
+
+    var spotChangeComponent: SpotChangeComponent {
+        SpotChangeComponent(parent: self)
+    }
+
+    var passwordCheckComponent: PasswordCheckComponent {
+        PasswordCheckComponent(parent: self)
+    }
+
+    var passwordChangeComponent: PasswordChangeComponent {
+        PasswordChangeComponent(parent: self)
+    }
+}
+
+// MARK: - Main
+extension AppComponent {
+    var mainTabComponent: MainTabComponent {
+        MainTabComponent(parent: self)
+    }
+
+    var homeComponent: HomeComponent {
+        HomeComponent(parent: self)
+    }
+
+    var writeHolidayComponent: WriteHolidayComponent {
+        WriteHolidayComponent(parent: self)
+    }
+
+    var myPageComponent: MyPageComponent {
+        MyPageComponent(parent: self)
+    }
+
+    var scheduleCalendarComponent: ScheduleCalendarComponent {
+        ScheduleCalendarComponent(parent: self)
+    }
+
+    var composeScheduleComponent: ComposeScheduleComponent {
+        ComposeScheduleComponent(parent: self)
+    }
+}
+
+// MARK: - Splash
+extension AppComponent {
+    var splashComponent: SplashComponent {
+        SplashComponent(parent: self)
     }
 }

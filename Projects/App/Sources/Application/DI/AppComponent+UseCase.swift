@@ -1,19 +1,36 @@
 import NeedleFoundation
 import DomainModule
 import DataModule
+import DatabaseModule
 
 // MARK: - Commons
 extension AppComponent {
     public var fetchSpotListUseCase: any FetchSpotListUseCase {
-        FetchSpotListUseCaseStub()
+        FetchSpotListUseCaseImpl(commonRepository: commonsRepository)
     }
 
     public var findEmployeeNumberUseCase: any FindEmployeeNumberUseCase {
         FindEmployeeNumberUseCaseImpl(commonRepository: commonsRepository)
     }
 
+    public var comparePasswordUseCase: any ComparePasswordUseCase {
+        ComparePasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
+
+    public var reissueTokenUseCase: any ReissueTokenUseCase {
+        ReissueTokenUseCaseImpl(commonsRepository: commonsRepository)
+    }
+
     public var resetPasswordUseCase: any ResetPasswordUseCase {
         ResetPasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
+
+    public var changePasswordUseCase: any ChangePasswordUseCase {
+        ChangePasswordUseCaseImpl(commonsRepository: commonsRepository)
+    }
+
+    public var checkExistEmployeeIDAndEmailUseCase: any CheckExistEmployeeIDAndEmailUseCase {
+        CheckExistEmployeeIDAndEmailUseCaseImpl(commonsRepository: commonsRepository)
     }
 }
 
@@ -38,20 +55,16 @@ extension AppComponent {
         SignupUseCaseImpl(usersRepository: usersRepository)
     }
 
-    public var existsByNameAndEmployeeNumberUseCase: any ExistsByNameAndEmployeeNumberUseCase {
-        ExistsByNameAndEmployeeNumberUseCaseImpl(usersRepository: usersRepository)
+    public var checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase {
+        CheckExistNameAndEmployeeIDUseCaseImpl(usersRepository: usersRepository)
     }
 
-    public var existsByEmailUseCase: any ExistsByEmailUseCase {
-        ExistsByEmailUseCaseImpl(usersRepository: usersRepository)
+    public var checkDuplicateEmail: any CheckDuplicateEmailUseCase {
+        CheckDuplicateEmailUseCaseImpl(commonsRepository: commonsRepository)
     }
 
     public var fetchMyProfileUseCase: any FetchMyProfileUseCase {
         FetchMyProfileUseCaseImpl(usersRepository: usersRepository)
-    }
-
-    public var changePasswordUseCase: any ChangePasswordUseCase {
-        ChangePasswordUseCaseImpl(usersRepository: usersRepository)
     }
 
     public var changeNicknameUseCase: any ChangeNicknameUseCase {
@@ -68,6 +81,14 @@ extension AppComponent {
 
     public var changeSpotUseCase: any ChangeSpotUseCase {
         ChangeSpotUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var checkDuplicateNicknameUseCase: any CheckDuplicateNicknameUseCase {
+        CheckDuplicateNicknameUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var logoutUseCase: any LogoutUseCase {
+        LogoutUseCaseImpl(usersRepository: usersRepository)
     }
 }
 
@@ -90,5 +111,24 @@ extension AppComponent {
 
     public var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
         FetchPublicMenuListUseCaseImpl(menuRepository: menuRepository)
+    }
+}
+
+// MARK: - Scheduls
+extension AppComponent {
+    public var fetchScheduleUseCase: any FetchScheduleUseCase {
+        FetchScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
+
+    public var createNewScheduleUseCase: any CreateNewScheduleUseCase {
+        CreateNewScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
+
+    public var updateScheduleUseCase: any UpdateScheduleUseCase {
+        UpdateScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
+
+    public var deleteScheduleUseCase: any DeleteScheduleUseCase {
+        DeleteScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
     }
 }

@@ -1,12 +1,15 @@
 import DomainModule
+import DatabaseModule
 import DataMappingModule
 import NetworkModule
 
 public struct UsersRepositoryImpl: UsersRepository {
     private let remoteUsersDataSource: any RemoteUsersDataSource
+    private let localUsersDataSource: any LocalUsersDataSource
 
-    public init(remoteUsersDataSource: any RemoteUsersDataSource) {
+    public init(remoteUsersDataSource: any RemoteUsersDataSource, localUsersDataSource: any LocalUsersDataSource) {
         self.remoteUsersDataSource = remoteUsersDataSource
+        self.localUsersDataSource = localUsersDataSource
     }
 
     public func signin(req: SigninRequestDTO) async throws {
@@ -17,20 +20,16 @@ public struct UsersRepositoryImpl: UsersRepository {
         try await remoteUsersDataSource.signup(req: req)
     }
 
-    public func existsByNameAndEmployeeNumber(name: String, employeeNumber: Int) async throws {
-        try await remoteUsersDataSource.existsByNameAndEmployeeNumber(name: name, employeeNumber: employeeNumber)
+    public func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws {
+        try await remoteUsersDataSource.checkExistNameAndEmployeeID(name: name, employeeID: employeeID)
     }
 
-    public func existsByEmail(email: String) async throws {
-        try await remoteUsersDataSource.existsByEmail(email: email)
-    }
-
-    public func fetchMyProfile() async throws -> UserInfo {
+    public func fetchMyProfile() async throws -> UserInfoEntity {
         try await remoteUsersDataSource.fetchMyProfile()
     }
 
-    public func changePassword(req: ChangePasswordRequestDTO) async throws {
-        try await remoteUsersDataSource.changePassword(req: req)
+    public func checkDuplicateNickname(nickname: String) async throws {
+        try await remoteUsersDataSource.checkDuplicateNickname(nickname: nickname)
     }
 
     public func changeNickname(nickname: String) async throws {
@@ -47,5 +46,9 @@ public struct UsersRepositoryImpl: UsersRepository {
 
     public func changeSpot(spotID: String) async throws {
         try await remoteUsersDataSource.changeSpot(spotID: spotID)
+    }
+
+    public func logout() {
+        localUsersDataSource.logout()
     }
 }

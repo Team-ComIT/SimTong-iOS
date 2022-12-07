@@ -19,13 +19,14 @@ public struct CTAButton: View {
         Button(action: action) {
             HStack {
                 Spacer()
+
                 Text(text)
                     .padding(.vertical, 17)
+
                 Spacer()
             }
         }
         .buttonStyle(CTAButtonStyle(style: style))
-        .frame(height: 48)
     }
 }
 

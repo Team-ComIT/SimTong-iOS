@@ -2,10 +2,13 @@ import UIKit
 import Lottie
 
 public final class LottieWrappedView: UIView {
-    let animationView: AnimationView
+    let animationView: LottieAnimationView
 
-    public init(animation: Lottie.Animation?) {
-        let animationView = AnimationView(animation: animation)
+    public init(animation: LottieAnimation?) {
+        let animationView = LottieAnimationView(
+            animation: animation,
+            configuration: .init(renderingEngine: .coreAnimation)
+        )
         animationView.translatesAutoresizingMaskIntoConstraints = false
         self.animationView = animationView
 

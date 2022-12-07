@@ -11,9 +11,15 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.Project.Features {
+    static let SplashFeature = TargetDependency.feature(name: "SplashFeature")
+    static let SigninFeature = TargetDependency.feature(name: "SigninFeature")
+    static let HomeFeature = TargetDependency.feature(name: "HomeFeature")
+    static let MainTabFeature = TargetDependency.feature(name: "MainTabFeature")
+    static let MyPageFeature = TargetDependency.feature(name: "MyPageFeature")
+    static let FindPasswordFeature = TargetDependency.feature(name: "FindPasswordFeature")
     static let FindEmployeeIDFeature = TargetDependency.feature(name: "FindEmployeeIDFeature")
     static let SignupFeature = TargetDependency.feature(name: "SignupFeature")
-    static let FindTabFeature = TargetDependency.feature(name: "FindTabFeature")
+    static let FindAuthInfoTabFeature = TargetDependency.feature(name: "FindAuthInfoTabFeature")
     static let IntroFeature = TargetDependency.feature(name: "IntroFeature")
     static let BaseFeature = TargetDependency.feature(name: "BaseFeature")
     static let RootFeature = TargetDependency.feature(name: "RootFeature")
@@ -22,7 +28,6 @@ public extension TargetDependency.Project.Features {
 public extension TargetDependency.Project.Module {
     static let KeychainModule = TargetDependency.module(name: "KeychainModule")
     static let ErrorModule = TargetDependency.module(name: "ErrorModule")
-    static let FeatureThirdPartyLib = TargetDependency.module(name: "FeatureThirdPartyLib")
     static let ThirdPartyLib = TargetDependency.module(name: "ThirdPartyLib")
     static let Utility = TargetDependency.module(name: "Utility")
 }

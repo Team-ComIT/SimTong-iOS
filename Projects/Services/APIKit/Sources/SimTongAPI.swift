@@ -10,11 +10,17 @@ public protocol SimTongAPI: TargetType, JwtAuthorizable {
 
 public extension SimTongAPI {
     var baseURL: URL {
-        URL(string: "https://www.google.com")!
+        URL(
+            string: Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String ?? ""
+        ) ?? URL(string: "https://www.google.com")!
     }
 
     var path: String {
         domain.asURLString + urlPath
+    }
+
+    var validationType: ValidationType {
+        .successCodes
     }
 
     var headers: [String: String]? {

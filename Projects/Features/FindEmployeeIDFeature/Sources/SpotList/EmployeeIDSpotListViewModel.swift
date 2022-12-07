@@ -5,14 +5,14 @@ import DomainModule
 public final class EmployeeIDSpotListViewModel: BaseViewModel {
     private let fetchSpotListUseCase: any FetchSpotListUseCase
 
-    @Published var spotList: [Spot] = []
-    @Published var selectedSpot: Spot?
-    private let completion: (Spot) -> Void
+    @Published var spotList: [SpotEntity] = []
+    @Published var selectedSpot: SpotEntity?
+    private let completion: (SpotEntity) -> Void
 
     public init(
         fetchSpotListUseCase: any FetchSpotListUseCase,
-        selectedSpot: Spot?,
-        completion: @escaping (Spot) -> Void
+        selectedSpot: SpotEntity?,
+        completion: @escaping (SpotEntity) -> Void
     ) {
         self.fetchSpotListUseCase = fetchSpotListUseCase
         self.selectedSpot = selectedSpot
@@ -27,7 +27,7 @@ public final class EmployeeIDSpotListViewModel: BaseViewModel {
         }
     }
 
-    public func spotDidTap(spot: Spot) {
+    public func spotDidTap(spot: SpotEntity) {
         selectedSpot = spot
         completion(spot)
     }
