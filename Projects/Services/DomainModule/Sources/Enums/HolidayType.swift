@@ -1,10 +1,10 @@
 import Foundation
 import SwiftUI
 
-public enum HolidayType {
-    case dayoff
-    case annual
-    case work
+public enum HolidayType: String, Codable {
+    case dayoff = "HOLIDAY"
+    case annual = "ANNUAL"
+    case work = "WORK"
 }
 
 public extension HolidayType {

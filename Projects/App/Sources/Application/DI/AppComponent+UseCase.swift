@@ -132,3 +132,22 @@ extension AppComponent {
         DeleteScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
     }
 }
+
+// MARK: - Holidays
+extension AppComponent {
+    public var fetchHolidayUseCase: any FetchHolidayUseCase {
+        FetchHolidayUseCaseImpl(holidaysRepository: holidaysRepository)
+    }
+
+    public var setHolidayUseCase: any SetHolidayUseCase {
+        SetHolidayUseCaseImpl(holidaysRepository: holidaysRepository)
+    }
+
+    public var setAnnualUseCase: any SetAnnualUseCase {
+        SetAnnualUseCaseImpl(holidaysRepository: holidaysRepository)
+    }
+
+    public var setWorkUseCase: any SetWorkUseCase {
+        SetWorkUseCaseImpl(holidaysRepository: holidaysRepository)
+    }
+}

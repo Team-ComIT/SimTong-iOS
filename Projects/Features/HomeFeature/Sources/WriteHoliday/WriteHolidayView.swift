@@ -80,10 +80,10 @@ struct WriteHolidayView: View {
                 isPresented = false
             }
         }
-        .alert(viewModel.errorMessage, isPresented: $viewModel.isError) {
+        .alert("", isPresented: $viewModel.isError) {
             Button("확인", role: .cancel) {}
         } message: {
-            Text(viewModel.errorSubMessage)
+            Text(viewModel.errorMessage)
         }
     }
 

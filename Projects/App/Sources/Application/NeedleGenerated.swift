@@ -324,6 +324,9 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var fetchScheduleUseCase: any FetchScheduleUseCase {
         return appComponent.fetchScheduleUseCase
     }
+    var fetchHolidayUseCase: any FetchHolidayUseCase {
+        return appComponent.fetchHolidayUseCase
+    }
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
@@ -378,15 +381,26 @@ private func factory435d771786798070a01bf47b58f8f304c97af4d5(_ component: Needle
     return ScheduleCalendarDependency82957fd936f8392eba72Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class WriteHolidayDependencyf70374d71937da494a07Provider: WriteHolidayDependency {
-
-
-    init() {
-
+    var fetchHolidayUseCase: any FetchHolidayUseCase {
+        return appComponent.fetchHolidayUseCase
+    }
+    var setHolidayUseCase: any SetHolidayUseCase {
+        return appComponent.setHolidayUseCase
+    }
+    var setAnnualUseCase: any SetAnnualUseCase {
+        return appComponent.setAnnualUseCase
+    }
+    var setWorkUseCase: any SetWorkUseCase {
+        return appComponent.setWorkUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->WriteHolidayComponent
-private func factory231bc78685abe84d7b9fe3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return WriteHolidayDependencyf70374d71937da494a07Provider()
+private func factory231bc78685abe84d7b9ff47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return WriteHolidayDependencyf70374d71937da494a07Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class FindPasswordVerifyDependencye7e025c9e757c84d8b5eProvider: FindPasswordVerifyDependency {
     var sendAuthCodeUseCase: any SendAuthCodeUseCase {
@@ -480,12 +494,14 @@ extension AppComponent: Registration {
         localTable["remoteEmailsDataSource-any RemoteEmailsDataSource"] = { self.remoteEmailsDataSource as Any }
         localTable["remoteMenuDataSource-any RemoteMenuDataSource"] = { self.remoteMenuDataSource as Any }
         localTable["remoteScheduleDataSource-any RemoteScheduleDataSource"] = { self.remoteScheduleDataSource as Any }
+        localTable["remoteHolidaysDataSource-any RemoteHolidaysDataSource"] = { self.remoteHolidaysDataSource as Any }
         localTable["commonsRepository-any CommonsRepository"] = { self.commonsRepository as Any }
         localTable["filesRepository-any FilesRepository"] = { self.filesRepository as Any }
         localTable["usersRepository-any UsersRepository"] = { self.usersRepository as Any }
         localTable["emailsRepository-any EmailsRepository"] = { self.emailsRepository as Any }
         localTable["menuRepository-any MenuRepository"] = { self.menuRepository as Any }
         localTable["scheduleRepository-any ScheduleRepository"] = { self.scheduleRepository as Any }
+        localTable["holidaysRepository-any HolidaysRepository"] = { self.holidaysRepository as Any }
         localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
         localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
         localTable["comparePasswordUseCase-any ComparePasswordUseCase"] = { self.comparePasswordUseCase as Any }
@@ -514,6 +530,10 @@ extension AppComponent: Registration {
         localTable["createNewScheduleUseCase-any CreateNewScheduleUseCase"] = { self.createNewScheduleUseCase as Any }
         localTable["updateScheduleUseCase-any UpdateScheduleUseCase"] = { self.updateScheduleUseCase as Any }
         localTable["deleteScheduleUseCase-any DeleteScheduleUseCase"] = { self.deleteScheduleUseCase as Any }
+        localTable["fetchHolidayUseCase-any FetchHolidayUseCase"] = { self.fetchHolidayUseCase as Any }
+        localTable["setHolidayUseCase-any SetHolidayUseCase"] = { self.setHolidayUseCase as Any }
+        localTable["setAnnualUseCase-any SetAnnualUseCase"] = { self.setAnnualUseCase as Any }
+        localTable["setWorkUseCase-any SetWorkUseCase"] = { self.setWorkUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -628,6 +648,7 @@ extension HomeComponent: Registration {
     public func registerItems() {
         keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
         keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
+        keyPathToName[\HomeDependency.fetchHolidayUseCase] = "fetchHolidayUseCase-any FetchHolidayUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
         keyPathToName[\HomeDependency.scheduleCalendarComponent] = "scheduleCalendarComponent-ScheduleCalendarComponent"
         keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
@@ -648,7 +669,10 @@ extension ScheduleCalendarComponent: Registration {
 }
 extension WriteHolidayComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\WriteHolidayDependency.fetchHolidayUseCase] = "fetchHolidayUseCase-any FetchHolidayUseCase"
+        keyPathToName[\WriteHolidayDependency.setHolidayUseCase] = "setHolidayUseCase-any SetHolidayUseCase"
+        keyPathToName[\WriteHolidayDependency.setAnnualUseCase] = "setAnnualUseCase-any SetAnnualUseCase"
+        keyPathToName[\WriteHolidayDependency.setWorkUseCase] = "setWorkUseCase-any SetWorkUseCase"
     }
 }
 extension FindPasswordVerifyComponent: Registration {
@@ -719,7 +743,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->ComposeScheduleComponent", factory18d959497033aa79a250f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->ScheduleCalendarComponent", factory435d771786798070a01bf47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->WriteHolidayComponent", factory231bc78685abe84d7b9fe3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->WriteHolidayComponent", factory231bc78685abe84d7b9ff47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)

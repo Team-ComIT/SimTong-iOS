@@ -64,3 +64,10 @@ extension AppComponent {
         }
     }
 }
+
+// MARK: - Holidays
+extension AppComponent {
+    public var remoteHolidaysDataSource: any RemoteHolidaysDataSource {
+        RemoteHolidaysDataSourceImpl(keychain: keychain)
+    }
+}

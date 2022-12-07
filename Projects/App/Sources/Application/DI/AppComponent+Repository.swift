@@ -46,3 +46,10 @@ extension AppComponent {
         ScheduleRepositoryImpl(remoteScheduleDataSource: remoteScheduleDataSource)
     }
 }
+
+// MARK: - Holidays
+extension AppComponent {
+    public var holidaysRepository: any HolidaysRepository {
+        HolidaysRepositoryImpl(remoteHolidaysDataSource: remoteHolidaysDataSource)
+    }
+}

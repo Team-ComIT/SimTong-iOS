@@ -6,6 +6,7 @@ import MyPageFeature
 public protocol HomeDependency: Dependency {
     var fetchMenuListUseCase: any FetchMenuListUseCase { get }
     var fetchScheduleUseCase: any FetchScheduleUseCase { get }
+    var fetchHolidayUseCase: any FetchHolidayUseCase { get }
     var writeHolidayComponent: WriteHolidayComponent { get }
     var scheduleCalendarComponent: ScheduleCalendarComponent { get }
     var myPageComponent: MyPageComponent { get }
@@ -16,7 +17,8 @@ public final class HomeComponent: Component<HomeDependency> {
         HomeView(
             viewModel: .init(
                 fetchMenuListUseCase: dependency.fetchMenuListUseCase,
-                fetchScheduleUseCase: dependency.fetchScheduleUseCase
+                fetchScheduleUseCase: dependency.fetchScheduleUseCase,
+                fetchHolidayUseCase: dependency.fetchHolidayUseCase
             ),
             writeHolidayComponent: dependency.writeHolidayComponent,
             scheduleCalendarComponent: dependency.scheduleCalendarComponent,
