@@ -1,6 +1,7 @@
 import NeedleFoundation
 import DomainModule
 import DataModule
+import DatabaseModule
 
 // MARK: - Commons
 extension AppComponent {
@@ -10,6 +11,10 @@ extension AppComponent {
 
     public var findEmployeeNumberUseCase: any FindEmployeeNumberUseCase {
         FindEmployeeNumberUseCaseImpl(commonRepository: commonsRepository)
+    }
+
+    public var comparePasswordUseCase: any ComparePasswordUseCase {
+        ComparePasswordUseCaseImpl(commonsRepository: commonsRepository)
     }
 
     public var reissueTokenUseCase: any ReissueTokenUseCase {
@@ -80,6 +85,10 @@ extension AppComponent {
 
     public var checkDuplicateNicknameUseCase: any CheckDuplicateNicknameUseCase {
         CheckDuplicateNicknameUseCaseImpl(usersRepository: usersRepository)
+    }
+
+    public var logoutUseCase: any LogoutUseCase {
+        LogoutUseCaseImpl(usersRepository: usersRepository)
     }
 }
 

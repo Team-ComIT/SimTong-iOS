@@ -10,6 +10,7 @@ public final class HomeViewModel: BaseViewModel {
     @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = []
+    @Published var isPresentedMyPage = false
     let salaryURL: URL = URL(
         string: Bundle.main.object(forInfoDictionaryKey: "SALARY_URL") as? String ?? ""
     ) ?? URL(string: "https://www.google.com")!

@@ -1,5 +1,6 @@
 import NeedleFoundation
 import NetworkModule
+import DatabaseModule
 
 // MARK: - Commons
 extension AppComponent {
@@ -26,6 +27,11 @@ extension AppComponent {
         shared {
 //            RemoteUsersDataSourceMock() // TODO: 나중에 변경
             RemoteUsersDataSourceImpl(keychain: keychain)
+        }
+    }
+    public var localUsersDataSource: any LocalUsersDataSource {
+        shared {
+            LocalUsersDataSourceImpl(keychain: keychain)
         }
     }
 }

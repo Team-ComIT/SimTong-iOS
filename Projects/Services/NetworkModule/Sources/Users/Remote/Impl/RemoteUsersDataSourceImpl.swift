@@ -4,11 +4,11 @@ import DomainModule
 
 public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, RemoteUsersDataSource {
     public func signin(req: SigninRequestDTO) async throws {
-        try await request(.signin(req), dto: NoResponse.self)
+        try await request(.signin(req))
     }
 
     public func signup(req: SignupRequestDTO) async throws {
-        try await request(.signup(req), dto: NoResponse.self)
+        try await request(.signup(req))
     }
 
     public func checkExistNameAndEmployeeID(name: String, employeeID: String) async throws {
@@ -16,8 +16,7 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
             .existsByNameAndEmployeeNumber(
                 name: name,
                 employeeNumber: employeeID
-            ),
-            dto: NoResponse.self
+            )
         )
     }
 
@@ -27,22 +26,22 @@ public final class RemoteUsersDataSourceImpl: BaseRemoteDataSource<UsersAPI>, Re
     }
 
     public func checkDuplicateNickname(nickname: String) async throws {
-        try await request(.checkDuplicateNickname(nickname: nickname), dto: NoResponse.self)
+        try await request(.checkDuplicateNickname(nickname: nickname))
     }
 
     public func changeNickname(nickname: String) async throws {
-        try await request(.changeNickname(nickname: nickname), dto: NoResponse.self)
+        try await request(.changeNickname(nickname: nickname))
     }
 
     public func changeEmail(email: String) async throws {
-        try await request(.changeEmail(email: email), dto: NoResponse.self)
+        try await request(.changeEmail(email: email))
     }
 
     public func changeProfileImage(imageURL: String) async throws {
-        try await request(.changeProfileImage(imageURL: imageURL), dto: NoResponse.self)
+        try await request(.changeProfileImage(imageURL: imageURL))
     }
 
     public func changeSpot(spotID: String) async throws {
-        try await request(.changeSpot(spotID: spotID), dto: NoResponse.self)
+        try await request(.changeSpot(spotID: spotID))
     }
 }

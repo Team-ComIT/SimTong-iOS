@@ -119,7 +119,7 @@ public extension UsersAPI {
 
     var jwtTokenType: JwtTokenType {
         switch self {
-        case .fetchMyProfile, .changeNickname, .changeEmail, .changeProfileImage:
+        case .fetchMyProfile, .changeNickname, .changeEmail, .changeProfileImage, .changeSpot:
             return .accessToken
 
         default:
@@ -184,7 +184,8 @@ public extension UsersAPI {
         case .changeSpot:
             return [
                 400: .unknown(),
-                401: .accessTokenExpired
+                401: .accessTokenExpired,
+                429: .tooManyRequestVerifyEmail
             ]
         }
     }
