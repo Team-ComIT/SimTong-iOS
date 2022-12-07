@@ -14,7 +14,7 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
     }
 
     public func comparePassword(password: String) async throws {
-        try await request(.comparePassword(password: password), dto: NoResponse.self)
+        try await request(.comparePassword(password: password))
     }
 
     public func reissueToken() async throws {
@@ -26,14 +26,14 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
     }
 
     public func changePassword(req: ChangePasswordRequestDTO) async throws {
-        try await request(.changePassword(req), dto: NoResponse.self)
+        try await request(.changePassword(req))
     }
 
     public func checkDuplicateEmail(email: String) async throws {
-        try await request(.checkDuplicateEmail(email: email), dto: NoResponse.self)
+        try await request(.checkDuplicateEmail(email: email))
     }
 
     public func checkExistEmployeeIDAndEmail(id: Int, email: String) async throws {
-        try await request(.checkExistEmployeeIDAndEmail(id: id, email: email), dto: NoResponse.self)
+        try await request(.checkExistEmployeeIDAndEmail(id: id, email: email))
     }
 }

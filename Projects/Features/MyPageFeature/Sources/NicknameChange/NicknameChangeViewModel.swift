@@ -14,7 +14,7 @@ final class NicknameChangeViewModel: BaseViewModel {
     ) {
         self.changeNicknameUseCase = changeNicknameUseCase
     }
-    
+
     @MainActor
     func changeButtonDidTap() {
         Task {

@@ -11,8 +11,18 @@ final class EmailVerifyViewModel: BaseViewModel {
     @Published var timeRemaining = 300
     @Published var isVerified = false
     @Published var isToastShow = false
+    private let email: String
+    private let verifyAuthCodeUseCase: VerifyAuthCodeUseCase
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private var bag = Set<AnyCancellable>()
+
+    init(
+        email: String,
+        verifyAuthCodeUseCase: VerifyAuthCodeUseCase
+    ) {
+        self.email = email
+        self.verifyAuthCodeUseCase = verifyAuthCodeUseCase
+    }
 
     deinit {
         bag.removeAll()
@@ -37,9 +47,10 @@ final class EmailVerifyViewModel: BaseViewModel {
     @MainActor
     func completeButtonDidTap() {
         Task {
-            await withAsyncTry(with: self, action: { owner in
+            await withAsyncTry(with: self) { owner in
+                try await owner.verifyAuthCodeUseCase.execute(email: owner.email, code: owner.authCode)
                 owner.isVerified = true
-            })
+            }
         }
     }
 

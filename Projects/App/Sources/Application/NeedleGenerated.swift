@@ -225,6 +225,9 @@ private class EmailModifyDependencya827d736d14366f73f84Provider: EmailModifyDepe
     var emailVerifyComponent: EmailVerifyComponent {
         return appComponent.emailVerifyComponent
     }
+    var sendAuthCodeUseCase: any SendAuthCodeUseCase {
+        return appComponent.sendAuthCodeUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -235,26 +238,30 @@ private func factory810e2c1d0c4bfa11ed69f47b58f8f304c97af4d5(_ component: Needle
     return EmailModifyDependencya827d736d14366f73f84Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class EmailVerifyDependency07369df20cfae6e66015Provider: EmailVerifyDependency {
-
-
-    init() {
-
+    var verifyAuthCodeUseCase: any VerifyAuthCodeUseCase {
+        return appComponent.verifyAuthCodeUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->EmailVerifyComponent
-private func factory0bd89edc8a1f0255a6d4e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return EmailVerifyDependency07369df20cfae6e66015Provider()
+private func factory0bd89edc8a1f0255a6d4f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return EmailVerifyDependency07369df20cfae6e66015Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class NicknameChangeDependency36c769a4a51e0288197dProvider: NicknameChangeDependency {
-
-
-    init() {
-
+    var changeNicknameUseCase: any ChangeNicknameUseCase {
+        return appComponent.changeNicknameUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->NicknameChangeComponent
-private func factorya664c7df07497c0791c4e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return NicknameChangeDependency36c769a4a51e0288197dProvider()
+private func factorya664c7df07497c0791c4f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return NicknameChangeDependency36c769a4a51e0288197dProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class PasswordChangeDependencyfb8e0245942548352385Provider: PasswordChangeDependency {
     var findPasswordInfoComponent: FindPasswordInfoComponent {
@@ -543,16 +550,17 @@ extension MyPageComponent: Registration {
 extension EmailModifyComponent: Registration {
     public func registerItems() {
         keyPathToName[\EmailModifyDependency.emailVerifyComponent] = "emailVerifyComponent-EmailVerifyComponent"
+        keyPathToName[\EmailModifyDependency.sendAuthCodeUseCase] = "sendAuthCodeUseCase-any SendAuthCodeUseCase"
     }
 }
 extension EmailVerifyComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\EmailVerifyDependency.verifyAuthCodeUseCase] = "verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"
     }
 }
 extension NicknameChangeComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\NicknameChangeDependency.changeNicknameUseCase] = "changeNicknameUseCase-any ChangeNicknameUseCase"
     }
 }
 extension PasswordChangeComponent: Registration {
@@ -648,8 +656,8 @@ private func register1() {
     registerProviderFactory("^->AppComponent->SpotChangeComponent", factory39a20509ab61b108ebf6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->MyPageComponent", factory0f6f456ebf157d02dfb3f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->EmailModifyComponent", factory810e2c1d0c4bfa11ed69f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->EmailVerifyComponent", factory0bd89edc8a1f0255a6d4e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->NicknameChangeComponent", factorya664c7df07497c0791c4e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->EmailVerifyComponent", factory0bd89edc8a1f0255a6d4f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->NicknameChangeComponent", factorya664c7df07497c0791c4f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->PasswordChangeComponent", factory04d7da095dc45d830f04f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)

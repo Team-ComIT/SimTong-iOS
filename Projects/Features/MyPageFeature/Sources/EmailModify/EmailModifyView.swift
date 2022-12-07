@@ -45,7 +45,7 @@ struct EmailModifyView: View {
         .navigationTitle("이메일 수정하기")
         .navigationBarTitleDisplayMode(.inline)
         .navigate(
-            to: emailVerifyComponent.makeView(),
+            to: emailVerifyComponent.makeView(email: viewModel.email),
             when: $viewModel.isSuccessNicknameModify
         )
         .stBackground()
