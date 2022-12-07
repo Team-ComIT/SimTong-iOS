@@ -119,6 +119,11 @@ struct MyPageView: View {
         .navigationBarItems(trailing:
             Button {
                 viewModel.modify()
+                if !viewModel.isModify {
+                    Task {
+                        await viewModel.loadMyInfo()
+                    }
+                }
             } label: {
                 Text(viewModel.isModify ? "완료" : "수정")
                     .stTypo(.m6, color: .main)
