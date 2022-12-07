@@ -30,8 +30,7 @@ final class PasswordChangeViewModel: BaseViewModel {
 
     @MainActor
     func changeButtonDidTap() {
-        isCheckPasswordStep = true
-        if checkPassword() {
+        if isCheckPasswordStep && checkPassword() {
             Task {
                 await withAsyncTry(with: self) { owner in
                     try await owner.changePasswordUseCase.execute(
@@ -44,6 +43,7 @@ final class PasswordChangeViewModel: BaseViewModel {
                 }
             }
         }
+        isCheckPasswordStep = true
     }
 
     func checkPassword() -> Bool {

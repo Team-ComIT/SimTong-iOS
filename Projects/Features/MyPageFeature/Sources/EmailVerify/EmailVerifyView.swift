@@ -3,7 +3,6 @@ import DesignSystem
 import Utility
 
 struct EmailVerifyView: View {
-
     @StateObject var viewModel: EmailVerifyViewModel
     @Environment(\.dismiss) var dismiss
     @FocusState private var focusField: Bool

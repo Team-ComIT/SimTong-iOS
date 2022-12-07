@@ -21,10 +21,6 @@ public final class HomeViewModel: BaseViewModel {
         self.fetchMenuListUseCase = fetchMenuListUseCase
         self.fetchScheduleUseCase = fetchScheduleUseCase
         super.init()
-        Task {
-            await fetchMeals()
-            await fetchSchedules()
-        }
     }
 
     func onDateTap(date: Date) {
