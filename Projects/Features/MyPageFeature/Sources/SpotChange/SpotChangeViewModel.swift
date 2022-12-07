@@ -8,6 +8,7 @@ final class SpotChangeViewModel: BaseViewModel {
     @Published var spotList: [SpotEntity] = []
     @Published var saveButtonDisable = false
     @Published var selectedSpot: SpotEntity?
+    @Published var limitSpotChange = false
     private let selectedSpotName: String
     private let completion: (SpotEntity) -> Void
 
@@ -43,6 +44,10 @@ final class SpotChangeViewModel: BaseViewModel {
     func changeSpot() async {
         await withAsyncTry(with: self) { owner in
             try await owner.changeSpotUseCase.execute(spotID: owner.selectedSpot?.id ?? "")
+        } errorAction: { owner, error in
+            if error == .tooManyRequestVerifyEmail {
+                owner.limitSpotChange = true
+            }
         }
     }
 }

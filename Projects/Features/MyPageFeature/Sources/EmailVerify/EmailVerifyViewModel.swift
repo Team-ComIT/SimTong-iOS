@@ -58,6 +58,7 @@ final class EmailVerifyViewModel: BaseViewModel {
     func resendCodeButtonDidTap() {
         Task {
             await withAsyncTry(with: self, action: { owner in
+                try await owner.verifyAuthCodeUseCase.execute(email: owner.email, code: owner.authCode)
                 owner.isToastShow = true
                 owner.timeRemaining = 300
             })

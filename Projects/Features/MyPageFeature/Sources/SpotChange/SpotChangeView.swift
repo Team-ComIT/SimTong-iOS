@@ -58,7 +58,7 @@ struct SpotChangeView: View {
             }
             .padding(.top, 32)
         }
-        .stToast(isShowing: $viewModel.saveButtonDisable, message: "근무 지점 변경은 90일 최대 3번 변경 가능합니다.", icon: .none)
+        .stToast(isShowing: $viewModel.limitSpotChange, message: "근무 지점 변경은 90일 최대 3번 변경 가능합니다.", icon: .none)
         .stBackground()
     }
 
