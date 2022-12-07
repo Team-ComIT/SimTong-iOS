@@ -327,6 +327,9 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
+    var scheduleCalendarComponent: ScheduleCalendarComponent {
+        return appComponent.scheduleCalendarComponent
+    }
     var myPageComponent: MyPageComponent {
         return appComponent.myPageComponent
     }
@@ -338,6 +341,41 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
 /// ^->AppComponent->HomeComponent
 private func factory67229cdf0f755562b2b1f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return HomeDependency443c4e1871277bd8432aProvider(appComponent: parent1(component) as! AppComponent)
+}
+private class ComposeScheduleDependency534591f9c4f254e49500Provider: ComposeScheduleDependency {
+    var createNewScheduleUseCase: any CreateNewScheduleUseCase {
+        return appComponent.createNewScheduleUseCase
+    }
+    var updateScheduleUseCase: any UpdateScheduleUseCase {
+        return appComponent.updateScheduleUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->ComposeScheduleComponent
+private func factory18d959497033aa79a250f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return ComposeScheduleDependency534591f9c4f254e49500Provider(appComponent: parent1(component) as! AppComponent)
+}
+private class ScheduleCalendarDependency82957fd936f8392eba72Provider: ScheduleCalendarDependency {
+    var composeScheduleComponent: ComposeScheduleComponent {
+        return appComponent.composeScheduleComponent
+    }
+    var deleteScheduleUseCase: any DeleteScheduleUseCase {
+        return appComponent.deleteScheduleUseCase
+    }
+    var fetchScheduleUseCase: any FetchScheduleUseCase {
+        return appComponent.fetchScheduleUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->ScheduleCalendarComponent
+private func factory435d771786798070a01bf47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return ScheduleCalendarDependency82957fd936f8392eba72Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class WriteHolidayDependencyf70374d71937da494a07Provider: WriteHolidayDependency {
 
@@ -473,6 +511,9 @@ extension AppComponent: Registration {
         localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
         localTable["fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"] = { self.fetchPublicMenuListUseCase as Any }
         localTable["fetchScheduleUseCase-any FetchScheduleUseCase"] = { self.fetchScheduleUseCase as Any }
+        localTable["createNewScheduleUseCase-any CreateNewScheduleUseCase"] = { self.createNewScheduleUseCase as Any }
+        localTable["updateScheduleUseCase-any UpdateScheduleUseCase"] = { self.updateScheduleUseCase as Any }
+        localTable["deleteScheduleUseCase-any DeleteScheduleUseCase"] = { self.deleteScheduleUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -588,7 +629,21 @@ extension HomeComponent: Registration {
         keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
         keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
+        keyPathToName[\HomeDependency.scheduleCalendarComponent] = "scheduleCalendarComponent-ScheduleCalendarComponent"
         keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
+    }
+}
+extension ComposeScheduleComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\ComposeScheduleDependency.createNewScheduleUseCase] = "createNewScheduleUseCase-any CreateNewScheduleUseCase"
+        keyPathToName[\ComposeScheduleDependency.updateScheduleUseCase] = "updateScheduleUseCase-any UpdateScheduleUseCase"
+    }
+}
+extension ScheduleCalendarComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\ScheduleCalendarDependency.composeScheduleComponent] = "composeScheduleComponent-ComposeScheduleComponent"
+        keyPathToName[\ScheduleCalendarDependency.deleteScheduleUseCase] = "deleteScheduleUseCase-any DeleteScheduleUseCase"
+        keyPathToName[\ScheduleCalendarDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
     }
 }
 extension WriteHolidayComponent: Registration {
@@ -641,7 +696,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 #if !NEEDLE_DYNAMIC
 
-private func register1() {
+@inline(never) private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
@@ -662,6 +717,8 @@ private func register1() {
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SigninComponent", factory2882a056d84a613debccf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->ComposeScheduleComponent", factory18d959497033aa79a250f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->ScheduleCalendarComponent", factory435d771786798070a01bf47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->WriteHolidayComponent", factory231bc78685abe84d7b9fe3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->FindPasswordVerifyComponent", factory573f446f1153613fedd6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)

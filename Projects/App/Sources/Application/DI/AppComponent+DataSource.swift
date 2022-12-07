@@ -59,6 +59,7 @@ extension AppComponent {
 extension AppComponent {
     public var remoteScheduleDataSource: any RemoteScheduleDataSource {
         shared {
+//            RemoteScheduleDataSourceFake() // TODO: 나중에 변경
             RemoteScheduleDataSourceImpl(keychain: keychain)
         }
     }

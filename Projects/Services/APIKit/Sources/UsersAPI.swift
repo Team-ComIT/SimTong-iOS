@@ -185,7 +185,7 @@ public extension UsersAPI {
             return [
                 400: .unknown(),
                 401: .accessTokenExpired,
-                429: .tooManyRequestVerifyEmail
+                429: .tooManyChangeSpot
             ]
         }
     }

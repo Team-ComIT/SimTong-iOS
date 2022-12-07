@@ -155,8 +155,8 @@ struct MyPageView: View {
             when: $viewModel.isNavigatePassword
         )
         .alert("로그아웃", isPresented: $viewModel.isLogout) {
-            Button("취소", role: .destructive) {}
-            Button("확인", role: nil) {
+            Button("취소", role: .cancel) {}
+            Button("확인", role: .destructive) {
                 viewModel.logoutCheckButtonDidTap()
                 withAnimation {
                     appState.sceneFlow = .intro

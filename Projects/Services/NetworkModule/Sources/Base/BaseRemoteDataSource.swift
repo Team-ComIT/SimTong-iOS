@@ -4,7 +4,6 @@ import KeychainModule
 import Moya
 import Utility
 
-// swiftlint: disable force_cast
 public class BaseRemoteDataSource<API: SimTongAPI> {
     private let keychain: any Keychain
     private let provider: MoyaProvider<API>
@@ -18,7 +17,7 @@ public class BaseRemoteDataSource<API: SimTongAPI> {
         self.keychain = keychain
 
         #if DEBUG
-        self.provider = provider ?? MoyaProvider(plugins: [JwtPlugin(keychain: keychain), NetworkLoggerPlugin()])
+        self.provider = provider ?? MoyaProvider(plugins: [JwtPlugin(keychain: keychain), MoyaLoggingPlugin()])
         #else
         self.provider = provider ?? MoyaProvider(plugins: [JwtPlugin(keychain: keychain)])
         #endif
@@ -39,23 +38,27 @@ private extension BaseRemoteDataSource {
     func defaultRequest(_ api: API) async throws -> Response {
         for _ in 0..<maxRetryCount {
             do {
+                try _Concurrency.Task<Never, Never>.checkCancellation()
                 return try await performRequest(api)
             } catch {
                 continue
             }
         }
+        try _Concurrency.Task<Never, Never>.checkCancellation()
         return try await performRequest(api)
     }
 
     func authorizedRequest(_ api: API) async throws -> Response {
         for _ in 0..<maxRetryCount {
             do {
+                try _Concurrency.Task<Never, Never>.checkCancellation()
                 return try await performRequest(api)
             } catch {
                 if checkTokenIsExpired() { try await tokenRefresh() }
                 continue
             }
         }
+        try _Concurrency.Task<Never, Never>.checkCancellation()
         return try await performRequest(api)
     }
 

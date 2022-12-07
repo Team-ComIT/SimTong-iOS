@@ -6,7 +6,6 @@ import Utility
 struct WriteHolidayView: View {
     @StateObject var viewModel: WriteHolidayViewModel
     @Binding var isPresented: Bool
-    @State var isHiddenNavigation = true
     @State var offset: CGSize = .init(width: 0, height: 0)
     @State var isPresentedHolidayPicker = false
     var calendarAnimation: Namespace.ID
@@ -33,26 +32,6 @@ struct WriteHolidayView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                ZStack {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                            .resizable()
-                            .frame(width: 9, height: 16)
-                            .onTapGesture {
-                                withAnimation(.spring()) {
-                                    isPresented = false
-                                }
-                            }
-
-                        Spacer()
-                    }
-
-                    Text("휴무표 작성")
-                        .stTypo(.r5, color: .grayMain)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 16)
-
                 if isPresented {
                     CalendarView(
                         holidaysDict: $viewModel.holidaysDict,
@@ -71,34 +50,36 @@ struct WriteHolidayView: View {
             .padding(.horizontal, 16)
         }
         .onDisappear {
-            isHiddenNavigation = false
             onFinished(viewModel.holidaysDict, viewModel.scheduleDict)
         }
-        .navigationBarHidden(isHiddenNavigation)
         .stBackground()
-        .offset(x: offset.width, y: offset.height)
         .bottomSheet(isShowing: $isPresentedHolidayPicker) {
             holidayPickerView()
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.translation.width > 0 && value.translation.height > 0 {
-                        offset = value.translation
+        .offset(x: offset.width)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("휴무표 작성")
+                    .font(.headline)
+            }
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button {
+                    withAnimation(.spring()) {
+                        isPresented = false
                     }
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .resizable()
+                        .frame(width: 9, height: 16)
+                        .foregroundColor(.grayMain)
                 }
-                .onEnded { _ in
-                    if abs(offset.width) > 150 || abs(offset.height) > 150 {
-                        withAnimation(.spring()) {
-                            isPresented = false
-                        }
-                    } else {
-                        withAnimation {
-                            offset = .zero
-                        }
-                    }
-                }
-        )
+            }
+        }
+        .onBackSwipe(offset: $offset) {
+            withAnimation(.spring()) {
+                isPresented = false
+            }
+        }
         .alert(viewModel.errorMessage, isPresented: $viewModel.isError) {
             Button("확인", role: .cancel) {}
         } message: {

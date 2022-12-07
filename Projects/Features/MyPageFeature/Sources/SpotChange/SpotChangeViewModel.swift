@@ -47,7 +47,7 @@ final class SpotChangeViewModel: BaseViewModel {
             try await owner.changeSpotUseCase.execute(spotID: spot.name)
             owner.completion(spot)
         } errorAction: { owner, error in
-            if error == .tooManyRequestVerifyEmail {
+            if error == .tooManyChangeSpot {
                 owner.limitSpotChange = true
             }
         }

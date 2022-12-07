@@ -119,4 +119,16 @@ extension AppComponent {
     public var fetchScheduleUseCase: any FetchScheduleUseCase {
         FetchScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
     }
+
+    public var createNewScheduleUseCase: any CreateNewScheduleUseCase {
+        CreateNewScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
+
+    public var updateScheduleUseCase: any UpdateScheduleUseCase {
+        UpdateScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
+
+    public var deleteScheduleUseCase: any DeleteScheduleUseCase {
+        DeleteScheduleUseCaseImpl(scheduleRepository: scheduleRepository)
+    }
 }
