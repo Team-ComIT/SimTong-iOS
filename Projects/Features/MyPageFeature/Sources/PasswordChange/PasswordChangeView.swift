@@ -1,6 +1,7 @@
 import SwiftUI
 import FindPasswordFeature
 import DesignSystem
+import Utility
 
 struct PasswordChangeView: View {
     private enum FocusField: Hashable {
@@ -28,7 +29,6 @@ struct PasswordChangeView: View {
                     STSecureTextField(
                         labelText: "비밀번호 재확인",
                         text: $viewModel.confirmPassword,
-                        errorText: viewModel.errorMessage,
                         isError: viewModel.isError,
                         onCommit: {
                             viewModel.changeButtonDidTap()
@@ -83,6 +83,11 @@ struct PasswordChangeView: View {
         }
         .onAppear {
             focusField = .password
+        }
+        .onChange(of: viewModel.isSuccessPasswordChange) { newValue in
+            if newValue {
+                NavigationUtil.popToRootView()
+            }
         }
         .navigate(
             to: findPasswordInfoComponent.makeView(),

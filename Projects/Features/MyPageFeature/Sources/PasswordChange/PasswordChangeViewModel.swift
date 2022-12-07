@@ -14,7 +14,7 @@ final class PasswordChangeViewModel: BaseViewModel {
     @Published var isSuccessPasswordChange = false
     @Published var isNavigateFindPassword = false
     @Published var isCheckPasswordStep = false
-    let password: String
+    private let password: String
 
     var isEnableChangeButton: Bool {
         !newPassword.isEmpty && (!confirmPassword.isEmpty || !isCheckPasswordStep)
@@ -40,6 +40,7 @@ final class PasswordChangeViewModel: BaseViewModel {
                             newPassword: owner.newPassword
                         )
                     )
+                    owner.isSuccessPasswordChange = true
                 }
             }
         }
