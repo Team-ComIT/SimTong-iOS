@@ -4,6 +4,7 @@ import SwiftUI
 import Utility
 import MyPageFeature
 
+
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @Namespace var calendarAnimation
@@ -15,7 +16,7 @@ struct HomeView: View {
     public init(
         viewModel: HomeViewModel,
         writeHolidayComponent: WriteHolidayComponent,
-        scheduleCalendarComponent: ScheduleCalendarComponent
+        scheduleCalendarComponent: ScheduleCalendarComponent,
         myPageComponent: MyPageComponent
     ) {
         self.myPageComponent = myPageComponent

@@ -327,11 +327,11 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
-    var myPageComponent: MyPageComponent {
-        return appComponent.myPageComponent
-    }
     var scheduleCalendarComponent: ScheduleCalendarComponent {
         return appComponent.scheduleCalendarComponent
+    }
+    var myPageComponent: MyPageComponent {
+        return appComponent.myPageComponent
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -629,8 +629,8 @@ extension HomeComponent: Registration {
         keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
         keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
-        keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
         keyPathToName[\HomeDependency.scheduleCalendarComponent] = "scheduleCalendarComponent-ScheduleCalendarComponent"
+        keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
     }
 }
 extension ComposeScheduleComponent: Registration {
@@ -696,7 +696,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 #if !NEEDLE_DYNAMIC
 
-private func register1() {
+@inline(never) private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)

@@ -15,6 +15,7 @@ public enum STError: Error, Equatable {
     case alreadyExistsByEmailOverlap
     case notFoundUserByCheckNameAndEmail
     case notFoundUserByComparePassword
+    case tooManyChangeSpot
 
     // users
     case notFoundUserBySignin
@@ -62,6 +63,9 @@ extension STError: LocalizedError {
 
         case .notFoundUserByComparePassword:
             return "비밀번호에 따른 유저를 찾을 수 없습니다"
+
+        case .tooManyChangeSpot:
+            return "근무 지점 변경은 90일 최대 3번 변경 가능합니다."
 
         // MARK: - Users
         case .passwordMismatch:
