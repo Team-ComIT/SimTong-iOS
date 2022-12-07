@@ -74,6 +74,9 @@ struct HomeView: View {
             }
             .padding(.horizontal, 16)
         }
+        .refreshable {
+            viewModel.homeDataInit()
+        }
         .overlay {
             if viewModel.isPresentedHoliday {
                 writeHolidayComponent.makeView(
@@ -112,26 +115,5 @@ struct HomeView: View {
             }
         }
         .stBackground()
-    }
-
-    @ViewBuilder
-    func scheduleOptionPickerView() -> some View {
-        VStack(spacing: 20) {
-            scheduleOptionRowView(system: "pencil", title: "수정")
-                .foregroundColor(.grayMain)
-
-            scheduleOptionRowView(system: "trash", title: "삭제")
-                .foregroundColor(.main)
-        }
-        .padding(24)
-    }
-
-    @ViewBuilder
-    func scheduleOptionRowView(system: String, title: String) -> some View {
-        HStack {
-            Image(systemName: system)
-
-            Text(title)
-        }
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import Moya
 
 #if DEBUG
-// swiflint: disable line_length
+// swiftlint: disable line_length
 public final class MoyaLoggingPlugin: PluginType {
     public init() {}
     public func willSend(_ request: RequestType, target: TargetType) {

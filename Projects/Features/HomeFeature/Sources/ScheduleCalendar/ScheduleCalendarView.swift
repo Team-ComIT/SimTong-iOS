@@ -107,7 +107,81 @@ struct ScheduleCalendarView: View {
         .onDisappear {
             onFinished(viewModel.holidaysDict, viewModel.scheduleDict)
         }
+        .navigate(
+            to: composeScheduleComponent.makeView(updateTarget: viewModel.selectedSchedule),
+            when: $viewModel.isNavigateUpdateSchedule
+        )
+        .bottomSheet(isShowing: $viewModel.isPresentedScheduleOptionPicker) {
+            scheduleOptionPickerView()
+        }
+        .bottomSheet(isShowing: $viewModel.isPresentedScheduleDeleteConfirm) {
+            scheduleDeleteCheckView()
+        }
         .stBackground()
+    }
+
+    @ViewBuilder
+    func scheduleOptionPickerView() -> some View {
+        VStack(spacing: 20) {
+            Button {
+                viewModel.scheduleUpdateButtonDidTap()
+            } label: {
+                scheduleOptionRowView(system: "pencil", title: "수정")
+                    .foregroundColor(.grayMain)
+            }
+
+            Button {
+                viewModel.scheduleDeleteButtonDidTap()
+            } label: {
+                scheduleOptionRowView(system: "trash", title: "삭제")
+                    .foregroundColor(.main)
+            }
+
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 32)
+        .padding(.bottom, 20)
+    }
+
+    @ViewBuilder
+    func scheduleOptionRowView(system: String, title: String) -> some View {
+        HStack {
+            Image(systemName: system)
+
+            Text(title)
+
+            Spacer()
+        }
+    }
+
+    @ViewBuilder
+    func scheduleDeleteCheckView() -> some View {
+        VStack {
+            if let schedule = viewModel.selectedSchedule {
+                let year = "\(schedule.startAt.toSmallSimtongDate().year)"
+                let month = schedule.startAt.toSmallSimtongDate().month
+                let day = schedule.startAt.toSmallSimtongDate().day
+                HStack {
+                    Text("**\(year)년 \(month)월 \(day)일 \(schedule.title)**\n일정을 삭제합니다.")
+
+                    Spacer()
+                }
+            } else {
+                EmptyView()
+            }
+
+            HStack {
+                CTAButton(text: "취소", style: .cancel) {
+                    viewModel.isPresentedScheduleDeleteConfirm = false
+                }
+
+                CTAButton(text: "삭제") {
+                    viewModel.scheduleDeleteConfirmButtonDidTap()
+                }
+            }
+        }
+        .padding([.horizontal, .bottom], 16)
+        .padding(.top, 24)
     }
 
     @ViewBuilder
@@ -137,8 +211,13 @@ struct ScheduleCalendarView: View {
 
             Spacer()
 
-            Image(systemName: "ellipsis")
-                .foregroundColor(.gray05)
+            Button {
+                viewModel.scheduleOptionButtonDidTap(schedule: schedule)
+            } label: {
+                Image(systemName: "ellipsis")
+                    .foregroundColor(.gray05)
+            }
+
         }
     }
 

@@ -95,6 +95,7 @@ final class ComposeScheduleViewModel: BaseViewModel {
                         )
                     )
                 }
+                owner.isSuccessComposeSchedule = true
             }
         }
     }

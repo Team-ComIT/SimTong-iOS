@@ -236,6 +236,12 @@ private class ScheduleCalendarDependency82957fd936f8392eba72Provider: ScheduleCa
     var composeScheduleComponent: ComposeScheduleComponent {
         return appComponent.composeScheduleComponent
     }
+    var deleteScheduleUseCase: any DeleteScheduleUseCase {
+        return appComponent.deleteScheduleUseCase
+    }
+    var fetchScheduleUseCase: any FetchScheduleUseCase {
+        return appComponent.fetchScheduleUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -461,6 +467,8 @@ extension ComposeScheduleComponent: Registration {
 extension ScheduleCalendarComponent: Registration {
     public func registerItems() {
         keyPathToName[\ScheduleCalendarDependency.composeScheduleComponent] = "composeScheduleComponent-ComposeScheduleComponent"
+        keyPathToName[\ScheduleCalendarDependency.deleteScheduleUseCase] = "deleteScheduleUseCase-any DeleteScheduleUseCase"
+        keyPathToName[\ScheduleCalendarDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
     }
 }
 extension WriteHolidayComponent: Registration {

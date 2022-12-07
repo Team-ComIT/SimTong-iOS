@@ -4,6 +4,8 @@ import NeedleFoundation
 
 public protocol ScheduleCalendarDependency: Dependency {
     var composeScheduleComponent: ComposeScheduleComponent { get }
+    var deleteScheduleUseCase: any DeleteScheduleUseCase { get }
+    var fetchScheduleUseCase: any FetchScheduleUseCase { get }
 }
 
 public final class ScheduleCalendarComponent: Component<ScheduleCalendarDependency> {
@@ -20,7 +22,9 @@ public final class ScheduleCalendarComponent: Component<ScheduleCalendarDependen
         ScheduleCalendarView(
             viewModel: .init(
                 holidaysDict: holidaysDict,
-                scheduleDict: scheduleDict
+                scheduleDict: scheduleDict,
+                deleteScheduleUseCase: dependency.deleteScheduleUseCase,
+                fetchScheduleUseCase: dependency.fetchScheduleUseCase
             ),
             isPresented: isPresented,
             scheduleAnimation: scheduleAnimation,
