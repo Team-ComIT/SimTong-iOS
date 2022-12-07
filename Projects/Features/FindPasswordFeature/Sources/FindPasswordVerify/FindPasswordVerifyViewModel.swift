@@ -34,7 +34,6 @@ final class FindPasswordVerifyViewModel: BaseViewModel {
     @MainActor
     func timerStart() {
         Task {
-
             self.timeText = self.remaingTime % 60 < 10 ?
             "\(self.remaingTime/60):0\(self.remaingTime%60)" :
             "\(self.remaingTime/60):\(self.remaingTime%60)"

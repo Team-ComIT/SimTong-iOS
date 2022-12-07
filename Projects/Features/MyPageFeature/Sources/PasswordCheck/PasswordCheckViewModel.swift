@@ -22,8 +22,6 @@ final class PasswordCheckViewModel: BaseViewModel {
         Task {
             await withAsyncTry(with: self) { owner in
                 try await owner.comparePasswordUseCase.execute(password: owner.password)
-            } errorAction: { _, error in
-                print(error)
             }
             self.isSuccessPasswordCheck = true
         }

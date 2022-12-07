@@ -55,7 +55,6 @@ final class PasswordChangeViewModel: BaseViewModel {
         }
 
         if newPassword == confirmPassword {
-            print(newPassword, confirmPassword)
             return true
         } else {
             isError = true

@@ -3,7 +3,7 @@ import DatabaseModule
 import DataMappingModule
 import NetworkModule
 
-public struct UsersRepositoryImpl: UsersRepository {    
+public struct UsersRepositoryImpl: UsersRepository {
     private let remoteUsersDataSource: any RemoteUsersDataSource
     private let localUsersDataSource: any LocalUsersDataSource
 

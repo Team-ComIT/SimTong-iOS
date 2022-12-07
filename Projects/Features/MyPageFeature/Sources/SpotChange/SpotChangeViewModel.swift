@@ -43,8 +43,8 @@ final class SpotChangeViewModel: BaseViewModel {
     @MainActor
     func changeSpot() async {
         await withAsyncTry(with: self) { owner in
-            try await owner.changeSpotUseCase.execute(spotID: owner.selectedSpot?.id ?? "")
             guard let spot = owner.selectedSpot else { return }
+            try await owner.changeSpotUseCase.execute(spotID: spot.name)
             owner.completion(spot)
         } errorAction: { owner, error in
             if error == .tooManyRequestVerifyEmail {

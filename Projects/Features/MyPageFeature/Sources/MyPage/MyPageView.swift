@@ -147,7 +147,6 @@ struct MyPageView: View {
         )
         .fullScreenCover(isPresented: $viewModel.isNaivgateSpot) {
             spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
-                print("asdfsd")
                 viewModel.spotDidSelect(spotName: spot.name)
             }
         }
