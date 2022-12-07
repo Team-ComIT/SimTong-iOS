@@ -29,6 +29,10 @@ public class BaseRemoteDataSource<API: SimTongAPI> {
         let res = try await checkIsApiNeedsAuth(api) ? authorizedRequest(api) : defaultRequest(api)
         return try decoder.decode(dto, from: res.data)
     }
+
+    public func request(_ api: API) async throws {
+        _ = try await checkIsApiNeedsAuth(api) ? authorizedRequest(api) : defaultRequest(api)
+    }
 }
 
 private extension BaseRemoteDataSource {
