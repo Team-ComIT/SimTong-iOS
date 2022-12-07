@@ -18,11 +18,11 @@ public final class RemoteCommonsDataSourceImpl: BaseRemoteDataSource<CommonsAPI>
     }
 
     public func reissueToken() async throws {
-        try await request(.reissueToken, dto: NoResponse.self)
+        try await request(.reissueToken)
     }
 
     public func resetPassword(req: ResetPasswordRequestDTO) async throws {
-        try await request(.resetPassword(req), dto: NoResponse.self)
+        try await request(.resetPassword(req))
     }
 
     public func changePassword(req: ChangePasswordRequestDTO) async throws {

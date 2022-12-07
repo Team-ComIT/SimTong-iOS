@@ -8,6 +8,6 @@ public final class RemoteEmailsDataSourceImpl: BaseRemoteDataSource<EmailsAPI>, 
     }
 
     public func sendAuthCode(email: String) async throws {
-        try await request(.sendAuthCode(email: email), dto: NoResponse.self)
+        try await request(.sendAuthCode(email: email))
     }
 }
