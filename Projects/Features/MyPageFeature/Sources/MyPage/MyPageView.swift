@@ -116,19 +116,21 @@ struct MyPageView: View {
         .imagePicker(isShow: $isPresentedImagePicker, uiImage: $viewModel.selectedImage)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text("프로필"))
-        .navigationBarItems(trailing:
-            Button {
-                viewModel.modify()
-                if !viewModel.isModify {
-                    Task {
-                        await viewModel.loadMyInfo()
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    viewModel.modify()
+                    if !viewModel.isModify {
+                        Task {
+                            await viewModel.loadMyInfo()
+                        }
                     }
+                } label: {
+                    Text(viewModel.isModify ? "완료" : "수정")
+                        .stTypo(.m6, color: .main)
                 }
-            } label: {
-                Text(viewModel.isModify ? "완료" : "수정")
-                    .stTypo(.m6, color: .main)
             }
-        )
+        }
         .configBackButton(dismiss: dismiss)
         .padding(.horizontal, 24)
         .stBackground()
@@ -145,7 +147,8 @@ struct MyPageView: View {
         )
         .fullScreenCover(isPresented: $viewModel.isNaivgateSpot) {
             spotChangeComponent.makeView(selectedSpot: viewModel.myProfile.spot) { spot in
-                viewModel.spotCopy(spotName: spot.name)
+                print("asdfsd")
+                viewModel.spotDidSelect(spotName: spot.name)
             }
         }
         .navigate(
@@ -154,7 +157,8 @@ struct MyPageView: View {
         )
         .alert("로그아웃", isPresented: $viewModel.isLogout) {
             Button("취소", role: .destructive) {}
-            Button("확인", role: .cancel) {
+            Button("확인", role: nil) {
+                viewModel.logoutCheckButtonDidTap()
                 withAnimation {
                     appState.sceneFlow = .intro
                 }

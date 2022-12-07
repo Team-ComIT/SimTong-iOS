@@ -65,6 +65,9 @@ public final class MyPageViewModel: BaseViewModel {
 
     func logoutButtonDidTap() {
         isLogout = true
+    }
+
+    func logoutCheckButtonDidTap() {
         self.logoutUseCase.execute()
     }
 
@@ -74,13 +77,14 @@ public final class MyPageViewModel: BaseViewModel {
         }
     }
 
-    func spotCopy(spotName: String) {
-        var spot = UserInfoEntity(
+    func spotDidSelect(spotName: String) {
+        let spot = UserInfoEntity(
             name: myProfile.name,
             email: myProfile.email,
             nickname: myProfile.nickname,
             spot: spotName,
             profileImagePath: myProfile.profileImagePath
         )
+        myProfile = spot
     }
 }

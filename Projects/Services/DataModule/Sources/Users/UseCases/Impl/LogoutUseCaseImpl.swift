@@ -7,6 +7,5 @@ public struct LogoutUseCaseImpl: LogoutUseCase {
         self.usersRepository = usersRepository
     }
 
-    public func execute() {
-    }
+    public func execute() {}
 }

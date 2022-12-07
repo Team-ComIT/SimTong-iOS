@@ -66,10 +66,8 @@ struct HomeView: View {
             .padding(.horizontal, 16)
         }
         .onAppear {
-            Task {
-                viewModel.fetchMeals()
-                viewModel.fetchSchedules()
-            }
+            viewModel.fetchMeals()
+            viewModel.fetchSchedules()
         }
         .overlay {
             if viewModel.isPresentedHoliday {
