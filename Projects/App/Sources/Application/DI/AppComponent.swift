@@ -8,6 +8,7 @@ import SignupFeature
 import KeychainModule
 import FindPasswordFeature
 import MainTabFeature
+import MyPageFeature
 import SigninFeature
 import HomeFeature
 import SplashFeature
@@ -81,6 +82,30 @@ extension AppComponent {
     var findPasswordVerifyComponent: FindPasswordVerifyComponent {
         FindPasswordVerifyComponent(parent: self)
     }
+
+    var nicknameChangeComponent: NicknameChangeComponent {
+        NicknameChangeComponent(parent: self)
+    }
+
+    var emailModifyComponent: EmailModifyComponent {
+        EmailModifyComponent(parent: self)
+    }
+
+    var emailVerifyComponent: EmailVerifyComponent {
+        EmailVerifyComponent(parent: self)
+    }
+
+    var spotChangeComponent: SpotChangeComponent {
+        SpotChangeComponent(parent: self)
+    }
+
+    var passwordCheckComponent: PasswordCheckComponent {
+        PasswordCheckComponent(parent: self)
+    }
+
+    var passwordChangeComponent: PasswordChangeComponent {
+        PasswordChangeComponent(parent: self)
+    }
 }
 
 // MARK: - Main
@@ -95,6 +120,10 @@ extension AppComponent {
 
     var writeHolidayComponent: WriteHolidayComponent {
         WriteHolidayComponent(parent: self)
+    }
+
+    var myPageComponent: MyPageComponent {
+        MyPageComponent(parent: self)
     }
 }
 

@@ -164,6 +164,7 @@ print('Input new feature name ', end=': ', flush=True)
 feature_name = sys.stdin.readline().replace("\n", "")
 feature_name = feature_name.replace("Feature", "")
 
+print(f'Feature name = {feature_name}')
 print('Include demo? (Y or N, default = N) ', end=': ', flush=True)
 has_demo = sys.stdin.readline().replace("\n", "").upper() == "Y"
 

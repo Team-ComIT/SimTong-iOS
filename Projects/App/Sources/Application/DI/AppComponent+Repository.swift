@@ -19,7 +19,10 @@ extension AppComponent {
 // MARK: - Users
 extension AppComponent {
     public var usersRepository: any UsersRepository {
-        UsersRepositoryImpl(remoteUsersDataSource: remoteUsersDataSource)
+        UsersRepositoryImpl(
+            remoteUsersDataSource: remoteUsersDataSource,
+            localUsersDataSource: localUsersDataSource
+        )
     }
 }
 

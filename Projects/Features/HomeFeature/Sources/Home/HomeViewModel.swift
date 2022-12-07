@@ -9,6 +9,7 @@ public final class HomeViewModel: BaseViewModel {
     @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = []
+    @Published var isPresentedMyPage = false
 
     private let fetchMenuListUseCase: any FetchMenuListUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
@@ -20,10 +21,6 @@ public final class HomeViewModel: BaseViewModel {
         self.fetchMenuListUseCase = fetchMenuListUseCase
         self.fetchScheduleUseCase = fetchScheduleUseCase
         super.init()
-        Task {
-            await fetchMeals()
-            await fetchSchedules()
-        }
     }
 
     func onDateTap(date: Date) {

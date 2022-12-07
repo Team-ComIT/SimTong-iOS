@@ -6,6 +6,7 @@ let project = Project.makeModule(
     product: .staticFramework,
     dependencies: [
         .Project.Features.BaseFeature,
-        .Project.Features.HomeFeature
+        .Project.Features.HomeFeature,
+        .Project.Features.MyPageFeature
     ]
 )

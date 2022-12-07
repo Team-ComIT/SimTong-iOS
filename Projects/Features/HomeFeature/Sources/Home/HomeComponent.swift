@@ -1,11 +1,13 @@
 import DomainModule
 import NeedleFoundation
 import SwiftUI
+import MyPageFeature
 
 public protocol HomeDependency: Dependency {
     var fetchMenuListUseCase: any FetchMenuListUseCase { get }
     var fetchScheduleUseCase: any FetchScheduleUseCase { get }
     var writeHolidayComponent: WriteHolidayComponent { get }
+    var myPageComponent: MyPageComponent { get }
 }
 
 public final class HomeComponent: Component<HomeDependency> {
@@ -15,7 +17,8 @@ public final class HomeComponent: Component<HomeDependency> {
                 fetchMenuListUseCase: dependency.fetchMenuListUseCase,
                 fetchScheduleUseCase: dependency.fetchScheduleUseCase
             ),
-            writeHolidayComponent: dependency.writeHolidayComponent
+            writeHolidayComponent: dependency.writeHolidayComponent,
+            myPageComponent: dependency.myPageComponent
         )
     }
 }

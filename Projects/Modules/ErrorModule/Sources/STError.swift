@@ -1,6 +1,6 @@
 import Foundation
 
-public enum STError: Error {
+public enum STError: Error, Equatable {
     case unknown(message: String = "알 수 없는 에러가 발생했습니다")
 
     // global
@@ -14,6 +14,7 @@ public enum STError: Error {
     case passwordMismatchByChangePassword
     case alreadyExistsByEmailOverlap
     case notFoundUserByCheckNameAndEmail
+    case notFoundUserByComparePassword
 
     // users
     case notFoundUserBySignin
@@ -58,6 +59,9 @@ extension STError: LocalizedError {
 
         case .notFoundUserByCheckNameAndEmail:
             return "이름과 이메일에 따른 유저를 찾을 수 없습니다"
+
+        case .notFoundUserByComparePassword:
+            return "비밀번호에 따른 유저를 찾을 수 없습니다"
 
         // MARK: - Users
         case .passwordMismatch:

@@ -2,16 +2,20 @@ import DesignSystem
 import DomainModule
 import SwiftUI
 import Utility
+import MyPageFeature
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @Namespace var calendarAnimation
     private let writeHolidayComponent: WriteHolidayComponent
+    private let myPageComponent: MyPageComponent
 
     public init(
         viewModel: HomeViewModel,
-        writeHolidayComponent: WriteHolidayComponent
+        writeHolidayComponent: WriteHolidayComponent,
+        myPageComponent: MyPageComponent
     ) {
+        self.myPageComponent = myPageComponent
         _viewModel = StateObject(wrappedValue: viewModel)
         self.writeHolidayComponent = writeHolidayComponent
     }
@@ -61,6 +65,10 @@ struct HomeView: View {
             }
             .padding(.horizontal, 16)
         }
+        .onAppear {
+            viewModel.fetchMeals()
+            viewModel.fetchSchedules()
+        }
         .overlay {
             if viewModel.isPresentedHoliday {
                 writeHolidayComponent.makeView(
@@ -80,10 +88,15 @@ struct HomeView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
+                    viewModel.isPresentedMyPage = true
                 } label: {
                     STIcon(.person, color: .gray03)
                 }
             }
         }
+        .navigate(
+            to: myPageComponent.makeView(),
+            when: $viewModel.isPresentedMyPage
+        )
     }
 }

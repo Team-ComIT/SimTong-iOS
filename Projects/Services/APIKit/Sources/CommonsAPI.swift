@@ -5,6 +5,7 @@ import DataMappingModule
 public enum CommonsAPI: SimTongAPI {
     case resetPassword(ResetPasswordRequestDTO)
     case reissueToken
+    case comparePassword(password: String)
     case findEmployeeNumber(FindEmployeeNumberRequestDTO)
     case spotList
     case changePassword(ChangePasswordRequestDTO)
@@ -39,12 +40,15 @@ public extension CommonsAPI {
 
         case .checkExistEmployeeIDAndEmail:
             return "/account/existence"
+
+        case .comparePassword:
+            return "/password/compare"
         }
     }
 
     var method: Method {
         switch self {
-        case .spotList, .findEmployeeNumber, .checkDuplicateEmail, .checkExistEmployeeIDAndEmail:
+        case .spotList, .findEmployeeNumber, .checkDuplicateEmail, .checkExistEmployeeIDAndEmail, .comparePassword:
             return .get
 
         case .reissueToken, .resetPassword, .changePassword:
@@ -87,12 +91,17 @@ public extension CommonsAPI {
                 "employeeNumber": id,
                 "email": email
             ], encoding: URLEncoding.queryString)
+
+        case let .comparePassword(password):
+            return .requestParameters(parameters: [
+                "password": password
+            ], encoding: URLEncoding.queryString)
         }
     }
 
     var jwtTokenType: JwtTokenType {
         switch self {
-        case .changePassword:
+        case .changePassword, .comparePassword:
             return .accessToken
 
         case .reissueToken:
@@ -145,6 +154,12 @@ public extension CommonsAPI {
             return [
                 400: .unknown(),
                 404: .notFoundUserByCheckNameAndEmail
+            ]
+        case .comparePassword:
+            return [
+                400: .unknown(),
+                401: .passwordMismatch,
+                404: .notFoundUserByComparePassword
             ]
         }
     }
