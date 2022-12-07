@@ -184,7 +184,8 @@ public extension UsersAPI {
         case .changeSpot:
             return [
                 400: .unknown(),
-                401: .accessTokenExpired
+                401: .accessTokenExpired,
+                429: .tooManyRequestVerifyEmail
             ]
         }
     }
