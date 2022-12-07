@@ -2,7 +2,12 @@ import DomainModule
 import NeedleFoundation
 import SwiftUI
 
-public protocol WriteHolidayDependency: Dependency {}
+public protocol WriteHolidayDependency: Dependency {
+    var fetchHolidayUseCase: any FetchHolidayUseCase { get }
+    var setHolidayUseCase: any SetHolidayUseCase { get }
+    var setAnnualUseCase: any SetAnnualUseCase { get }
+    var setWorkUseCase: any SetWorkUseCase { get }
+}
 
 public final class WriteHolidayComponent: Component<WriteHolidayDependency> {
     public func makeView(
@@ -18,7 +23,11 @@ public final class WriteHolidayComponent: Component<WriteHolidayDependency> {
         WriteHolidayView(
             viewModel: .init(
                 holidaysDict: holidaysDict,
-                scheduleDict: scheduleDict
+                scheduleDict: scheduleDict,
+                fetchHolidayUseCase: dependency.fetchHolidayUseCase,
+                setHolidayUseCase: dependency.setHolidayUseCase,
+                setAnnualUseCase: dependency.setAnnualUseCase,
+                setWorkUseCase: dependency.setWorkUseCase
             ),
             isPresented: isPresented,
             calendarAnimation: calendarAnimation,

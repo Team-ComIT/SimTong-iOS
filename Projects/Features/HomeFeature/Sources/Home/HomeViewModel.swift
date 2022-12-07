@@ -16,13 +16,16 @@ public final class HomeViewModel: BaseViewModel {
     ) ?? URL(string: "https://www.google.com")!
     private let fetchMenuListUseCase: any FetchMenuListUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
+    private let fetchHolidayUseCase: any FetchHolidayUseCase
 
     init(
         fetchMenuListUseCase: any FetchMenuListUseCase,
-        fetchScheduleUseCase: any FetchScheduleUseCase
+        fetchScheduleUseCase: any FetchScheduleUseCase,
+        fetchHolidayUseCase: any FetchHolidayUseCase
     ) {
         self.fetchMenuListUseCase = fetchMenuListUseCase
         self.fetchScheduleUseCase = fetchScheduleUseCase
+        self.fetchHolidayUseCase = fetchHolidayUseCase
         super.init()
         homeDataInit()
     }
@@ -31,7 +34,8 @@ public final class HomeViewModel: BaseViewModel {
         Task {
             async let meal: () = fetchMeals()
             async let schedule: () = fetchSchedules()
-            _ = await [meal, schedule]
+            async let holiday: () = fetchHoliday()
+            _ = await [meal, schedule, holiday]
         }
     }
 
@@ -74,6 +78,18 @@ public final class HomeViewModel: BaseViewModel {
             await withAsyncTry(with: self) { owner in
                 let menus = try await owner.fetchMenuListUseCase.execute(date: .init())
                 owner.menus = menus
+            }
+        }
+    }
+
+    @MainActor
+    func fetchHoliday() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                let holidays = try await owner.fetchHolidayUseCase.execute(date: .init())
+                holidays.forEach { holiday in
+                    owner.holidaysDict[holiday.date] = holiday.type
+                }
             }
         }
     }

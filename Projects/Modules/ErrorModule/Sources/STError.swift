@@ -31,6 +31,11 @@ public enum STError: Error, Equatable {
     case authCodeExpired
     case alreadyVerifiedEmail
     case tooManyRequestVerifyEmail
+    
+    // holidays
+    case alreadyHolidaysOrLimited
+    case alreadyAnnualOrLacked
+    case dateIsNotHolidayOrAnnual
 }
 
 extension STError: LocalizedError {
@@ -104,6 +109,16 @@ extension STError: LocalizedError {
 
         case .tooManyRequestVerifyEmail:
             return "인증 요청은 30분에 최대 5번 발급가능합니다"
+
+        // MARK: - Holidays
+        case .alreadyHolidaysOrLimited:
+            return "이미 휴무일이거나 일주일에 휴무일을 2회이상 지정할 수 없습니다"
+
+        case .alreadyAnnualOrLacked:
+            return "이미 연차일이거나 연차가 부족합니다"
+
+        case .dateIsNotHolidayOrAnnual:
+            return "휴무일 또는 연차일이 아닙니다"
         }
     }
 }
