@@ -5,7 +5,7 @@ import SwiftUI
 public protocol MyPageDependency: Dependency {
     var fetchMyProfileUseCase: any FetchMyProfileUseCase { get }
     var logoutUseCase: any LogoutUseCase { get }
-    var uploadMultipleFileUseCase: any UploadMultipleFileUseCase { get }
+    var uploadSingleFileUseCase: any UploadSingleFileUseCase { get }
     var changeProfileImageUseCase: any ChangeProfileImageUseCase { get }
     var nicknameChangeComponent: NicknameChangeComponent { get }
     var emailModifyComponent: EmailModifyComponent { get }
@@ -19,7 +19,7 @@ public final class MyPageComponent: Component<MyPageDependency> {
             viewModel: .init(
                 fetchMyProfileUseCase: dependency.fetchMyProfileUseCase,
                 logoutUseCase: dependency.logoutUseCase,
-                uploadMultipleFileUseCase: dependency.uploadMultipleFileUseCase,
+                uploadSingleFileUseCase: dependency.uploadSingleFileUseCase,
                 changeProfileImageUseCase: dependency.changeProfileImageUseCase
             ),
             nicknameChangeComponent: dependency.nicknameChangeComponent,

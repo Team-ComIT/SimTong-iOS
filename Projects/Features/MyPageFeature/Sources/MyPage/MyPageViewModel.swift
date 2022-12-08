@@ -6,7 +6,7 @@ import UIKit
 public final class MyPageViewModel: BaseViewModel {
     private let fetchMyProfileUseCase: any FetchMyProfileUseCase
     private let logoutUseCase: any LogoutUseCase
-    private let uploadMultipleFileUseCase: any UploadMultipleFileUseCase
+    private let uploadSingleFileUseCase: any UploadSingleFileUseCase
     private let changeProfileImageUseCase: any ChangeProfileImageUseCase
     @Published var myProfile: UserInfoEntity = .init(
         name: "김이름",
@@ -24,17 +24,16 @@ public final class MyPageViewModel: BaseViewModel {
     @Published var isNaivgateSpot = false
     @Published var isNavigatePassword = false
     @Published var isLogout = false
-    var bag = Set<AnyCancellable>()
 
     init(
         fetchMyProfileUseCase: any FetchMyProfileUseCase,
         logoutUseCase: any LogoutUseCase,
-        uploadMultipleFileUseCase: any UploadMultipleFileUseCase,
+        uploadSingleFileUseCase: any UploadSingleFileUseCase,
         changeProfileImageUseCase: any ChangeProfileImageUseCase
     ) {
         self.fetchMyProfileUseCase = fetchMyProfileUseCase
         self.logoutUseCase = logoutUseCase
-        self.uploadMultipleFileUseCase = uploadMultipleFileUseCase
+        self.uploadSingleFileUseCase = uploadSingleFileUseCase
         self.changeProfileImageUseCase = changeProfileImageUseCase
         super.init()
         self.isSkeleton = true
@@ -62,8 +61,8 @@ public final class MyPageViewModel: BaseViewModel {
     func changeProfileImage(image: UIImage?) {
         Task {
             await withAsyncTry(with: self) { owner in
-                let imageData = image?.pngData() ?? .init()
-                let url = try await owner.uploadMultipleFileUseCase.execute([imageData]).first ?? ""
+                let imageData = image?.jpegData(compressionQuality: 0.9) ?? .init()
+                let url = try await owner.uploadSingleFileUseCase.execute(imageData)
                 try await owner.changeProfileImageUseCase.execute(imageURL: url)
             }
         }
