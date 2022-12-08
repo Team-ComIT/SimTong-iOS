@@ -35,7 +35,7 @@ public extension FilsAPI {
             return .uploadMultipart([
                 MultipartFormData(
                     provider: .data(data),
-                    name: "file_path"
+                    name: "file"
                 )
             ])
 
@@ -43,7 +43,7 @@ public extension FilsAPI {
             return .uploadMultipart(datas.map { data in
                 MultipartFormData(
                     provider: .data(data),
-                    name: "file_path_list"
+                    name: "file_paths"
                 )
             })
         }
