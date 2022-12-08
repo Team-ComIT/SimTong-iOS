@@ -38,6 +38,11 @@ final class FindPasswordVerifyViewModel: BaseViewModel {
             "\(self.remaingTime/60):0\(self.remaingTime%60)" :
             "\(self.remaingTime/60):\(self.remaingTime%60)"
 
+            await withAsyncTry(with: self) { owner in
+                try await owner.sendAuthCodeUseCase.execute(email: owner.findPasswordVerifySceneParam.email)
+                owner.isToastShow = true
+            }
+
             timer.sink { [weak self] _ in
                 guard let self, self.remaingTime > 0 else { return }
                 self.remaingTime -= 1

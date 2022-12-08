@@ -33,6 +33,15 @@ public final class RenewalPasswordViewModel: BaseViewModel {
         }
 
         if password == passwordCheck {
+            Task {
+                await withAsyncTry(with: self) { owner in
+                    try await owner.resetPasswordUseCase.execute(req: .init(
+                        email: owner.renewalPasswordSceneParam.email,
+                        employeeNumber: Int(owner.renewalPasswordSceneParam.employeeID) ?? 0,
+                        newPassword: owner.password)
+                    )
+                }
+            }
             isSuccessRenewal = true
         } else {
             isError = true

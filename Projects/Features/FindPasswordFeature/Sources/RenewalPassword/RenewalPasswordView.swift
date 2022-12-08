@@ -1,5 +1,6 @@
 import DesignSystem
 import SwiftUI
+import Utility
 
 struct RenewalPasswordView: View {
     private enum FocusField: Hashable {
@@ -50,6 +51,11 @@ struct RenewalPasswordView: View {
         .stBackground()
         .padding(.horizontal, 16)
         .configBackButton(dismiss: dismiss)
+        .onChange(of: viewModel.isSuccessRenewal) { newValue in
+            if newValue {
+                NavigationUtil.popToRootView()
+            }
+        }
         .stSnackbar(isShowing: $viewModel.isSuccessRenewal, text: "비밀번호 변경이 완료되었습니다.")
     }
 }

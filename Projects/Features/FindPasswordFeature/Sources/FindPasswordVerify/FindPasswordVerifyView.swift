@@ -16,7 +16,6 @@ struct FindPasswordVerifyVIew: View {
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.renewalPasswordComponent = renewalPasswordComponent
-        viewModel.timerStart()
     }
 
     var body: some View {
@@ -55,6 +54,7 @@ struct FindPasswordVerifyVIew: View {
         }
         .onAppear {
             focusField = .code
+            viewModel.timerStart()
         }
         .padding(.horizontal, 16)
         .stBackground()
