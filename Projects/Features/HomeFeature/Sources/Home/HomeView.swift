@@ -106,6 +106,9 @@ struct HomeView: View {
                 EmptyView()
             }
         }
+        .onAppear {
+            viewModel.homeDataInit()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("")
         .toolbar {

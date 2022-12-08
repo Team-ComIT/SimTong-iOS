@@ -136,6 +136,9 @@ private class FindEmployeeDependency636344242d29e7292bd9Provider: FindEmployeeDe
     var employeeIDResultComponent: EmployeeIDResultComponent {
         return appComponent.employeeIDResultComponent
     }
+    var findEmployeeNumberUseCase: any FindEmployeeNumberUseCase {
+        return appComponent.findEmployeeNumberUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -584,6 +587,7 @@ extension FindEmployeeIDComponent: Registration {
     public func registerItems() {
         keyPathToName[\FindEmployeeDependency.employeeIDSpotListComponent] = "employeeIDSpotListComponent-EmployeeIDSpotListComponent"
         keyPathToName[\FindEmployeeDependency.employeeIDResultComponent] = "employeeIDResultComponent-EmployeeIDResultComponent"
+        keyPathToName[\FindEmployeeDependency.findEmployeeNumberUseCase] = "findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"
     }
 }
 extension EmployeeIDSpotListComponent: Registration {
@@ -728,7 +732,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 #if !NEEDLE_DYNAMIC
 
-@inline(never) private func register1() {
+private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)

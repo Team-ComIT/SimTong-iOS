@@ -44,7 +44,7 @@ final class SpotChangeViewModel: BaseViewModel {
     func changeSpot() async {
         await withAsyncTry(with: self) { owner in
             guard let spot = owner.selectedSpot else { return }
-            try await owner.changeSpotUseCase.execute(spotID: spot.name)
+            try await owner.changeSpotUseCase.execute(spotID: spot.id)
             owner.completion(spot)
         } errorAction: { owner, error in
             if error == .tooManyChangeSpot {
