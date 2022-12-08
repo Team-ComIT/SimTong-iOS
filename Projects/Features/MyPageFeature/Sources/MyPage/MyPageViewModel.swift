@@ -6,6 +6,8 @@ import UIKit
 public final class MyPageViewModel: BaseViewModel {
     private let fetchMyProfileUseCase: any FetchMyProfileUseCase
     private let logoutUseCase: any LogoutUseCase
+    private let uploadSingleFileUseCase: any UploadSingleFileUseCase
+    private let changeProfileImageUseCase: any ChangeProfileImageUseCase
     @Published var myProfile: UserInfoEntity = .init(
         name: "김이름",
         email: "test@gmail.com",
@@ -16,18 +18,24 @@ public final class MyPageViewModel: BaseViewModel {
     @Published var selectedImage: UIImage?
     @Published var isSkeleton = false
     @Published var isModify = false
+    @Published var isPresentedImagePicker = false
     @Published var isNavigateNickname = false
     @Published var isNavigateEmail = false
     @Published var isNaivgateSpot = false
     @Published var isNavigatePassword = false
     @Published var isLogout = false
+    var bag = Set<AnyCancellable>()
 
     init(
         fetchMyProfileUseCase: any FetchMyProfileUseCase,
-        logoutUseCase: any LogoutUseCase
+        logoutUseCase: any LogoutUseCase,
+        uploadSingleFileUseCase: any UploadSingleFileUseCase,
+        changeProfileImageUseCase: any ChangeProfileImageUseCase
     ) {
         self.fetchMyProfileUseCase = fetchMyProfileUseCase
         self.logoutUseCase = logoutUseCase
+        self.uploadSingleFileUseCase = uploadSingleFileUseCase
+        self.changeProfileImageUseCase = changeProfileImageUseCase
         super.init()
         self.isSkeleton = true
     }
@@ -43,6 +51,22 @@ public final class MyPageViewModel: BaseViewModel {
 
     func modify() {
         isModify.toggle()
+    }
+
+    func profileButtonDidTap() {
+        if isModify {
+            isPresentedImagePicker = true
+        }
+    }
+
+    func changeProfileImage(image: UIImage?) {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                let imageData = image?.pngData() ?? .init()
+                let url = try await owner.uploadSingleFileUseCase.execute(imageData)
+                try await owner.changeProfileImageUseCase.execute(imageURL: url)
+            }
+        }
     }
 
     func nicknameButtonDidTap() {

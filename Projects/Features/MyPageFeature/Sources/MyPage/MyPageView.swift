@@ -5,7 +5,6 @@ import SwiftUI
 struct MyPageView: View {
     @StateObject var viewModel: MyPageViewModel
     @Environment(\.dismiss) var dismiss
-    @State var isPresentedImagePicker = false
     @EnvironmentObject var appState: AppState
     private let nicknameChangeComponent: NicknameChangeComponent
     private let emailModifyComponent: EmailModifyComponent
@@ -29,19 +28,26 @@ struct MyPageView: View {
     var body: some View {
         VStack {
             Button {
-                isPresentedImagePicker.toggle()
+                viewModel.profileButtonDidTap()
             } label: {
                 ZStack(alignment: .bottomTrailing) {
-                    AsyncImage(url: URL(string: viewModel.myProfile.profileImagePath)) { image in
-                        image
+                    if let selectedImage = viewModel.selectedImage {
+                        Image(uiImage: selectedImage)
                             .resizable()
-                            .foregroundColor(.gray04)
                             .frame(width: 100, height: 100)
-                    } placeholder: {
-                        Color.gray01
-                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    } else {
+                        AsyncImage(url: URL(string: viewModel.myProfile.profileImagePath)) { image in
+                            image
+                                .resizable()
+                                .foregroundColor(.gray04)
+                                .frame(width: 100, height: 100)
+                        } placeholder: {
+                            Color.gray01
+                                .frame(width: 100, height: 100)
+                        }
+                        .clipShape(Circle())
                     }
-                    .clipShape(Circle())
 
                     Image(systemName: "camera.fill")
                         .resizable()
@@ -113,7 +119,9 @@ struct MyPageView: View {
             Spacer()
         }
         .redacted(reason: viewModel.isSkeleton ? .placeholder : [])
-        .imagePicker(isShow: $isPresentedImagePicker, uiImage: $viewModel.selectedImage)
+        .imagePicker(isShow: $viewModel.isPresentedImagePicker, completion: { image in
+            viewModel.changeProfileImage(image: image)
+        }, uiImage: $viewModel.selectedImage)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text("프로필"))
         .toolbar {

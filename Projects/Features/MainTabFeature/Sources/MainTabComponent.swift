@@ -20,6 +20,7 @@ public final class MainTabComponent: Component<MainTabDependency> {
                     homeComponent: self.dependency.homeComponent
                 )
             }
+            .navigationViewStyle(.stack)
         }
     }
 }
