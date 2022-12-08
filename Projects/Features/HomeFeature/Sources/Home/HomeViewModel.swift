@@ -27,7 +27,6 @@ public final class HomeViewModel: BaseViewModel {
         self.fetchScheduleUseCase = fetchScheduleUseCase
         self.fetchHolidayUseCase = fetchHolidayUseCase
         super.init()
-        homeDataInit()
     }
 
     func homeDataInit() {
