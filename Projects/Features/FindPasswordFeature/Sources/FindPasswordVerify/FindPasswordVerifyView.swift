@@ -33,7 +33,6 @@ struct FindPasswordVerifyVIew: View {
                     }
                 )
                 .focused($focusField, equals: .code)
-                .keyboardType(.numberPad)
 
                 Text("남은 시간 \(viewModel.timeText)")
                     .stTypo(.m6, color: .extraError)

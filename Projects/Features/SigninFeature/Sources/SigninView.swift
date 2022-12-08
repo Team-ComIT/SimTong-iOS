@@ -52,6 +52,7 @@ struct SigninView: View {
                         focusField = .password
                     }
                 )
+                .keyboardType(.numberPad)
                 .padding(.bottom, 8)
                 .focused($focusField, equals: .employeeID)
 
