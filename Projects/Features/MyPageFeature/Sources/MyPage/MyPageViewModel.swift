@@ -6,7 +6,7 @@ import UIKit
 public final class MyPageViewModel: BaseViewModel {
     private let fetchMyProfileUseCase: any FetchMyProfileUseCase
     private let logoutUseCase: any LogoutUseCase
-    private let uploadSingleFileUseCase: any UploadSingleFileUseCase
+    private let uploadMultipleFileUseCase: any UploadMultipleFileUseCase
     private let changeProfileImageUseCase: any ChangeProfileImageUseCase
     @Published var myProfile: UserInfoEntity = .init(
         name: "김이름",
@@ -29,12 +29,12 @@ public final class MyPageViewModel: BaseViewModel {
     init(
         fetchMyProfileUseCase: any FetchMyProfileUseCase,
         logoutUseCase: any LogoutUseCase,
-        uploadSingleFileUseCase: any UploadSingleFileUseCase,
+        uploadMultipleFileUseCase: any UploadMultipleFileUseCase,
         changeProfileImageUseCase: any ChangeProfileImageUseCase
     ) {
         self.fetchMyProfileUseCase = fetchMyProfileUseCase
         self.logoutUseCase = logoutUseCase
-        self.uploadSingleFileUseCase = uploadSingleFileUseCase
+        self.uploadMultipleFileUseCase = uploadMultipleFileUseCase
         self.changeProfileImageUseCase = changeProfileImageUseCase
         super.init()
         self.isSkeleton = true
@@ -63,7 +63,7 @@ public final class MyPageViewModel: BaseViewModel {
         Task {
             await withAsyncTry(with: self) { owner in
                 let imageData = image?.pngData() ?? .init()
-                let url = try await owner.uploadSingleFileUseCase.execute(imageData)
+                let url = try await owner.uploadMultipleFileUseCase.execute([imageData]).first ?? ""
                 try await owner.changeProfileImageUseCase.execute(imageURL: url)
             }
         }

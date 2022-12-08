@@ -200,8 +200,8 @@ private class MyPageDependency48d84b530313b3ee40feProvider: MyPageDependency {
     var logoutUseCase: any LogoutUseCase {
         return appComponent.logoutUseCase
     }
-    var uploadSingleFileUseCase: any UploadSingleFileUseCase {
-        return appComponent.uploadSingleFileUseCase
+    var uploadMultipleFileUseCase: any UploadMultipleFileUseCase {
+        return appComponent.uploadMultipleFileUseCase
     }
     var changeProfileImageUseCase: any ChangeProfileImageUseCase {
         return appComponent.changeProfileImageUseCase
@@ -608,7 +608,7 @@ extension MyPageComponent: Registration {
     public func registerItems() {
         keyPathToName[\MyPageDependency.fetchMyProfileUseCase] = "fetchMyProfileUseCase-any FetchMyProfileUseCase"
         keyPathToName[\MyPageDependency.logoutUseCase] = "logoutUseCase-any LogoutUseCase"
-        keyPathToName[\MyPageDependency.uploadSingleFileUseCase] = "uploadSingleFileUseCase-any UploadSingleFileUseCase"
+        keyPathToName[\MyPageDependency.uploadMultipleFileUseCase] = "uploadMultipleFileUseCase-any UploadMultipleFileUseCase"
         keyPathToName[\MyPageDependency.changeProfileImageUseCase] = "changeProfileImageUseCase-any ChangeProfileImageUseCase"
         keyPathToName[\MyPageDependency.nicknameChangeComponent] = "nicknameChangeComponent-NicknameChangeComponent"
         keyPathToName[\MyPageDependency.emailModifyComponent] = "emailModifyComponent-EmailModifyComponent"

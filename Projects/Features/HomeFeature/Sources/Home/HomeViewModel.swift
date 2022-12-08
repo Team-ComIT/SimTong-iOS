@@ -86,7 +86,7 @@ public final class HomeViewModel: BaseViewModel {
     func fetchHoliday() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let holidays = try await owner.fetchHolidayUseCase.execute(date: .init())
+                let holidays = try await owner.fetchHolidayUseCase.execute(date: Date().toSmallSimtongDateString())
                 holidays.forEach { holiday in
                     owner.holidaysDict[holiday.date] = holiday.type
                 }

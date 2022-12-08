@@ -43,7 +43,7 @@ public extension FilsAPI {
             return .uploadMultipart(datas.map { data in
                 MultipartFormData(
                     provider: .data(data),
-                    name: "file_paths"
+                    name: "files"
                 )
             })
         }
@@ -54,6 +54,10 @@ public extension FilsAPI {
         default:
             return .none
         }
+    }
+
+    var headers: [String: String]? {
+        ["Content-Type": "multipart/form-data"]
     }
 
     var errorMap: [Int: STError] {
