@@ -25,4 +25,7 @@ final class GuestViewModel: BaseViewModel {
             "https://www.sungsimdangmall.co.kr/product/content.asp?guid=523124"
         )
     ]
+    @Published var imageSlideSelection = 0
+    @Published var selectedURL: String?
+    @Published var isPresentedBread = false
 }

@@ -88,6 +88,7 @@ public enum DesignSystemAsset {
     public static let pay = DesignSystemImages(name: "pay")
     public static let rice = DesignSystemImages(name: "rice")
     public static let sungsimdangFacebook = DesignSystemImages(name: "sungsimdang-facebook")
+    public static let sungsimdangIntroduce = DesignSystemImages(name: "sungsimdang-introduce")
     public static let sungsimdang = DesignSystemImages(name: "sungsimdang")
   }
 }

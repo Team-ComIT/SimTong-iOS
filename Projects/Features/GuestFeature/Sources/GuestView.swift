@@ -1,4 +1,5 @@
 import BaseFeature
+import Combine
 import DesignSystem
 import SwiftUI
 
@@ -6,6 +7,7 @@ struct GuestView: View {
     @EnvironmentObject var appState: AppState
     @StateObject var viewModel: GuestViewModel
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+    private let timer = Timer.publish(every: 3, on: .main, in: .common) .autoconnect()
 
     init(
         viewModel: GuestViewModel
@@ -17,13 +19,25 @@ struct GuestView: View {
         GeometryReader { proxy in
             ScrollView(.vertical) {
                 VStack {
-                    Link(
-                        destination: URL(string: "https://www.facebook.com/sungsimdang4114") ??
-                        URL(string: "https://www.google.com")!
-                    ) {
-                        STImage(.sungsimdangFacebook)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: proxy.size.width * 0.5333)
+                    TabView(selection: $viewModel.imageSlideSelection) {
+                        STImage(.sungsimdangIntroduce)
+                            .tag(0)
+
+                        Link(
+                            destination: URL(string: "https://www.facebook.com/sungsimdang4114") ??
+                            URL(string: "https://www.google.com")!
+                        ) {
+                            STImage(.sungsimdangFacebook)
+                        }
+                        .tag(1)
+                    }
+                    .tabViewStyle(.page)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: proxy.size.width * 0.5333)
+                    .onReceive(timer) { _ in
+                        withAnimation {
+                            viewModel.imageSlideSelection =  viewModel.imageSlideSelection == 0 ? 1 : 0
+                        }
                     }
 
                     VStack(spacing: 12) {
@@ -49,10 +63,10 @@ struct GuestView: View {
 
                         LazyVGrid(columns: columns) {
                             ForEach(viewModel.specialtiesList, id: \.0) { bread in
-                                Link(
-                                    destination: URL(string: bread.2) ??
-                                    URL(string: "https://www.google.com")!
-                                ) {
+                                Button {
+                                    viewModel.selectedURL = bread.2
+                                    viewModel.isPresentedBread = true
+                                } label: {
                                     VStack(spacing: 4) {
                                         AsyncImage(url: URL(string: bread.1)) { image in
                                             image.resizable()
@@ -66,12 +80,17 @@ struct GuestView: View {
                                             .stTypo(.r6, color: .grayMain)
                                     }
                                 }
+
                             }
                         }
                     }
                     .padding(.top, 32)
                     .padding(.horizontal, 16)
                 }
+            }
+            .fullScreenCover(isPresented: $viewModel.isPresentedBread) {
+                STSafariView(url: URL(string: viewModel.selectedURL ?? ""))
+                    .ignoresSafeArea()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

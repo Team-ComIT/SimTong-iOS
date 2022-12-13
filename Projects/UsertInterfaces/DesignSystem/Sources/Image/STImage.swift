@@ -1,11 +1,5 @@
 import SwiftUI
 
-fileprivate extension DesignSystemImages {
-    var suiImage: SwiftUI.Image {
-        SwiftUI.Image(uiImage: self.image)
-    }
-}
-
 public struct STImage: View {
     var image: Image
     var renderingMode: SwiftUI.Image.TemplateRenderingMode
@@ -31,6 +25,7 @@ public struct STImage: View {
         case signinLogo
         case sungsimdang
         case sungsimdangFacebook
+        case sungsimdangIntroduce
     }
 
     public var body: some View {
@@ -39,32 +34,35 @@ public struct STImage: View {
             .renderingMode(renderingMode)
     }
 
+    // swiftlint: disable cyclomatic_complexity
     private func imageToImage() -> SwiftUI.Image {
         switch image {
         case .place1:
-            return DesignSystemAsset.Images.place1.suiImage
+            return DesignSystemAsset.Images.place1.swiftUIImage
         case .place2:
-            return DesignSystemAsset.Images.place2.suiImage
+            return DesignSystemAsset.Images.place2.swiftUIImage
         case .place3:
-            return DesignSystemAsset.Images.place3.suiImage
+            return DesignSystemAsset.Images.place3.swiftUIImage
         case .place4:
-            return DesignSystemAsset.Images.place4.suiImage
+            return DesignSystemAsset.Images.place4.swiftUIImage
         case .place5:
-            return DesignSystemAsset.Images.place5.suiImage
+            return DesignSystemAsset.Images.place5.swiftUIImage
         case .introLogo:
-            return DesignSystemAsset.Images.introLogo.suiImage
+            return DesignSystemAsset.Images.introLogo.swiftUIImage
         case .rice:
-            return DesignSystemAsset.Images.rice.suiImage
+            return DesignSystemAsset.Images.rice.swiftUIImage
         case .pay:
-            return DesignSystemAsset.Images.pay.suiImage
+            return DesignSystemAsset.Images.pay.swiftUIImage
         case .holiday:
-            return DesignSystemAsset.Images.holiday.suiImage
+            return DesignSystemAsset.Images.holiday.swiftUIImage
         case .signinLogo:
-            return DesignSystemAsset.Images.signinLogo.suiImage
+            return DesignSystemAsset.Images.signinLogo.swiftUIImage
         case .sungsimdang:
-            return DesignSystemAsset.Images.sungsimdang.suiImage
+            return DesignSystemAsset.Images.sungsimdang.swiftUIImage
         case .sungsimdangFacebook:
-            return DesignSystemAsset.Images.sungsimdangFacebook.suiImage
+            return DesignSystemAsset.Images.sungsimdangFacebook.swiftUIImage
+        case .sungsimdangIntroduce:
+            return DesignSystemAsset.Images.sungsimdangIntroduce.swiftUIImage
         }
     }
 }

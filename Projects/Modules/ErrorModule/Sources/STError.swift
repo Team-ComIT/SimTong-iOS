@@ -31,7 +31,7 @@ public enum STError: Error, Equatable {
     case authCodeExpired
     case alreadyVerifiedEmail
     case tooManyRequestVerifyEmail
-    
+
     // holidays
     case alreadyHolidaysOrLimited
     case alreadyAnnualOrLacked
