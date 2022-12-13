@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "IntroLogo.svg",
+      "filename" : "simtong-typo.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "IntroLogo 1.svg",
+      "filename" : "simtong-typo 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "IntroLogo 2.svg",
+      "filename" : "simtong-typo 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }

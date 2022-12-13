@@ -18,7 +18,6 @@ public struct STImage: View {
         case place3
         case place4
         case place5
-        case introLogo
         case rice
         case pay
         case holiday
@@ -27,6 +26,8 @@ public struct STImage: View {
         case sungsimdangFacebook
         case sungsimdangIntroduce
         case sungsimdangCharacter
+        case miniSimtong
+        case simtongTypo
     }
 
     public var body: some View {
@@ -48,8 +49,6 @@ public struct STImage: View {
             return DesignSystemAsset.Images.place4.swiftUIImage
         case .place5:
             return DesignSystemAsset.Images.place5.swiftUIImage
-        case .introLogo:
-            return DesignSystemAsset.Images.introLogo.swiftUIImage
         case .rice:
             return DesignSystemAsset.Images.rice.swiftUIImage
         case .pay:
@@ -66,6 +65,10 @@ public struct STImage: View {
             return DesignSystemAsset.Images.sungsimdangIntroduce.swiftUIImage
         case .sungsimdangCharacter:
             return DesignSystemAsset.Images.sungsimdangCharacter.swiftUIImage
+        case .miniSimtong:
+            return DesignSystemAsset.Images.miniSimtong.swiftUIImage
+        case .simtongTypo:
+            return DesignSystemAsset.Images.simtongTypo.swiftUIImage
         }
     }
 }

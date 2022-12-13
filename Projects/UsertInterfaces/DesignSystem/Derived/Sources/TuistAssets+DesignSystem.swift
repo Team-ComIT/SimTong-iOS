@@ -77,7 +77,6 @@ public enum DesignSystemAsset {
     public static let xmark = DesignSystemImages(name: "xmark")
   }
   public enum Images {
-    public static let introLogo = DesignSystemImages(name: "IntroLogo")
     public static let place1 = DesignSystemImages(name: "place1")
     public static let place2 = DesignSystemImages(name: "place2")
     public static let place3 = DesignSystemImages(name: "place3")
@@ -85,8 +84,10 @@ public enum DesignSystemAsset {
     public static let place5 = DesignSystemImages(name: "place5")
     public static let signinLogo = DesignSystemImages(name: "SigninLogo")
     public static let holiday = DesignSystemImages(name: "holiday")
+    public static let miniSimtong = DesignSystemImages(name: "mini-simtong")
     public static let pay = DesignSystemImages(name: "pay")
     public static let rice = DesignSystemImages(name: "rice")
+    public static let simtongTypo = DesignSystemImages(name: "simtong-typo")
     public static let sungsimdangCharacter = DesignSystemImages(name: "sungsimdang-character")
     public static let sungsimdangFacebook = DesignSystemImages(name: "sungsimdang-facebook")
     public static let sungsimdangIntroduce = DesignSystemImages(name: "sungsimdang-introduce")
