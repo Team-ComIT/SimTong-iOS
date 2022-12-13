@@ -61,15 +61,23 @@ private func factorye93d1d56840ff97c674af47b58f8f304c97af4d5(_ component: Needle
     return SignupPasswordDependency778bf5389a70d7df6152Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupInfoDependency76f0cca8f78295db6e25Provider: SignupInfoDependency {
-
-
-    init() {
-
+    var checkDuplicateNicknameUseCase: any CheckDuplicateNicknameUseCase {
+        return appComponent.checkDuplicateNicknameUseCase
+    }
+    var uploadSingleFileUseCase: any UploadSingleFileUseCase {
+        return appComponent.uploadSingleFileUseCase
+    }
+    var signupUseCase: any SignupUseCase {
+        return appComponent.signupUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->SignupInfoComponent
-private func factoryf65b1c12d971bd932996e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return SignupInfoDependency76f0cca8f78295db6e25Provider()
+private func factoryf65b1c12d971bd932996f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupInfoDependency76f0cca8f78295db6e25Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider: SignupEmployeeInfoDependency {
     var checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase {
@@ -572,7 +580,9 @@ extension SignupPasswordComponent: Registration {
 }
 extension SignupInfoComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\SignupInfoDependency.checkDuplicateNicknameUseCase] = "checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"
+        keyPathToName[\SignupInfoDependency.uploadSingleFileUseCase] = "uploadSingleFileUseCase-any UploadSingleFileUseCase"
+        keyPathToName[\SignupInfoDependency.signupUseCase] = "signupUseCase-any SignupUseCase"
     }
 }
 extension SignupEmployeeInfoComponent: Registration {
@@ -757,7 +767,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->MainTabComponent", factory1ab5a747ddf21e1393f9f47b58f8f304c97af4d5)

@@ -20,7 +20,9 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Binding var requests: UIImage?
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
-        let controller = PHPickerViewController(configuration: configuration)
+        var config = configuration
+        config.filter = .images
+        let controller = PHPickerViewController(configuration: config)
         controller.delegate = context.coordinator
         return controller
     }

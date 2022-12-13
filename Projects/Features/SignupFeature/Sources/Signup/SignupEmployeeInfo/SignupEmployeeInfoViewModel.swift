@@ -44,7 +44,7 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
 
     @MainActor
     func signup() {
-        if !email.isEmpty && isEmailStep {
+        if !email.isEmpty && isEmailStep && Int(number) != nil {
             Task {
                 await withAsyncTry(with: self) { owner in
                     try await owner.checkExistNameAndEmployeeIDUseCase.execute(

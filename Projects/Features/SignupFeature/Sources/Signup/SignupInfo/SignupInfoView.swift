@@ -1,9 +1,12 @@
+import BaseFeature
 import SwiftUI
 import DesignSystem
+import Utility
 
 struct SignupInfoView: View {
     @StateObject var viewModel: SignupInfoViewModel
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var appState: AppState
     @State var isPresentedImagePicker = false
 
     public init(
@@ -53,8 +56,8 @@ struct SignupInfoView: View {
                     .stTypo(.r7)
                     .foregroundColor(.gray05)
 
-                NavigationLink {
-                    Text("안녕하세용")
+                Button {
+                    NavigationUtil.popToRootView()
                 } label: {
                     Text("로그인")
                         .underline()
@@ -68,6 +71,13 @@ struct SignupInfoView: View {
 
             WideButton(text: viewModel.isSkip ? "건너뛰기" : "다음") {
                 viewModel.isNotSupportImageType = true
+            }
+        }
+        .onChange(of: viewModel.isSuccessSignup) { newValue in
+            if newValue {
+                withAnimation {
+                    appState.sceneFlow = .main
+                }
             }
         }
         .imagePicker(isShow: $isPresentedImagePicker, uiImage: $viewModel.image)

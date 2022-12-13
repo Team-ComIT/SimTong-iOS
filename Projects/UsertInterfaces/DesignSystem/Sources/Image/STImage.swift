@@ -26,6 +26,7 @@ public struct STImage: View {
         case sungsimdang
         case sungsimdangFacebook
         case sungsimdangIntroduce
+        case sungsimdangCharacter
     }
 
     public var body: some View {
@@ -63,6 +64,8 @@ public struct STImage: View {
             return DesignSystemAsset.Images.sungsimdangFacebook.swiftUIImage
         case .sungsimdangIntroduce:
             return DesignSystemAsset.Images.sungsimdangIntroduce.swiftUIImage
+        case .sungsimdangCharacter:
+            return DesignSystemAsset.Images.sungsimdangCharacter.swiftUIImage
         }
     }
 }

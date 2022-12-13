@@ -47,7 +47,7 @@ final class PasswordChangeViewModel: BaseViewModel {
     }
 
     func checkPassword() -> Bool {
-        let passwordPattern = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$_+-]).{8,20}"
+        let passwordPattern = "(?=.*[A-Za-z])(?=.*\\d)(?=^[\\w$+-]{8,20}$).*"
         guard newPassword ~= passwordPattern else {
             isError = true
             errorMessage = "비밀번호는 8~20자이고 영문, 숫자, 특수기호($+-_)가 모두 포함되어야합니다."
