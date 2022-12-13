@@ -68,7 +68,9 @@ struct GuestView: View {
                                     viewModel.isPresentedBread = true
                                 } label: {
                                     VStack(spacing: 4) {
-                                        AsyncImage(url: URL(string: bread.1)) { image in
+                                        AsyncImage(
+                                            url: URL(string: bread.1.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+                                        ) { image in
                                             image.resizable()
                                         } placeholder: {
                                             Color.gray04
