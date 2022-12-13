@@ -1,3 +1,4 @@
+import BaseFeature
 import DesignSystem
 import SwiftUI
 import SigninFeature
@@ -5,6 +6,7 @@ import SignupFeature
 
 struct IntroView: View {
     @StateObject var viewModel: IntroViewModel
+    @EnvironmentObject var appState: AppState
     private let signinComponent: SigninComponent
     private let signupEmployeeInfoComponent: SignupEmployeeInfoComponent
 
@@ -48,6 +50,12 @@ struct IntroView: View {
 
                     CTAButton(text: "로그인", style: .cancel) {
                         viewModel.isNavigateSignin = true
+                    }
+
+                    CTAButton(text: "게스트", style: .cancel) {
+                        withAnimation {
+                            appState.sceneFlow = .guest
+                        }
                     }
                 }
                 .padding(.horizontal, 16)

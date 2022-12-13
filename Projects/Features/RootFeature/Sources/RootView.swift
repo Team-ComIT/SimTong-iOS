@@ -17,7 +17,7 @@ public struct RootView: View {
         introComponent: IntroComponent,
         mainTabComponent: MainTabComponent,
         splashComponent: SplashComponent,
-        guestComponent: GuestComponent
+        guestComponent: GuestComponent,
         viewModel: RootViewModel
     ) {
         self.introComponent = introComponent
