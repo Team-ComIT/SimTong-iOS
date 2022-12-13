@@ -11,7 +11,8 @@ final class GuestViewModel: BaseViewModel {
         ),
         (
             "초코튀소삼형제",
-            "https://www.sungsimdangmall.co.kr/data/sungsimdang/goods/sungsimdang/big/초코튀소삼형제.jpg",
+            "https://www.sungsimdangmall.co.kr/data/sungsimdang/goods/sungsimdang/big/초코튀소삼형제.jpg"
+                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "",
             "https://www.sungsimdangmall.co.kr/product/content.asp?guid=523295"
         ),
         (
