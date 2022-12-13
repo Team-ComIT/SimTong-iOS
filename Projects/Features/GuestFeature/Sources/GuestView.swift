@@ -69,7 +69,9 @@ struct GuestView: View {
                                 } label: {
                                     VStack(spacing: 4) {
                                         AsyncImage(
-                                            url: URL(string: bread.1.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+                                            url: URL(
+                                                string: bread.1.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                                            )
                                         ) { image in
                                             image.resizable()
                                         } placeholder: {
