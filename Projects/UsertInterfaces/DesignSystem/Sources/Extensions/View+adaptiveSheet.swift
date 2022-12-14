@@ -67,7 +67,7 @@ public extension View {
         willDismiss: @escaping () -> Void = {},
         didDismiss: @escaping () -> Void = {},
         @ViewBuilder content: @escaping () -> T
-    )-> some View {
+    ) -> some View {
         modifier(
             AdaptiveSheet(
                 isPresented: isPresented,

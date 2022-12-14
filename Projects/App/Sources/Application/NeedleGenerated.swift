@@ -488,15 +488,17 @@ private func factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5(_ component: Needle
     return FindAuthInfoTabDependency79082cf44b62999fcee0Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class GuestDependency452a7de310bc588b860eProvider: GuestDependency {
-
-
-    init() {
-
+    var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
+        return appComponent.fetchPublicMenuListUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->GuestComponent
-private func factory3e3f831d36968386aaf6e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return GuestDependency452a7de310bc588b860eProvider()
+private func factory3e3f831d36968386aaf6f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return GuestDependency452a7de310bc588b860eProvider(appComponent: parent1(component) as! AppComponent)
 }
 private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
     var signinComponent: SigninComponent {
@@ -739,7 +741,7 @@ extension FindAuthInfoTabComponent: Registration {
 }
 extension GuestComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\GuestDependency.fetchPublicMenuListUseCase] = "fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"
     }
 }
 extension IntroComponent: Registration {
@@ -791,7 +793,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->GuestComponent", factory3e3f831d36968386aaf6e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->GuestComponent", factory3e3f831d36968386aaf6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4acf47b58f8f304c97af4d5)
 }
 #endif

@@ -1,7 +1,9 @@
 import BaseFeature
 import Combine
 import DesignSystem
+import DomainModule
 import SwiftUI
+import Utility
 
 struct GuestView: View {
     @EnvironmentObject var appState: AppState
@@ -39,6 +41,24 @@ struct GuestView: View {
                             viewModel.imageSlideSelection =  viewModel.imageSlideSelection == 0 ? 1 : 0
                         }
                     }
+
+                    VStack(spacing: 12) {
+                        HStack {
+                            Text("본점 식당 메뉴")
+                                .stTypo(.s5, color: .extraBlack)
+
+                            Spacer()
+                        }
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(spacing: 8) {
+                                ForEach(viewModel.menus, id: \.date) { menu in
+                                    menuColumnView(menu: menu)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 16)
 
                     VStack(spacing: 12) {
                         HStack {
@@ -80,7 +100,6 @@ struct GuestView: View {
                                             .stTypo(.r6, color: .grayMain)
                                     }
                                 }
-
                             }
                         }
                     }
@@ -103,11 +122,41 @@ struct GuestView: View {
                             appState.sceneFlow = .intro
                         }
                     } label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                        Image(systemName: "person.fill")
                             .foregroundColor(.grayMain)
                     }
                 }
             }
+            .onAppear {
+                viewModel.onAppear()
+            }
         }
+    }
+
+    @ViewBuilder
+    func menuColumnView(menu: MenuEntity) -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("\(menu.date.toSmallSimtongDate().month)월 \(menu.date.toSmallSimtongDate().day)일")
+                        .stTypo(.r7, color: .extraBlack)
+                        .padding(.bottom, 8)
+
+                    ForEach(menu.meal, id: \.self) { meal in
+                        Text(meal)
+                            .stTypo(.m5, color: .grayMain)
+                            .frame(maxHeight: .infinity)
+                    }
+                }
+
+                Spacer()
+            }
+            .padding(20)
+        }
+        .frame(width: 168, height: 272)
+        .background {
+            STImage(.rice, renderingMode: .original)
+        }
+        .cornerRadius(16)
     }
 }

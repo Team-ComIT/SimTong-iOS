@@ -1,5 +1,7 @@
 import BaseFeature
+import Foundation
 import Combine
+import DomainModule
 
 // swiftlint: disable large_tuple
 final class GuestViewModel: BaseViewModel {
@@ -29,4 +31,21 @@ final class GuestViewModel: BaseViewModel {
     @Published var imageSlideSelection = 0
     @Published var selectedURL: String?
     @Published var isPresentedBread = false
+    @Published var menus: [MenuEntity] = []
+
+    private let fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase
+
+    init(fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase) {
+        self.fetchPublicMenuListUseCase = fetchPublicMenuListUseCase
+    }
+
+    @MainActor
+    func onAppear() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                let menus = try await owner.fetchPublicMenuListUseCase.execute(date: Date())
+                owner.menus = menus
+            }
+        }
+    }
 }
