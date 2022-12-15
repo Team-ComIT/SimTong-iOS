@@ -27,6 +27,7 @@ final class ScheduleCalendarViewModel: BaseViewModel {
             partialResult.append(contentsOf: dict.value)
         }
         .unique()
+        .sorted { $0.startAt < $1.startAt }
     }
     private let deleteScheduleUseCase: any DeleteScheduleUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase

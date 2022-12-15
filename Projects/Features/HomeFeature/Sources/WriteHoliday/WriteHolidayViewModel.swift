@@ -35,6 +35,7 @@ final class WriteHolidayViewModel: BaseViewModel {
         self.setWorkUseCase = setWorkUseCase
     }
 
+    @MainActor
     func writeHoliday(type: HolidayType) {
         let thisWeek = selectedDate.fetchAllDatesInCurrentWeek()
         if type == .dayoff && thisWeek.filter({ holidaysDict[$0.toSmallSimtongDateString()] == .dayoff }).count >= 2 {
