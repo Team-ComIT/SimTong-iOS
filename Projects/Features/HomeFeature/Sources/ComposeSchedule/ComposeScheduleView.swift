@@ -41,6 +41,7 @@ struct ComposeScheduleView: View {
             }
             .padding(.top, 24)
             .onTapGesture {
+                hideKeyboard()
                 viewModel.isPresentedStartAtDatePicker = true
             }
 
@@ -53,6 +54,7 @@ struct ComposeScheduleView: View {
                 .disabled(true)
             }
             .onTapGesture {
+                hideKeyboard()
                 viewModel.isPresentedEndAtDatePicker = true
             }
 
@@ -66,12 +68,14 @@ struct ComposeScheduleView: View {
             }
             .padding(.top, 24)
             .onTapGesture {
+                hideKeyboard()
                 viewModel.isPresentedAlarmDatePicker = true
             }
 
             Spacer()
 
             CTAButton(text: viewModel.isUpdate ? "수정" : "추가") {
+                hideKeyboard()
                 viewModel.completeButtonDidTap()
             }
             .disabled(viewModel.title.isEmpty)
