@@ -73,8 +73,9 @@ struct SignupEmployeeInfoView: View {
                             .opacity(viewModel.isNumberStep ? 1.0 : 0.0)
                             .keyboardType(.numberPad)
                             .onChange(of: viewModel.number) { newValue in
-                                if newValue.count == 10 {
+                                if newValue.count >= 10 {
                                     withAnimation {
+                                        viewModel.number = String(newValue.prefix(10))
                                         viewModel.nextButtonDidTap()
                                         focusField = .email
                                     }
