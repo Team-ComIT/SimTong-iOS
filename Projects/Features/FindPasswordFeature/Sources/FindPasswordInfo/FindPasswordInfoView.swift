@@ -26,6 +26,14 @@ struct FindPasswordInfoView: View {
             })
             .focused($focusField, equals: .id)
             .padding(.top, 64)
+            .onChange(of: viewModel.employeeID) { newValue in
+                if newValue.count >= 10 {
+                    withAnimation {
+                        viewModel.employeeID = String(newValue.prefix(10))
+                        focusField = .email
+                    }
+                }
+            }
 
             STTextField(
                 "이메일을 입력해주세요",

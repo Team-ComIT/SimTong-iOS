@@ -115,7 +115,9 @@ struct SigninView: View {
         .onChange(of: viewModel.isSuccessSignin) { newValue in
             if newValue {
                 DispatchQueue.main.async {
-                    appState.sceneFlow = .main
+                    withAnimation {
+                        appState.sceneFlow = .main
+                    }
                 }
             }
         }
