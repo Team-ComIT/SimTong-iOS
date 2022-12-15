@@ -54,8 +54,8 @@ final class WriteHolidayViewModel: BaseViewModel {
                         try await owner.setWorkUseCase.execute(date: owner.selectedDate.toSmallSimtongDateString())
                     }
                 }
+                holidaysDict[selectedDate.toSmallSimtongDateString()] = type
             }
-            holidaysDict[selectedDate.toSmallSimtongDateString()] = type
         }
     }
 }

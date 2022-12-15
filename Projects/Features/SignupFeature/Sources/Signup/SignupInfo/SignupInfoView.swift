@@ -70,7 +70,7 @@ struct SignupInfoView: View {
             Spacer()
 
             WideButton(text: viewModel.isSkip ? "건너뛰기" : "다음") {
-                viewModel.isNotSupportImageType = true
+                viewModel.nextButtonDidTap()
             }
         }
         .onChange(of: viewModel.isSuccessSignup) { newValue in

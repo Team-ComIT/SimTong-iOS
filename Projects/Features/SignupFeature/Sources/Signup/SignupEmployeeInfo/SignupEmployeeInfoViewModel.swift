@@ -41,8 +41,10 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
                         name: owner.name,
                         employeeNumber: owner.number
                     )
-                    owner.isEmailStep = true
-                    owner.nextButtonTitle = "인증"
+                    withAnimation {
+                        owner.isEmailStep = true
+                        owner.nextButtonTitle = "인증"
+                    }
                 }
             }
         } else {

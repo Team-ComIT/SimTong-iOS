@@ -22,9 +22,7 @@ struct ComposeScheduleView: View {
             STTextField(
                 "일정 제목을 입력해주세요.",
                 labelText: "제목",
-                text: $viewModel.title,
-                onCommit: {
-                }
+                text: $viewModel.title
             )
             .focused($focusField, equals: .title)
             .padding(.top, 32)

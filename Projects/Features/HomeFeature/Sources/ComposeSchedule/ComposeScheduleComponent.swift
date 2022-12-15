@@ -8,9 +8,10 @@ public protocol ComposeScheduleDependency: Dependency {
 }
 
 public final class ComposeScheduleComponent: Component<ComposeScheduleDependency> {
-    public func makeView(updateTarget: ScheduleEntity? = nil) -> some View {
+    public func makeView(selectedDate: Date? = nil, updateTarget: ScheduleEntity? = nil) -> some View {
         ComposeScheduleView(
             viewModel: .init(
+                selectedDate: selectedDate,
                 updateTarget: updateTarget,
                 createNewScheduleUseCase: dependency.createNewScheduleUseCase,
                 updateScheduleUseCase: dependency.updateScheduleUseCase
