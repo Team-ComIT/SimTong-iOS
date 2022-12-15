@@ -60,7 +60,9 @@ struct ScheduleCalendarView: View {
 
                     NavigationLink {
                         DeferView {
-                            composeScheduleComponent.makeView(selectedDate: viewModel.selectedDate)
+                            composeScheduleComponent.makeView(selectedDate: viewModel.selectedDate) {
+                                viewModel.onAppear()
+                            }
                         }
                     } label: {
                         Image(systemName: "plus")
@@ -110,7 +112,10 @@ struct ScheduleCalendarView: View {
         .navigate(
             to: composeScheduleComponent.makeView(
                 selectedDate: viewModel.selectedDate,
-                updateTarget: viewModel.selectedSchedule
+                updateTarget: viewModel.selectedSchedule,
+                completion: {
+                    viewModel.onAppear()
+                }
             ),
             when: $viewModel.isNavigateUpdateSchedule
         )

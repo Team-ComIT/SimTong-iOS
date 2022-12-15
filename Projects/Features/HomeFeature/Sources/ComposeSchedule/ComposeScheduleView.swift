@@ -10,11 +10,14 @@ struct ComposeScheduleView: View {
     @StateObject var viewModel: ComposeScheduleViewModel
     @Environment(\.dismiss) var dismiss
     @FocusState private var focusField: FocusField?
+    private let completion: (() -> Void)?
 
     init(
-        viewModel: ComposeScheduleViewModel
+        viewModel: ComposeScheduleViewModel,
+        completion: (() -> Void)?
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.completion = completion
     }
 
     var body: some View {
@@ -77,6 +80,7 @@ struct ComposeScheduleView: View {
         .onChange(of: viewModel.isSuccessComposeSchedule) { newValue in
             if newValue {
                 dismiss()
+                (completion ?? {})()
             }
         }
         .padding(.horizontal, 16)

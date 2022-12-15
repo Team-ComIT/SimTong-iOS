@@ -37,8 +37,8 @@ final class WriteHolidayViewModel: BaseViewModel {
 
     func writeHoliday(type: HolidayType) {
         let thisWeek = selectedDate.fetchAllDatesInCurrentWeek()
-        if type == .annual, thisWeek.filter({ holidaysDict[$0.toSmallSimtongDateString()] == .annual }).count >= 2 {
-            errorMessage = "일주일 최대 2회 휴무 정보를\n등록할 수 있습니다"
+        if type == .dayoff && thisWeek.filter({ holidaysDict[$0.toSmallSimtongDateString()] == .dayoff }).count >= 2 {
+            errorMessage = "일주일 최대 2회만 휴무 정보를 등록할 수 있습니다"
             isError = true
         } else {
             Task {
@@ -53,8 +53,8 @@ final class WriteHolidayViewModel: BaseViewModel {
                     case .work:
                         try await owner.setWorkUseCase.execute(date: owner.selectedDate.toSmallSimtongDateString())
                     }
+                    owner.holidaysDict[owner.selectedDate.toSmallSimtongDateString()] = type
                 }
-                holidaysDict[selectedDate.toSmallSimtongDateString()] = type
             }
         }
     }

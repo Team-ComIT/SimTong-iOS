@@ -43,6 +43,7 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         self.fetchScheduleUseCase = fetchScheduleUseCase
     }
 
+    @MainActor
     func onAppear() {
         fetchSchedules()
     }
@@ -77,35 +78,37 @@ final class ScheduleCalendarViewModel: BaseViewModel {
             await withAsyncTry(with: self) { owner in
                 guard let selectedSchedule = owner.selectedSchedule else { return }
                 try await owner.deleteScheduleUseCase.execute(id: selectedSchedule.id)
-                owner.isPresentedScheduleDeleteConfirm = false
-                owner.fetchSchedules()
+                await MainActor.run {
+                    owner.isPresentedScheduleDeleteConfirm = false
+                    owner.fetchSchedules()
+                }
             }
         }
     }
 
+    @MainActor
     func fetchSchedules() {
         Task {
             await withAsyncTry(with: self) { owner in
+                owner.scheduleDict = .init()
                 let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
                 for schedule in schedules {
-                    await MainActor.run {
-                        var start = schedule.startAt.toSmallSimtongDate()
-                        let end = schedule.endAt.toSmallSimtongDate().adding(by: .day, value: 1)
-                        if owner.scheduleDict[schedule.startAt] == nil {
-                            owner.scheduleDict[schedule.startAt] = [schedule]
+                    var start = schedule.startAt.toSmallSimtongDate()
+                    let end = schedule.endAt.toSmallSimtongDate().adding(by: .day, value: 1)
+                    if owner.scheduleDict[schedule.startAt] == nil {
+                        owner.scheduleDict[schedule.startAt] = [schedule]
+                    } else {
+                        owner.scheduleDict[schedule.startAt]?.append(schedule)
+                    }
+                    start = start.adding(by: .day, value: 1)
+                    while !start.isSameDay(end) {
+                        if owner.scheduleDict[start.toSmallSimtongDateString()] == nil {
+                            owner.scheduleDict[start.toSmallSimtongDateString()] = [schedule]
                         } else {
-                            owner.scheduleDict[schedule.startAt]?.append(schedule)
+                            owner.scheduleDict[start.toSmallSimtongDateString()]?.append(schedule)
                         }
-                        start = start.adding(by: .day, value: 1)
-                        while !start.isSameDay(end) {
-                            if owner.scheduleDict[start.toSmallSimtongDateString()] == nil {
-                                owner.scheduleDict[start.toSmallSimtongDateString()] = [schedule]
-                            } else {
-                                owner.scheduleDict[start.toSmallSimtongDateString()]?.append(schedule)
-                            }
 
-                            start = start.adding(by: .day, value: 1)
-                        }
+                        start = start.adding(by: .day, value: 1)
                     }
                 }
             }
