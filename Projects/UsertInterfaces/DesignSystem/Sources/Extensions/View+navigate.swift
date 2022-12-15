@@ -6,11 +6,11 @@ public extension View {
         when binding: Binding<Bool>,
         isDetailLink: Bool = false
     ) -> some View {
-        if #available(iOS 16.0, *) {
-            return self.navigationDestination(isPresented: binding) {
-                view
-            }
-        } else {
+//        if #available(iOS 16.0, *) {
+//            return self.navigationDestination(isPresented: binding) {
+//                view
+//            }
+//        } else {
             return self.background {
                 NavigationLink(isActive: binding) {
                     DeferView {
@@ -22,7 +22,7 @@ public extension View {
                 .isDetailLink(isDetailLink)
             }
         }
-    }
+//    }
 }
 
 public struct DeferView<Content: View>: View {

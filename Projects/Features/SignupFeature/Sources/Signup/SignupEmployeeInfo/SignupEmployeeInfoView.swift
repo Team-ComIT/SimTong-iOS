@@ -117,6 +117,13 @@ struct SignupEmployeeInfoView: View {
                 WideButton(text: viewModel.nextButtonTitle) {
                     withAnimation {
                         viewModel.nextButtonDidTap()
+                        if !viewModel.isEmailStep && !viewModel.isNumberStep {
+                            focusField = .email
+                        } else if viewModel.isNumberStep {
+                            focusField = .number
+                        } else if viewModel.isEmailStep {
+                            hideKeyboard()
+                        }
                     }
                     viewModel.signup()
                 }

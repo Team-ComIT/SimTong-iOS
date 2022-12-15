@@ -55,6 +55,11 @@ struct SigninView: View {
                 .keyboardType(.numberPad)
                 .padding(.bottom, 8)
                 .focused($focusField, equals: .employeeID)
+                .onChange(of: viewModel.employeeID) { newValue in
+                    if newValue.count == 10 {
+                        focusField = .password
+                    }
+                }
 
                 STSecureTextField(
                     "비밀번호를 입력해주세요.",
@@ -74,8 +79,8 @@ struct SigninView: View {
             }
             .padding(.horizontal, 16)
 
-            NavigationLink {
-                findAuthInfoTabComponent.makeView()
+            Button {
+                viewModel.isNavigateFindAuthInfo = true
             } label: {
                 Text("사원번호 ∙ 비밀번호 찾기")
                     .stTypo(.r7, color: .gray05)
@@ -87,8 +92,8 @@ struct SigninView: View {
                 Text("계정이 없으신가요?")
                     .stTypo(.r7, color: .gray05)
 
-                NavigationLink {
-                    signupEmployeeInfoComponent.makeView()
+                Button {
+                    dismiss()
                 } label: {
                     Text("회원가입")
                         .underline()
@@ -97,7 +102,14 @@ struct SigninView: View {
             }
             .padding(.bottom, 24)
         }
+        .onAppear {
+            focusField = .employeeID
+        }
         .stBackground()
+        .navigate(
+            to: findAuthInfoTabComponent.makeView(),
+            when: $viewModel.isNavigateFindAuthInfo
+        )
         .configBackButton(dismiss: dismiss)
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: viewModel.isSuccessSignin) { newValue in

@@ -69,6 +69,7 @@ struct IntroView: View {
             }
             .padding(.horizontal, 16)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .navigate(
             to: signinComponent.makeView(),
             when: $viewModel.isNavigateSignin
