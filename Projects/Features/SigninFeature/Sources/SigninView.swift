@@ -114,7 +114,9 @@ struct SigninView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: viewModel.isSuccessSignin) { newValue in
             if newValue {
-                appState.sceneFlow = .main
+                DispatchQueue.main.async {
+                    appState.sceneFlow = .main
+                }
             }
         }
     }

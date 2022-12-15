@@ -31,7 +31,7 @@ struct IntroView: View {
                         .frame(width: 50, height: 54)
 
                     STImage(.simtongTypo)
-                        .frame(width: 77, height: 38)
+                        .frame(width: 71, height: 30)
 
                     Text("마음을 나누다.")
                         .font(Font(
