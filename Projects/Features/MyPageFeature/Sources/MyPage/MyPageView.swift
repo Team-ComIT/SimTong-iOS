@@ -66,7 +66,7 @@ struct MyPageView: View {
                         .padding([.bottom, .trailing], 4)
                 }
             }
-            .disabled(viewModel.isSkeleton)
+            .disabled(!viewModel.isModify)
             .padding(.top, 24)
 
             VStack(spacing: 24) {
