@@ -24,6 +24,7 @@ struct FindPasswordInfoView: View {
             STTextField("사원번호을 입력해주세요", text: $viewModel.employeeID, style: .clear, onCommit: {
                 focusField = .email
             })
+            .keyboardType(.numberPad)
             .focused($focusField, equals: .id)
             .padding(.top, 64)
             .onChange(of: viewModel.employeeID) { newValue in
