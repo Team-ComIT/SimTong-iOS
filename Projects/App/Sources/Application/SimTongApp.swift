@@ -7,6 +7,7 @@ import SignupFeature
 @main
 struct SimTongApp: App {
     @StateObject private var appState = AppState()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     init() {
         registerProviderFactories()

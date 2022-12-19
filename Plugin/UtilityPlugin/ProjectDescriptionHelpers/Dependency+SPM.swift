@@ -11,4 +11,5 @@ public extension TargetDependency.SPM {
     static let Moya = TargetDependency.external(name: "Moya")
     static let Quick = TargetDependency.external(name: "Quick")
     static let Nimble = TargetDependency.external(name: "Nimble")
+    static let FCM = TargetDependency.external(name: "FirebaseMessaging")
 }
