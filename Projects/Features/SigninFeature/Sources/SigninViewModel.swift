@@ -10,6 +10,7 @@ final class SigninViewModel: BaseViewModel {
         didSet { isError = false }
     }
     @Published var isSuccessSignin = false
+    @Published var isNavigateFindAuthInfo = false
     private let signinUseCase: any SigninUseCase
 
     init(

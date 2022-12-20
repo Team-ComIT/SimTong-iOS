@@ -1,5 +1,6 @@
 import SwiftUI
 import DesignSystem
+import Utility
 
 struct SignupVerifyView: View {
     private enum FocusField {
@@ -57,8 +58,8 @@ struct SignupVerifyView: View {
                     .stTypo(.r7)
                     .foregroundColor(.gray05)
 
-                NavigationLink {
-                    Text("안녕하세용")
+                Button {
+                    NavigationUtil.popToRootView()
                 } label: {
                     Text("로그인")
                         .underline()

@@ -1,5 +1,6 @@
 import SwiftUI
 import DesignSystem
+import Utility
 
 struct SignupPasswordView: View {
     private enum FocusField: Hashable {
@@ -39,7 +40,6 @@ struct SignupPasswordView: View {
                         onCommit: {
                             withAnimation {
                                 viewModel.nextButtonDidTap()
-                                viewModel.checkPassword()
                             }
                         }
                     )
@@ -68,8 +68,8 @@ struct SignupPasswordView: View {
                         .stTypo(.r7)
                         .foregroundColor(.gray05)
 
-                    NavigationLink {
-                        Text("안녕하세용")
+                    Button {
+                        NavigationUtil.popToRootView()
                     } label: {
                         Text("로그인")
                             .underline()
@@ -84,7 +84,6 @@ struct SignupPasswordView: View {
                 WideButton(text: "다음") {
                     withAnimation {
                         viewModel.nextButtonDidTap()
-                        viewModel.checkPassword()
                     }
                 }
                 .disabled(viewModel.password.isEmpty)

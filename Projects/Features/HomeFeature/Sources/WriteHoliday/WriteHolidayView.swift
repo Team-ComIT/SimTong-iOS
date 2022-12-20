@@ -98,7 +98,7 @@ struct WriteHolidayView: View {
             }
 
             HStack(spacing: 32) {
-                ForEach([HolidayType.annual, .dayoff, .work], id: \.hashValue) {
+                ForEach([HolidayType.dayoff, .annual, .work], id: \.hashValue) {
                     holidayColumnView(holiday: $0)
                 }
             }
@@ -133,10 +133,10 @@ struct WriteHolidayView: View {
     func holidayColor(holiday: HolidayType) -> Color {
         switch holiday {
         case .dayoff:
-            return .extraPrimary
+            return .main
 
         case .annual:
-            return .main
+            return .extraPrimary
 
         case .work:
             return .gray04

@@ -1,5 +1,5 @@
 import SwiftUI
-// swiftlint:disable identifier_name cyclomatic_complexity function_body_length
+// swiftlint:disable identifier_name cyclomatic_complexity
 public struct STTypography: ViewModifier {
     public enum Style {
         // MARK: - Regular

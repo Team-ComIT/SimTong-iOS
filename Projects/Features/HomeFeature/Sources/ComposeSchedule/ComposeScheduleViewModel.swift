@@ -31,6 +31,7 @@ final class ComposeScheduleViewModel: BaseViewModel {
     private let updateScheduleUseCase: any UpdateScheduleUseCase
 
     init(
+        selectedDate: Date? = nil,
         updateTarget: ScheduleEntity? = nil,
         createNewScheduleUseCase: any CreateNewScheduleUseCase,
         updateScheduleUseCase: any UpdateScheduleUseCase
@@ -50,6 +51,10 @@ final class ComposeScheduleViewModel: BaseViewModel {
             id = ""
             isUpdate = false
             super.init()
+        }
+        if let selectedDate {
+            self.startAt = selectedDate
+            self.endAt = selectedDate
         }
         let defaultAlarmTime = DateComponents(calendar: .current, hour: 8, minute: 30).date ?? .init()
         alarmTime = defaultAlarmTime

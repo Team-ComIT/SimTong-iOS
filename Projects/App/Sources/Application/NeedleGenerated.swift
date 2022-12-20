@@ -7,6 +7,7 @@ import DomainModule
 import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
 import FindPasswordFeature
+import GuestFeature
 import HomeFeature
 import IntroFeature
 import KeychainModule
@@ -60,15 +61,23 @@ private func factorye93d1d56840ff97c674af47b58f8f304c97af4d5(_ component: Needle
     return SignupPasswordDependency778bf5389a70d7df6152Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupInfoDependency76f0cca8f78295db6e25Provider: SignupInfoDependency {
-
-
-    init() {
-
+    var checkDuplicateNicknameUseCase: any CheckDuplicateNicknameUseCase {
+        return appComponent.checkDuplicateNicknameUseCase
+    }
+    var uploadSingleFileUseCase: any UploadSingleFileUseCase {
+        return appComponent.uploadSingleFileUseCase
+    }
+    var signupUseCase: any SignupUseCase {
+        return appComponent.signupUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->SignupInfoComponent
-private func factoryf65b1c12d971bd932996e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return SignupInfoDependency76f0cca8f78295db6e25Provider()
+private func factoryf65b1c12d971bd932996f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SignupInfoDependency76f0cca8f78295db6e25Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class SignupEmployeeInfoDependency7f1092640a8ab85d9aeaProvider: SignupEmployeeInfoDependency {
     var checkExistNameAndEmployeeIDUseCase: any CheckExistNameAndEmployeeIDUseCase {
@@ -298,6 +307,9 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var splashComponent: SplashComponent {
         return appComponent.splashComponent
     }
+    var guestComponent: GuestComponent {
+        return appComponent.guestComponent
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -475,6 +487,19 @@ private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInf
 private func factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return FindAuthInfoTabDependency79082cf44b62999fcee0Provider(appComponent: parent1(component) as! AppComponent)
 }
+private class GuestDependency452a7de310bc588b860eProvider: GuestDependency {
+    var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
+        return appComponent.fetchPublicMenuListUseCase
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
+    }
+}
+/// ^->AppComponent->GuestComponent
+private func factory3e3f831d36968386aaf6f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return GuestDependency452a7de310bc588b860eProvider(appComponent: parent1(component) as! AppComponent)
+}
 private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
     var signinComponent: SigninComponent {
         return appComponent.signinComponent
@@ -557,7 +582,9 @@ extension SignupPasswordComponent: Registration {
 }
 extension SignupInfoComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\SignupInfoDependency.checkDuplicateNicknameUseCase] = "checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"
+        keyPathToName[\SignupInfoDependency.uploadSingleFileUseCase] = "uploadSingleFileUseCase-any UploadSingleFileUseCase"
+        keyPathToName[\SignupInfoDependency.signupUseCase] = "signupUseCase-any SignupUseCase"
     }
 }
 extension SignupEmployeeInfoComponent: Registration {
@@ -647,6 +674,7 @@ extension RootComponent: Registration {
         keyPathToName[\RootDependency.introComponent] = "introComponent-IntroComponent"
         keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
         keyPathToName[\RootDependency.splashComponent] = "splashComponent-SplashComponent"
+        keyPathToName[\RootDependency.guestComponent] = "guestComponent-GuestComponent"
     }
 }
 extension SigninComponent: Registration {
@@ -711,6 +739,11 @@ extension FindAuthInfoTabComponent: Registration {
         keyPathToName[\FindAuthInfoTabDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
     }
 }
+extension GuestComponent: Registration {
+    public func registerItems() {
+        keyPathToName[\GuestDependency.fetchPublicMenuListUseCase] = "fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"
+    }
+}
 extension IntroComponent: Registration {
     public func registerItems() {
         keyPathToName[\IntroDependency.signinComponent] = "signinComponent-SigninComponent"
@@ -736,7 +769,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupPasswordComponent", factorye93d1d56840ff97c674af47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->SignupInfoComponent", factoryf65b1c12d971bd932996f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupEmployeeInfoComponent", factory85693d36827c3c0e8881f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SignupVerifyComponent", factoryf7587eff678919fec270f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->MainTabComponent", factory1ab5a747ddf21e1393f9f47b58f8f304c97af4d5)
@@ -760,6 +793,7 @@ private func register1() {
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->GuestComponent", factory3e3f831d36968386aaf6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4acf47b58f8f304c97af4d5)
 }
 #endif

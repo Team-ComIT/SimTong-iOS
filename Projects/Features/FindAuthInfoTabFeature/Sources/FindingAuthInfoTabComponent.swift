@@ -11,7 +11,8 @@ public final class FindAuthInfoTabComponent: Component<FindAuthInfoTabDependency
     public func makeView() -> some View {
         FindAuthInfoTabView(
             findEmployeeIDComponent: dependency.findEmployeeIDComponent,
-            findPasswordComponent: dependency.findPasswordInfoComponent
+            findPasswordComponent: dependency.findPasswordInfoComponent,
+            viewModel: .init()
         )
     }
 }

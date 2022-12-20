@@ -3,28 +3,30 @@ import DesignSystem
 import FindEmployeeIDFeature
 import FindPasswordFeature
 
-public struct FindAuthInfoTabView: View {
+struct FindAuthInfoTabView: View {
     @Environment(\.dismiss) var dismiss
-    @State var currentTab: Int = 0
+    @StateObject var viewModel: FindAuthInfoTabViewModel
 
     private let findEmployeeIDComponent: FindEmployeeIDComponent
     private let findPasswordInfoComponent: FindPasswordInfoComponent
 
-    public init(
+    init(
         findEmployeeIDComponent: FindEmployeeIDComponent,
-        findPasswordComponent: FindPasswordInfoComponent
+        findPasswordComponent: FindPasswordInfoComponent,
+        viewModel: FindAuthInfoTabViewModel
     ) {
         self.findEmployeeIDComponent = findEmployeeIDComponent
         self.findPasswordInfoComponent = findPasswordComponent
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
-    public var body: some View {
+    var body: some View {
         VStack {
-            TabbarView(currentTab: $currentTab, tabbarItems: [
+            TabbarView(currentTab: $viewModel.currentTab, tabbarItems: [
                 "사원번호 찾기", "비밀번호 찾기"
             ])
 
-            TabView(selection: $currentTab) {
+            TabView(selection: $viewModel.currentTab) {
                 findEmployeeIDComponent.makeView()
                     .tag(0)
 
@@ -39,7 +41,7 @@ public struct FindAuthInfoTabView: View {
     }
 }
 
-private struct TabbarView: View {
+struct TabbarView: View {
     @Binding var currentTab: Int
     let tabbarItems: [String]
     @Namespace var animation
