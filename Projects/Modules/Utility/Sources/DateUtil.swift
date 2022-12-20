@@ -50,6 +50,27 @@ public extension Date {
         }
     }
 
+    func fetchAllDatesInCurrentMonthWithPrevNext() -> [Date] {
+        let calendar = Calendar.current
+        var days = self.fetchAllDatesInCurrentMonth()
+
+        let prevDate = self.adding(by: .month, value: -1)
+        var prevDays = prevDate.fetchAllDatesInCurrentMonth()
+        let firstWeekDay = calendar.component(.weekday, from: days.first ?? .init())
+        for _ in 0..<firstWeekDay - 1 {
+            days.insert(prevDays.popLast() ?? .init(), at: 0)
+        }
+
+        let nextDate = self.adding(by: .month, value: 1)
+        var nextDays = nextDate.fetchAllDatesInCurrentMonth()
+        let lastWeekDay = calendar.component(.weekday, from: days.last ?? .init())
+        for _ in 0..<7 - lastWeekDay {
+            days.append(nextDays.removeFirst())
+        }
+
+        return days
+    }
+
     func fetchAllDatesInCurrentWeek() -> [Date] {
         let calendar = Calendar.current
         let dayOfWeek = calendar.component(.weekday, from: self)

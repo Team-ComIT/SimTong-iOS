@@ -1,6 +1,6 @@
 import Foundation
 
 public protocol MenuRepository {
-    func fetchMenuList(date: Date) async throws -> [MenuEntity]
-    func fetchPublicMenuList(date: Date) async throws -> [MenuEntity]
+    func fetchMenuList(start: Date, end: Date) async throws -> [MenuEntity]
+    func fetchPublicMenuList(start: Date, end: Date) async throws -> [MenuEntity]
 }

@@ -75,7 +75,10 @@ public final class HomeViewModel: BaseViewModel {
     func fetchMeals() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let menus = try await owner.fetchMenuListUseCase.execute(date: .init())
+                let menus = try await owner.fetchMenuListUseCase.execute(
+                    start: Date(),
+                    end: Date().adding(by: .day, value: 7)
+                )
                 owner.menus = menus
             }
         }

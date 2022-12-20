@@ -8,7 +8,7 @@ public struct FetchMenuListUseCaseImpl: FetchMenuListUseCase {
         self.menuRepository = menuRepository
     }
 
-    public func execute(date: Date) async throws -> [MenuEntity] {
-        try await menuRepository.fetchMenuList(date: date)
+    public func execute(start: Date, end: Date) async throws -> [MenuEntity] {
+        try await menuRepository.fetchMenuList(start: start, end: end)
     }
 }
