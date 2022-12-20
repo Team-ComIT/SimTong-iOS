@@ -10,7 +10,6 @@ let project = Project.makeModule(
         .Project.UserInterfaces.DesignSystem,
         .Project.UserInterfaces.LocalizableManager,
 
-        .SPM.Needle,
-        .SPM.FCM
+        .SPM.Needle
     ]
 )

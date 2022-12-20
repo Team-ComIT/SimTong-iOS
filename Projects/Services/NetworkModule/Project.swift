@@ -7,6 +7,7 @@ let project = Project.makeModule(
     dependencies: [
         .Project.Module.Utility,
         .Project.Service.APIKit,
-        .Project.Service.Domain
+        .Project.Service.Domain,
+        .SPM.FCM
     ]
 )
