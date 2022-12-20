@@ -28,6 +28,7 @@ let targets: [Target] = [
         infoPlist: .file(path: "Support/Info.plist"),
         sources: ["Sources/**"],
         resources: ["Resources/**"],
+        entitlements: Path("Support/Simtong.entitlements"),
         scripts: scripts,
         dependencies: [
             .Project.Features.RootFeature,

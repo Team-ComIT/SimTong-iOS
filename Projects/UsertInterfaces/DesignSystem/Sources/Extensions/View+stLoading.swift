@@ -6,13 +6,13 @@ struct STLoadingModifier: ViewModifier {
         ZStack {
             content
 
-            if isLoading {
-                STLoadingView(play: $isLoading)
-                    .padding(6)
-                    .background(Color.extraWhite)
-                    .frame(width: 64, height: 64)
-                    .clipShape(Circle())
-            }
+//            if isLoading {
+//                STLoadingView(play: $isLoading)
+//                    .padding(6)
+//                    .background(Color.extraWhite)
+//                    .frame(width: 64, height: 64)
+//                    .clipShape(Circle())
+//            }
         }
     }
 }
