@@ -5,7 +5,7 @@ import Utility
 import Moya
 
 public enum ScheduleAPI: SimTongAPI {
-    case fetchSchedule(date: Date)
+    case fetchSchedule(start: Date, end: Date)
     case createNewSchedule(CreateNewScheduleRequestDTO)
     case updateSchedule(id: String, req: UpdateScheduleRequestDTO)
     case deleteSchedule(id: String)
@@ -47,9 +47,10 @@ public extension ScheduleAPI {
 
     var task: Moya.Task {
         switch self {
-        case let .fetchSchedule(date):
+        case let .fetchSchedule(start, end):
             return .requestParameters(parameters: [
-                "date": date.toSmallSimtongDateString()
+                "start_at": start.toSmallSimtongDateString(),
+                "end_at": end.toSmallSimtongDateString()
             ], encoding: URLEncoding.queryString)
 
         case let .createNewSchedule(req):

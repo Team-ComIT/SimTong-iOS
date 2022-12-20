@@ -41,7 +41,11 @@ struct HomeView: View {
                     }
                 }
 
-                CalendarView(holidaysDict: $viewModel.holidaysDict, scheduleDict: $viewModel.schedules) { date in
+                CalendarView(
+                    currentMonth: $viewModel.currentMonth,
+                    holidaysDict: $viewModel.holidaysDict,
+                    scheduleDict: $viewModel.schedules
+                ) { date in
                     withAnimation {
                         viewModel.onDateTap(date: date)
                     }

@@ -1,11 +1,10 @@
-
 import SwiftUI
 import DesignSystem
 import DomainModule
 import Utility
 
 struct CalendarView: View {
-    @State var currentMonth = Date()
+    @Binding var currentMonth: Date
     @Binding var holidaysDict: [String: HolidayType]
     @Binding var scheduleDict: [String: [ScheduleEntity]]
     var onDateTap: (Date) -> Void

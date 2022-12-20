@@ -5,6 +5,7 @@ import SwiftUI
 import Utility
 
 final class WriteHolidayViewModel: BaseViewModel {
+    @Published var currentMonth = Date()
     @Published var holidaysDict: [String: HolidayType]
     @Published var scheduleDict: [String: [ScheduleEntity]]
     @Published var selectedDate = Date()

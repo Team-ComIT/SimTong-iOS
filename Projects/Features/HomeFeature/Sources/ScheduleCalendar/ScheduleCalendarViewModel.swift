@@ -5,6 +5,7 @@ import Foundation
 import Utility
 
 final class ScheduleCalendarViewModel: BaseViewModel {
+    @Published var currentMonth = Date()
     @Published var isPresentedScheduleOptionPicker = false
     @Published var isPresentedScheduleDeleteConfirm = false
     @Published var isNavigateUpdateSchedule = false
@@ -92,7 +93,15 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         Task {
             await withAsyncTry(with: self) { owner in
                 owner.scheduleDict = .init()
-                let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
+                let currentDates = owner.currentMonth.fetchAllDatesInCurrentMonthWithPrevNext()
+                guard
+                    let first = currentDates.first,
+                    let last = currentDates.last
+                else { return }
+                let schedules = try await owner.fetchScheduleUseCase.execute(
+                    start: first,
+                    end: last
+                )
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()
                     let end = schedule.endAt.toSmallSimtongDate().adding(by: .day, value: 1)

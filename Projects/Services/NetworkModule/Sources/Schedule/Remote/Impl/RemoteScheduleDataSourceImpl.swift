@@ -4,8 +4,8 @@ import APIKit
 import DataMappingModule
 
 public final class RemoteScheduleDataSourceImpl: BaseRemoteDataSource<ScheduleAPI>, RemoteScheduleDataSource {
-    public func fetchSchedule(date: Date) async throws -> [ScheduleEntity] {
-        try await request(.fetchSchedule(date: date), dto: FetchScheduleResponseDTO.self)
+    public func fetchSchedule(start: Date, end: Date) async throws -> [ScheduleEntity] {
+        try await request(.fetchSchedule(start: start, end: end), dto: FetchScheduleResponseDTO.self)
             .toDomain()
     }
 

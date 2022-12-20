@@ -8,7 +8,7 @@ public final class RemoteScheduleDataSourceFake: RemoteScheduleDataSource {
     public init() {}
     var store = [String: [ScheduleEntity]]()
 
-    public func fetchSchedule(date: Date) async throws -> [DomainModule.ScheduleEntity] {
+    public func fetchSchedule(start: Date, end: Date) async throws -> [DomainModule.ScheduleEntity] {
         return store
             .reduce(into: [ScheduleEntity]()) { partialResult, dict in
                 partialResult.append(contentsOf: dict.value)
