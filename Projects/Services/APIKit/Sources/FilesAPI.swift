@@ -36,7 +36,7 @@ public extension FilsAPI {
                 MultipartFormData(
                     provider: .data(data),
                     name: "file",
-                    fileName: "\(UUID().uuidString).jpeg"
+                    fileName: "\(UUID().uuidString).png"
                 )
             ])
 
@@ -45,7 +45,7 @@ public extension FilsAPI {
                 MultipartFormData(
                     provider: .data(data),
                     name: "files",
-                    fileName: "\(UUID().uuidString).jpeg"
+                    fileName: "\(UUID().uuidString).png"
                 )
             })
         }

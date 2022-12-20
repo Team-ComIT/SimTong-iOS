@@ -11,10 +11,10 @@ public extension HolidayType {
     var display: String {
         switch self {
         case .dayoff:
-            return "연차"
+            return "휴무"
 
         case .annual:
-            return "휴무"
+            return "연차"
 
         case .work:
             return "근무"
@@ -24,10 +24,10 @@ public extension HolidayType {
     var shortDisplay: String {
         switch self {
         case .dayoff:
-            return "연"
+            return "휴"
 
         case .annual:
-            return "휴"
+            return "연"
 
         case .work:
             return "근"

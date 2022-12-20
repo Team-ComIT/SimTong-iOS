@@ -72,6 +72,15 @@ struct SignupEmployeeInfoView: View {
                             .focused($focusField, equals: .number)
                             .opacity(viewModel.isNumberStep ? 1.0 : 0.0)
                             .keyboardType(.numberPad)
+                            .onChange(of: viewModel.number) { newValue in
+                                if newValue.count >= 10 {
+                                    withAnimation {
+                                        viewModel.number = String(newValue.prefix(10))
+                                        viewModel.nextButtonDidTap()
+                                        focusField = .email
+                                    }
+                                }
+                            }
                         }
 
                         STTextField(
@@ -117,11 +126,21 @@ struct SignupEmployeeInfoView: View {
                 WideButton(text: viewModel.nextButtonTitle) {
                     withAnimation {
                         viewModel.nextButtonDidTap()
+                        if !viewModel.isEmailStep && !viewModel.isNumberStep {
+                            focusField = .email
+                        } else if viewModel.isEmailStep {
+                            hideKeyboard()
+                        } else if viewModel.isNumberStep {
+                            focusField = .number
+                        }
                     }
                     viewModel.signup()
                 }
                 .disabled(!viewModel.isEnableNextButton)
             }
+        }
+        .onDisappear {
+            hideKeyboard()
         }
         .stBackground()
         .onAppear {

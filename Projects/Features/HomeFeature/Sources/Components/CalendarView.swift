@@ -179,10 +179,10 @@ private extension HolidayType {
     var primaryColor: Color {
         switch self {
         case .dayoff:
-            return .extraPrimary
+            return .main
 
         case .annual:
-            return .main
+            return .extraPrimary
 
         case .work:
             return .gray02

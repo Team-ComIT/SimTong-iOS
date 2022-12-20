@@ -10,23 +10,13 @@ public protocol IntroDependency: Dependency {
 
 public final class IntroComponent: Component<IntroDependency> {
     public func makeView() -> some View {
-        if #available(iOS 16.0, *) {
-            return NavigationStack {
-                IntroView(
-                    viewModel: .init(),
-                    signinComponent: dependency.signinComponent,
-                    signupEmployeeInfoComponent: dependency.signupEmployeeInfoComponent
-                )
-            }
-        } else {
-            return NavigationView {
-                IntroView(
-                    viewModel: .init(),
-                    signinComponent: dependency.signinComponent,
-                    signupEmployeeInfoComponent: dependency.signupEmployeeInfoComponent
-                )
-            }
-            .navigationViewStyle(.stack)
+        NavigationView {
+            IntroView(
+                viewModel: .init(),
+                signinComponent: dependency.signinComponent,
+                signupEmployeeInfoComponent: dependency.signupEmployeeInfoComponent
+            )
         }
+        .navigationViewStyle(.stack)
     }
 }

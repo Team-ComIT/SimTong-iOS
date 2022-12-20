@@ -1,3 +1,4 @@
+import BaseFeature
 import DesignSystem
 import SwiftUI
 import SigninFeature
@@ -5,6 +6,7 @@ import SignupFeature
 
 struct IntroView: View {
     @StateObject var viewModel: IntroViewModel
+    @EnvironmentObject var appState: AppState
     private let signinComponent: SigninComponent
     private let signupEmployeeInfoComponent: SignupEmployeeInfoComponent
 
@@ -20,11 +22,17 @@ struct IntroView: View {
 
     var body: some View {
         ZStack {
-            STImage(viewModel.places[viewModel.currentIndex])
-                .ignoresSafeArea()
+            STImage(.sungsimdangCharacter)
+                .frame(width: 259, height: 324)
 
-            VStack {
-                VStack(alignment: .center, spacing: 0) {
+            VStack(spacing: 12) {
+                VStack(spacing: 4) {
+                    STImage(.miniSimtong)
+                        .frame(width: 50, height: 54)
+
+                    STImage(.simtongTypo)
+                        .frame(width: 71, height: 30)
+
                     Text("마음을 나누다.")
                         .font(Font(
                             uiFont: .init(
@@ -33,27 +41,35 @@ struct IntroView: View {
                             ) ?? .init())
                         )
                         .foregroundColor(.gray04)
-
-                    STImage(.introLogo)
-                        .frame(width: 156, height: 53)
                 }
-                .padding(.top, 24)
+                .padding(.top, 8)
 
                 Spacer()
 
-                VStack(spacing: 16) {
-                    CTAButton(text: "회원가입") {
-                        viewModel.isNavigateSignup = true
-                    }
+                CTAButton(text: "회원가입") {
+                    viewModel.isNavigateSignup = true
+                }
 
-                    CTAButton(text: "로그인", style: .cancel) {
-                        viewModel.isNavigateSignin = true
+                CTAButton(text: "로그인", style: .cancel) {
+                    viewModel.isNavigateSignin = true
+                }
+
+                HStack(spacing: 12) {
+                    Text("일반 사용자라면?")
+                        .stTypo(.r6, color: .gray06)
+
+                    Button {
+                        appState.sceneFlow = .guest
+                    } label: {
+                        Text("게스트")
+                            .stTypo(.r6, color: .main)
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
+                .padding(.bottom, 32)
             }
+            .padding(.horizontal, 16)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .navigate(
             to: signinComponent.makeView(),
             when: $viewModel.isNavigateSignin

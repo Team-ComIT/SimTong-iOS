@@ -10,11 +10,14 @@ struct ComposeScheduleView: View {
     @StateObject var viewModel: ComposeScheduleViewModel
     @Environment(\.dismiss) var dismiss
     @FocusState private var focusField: FocusField?
+    private let completion: (() -> Void)?
 
     init(
-        viewModel: ComposeScheduleViewModel
+        viewModel: ComposeScheduleViewModel,
+        completion: (() -> Void)?
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.completion = completion
     }
 
     var body: some View {
@@ -22,9 +25,7 @@ struct ComposeScheduleView: View {
             STTextField(
                 "일정 제목을 입력해주세요.",
                 labelText: "제목",
-                text: $viewModel.title,
-                onCommit: {
-                }
+                text: $viewModel.title
             )
             .focused($focusField, equals: .title)
             .padding(.top, 32)
@@ -40,6 +41,7 @@ struct ComposeScheduleView: View {
             }
             .padding(.top, 24)
             .onTapGesture {
+                hideKeyboard()
                 viewModel.isPresentedStartAtDatePicker = true
             }
 
@@ -52,6 +54,7 @@ struct ComposeScheduleView: View {
                 .disabled(true)
             }
             .onTapGesture {
+                hideKeyboard()
                 viewModel.isPresentedEndAtDatePicker = true
             }
 
@@ -65,12 +68,14 @@ struct ComposeScheduleView: View {
             }
             .padding(.top, 24)
             .onTapGesture {
+                hideKeyboard()
                 viewModel.isPresentedAlarmDatePicker = true
             }
 
             Spacer()
 
             CTAButton(text: viewModel.isUpdate ? "수정" : "추가") {
+                hideKeyboard()
                 viewModel.completeButtonDidTap()
             }
             .disabled(viewModel.title.isEmpty)
@@ -79,6 +84,7 @@ struct ComposeScheduleView: View {
         .onChange(of: viewModel.isSuccessComposeSchedule) { newValue in
             if newValue {
                 dismiss()
+                (completion ?? {})()
             }
         }
         .padding(.horizontal, 16)

@@ -34,8 +34,19 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
     func nextButtonDidTap() {
         if isEmailStep {
         } else if isNumberStep {
-            isEmailStep = true
-            nextButtonTitle = "인증"
+            guard !name.isEmpty else { return }
+            Task {
+                await withAsyncTry(with: self) { owner in
+                    try await owner.checkExistNameAndEmployeeIDUseCase.execute(
+                        name: owner.name,
+                        employeeNumber: owner.number
+                    )
+                    withAnimation {
+                        owner.isEmailStep = true
+                        owner.nextButtonTitle = "인증"
+                    }
+                }
+            }
         } else {
             isNumberStep = true
             nextButtonTitle = "확인"
@@ -44,7 +55,7 @@ public final class SignupEmployeeInfoViewModel: BaseViewModel {
 
     @MainActor
     func signup() {
-        if !email.isEmpty && isEmailStep {
+        if !email.isEmpty && isEmailStep && Int(number) != nil {
             Task {
                 await withAsyncTry(with: self) { owner in
                     try await owner.checkExistNameAndEmployeeIDUseCase.execute(

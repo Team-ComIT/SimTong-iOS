@@ -27,6 +27,7 @@ final class ScheduleCalendarViewModel: BaseViewModel {
             partialResult.append(contentsOf: dict.value)
         }
         .unique()
+        .sorted { $0.startAt < $1.startAt }
     }
     private let deleteScheduleUseCase: any DeleteScheduleUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
@@ -41,6 +42,11 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         self.scheduleDict = scheduleDict
         self.deleteScheduleUseCase = deleteScheduleUseCase
         self.fetchScheduleUseCase = fetchScheduleUseCase
+    }
+
+    @MainActor
+    func onAppear() {
+        fetchSchedules()
     }
 
     func dateOnTap(date: Date) {
@@ -73,7 +79,19 @@ final class ScheduleCalendarViewModel: BaseViewModel {
             await withAsyncTry(with: self) { owner in
                 guard let selectedSchedule = owner.selectedSchedule else { return }
                 try await owner.deleteScheduleUseCase.execute(id: selectedSchedule.id)
-                owner.isPresentedScheduleDeleteConfirm = false
+                await MainActor.run {
+                    owner.isPresentedScheduleDeleteConfirm = false
+                    owner.fetchSchedules()
+                }
+            }
+        }
+    }
+
+    @MainActor
+    func fetchSchedules() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                owner.scheduleDict = .init()
                 let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()

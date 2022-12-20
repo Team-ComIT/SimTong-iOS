@@ -60,7 +60,9 @@ struct ScheduleCalendarView: View {
 
                     NavigationLink {
                         DeferView {
-                            composeScheduleComponent.makeView()
+                            composeScheduleComponent.makeView(selectedDate: viewModel.selectedDate) {
+                                viewModel.onAppear()
+                            }
                         }
                     } label: {
                         Image(systemName: "plus")
@@ -108,7 +110,13 @@ struct ScheduleCalendarView: View {
             onFinished(viewModel.holidaysDict, viewModel.scheduleDict)
         }
         .navigate(
-            to: composeScheduleComponent.makeView(updateTarget: viewModel.selectedSchedule),
+            to: composeScheduleComponent.makeView(
+                selectedDate: viewModel.selectedDate,
+                updateTarget: viewModel.selectedSchedule,
+                completion: {
+                    viewModel.onAppear()
+                }
+            ),
             when: $viewModel.isNavigateUpdateSchedule
         )
         .bottomSheet(isShowing: $viewModel.isPresentedScheduleOptionPicker) {
@@ -179,6 +187,9 @@ struct ScheduleCalendarView: View {
                     viewModel.scheduleDeleteConfirmButtonDidTap()
                 }
             }
+        }
+        .onAppear {
+            viewModel.fetchSchedules()
         }
         .padding([.horizontal, .bottom], 16)
         .padding(.top, 24)
