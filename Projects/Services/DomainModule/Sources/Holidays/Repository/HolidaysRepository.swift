@@ -5,4 +5,5 @@ public protocol HolidaysRepository {
     func setHoliday(date: String) async throws
     func setAnnual(date: String) async throws
     func setWork(date: String) async throws
+    func fetchAnnualCount(year: Int) async throws -> Int
 }

@@ -9,11 +9,14 @@ final class WriteHolidayViewModel: BaseViewModel {
     @Published var holidaysDict: [String: HolidayType]
     @Published var scheduleDict: [String: [ScheduleEntity]]
     @Published var selectedDate = Date()
+    @Published var annualCount = 0
+    @Published var isPresentedCheckSendHolidays = false
 
     private let fetchHolidayUseCase: any FetchHolidayUseCase
     private let setHolidayUseCase: any SetHolidayUseCase
     private let setAnnualUseCase: any SetAnnualUseCase
     private let setWorkUseCase: any SetWorkUseCase
+    private let fetchAnnualCountUseCase: any FetchAnnualCountUseCase
 
     var selectedDateHolidayText: String {
         "\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day)일은" +
@@ -26,7 +29,8 @@ final class WriteHolidayViewModel: BaseViewModel {
         fetchHolidayUseCase: any FetchHolidayUseCase,
         setHolidayUseCase: any SetHolidayUseCase,
         setAnnualUseCase: any SetAnnualUseCase,
-        setWorkUseCase: any SetWorkUseCase
+        setWorkUseCase: any SetWorkUseCase,
+        fetchAnnualCountUseCase: any FetchAnnualCountUseCase
     ) {
         self.holidaysDict = holidaysDict
         self.scheduleDict = scheduleDict
@@ -34,6 +38,17 @@ final class WriteHolidayViewModel: BaseViewModel {
         self.setHolidayUseCase = setHolidayUseCase
         self.setAnnualUseCase = setAnnualUseCase
         self.setWorkUseCase = setWorkUseCase
+        self.fetchAnnualCountUseCase = fetchAnnualCountUseCase
+    }
+
+    @MainActor
+    func onAppear() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                let annualCount = try await owner.fetchAnnualCountUseCase.execute(year: owner.currentMonth.year)
+                owner.annualCount = annualCount
+            }
+        }
     }
 
     @MainActor
@@ -58,6 +73,17 @@ final class WriteHolidayViewModel: BaseViewModel {
                     owner.holidaysDict[owner.selectedDate.toSmallSimtongDateString()] = type
                 }
             }
+        }
+    }
+
+    func holidaySendButtonDidTap() {
+        isPresentedCheckSendHolidays = true
+    }
+
+    @MainActor
+    func confirmHolidaySendButtonDidTap() {
+        Task {
+            
         }
     }
 }

@@ -19,4 +19,9 @@ public final class RemoteHolidaysDataSourceImpl: BaseRemoteDataSource<HolidaysAP
     public func setWork(date: String) async throws {
         try await request(.setWork(date: date))
     }
+
+    public func fetchAnnualCount(year: Int) async throws -> Int {
+        try await request(.fetchAnnualCount(year: year), dto: FetchAnnualCountResponseDTO.self)
+            .result
+    }
 }

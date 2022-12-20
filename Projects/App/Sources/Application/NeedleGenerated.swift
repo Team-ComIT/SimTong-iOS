@@ -414,6 +414,9 @@ private class WriteHolidayDependencyf70374d71937da494a07Provider: WriteHolidayDe
     var setWorkUseCase: any SetWorkUseCase {
         return appComponent.setWorkUseCase
     }
+    var fetchAnnualCountUseCase: any FetchAnnualCountUseCase {
+        return appComponent.fetchAnnualCountUseCase
+    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -568,6 +571,7 @@ extension AppComponent: Registration {
         localTable["setHolidayUseCase-any SetHolidayUseCase"] = { self.setHolidayUseCase as Any }
         localTable["setAnnualUseCase-any SetAnnualUseCase"] = { self.setAnnualUseCase as Any }
         localTable["setWorkUseCase-any SetWorkUseCase"] = { self.setWorkUseCase as Any }
+        localTable["fetchAnnualCountUseCase-any FetchAnnualCountUseCase"] = { self.fetchAnnualCountUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -713,6 +717,7 @@ extension WriteHolidayComponent: Registration {
         keyPathToName[\WriteHolidayDependency.setHolidayUseCase] = "setHolidayUseCase-any SetHolidayUseCase"
         keyPathToName[\WriteHolidayDependency.setAnnualUseCase] = "setAnnualUseCase-any SetAnnualUseCase"
         keyPathToName[\WriteHolidayDependency.setWorkUseCase] = "setWorkUseCase-any SetWorkUseCase"
+        keyPathToName[\WriteHolidayDependency.fetchAnnualCountUseCase] = "fetchAnnualCountUseCase-any FetchAnnualCountUseCase"
     }
 }
 extension FindPasswordVerifyComponent: Registration {

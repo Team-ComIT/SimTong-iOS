@@ -150,4 +150,8 @@ extension AppComponent {
     public var setWorkUseCase: any SetWorkUseCase {
         SetWorkUseCaseImpl(holidaysRepository: holidaysRepository)
     }
+
+    public var fetchAnnualCountUseCase: any FetchAnnualCountUseCase {
+        FetchAnnualCountUseCaseImpl(holidaysRepository: holidaysRepository)
+    }
 }
