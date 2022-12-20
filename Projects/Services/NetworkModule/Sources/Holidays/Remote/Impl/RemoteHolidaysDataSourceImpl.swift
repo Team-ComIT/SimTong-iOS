@@ -24,4 +24,8 @@ public final class RemoteHolidaysDataSourceImpl: BaseRemoteDataSource<HolidaysAP
         try await request(.fetchAnnualCount(year: year), dto: FetchAnnualCountResponseDTO.self)
             .result
     }
+
+    public func checkIsHolidayPeriod() async throws {
+        try await request(.checkIsHolidaySetupPeriod)
+    }
 }

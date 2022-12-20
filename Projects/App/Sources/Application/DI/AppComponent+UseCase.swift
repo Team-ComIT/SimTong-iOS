@@ -154,4 +154,8 @@ extension AppComponent {
     public var fetchAnnualCountUseCase: any FetchAnnualCountUseCase {
         FetchAnnualCountUseCaseImpl(holidaysRepository: holidaysRepository)
     }
+
+    public var checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase {
+        CheckIsHolidayPeriodUseCaseImpl(holidaysRepository: holidaysRepository)
+    }
 }

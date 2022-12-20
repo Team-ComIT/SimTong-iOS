@@ -28,4 +28,8 @@ public struct HolidaysRepositoryImpl: HolidaysRepository {
     public func fetchAnnualCount(year: Int) async throws -> Int {
         try await remoteHolidaysDataSource.fetchAnnualCount(year: year)
     }
+
+    public func checkIsHolidayPeriod() async throws {
+        try await remoteHolidaysDataSource.checkIsHolidayPeriod()
+    }
 }

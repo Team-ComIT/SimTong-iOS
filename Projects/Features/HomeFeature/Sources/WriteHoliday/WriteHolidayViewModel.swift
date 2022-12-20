@@ -54,7 +54,7 @@ final class WriteHolidayViewModel: BaseViewModel {
     @MainActor
     func writeHoliday(type: HolidayType) {
         let thisWeek = selectedDate.fetchAllDatesInCurrentWeek()
-        if type == .dayoff && thisWeek.filter({ holidaysDict[$0.toSmallSimtongDateString()] == .dayoff }).count >= 2 {
+        if isDayoffGreaterThanTwoInWeek(dates: thisWeek, type: type) {
             errorMessage = "일주일 최대 2회만 휴무 정보를 등록할 수 있습니다"
             isError = true
         } else {
@@ -74,6 +74,10 @@ final class WriteHolidayViewModel: BaseViewModel {
                 }
             }
         }
+    }
+
+    func isDayoffGreaterThanTwoInWeek(dates: [Date], type: HolidayType) -> Bool {
+        type == .dayoff && dates.filter { holidaysDict[$0.toSmallSimtongDateString()] == .dayoff }.count >= 2
     }
 
     func holidaySendButtonDidTap() {

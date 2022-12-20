@@ -572,6 +572,7 @@ extension AppComponent: Registration {
         localTable["setAnnualUseCase-any SetAnnualUseCase"] = { self.setAnnualUseCase as Any }
         localTable["setWorkUseCase-any SetWorkUseCase"] = { self.setWorkUseCase as Any }
         localTable["fetchAnnualCountUseCase-any FetchAnnualCountUseCase"] = { self.fetchAnnualCountUseCase as Any }
+        localTable["checkIsHolidayPeriodUseCase-any CheckIsHolidayPeriodUseCase"] = { self.checkIsHolidayPeriodUseCase as Any }
     }
 }
 extension SplashComponent: Registration {

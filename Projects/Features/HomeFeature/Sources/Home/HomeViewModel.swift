@@ -18,15 +18,18 @@ public final class HomeViewModel: BaseViewModel {
     private let fetchMenuListUseCase: any FetchMenuListUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
     private let fetchHolidayUseCase: any FetchHolidayUseCase
+    private let checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase
 
     init(
         fetchMenuListUseCase: any FetchMenuListUseCase,
         fetchScheduleUseCase: any FetchScheduleUseCase,
-        fetchHolidayUseCase: any FetchHolidayUseCase
+        fetchHolidayUseCase: any FetchHolidayUseCase,
+        checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase
     ) {
         self.fetchMenuListUseCase = fetchMenuListUseCase
         self.fetchScheduleUseCase = fetchScheduleUseCase
         self.fetchHolidayUseCase = fetchHolidayUseCase
+        self.checkIsHolidayPeriodUseCase = checkIsHolidayPeriodUseCase
         super.init()
     }
 
@@ -41,6 +44,16 @@ public final class HomeViewModel: BaseViewModel {
 
     func onDateTap(date: Date) {
         isPresentedSchedule = true
+    }
+
+    @MainActor
+    func writeHolidayButtonDidTap() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                try await owner.checkIsHolidayPeriodUseCase.execute()
+                owner.isPresentedHoliday = true
+            }
+        }
     }
 
     @MainActor

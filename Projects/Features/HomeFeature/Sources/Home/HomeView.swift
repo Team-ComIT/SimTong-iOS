@@ -73,7 +73,7 @@ struct HomeView: View {
                     WideCardView(image: STImage(.holiday), title: "휴무표 작성", description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요.")
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                viewModel.isPresentedHoliday = true
+                                viewModel.writeHolidayButtonDidTap()
                             }
                         }
                 }

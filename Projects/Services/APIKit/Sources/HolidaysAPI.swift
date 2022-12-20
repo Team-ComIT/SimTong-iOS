@@ -8,6 +8,7 @@ public enum HolidaysAPI {
     case setAnnual(date: String)
     case setWork(date: String)
     case fetchAnnualCount(year: Int)
+    case checkIsHolidaySetupPeriod
 }
 
 extension HolidaysAPI: SimTongAPI {
@@ -18,7 +19,7 @@ extension HolidaysAPI: SimTongAPI {
     public var urlPath: String {
         switch self {
         case .fetchHolidays:
-            return ""
+            return "/individual"
 
         case .setHoliday:
             return "/dayoff"
@@ -31,19 +32,22 @@ extension HolidaysAPI: SimTongAPI {
 
         case .fetchAnnualCount:
             return "/annual/count"
+
+        case .checkIsHolidaySetupPeriod:
+            return "/period"
         }
     }
 
     public var method: Moya.Method {
         switch self {
-        case .fetchHolidays, .fetchAnnualCount:
+        case .fetchHolidays, .fetchAnnualCount, .checkIsHolidaySetupPeriod:
             return .get
 
         case .setHoliday, .setAnnual:
             return .post
 
         case .setWork:
-            return .delete
+            return .put
         }
     }
 
@@ -109,6 +113,12 @@ extension HolidaysAPI: SimTongAPI {
             ]
 
         case .fetchAnnualCount:
+            return [
+                400: .unknown(),
+                401: .accessTokenExpired
+            ]
+
+        case .checkIsHolidaySetupPeriod:
             return [
                 400: .unknown(),
                 401: .accessTokenExpired
