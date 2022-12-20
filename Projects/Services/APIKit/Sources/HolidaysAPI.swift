@@ -3,7 +3,7 @@ import ErrorModule
 import Moya
 
 public enum HolidaysAPI {
-    case fetchHolidays(date: String)
+    case fetchHolidays(start: String, end: String)
     case setHoliday(date: String)
     case setAnnual(date: String)
     case setWork(date: String)
@@ -45,15 +45,21 @@ extension HolidaysAPI: SimTongAPI {
 
     public var task: Moya.Task {
         switch self {
-        case let .fetchHolidays(date), let .setWork(date):
+        case let .fetchHolidays(start, end):
             return .requestParameters(parameters: [
-                "date": date
+                "start_at": start,
+                "end_at": end
             ], encoding: URLEncoding.queryString)
 
         case let .setHoliday(date), let .setAnnual(date):
             return .requestParameters(parameters: [
                 "date": date
             ], encoding: JSONEncoding.default)
+
+        case let .setWork(date):
+            return .requestParameters(parameters: [
+                "date": date
+            ], encoding: URLEncoding.queryString)
 
         default:
             return .requestPlain

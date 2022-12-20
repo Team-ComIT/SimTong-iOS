@@ -3,7 +3,6 @@ import Combine
 import DomainModule
 import Foundation
 import Utility
-import CryptoKit
 
 public final class HomeViewModel: BaseViewModel {
     @Published var currentMonth = Date()
@@ -98,7 +97,15 @@ public final class HomeViewModel: BaseViewModel {
     func fetchHoliday() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let holidays = try await owner.fetchHolidayUseCase.execute(date: Date().toSmallSimtongDateString())
+                let currentDates = owner.currentMonth.fetchAllDatesInCurrentMonthWithPrevNext()
+                guard
+                    let first = currentDates.first,
+                    let last = currentDates.last
+                else { return }
+                let holidays = try await owner.fetchHolidayUseCase.execute(
+                    start: first.toSmallSimtongDateString(),
+                    end: last.toSmallSimtongDateString()
+                )
                 holidays.forEach { holiday in
                     owner.holidaysDict[holiday.date] = holiday.type
                 }

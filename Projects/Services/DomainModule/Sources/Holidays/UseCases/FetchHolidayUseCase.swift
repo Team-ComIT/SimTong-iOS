@@ -1,3 +1,3 @@
 public protocol FetchHolidayUseCase {
-    func execute(date: String) async throws -> [HolidayEntity]
+    func execute(start: String, end: String) async throws -> [HolidayEntity]
 }

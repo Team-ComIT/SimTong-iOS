@@ -35,7 +35,7 @@ public extension MenuAPI {
         case let .fetchMenuList(start, end), let .fetchPublicMenuList(start, end):
             return .requestParameters(parameters: [
                 "start_at": start.toSmallSimtongDateString(),
-                "end_at": end.toSimtongDateString()
+                "end_at": end.toSmallSimtongDateString()
             ], encoding: URLEncoding.queryString)
         }
     }
