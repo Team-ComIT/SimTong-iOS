@@ -3,8 +3,8 @@ import APIKit
 import DataMappingModule
 
 public final class RemoteHolidaysDataSourceImpl: BaseRemoteDataSource<HolidaysAPI>, RemoteHolidaysDataSource {
-    public func fetchHoliday(start: String, end: String) async throws -> [HolidayEntity] {
-        try await request(.fetchHolidays(start: start, end: end), dto: FetchHolidayResponseDTO.self)
+    public func fetchHoliday(start: String, end: String, status: String) async throws -> [HolidayEntity] {
+        try await request(.fetchHolidays(start: start, end: end, status: status), dto: FetchHolidayResponseDTO.self)
             .toDomain()
     }
 

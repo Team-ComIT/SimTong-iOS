@@ -348,6 +348,9 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var fetchHolidayUseCase: any FetchHolidayUseCase {
         return appComponent.fetchHolidayUseCase
     }
+    var checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase {
+        return appComponent.checkIsHolidayPeriodUseCase
+    }
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
@@ -694,6 +697,7 @@ extension HomeComponent: Registration {
         keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
         keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
         keyPathToName[\HomeDependency.fetchHolidayUseCase] = "fetchHolidayUseCase-any FetchHolidayUseCase"
+        keyPathToName[\HomeDependency.checkIsHolidayPeriodUseCase] = "checkIsHolidayPeriodUseCase-any CheckIsHolidayPeriodUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
         keyPathToName[\HomeDependency.scheduleCalendarComponent] = "scheduleCalendarComponent-ScheduleCalendarComponent"
         keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"

@@ -6,7 +6,7 @@ import Utility
 
 final class WriteHolidayViewModel: BaseViewModel {
     @Published var currentMonth = Date()
-    @Published var holidaysDict: [String: HolidayType]
+    @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var scheduleDict: [String: [ScheduleEntity]]
     @Published var selectedDate = Date()
     @Published var annualCount = 0
@@ -24,7 +24,6 @@ final class WriteHolidayViewModel: BaseViewModel {
     }
 
     init(
-        holidaysDict: [String: HolidayType],
         scheduleDict: [String: [ScheduleEntity]],
         fetchHolidayUseCase: any FetchHolidayUseCase,
         setHolidayUseCase: any SetHolidayUseCase,
@@ -32,7 +31,6 @@ final class WriteHolidayViewModel: BaseViewModel {
         setWorkUseCase: any SetWorkUseCase,
         fetchAnnualCountUseCase: any FetchAnnualCountUseCase
     ) {
-        self.holidaysDict = holidaysDict
         self.scheduleDict = scheduleDict
         self.fetchHolidayUseCase = fetchHolidayUseCase
         self.setHolidayUseCase = setHolidayUseCase
@@ -45,8 +43,24 @@ final class WriteHolidayViewModel: BaseViewModel {
     func onAppear() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let annualCount = try await owner.fetchAnnualCountUseCase.execute(year: owner.currentMonth.year)
+                let currentDates = Date().fetchAllDatesInCurrentMonthWithPrevNext()
+                guard
+                    let first = currentDates.first,
+                    let last = currentDates.last
+                else { return }
+
+                async let holidaysDictAsync = owner.fetchHolidayUseCase.execute(
+                    start: first.toSmallSimtongDateString(),
+                    end: last.toSmallSimtongDateString(),
+                    status: .written
+                )
+                async let annualCountAsync = owner.fetchAnnualCountUseCase.execute(year: Date().year)
+                let (annualCount, holidaysDict) = try await (annualCountAsync, holidaysDictAsync)
+
                 owner.annualCount = annualCount
+                holidaysDict.forEach { holiday in
+                    owner.holidaysDict[holiday.date] = holiday.type
+                }
             }
         }
     }

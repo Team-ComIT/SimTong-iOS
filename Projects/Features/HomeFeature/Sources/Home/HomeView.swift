@@ -88,7 +88,6 @@ struct HomeView: View {
         .overlay {
             if viewModel.isPresentedHoliday {
                 writeHolidayComponent.makeView(
-                    holidaysDict: viewModel.holidaysDict,
                     scheduleDict: viewModel.schedules,
                     isPresented: $viewModel.isPresentedHoliday,
                     calendarAnimation: calendarAnimation

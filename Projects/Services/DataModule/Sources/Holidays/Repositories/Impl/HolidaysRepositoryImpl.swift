@@ -9,8 +9,8 @@ public struct HolidaysRepositoryImpl: HolidaysRepository {
         self.remoteHolidaysDataSource = remoteHolidaysDataSource
     }
 
-    public func fetchHoliday(start: String, end: String) async throws -> [HolidayEntity] {
-        try await remoteHolidaysDataSource.fetchHoliday(start: start, end: end)
+    public func fetchHoliday(start: String, end: String, status: String) async throws -> [HolidayEntity] {
+        try await remoteHolidaysDataSource.fetchHoliday(start: start, end: end, status: status)
     }
 
     public func setHoliday(date: String) async throws {

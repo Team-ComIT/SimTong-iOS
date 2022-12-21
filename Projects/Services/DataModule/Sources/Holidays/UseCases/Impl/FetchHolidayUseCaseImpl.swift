@@ -7,7 +7,11 @@ public struct FetchHolidayUseCaseImpl: FetchHolidayUseCase {
         self.holidaysRepository = holidaysRepository
     }
 
-    public func execute(start: String, end: String) async throws -> [HolidayEntity] {
-        try await holidaysRepository.fetchHoliday(start: start, end: end)
+    public func execute(
+        start: String,
+        end: String,
+        status: HolidayStatus
+    ) async throws -> [HolidayEntity] {
+        try await holidaysRepository.fetchHoliday(start: start, end: end, status: status.rawValue)
     }
 }
