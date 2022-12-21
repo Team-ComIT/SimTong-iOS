@@ -36,6 +36,7 @@ public enum STError: Error, Equatable {
     case alreadyHolidaysOrLimited
     case alreadyAnnualOrLacked
     case dateIsNotHolidayOrAnnual
+    case todayIsNotHolidayPeriod
 }
 
 extension STError: LocalizedError {
@@ -119,6 +120,9 @@ extension STError: LocalizedError {
 
         case .dateIsNotHolidayOrAnnual:
             return "휴무일 또는 연차일이 아닙니다"
+
+        case .todayIsNotHolidayPeriod:
+            return "휴무표 작성 기간이 아닙니다"
         }
     }
 }

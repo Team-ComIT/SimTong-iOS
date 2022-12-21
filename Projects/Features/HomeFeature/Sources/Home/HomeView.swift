@@ -57,10 +57,15 @@ struct HomeView: View {
                     .stTypo(.r4, color: .extraBlack)
                     .padding(.top, 32)
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 8) {
-                        ForEach(viewModel.menus, id: \.date) { menu in
-                            MenuCardView(menu: menu)
+                if viewModel.isLoading {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                } else {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 8) {
+                            ForEach(viewModel.menus, id: \.date) { menu in
+                                MenuCardView(menu: menu)
+                            }
                         }
                     }
                 }
@@ -112,6 +117,11 @@ struct HomeView: View {
         .onAppear {
             viewModel.homeDataInit()
         }
+        .alert("", isPresented: $viewModel.isError) {
+            Button("확인") {}
+        } message: {
+            Text(viewModel.errorMessage)
+        }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("")
         .toolbar {
@@ -130,5 +140,11 @@ struct HomeView: View {
             to: myPageComponent.makeView(),
             when: $viewModel.isPresentedMyPage
         )
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+            }
+        }
     }
 }

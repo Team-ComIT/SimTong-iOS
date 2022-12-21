@@ -10,7 +10,6 @@ final class WriteHolidayViewModel: BaseViewModel {
     @Published var scheduleDict: [String: [ScheduleEntity]]
     @Published var selectedDate = Date()
     @Published var annualCount = 0
-    @Published var isPresentedCheckSendHolidays = false
 
     private let fetchHolidayUseCase: any FetchHolidayUseCase
     private let setHolidayUseCase: any SetHolidayUseCase
@@ -92,10 +91,6 @@ final class WriteHolidayViewModel: BaseViewModel {
 
     func isDayoffGreaterThanTwoInWeek(dates: [Date], type: HolidayType) -> Bool {
         type == .dayoff && dates.filter { holidaysDict[$0.toSmallSimtongDateString()] == .dayoff }.count >= 2
-    }
-
-    func holidaySendButtonDidTap() {
-        isPresentedCheckSendHolidays = true
     }
 
     @MainActor

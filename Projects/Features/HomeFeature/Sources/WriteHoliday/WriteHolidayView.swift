@@ -47,12 +47,6 @@ struct WriteHolidayView: View {
                     .padding(.top, 8)
                     .padding(.horizontal, 16)
                 }
-
-                Spacer()
-
-                WideButton(text: "휴무표 전송하기") {
-                    viewModel.holidaySendButtonDidTap()
-                }
             }
             .padding(.top, 12)
         }
@@ -95,14 +89,11 @@ struct WriteHolidayView: View {
         } message: {
             Text(viewModel.errorMessage)
         }
-        .alert("정말로 전송하시겠습니까?", isPresented: $viewModel.isPresentedCheckSendHolidays) {
-            Button("취소", role: .cancel) {}
-
-            Button("전송") {
-                viewModel.confirmHolidaySendButtonDidTap()
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
             }
-        } message: {
-            Text("한 번 휴무표를 전송하고 나면 수정할 수 없습니다!")
         }
     }
 

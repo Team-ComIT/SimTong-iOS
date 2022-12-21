@@ -122,7 +122,8 @@ extension HolidaysAPI: SimTongAPI {
         case .checkIsHolidaySetupPeriod:
             return [
                 400: .unknown(),
-                401: .accessTokenExpired
+                401: .accessTokenExpired,
+                404: .todayIsNotHolidayPeriod
             ]
         }
     }
