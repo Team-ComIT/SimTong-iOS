@@ -34,7 +34,7 @@ extension HolidaysAPI: SimTongAPI {
             return "/annual/count"
 
         case .checkIsHolidaySetupPeriod:
-            return "/period"
+            return "/verification-period"
         }
     }
 
