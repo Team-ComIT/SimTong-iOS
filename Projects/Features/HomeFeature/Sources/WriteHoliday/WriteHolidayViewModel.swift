@@ -92,11 +92,4 @@ final class WriteHolidayViewModel: BaseViewModel {
     func isDayoffGreaterThanTwoInWeek(dates: [Date], type: HolidayType) -> Bool {
         type == .dayoff && dates.filter { holidaysDict[$0.toSmallSimtongDateString()] == .dayoff }.count >= 2
     }
-
-    @MainActor
-    func confirmHolidaySendButtonDidTap() {
-        Task {
-            
-        }
-    }
 }
