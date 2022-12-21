@@ -46,7 +46,7 @@ struct HomeView: View {
                     holidaysDict: $viewModel.holidaysDict,
                     scheduleDict: $viewModel.schedules
                 ) { date in
-                    withAnimation {
+                    withAnimation(.spring()) {
                         viewModel.onDateTap(date: date)
                     }
                 }
@@ -57,7 +57,7 @@ struct HomeView: View {
                     .stTypo(.r4, color: .extraBlack)
                     .padding(.top, 32)
 
-                if viewModel.isLoading {
+                if viewModel.isLoadingMeal {
                     ProgressView()
                         .progressViewStyle(.circular)
                 } else {
@@ -75,12 +75,17 @@ struct HomeView: View {
                         WideCardView(image: STImage(.pay), title: "나의 급여 정보", description: "나의 급여 정보를 손쉽게 확인하세요.")
                     }
 
-                    WideCardView(image: STImage(.holiday), title: "휴무표 작성", description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요.")
-                        .onTapGesture {
-                            withAnimation(.spring()) {
-                                viewModel.writeHolidayButtonDidTap()
-                            }
+                    Button {
+                        withAnimation(.spring()) {
+                            viewModel.writeHolidayButtonDidTap()
                         }
+                    } label: {
+                        WideCardView(
+                            image: STImage(.holiday),
+                            title: "휴무표 작성",
+                            description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요."
+                        )
+                    }
                 }
                 .padding(.top)
                 .padding(.bottom, 30)

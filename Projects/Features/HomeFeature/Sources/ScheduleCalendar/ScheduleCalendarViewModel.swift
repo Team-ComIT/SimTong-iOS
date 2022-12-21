@@ -18,17 +18,21 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         if let selectedDate {
             list = scheduleDict.filter { selectedDate.isSameDay($0.key.toSmallSimtongDate()) }
         } else {
-            list = scheduleDict
+            list = scheduleDict.filter {
+                $0.key.toSmallSimtongDate().compare(Date()) == .orderedDescending ||
+                $0.key.toSmallSimtongDate().compare(Date()) == .orderedSame
+            }
         }
-        return list.sorted {
-            $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedDescending ||
-            $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedSame
-        }
-        .reduce(into: [ScheduleEntity]()) { partialResult, dict in
-            partialResult.append(contentsOf: dict.value)
-        }
-        .unique()
-        .sorted { $0.startAt < $1.startAt }
+        return list
+            .sorted {
+                $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedDescending ||
+                $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedSame
+            }
+            .reduce(into: [ScheduleEntity]()) { partialResult, dict in
+                partialResult.append(contentsOf: dict.value)
+            }
+            .unique()
+            .sorted { $0.startAt < $1.startAt }
     }
     private let deleteScheduleUseCase: any DeleteScheduleUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase

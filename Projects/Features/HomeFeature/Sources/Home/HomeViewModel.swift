@@ -8,10 +8,11 @@ public final class HomeViewModel: BaseViewModel {
     @Published var currentMonth = Date()
     @Published var isPresentedHoliday = false
     @Published var isPresentedSchedule = false
+    @Published var isPresentedMyPage = false
+    @Published var isLoadingMeal = false
     @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = []
-    @Published var isPresentedMyPage = false
     let salaryURL: URL = URL(
         string: Bundle.main.object(forInfoDictionaryKey: "SALARY_URL") as? String ?? ""
     ) ?? URL(string: "https://www.google.com")!
@@ -96,12 +97,14 @@ public final class HomeViewModel: BaseViewModel {
     @MainActor
     func fetchMeals() {
         Task {
+            isLoadingMeal = true
             await withAsyncTry(with: self) { owner in
                 let menus = try await owner.fetchMenuListUseCase.execute(
                     start: Date(),
                     end: Date().adding(by: .day, value: 7)
                 )
                 owner.menus = menus
+                owner.isLoadingMeal = false
             }
         }
     }
