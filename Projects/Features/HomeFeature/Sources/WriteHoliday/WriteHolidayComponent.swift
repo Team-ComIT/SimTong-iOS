@@ -7,11 +7,11 @@ public protocol WriteHolidayDependency: Dependency {
     var setHolidayUseCase: any SetHolidayUseCase { get }
     var setAnnualUseCase: any SetAnnualUseCase { get }
     var setWorkUseCase: any SetWorkUseCase { get }
+    var fetchAnnualCountUseCase: any FetchAnnualCountUseCase { get }
 }
 
 public final class WriteHolidayComponent: Component<WriteHolidayDependency> {
     public func makeView(
-        holidaysDict: [String: HolidayType],
         scheduleDict: [String: [ScheduleEntity]],
         isPresented: Binding<Bool>,
         calendarAnimation: Namespace.ID,
@@ -22,12 +22,12 @@ public final class WriteHolidayComponent: Component<WriteHolidayDependency> {
     ) -> some View {
         WriteHolidayView(
             viewModel: .init(
-                holidaysDict: holidaysDict,
                 scheduleDict: scheduleDict,
                 fetchHolidayUseCase: dependency.fetchHolidayUseCase,
                 setHolidayUseCase: dependency.setHolidayUseCase,
                 setAnnualUseCase: dependency.setAnnualUseCase,
-                setWorkUseCase: dependency.setWorkUseCase
+                setWorkUseCase: dependency.setWorkUseCase,
+                fetchAnnualCountUseCase: dependency.fetchAnnualCountUseCase
             ),
             isPresented: isPresented,
             calendarAnimation: calendarAnimation,

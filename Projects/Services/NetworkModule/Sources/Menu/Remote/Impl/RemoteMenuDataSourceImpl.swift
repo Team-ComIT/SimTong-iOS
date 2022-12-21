@@ -4,13 +4,13 @@ import APIKit
 import DataMappingModule
 
 public final class RemoteMenuDataSourceImpl: BaseRemoteDataSource<MenuAPI>, RemoteMenuDataSource {
-    public func fetchMealList(date: Date) async throws -> [MenuEntity] {
-        try await request(.fetchMenuList(date), dto: FetchMenuListResponseDTO.self)
+    public func fetchMealList(start: Date, end: Date) async throws -> [MenuEntity] {
+        try await request(.fetchMenuList(start: start, end: end), dto: FetchMenuListResponseDTO.self)
             .toDomain()
     }
 
-    public func fetcPublichMealList(date: Date) async throws -> [MenuEntity] {
-        try await request(.fetchPublicMenuList(date), dto: FetchMenuListResponseDTO.self)
+    public func fetcPublichMealList(start: Date, end: Date) async throws -> [MenuEntity] {
+        try await request(.fetchPublicMenuList(start: start, end: end), dto: FetchMenuListResponseDTO.self)
             .toDomain()
     }
 }

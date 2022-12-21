@@ -5,6 +5,7 @@ import Foundation
 import Utility
 
 final class ScheduleCalendarViewModel: BaseViewModel {
+    @Published var currentMonth = Date()
     @Published var isPresentedScheduleOptionPicker = false
     @Published var isPresentedScheduleDeleteConfirm = false
     @Published var isNavigateUpdateSchedule = false
@@ -17,17 +18,21 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         if let selectedDate {
             list = scheduleDict.filter { selectedDate.isSameDay($0.key.toSmallSimtongDate()) }
         } else {
-            list = scheduleDict
+            list = scheduleDict.filter {
+                $0.key.toSmallSimtongDate().compare(Date()) == .orderedDescending ||
+                $0.key.toSmallSimtongDate().compare(Date()) == .orderedSame
+            }
         }
-        return list.sorted {
-            $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedDescending ||
-            $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedSame
-        }
-        .reduce(into: [ScheduleEntity]()) { partialResult, dict in
-            partialResult.append(contentsOf: dict.value)
-        }
-        .unique()
-        .sorted { $0.startAt < $1.startAt }
+        return list
+            .sorted {
+                $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedDescending ||
+                $0.key.toSmallSimtongDate().compare($1.key.toSmallSimtongDate()) == .orderedSame
+            }
+            .reduce(into: [ScheduleEntity]()) { partialResult, dict in
+                partialResult.append(contentsOf: dict.value)
+            }
+            .unique()
+            .sorted { $0.startAt < $1.startAt }
     }
     private let deleteScheduleUseCase: any DeleteScheduleUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
@@ -92,7 +97,15 @@ final class ScheduleCalendarViewModel: BaseViewModel {
         Task {
             await withAsyncTry(with: self) { owner in
                 owner.scheduleDict = .init()
-                let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
+                let currentDates = owner.currentMonth.fetchAllDatesInCurrentMonthWithPrevNext()
+                guard
+                    let first = currentDates.first,
+                    let last = currentDates.last
+                else { return }
+                let schedules = try await owner.fetchScheduleUseCase.execute(
+                    start: first,
+                    end: last
+                )
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()
                     let end = schedule.endAt.toSmallSimtongDate().adding(by: .day, value: 1)

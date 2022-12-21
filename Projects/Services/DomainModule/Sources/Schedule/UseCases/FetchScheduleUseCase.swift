@@ -1,5 +1,5 @@
 import Foundation
 
 public protocol FetchScheduleUseCase {
-    func execute(date: Date) async throws -> [ScheduleEntity]
+    func execute(start: Date, end: Date) async throws -> [ScheduleEntity]
 }

@@ -348,6 +348,9 @@ private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
     var fetchHolidayUseCase: any FetchHolidayUseCase {
         return appComponent.fetchHolidayUseCase
     }
+    var checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase {
+        return appComponent.checkIsHolidayPeriodUseCase
+    }
     var writeHolidayComponent: WriteHolidayComponent {
         return appComponent.writeHolidayComponent
     }
@@ -413,6 +416,9 @@ private class WriteHolidayDependencyf70374d71937da494a07Provider: WriteHolidayDe
     }
     var setWorkUseCase: any SetWorkUseCase {
         return appComponent.setWorkUseCase
+    }
+    var fetchAnnualCountUseCase: any FetchAnnualCountUseCase {
+        return appComponent.fetchAnnualCountUseCase
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -568,6 +574,8 @@ extension AppComponent: Registration {
         localTable["setHolidayUseCase-any SetHolidayUseCase"] = { self.setHolidayUseCase as Any }
         localTable["setAnnualUseCase-any SetAnnualUseCase"] = { self.setAnnualUseCase as Any }
         localTable["setWorkUseCase-any SetWorkUseCase"] = { self.setWorkUseCase as Any }
+        localTable["fetchAnnualCountUseCase-any FetchAnnualCountUseCase"] = { self.fetchAnnualCountUseCase as Any }
+        localTable["checkIsHolidayPeriodUseCase-any CheckIsHolidayPeriodUseCase"] = { self.checkIsHolidayPeriodUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -689,6 +697,7 @@ extension HomeComponent: Registration {
         keyPathToName[\HomeDependency.fetchMenuListUseCase] = "fetchMenuListUseCase-any FetchMenuListUseCase"
         keyPathToName[\HomeDependency.fetchScheduleUseCase] = "fetchScheduleUseCase-any FetchScheduleUseCase"
         keyPathToName[\HomeDependency.fetchHolidayUseCase] = "fetchHolidayUseCase-any FetchHolidayUseCase"
+        keyPathToName[\HomeDependency.checkIsHolidayPeriodUseCase] = "checkIsHolidayPeriodUseCase-any CheckIsHolidayPeriodUseCase"
         keyPathToName[\HomeDependency.writeHolidayComponent] = "writeHolidayComponent-WriteHolidayComponent"
         keyPathToName[\HomeDependency.scheduleCalendarComponent] = "scheduleCalendarComponent-ScheduleCalendarComponent"
         keyPathToName[\HomeDependency.myPageComponent] = "myPageComponent-MyPageComponent"
@@ -713,6 +722,7 @@ extension WriteHolidayComponent: Registration {
         keyPathToName[\WriteHolidayDependency.setHolidayUseCase] = "setHolidayUseCase-any SetHolidayUseCase"
         keyPathToName[\WriteHolidayDependency.setAnnualUseCase] = "setAnnualUseCase-any SetAnnualUseCase"
         keyPathToName[\WriteHolidayDependency.setWorkUseCase] = "setWorkUseCase-any SetWorkUseCase"
+        keyPathToName[\WriteHolidayDependency.fetchAnnualCountUseCase] = "fetchAnnualCountUseCase-any FetchAnnualCountUseCase"
     }
 }
 extension FindPasswordVerifyComponent: Registration {

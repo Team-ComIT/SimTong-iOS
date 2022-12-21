@@ -2,6 +2,7 @@ import BaseFeature
 import Foundation
 import Combine
 import DomainModule
+import Utility
 
 // swiftlint: disable large_tuple
 final class GuestViewModel: BaseViewModel {
@@ -43,7 +44,10 @@ final class GuestViewModel: BaseViewModel {
     func onAppear() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let menus = try await owner.fetchPublicMenuListUseCase.execute(date: Date())
+                let menus = try await owner.fetchPublicMenuListUseCase.execute(
+                    start: Date(),
+                    end: Date().adding(by: .day, value: 3)
+                )
                 owner.menus = menus
             }
         }

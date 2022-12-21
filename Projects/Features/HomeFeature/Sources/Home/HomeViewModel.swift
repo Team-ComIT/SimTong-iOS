@@ -5,27 +5,32 @@ import Foundation
 import Utility
 
 public final class HomeViewModel: BaseViewModel {
+    @Published var currentMonth = Date()
     @Published var isPresentedHoliday = false
     @Published var isPresentedSchedule = false
+    @Published var isPresentedMyPage = false
+    @Published var isLoadingMeal = false
     @Published var holidaysDict: [String: HolidayType] = [:]
     @Published var schedules: [String: [ScheduleEntity]] = [:]
     @Published var menus: [MenuEntity] = []
-    @Published var isPresentedMyPage = false
     let salaryURL: URL = URL(
         string: Bundle.main.object(forInfoDictionaryKey: "SALARY_URL") as? String ?? ""
     ) ?? URL(string: "https://www.google.com")!
     private let fetchMenuListUseCase: any FetchMenuListUseCase
     private let fetchScheduleUseCase: any FetchScheduleUseCase
     private let fetchHolidayUseCase: any FetchHolidayUseCase
+    private let checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase
 
     init(
         fetchMenuListUseCase: any FetchMenuListUseCase,
         fetchScheduleUseCase: any FetchScheduleUseCase,
-        fetchHolidayUseCase: any FetchHolidayUseCase
+        fetchHolidayUseCase: any FetchHolidayUseCase,
+        checkIsHolidayPeriodUseCase: any CheckIsHolidayPeriodUseCase
     ) {
         self.fetchMenuListUseCase = fetchMenuListUseCase
         self.fetchScheduleUseCase = fetchScheduleUseCase
         self.fetchHolidayUseCase = fetchHolidayUseCase
+        self.checkIsHolidayPeriodUseCase = checkIsHolidayPeriodUseCase
         super.init()
     }
 
@@ -43,11 +48,29 @@ public final class HomeViewModel: BaseViewModel {
     }
 
     @MainActor
+    func writeHolidayButtonDidTap() {
+        Task {
+            await withAsyncTry(with: self) { owner in
+                try await owner.checkIsHolidayPeriodUseCase.execute()
+                owner.isPresentedHoliday = true
+            }
+        }
+    }
+
+    @MainActor
     func fetchSchedules() {
         Task {
             await withAsyncTry(with: self) { owner in
                 owner.schedules = .init()
-                let schedules = try await owner.fetchScheduleUseCase.execute(date: Date())
+                let currentDates = owner.currentMonth.fetchAllDatesInCurrentMonthWithPrevNext()
+                guard
+                    let first = currentDates.first,
+                    let last = currentDates.last
+                else { return }
+                let schedules = try await owner.fetchScheduleUseCase.execute(
+                    start: first,
+                    end: last
+                )
                 for schedule in schedules {
                     var start = schedule.startAt.toSmallSimtongDate()
                     let end = schedule.endAt.toSmallSimtongDate().adding(by: .day, value: 1)
@@ -74,9 +97,14 @@ public final class HomeViewModel: BaseViewModel {
     @MainActor
     func fetchMeals() {
         Task {
+            isLoadingMeal = true
             await withAsyncTry(with: self) { owner in
-                let menus = try await owner.fetchMenuListUseCase.execute(date: .init())
+                let menus = try await owner.fetchMenuListUseCase.execute(
+                    start: Date(),
+                    end: Date().adding(by: .day, value: 7)
+                )
                 owner.menus = menus
+                owner.isLoadingMeal = false
             }
         }
     }
@@ -85,7 +113,16 @@ public final class HomeViewModel: BaseViewModel {
     func fetchHoliday() {
         Task {
             await withAsyncTry(with: self) { owner in
-                let holidays = try await owner.fetchHolidayUseCase.execute(date: Date().toSmallSimtongDateString())
+                let currentDates = owner.currentMonth.fetchAllDatesInCurrentMonthWithPrevNext()
+                guard
+                    let first = currentDates.first,
+                    let last = currentDates.last
+                else { return }
+                let holidays = try await owner.fetchHolidayUseCase.execute(
+                    start: first.toSmallSimtongDateString(),
+                    end: last.toSmallSimtongDateString(),
+                    status: .completed
+                )
                 holidays.forEach { holiday in
                     owner.holidaysDict[holiday.date] = holiday.type
                 }

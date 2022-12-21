@@ -3,10 +3,12 @@ import ErrorModule
 import Moya
 
 public enum HolidaysAPI {
-    case fetchHolidays(date: String)
+    case fetchHolidays(start: String, end: String, status: String)
     case setHoliday(date: String)
     case setAnnual(date: String)
     case setWork(date: String)
+    case fetchAnnualCount(year: Int)
+    case checkIsHolidaySetupPeriod
 }
 
 extension HolidaysAPI: SimTongAPI {
@@ -17,7 +19,7 @@ extension HolidaysAPI: SimTongAPI {
     public var urlPath: String {
         switch self {
         case .fetchHolidays:
-            return ""
+            return "/individual"
 
         case .setHoliday:
             return "/dayoff"
@@ -27,33 +29,51 @@ extension HolidaysAPI: SimTongAPI {
 
         case .setWork:
             return "/work"
+
+        case .fetchAnnualCount:
+            return "/annual/count"
+
+        case .checkIsHolidaySetupPeriod:
+            return "/verification-period"
         }
     }
 
     public var method: Moya.Method {
         switch self {
-        case .fetchHolidays:
+        case .fetchHolidays, .fetchAnnualCount, .checkIsHolidaySetupPeriod:
             return .get
 
         case .setHoliday, .setAnnual:
             return .post
 
         case .setWork:
-            return .delete
+            return .put
         }
     }
 
     public var task: Moya.Task {
         switch self {
-        case let .fetchHolidays(date), let .setWork(date):
+        case let .fetchHolidays(start, end, status):
             return .requestParameters(parameters: [
-                "date": date
+                "start_at": start,
+                "end_at": end,
+                "status": status
             ], encoding: URLEncoding.queryString)
 
         case let .setHoliday(date), let .setAnnual(date):
             return .requestParameters(parameters: [
                 "date": date
             ], encoding: JSONEncoding.default)
+
+        case let .setWork(date):
+            return .requestParameters(parameters: [
+                "date": date
+            ], encoding: URLEncoding.queryString)
+
+        case let .fetchAnnualCount(year):
+            return .requestParameters(parameters: [
+                "year": year
+            ], encoding: URLEncoding.queryString)
 
         default:
             return .requestPlain
@@ -91,6 +111,19 @@ extension HolidaysAPI: SimTongAPI {
                 400: .unknown(),
                 401: .accessTokenExpired,
                 404: .dateIsNotHolidayOrAnnual
+            ]
+
+        case .fetchAnnualCount:
+            return [
+                400: .unknown(),
+                401: .accessTokenExpired
+            ]
+
+        case .checkIsHolidaySetupPeriod:
+            return [
+                400: .unknown(),
+                401: .accessTokenExpired,
+                404: .todayIsNotHolidayPeriod
             ]
         }
     }

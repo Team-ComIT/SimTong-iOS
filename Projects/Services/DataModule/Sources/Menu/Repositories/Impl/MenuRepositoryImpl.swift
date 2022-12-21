@@ -9,11 +9,11 @@ public struct MenuRepositoryImpl: MenuRepository {
         self.remoteMenuDataSource = remoteMenuDataSource
     }
 
-    public func fetchMenuList(date: Date) async throws -> [MenuEntity] {
-        try await remoteMenuDataSource.fetchMealList(date: date)
+    public func fetchMenuList(start: Date, end: Date) async throws -> [MenuEntity] {
+        try await remoteMenuDataSource.fetchMealList(start: start, end: end)
     }
 
-    public func fetchPublicMenuList(date: Date) async throws -> [MenuEntity] {
-        try await remoteMenuDataSource.fetcPublichMealList(date: date)
+    public func fetchPublicMenuList(start: Date, end: Date) async throws -> [MenuEntity] {
+        try await remoteMenuDataSource.fetcPublichMealList(start: start, end: end)
     }
 }

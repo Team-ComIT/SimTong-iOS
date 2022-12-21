@@ -34,6 +34,7 @@ struct WriteHolidayView: View {
             VStack {
                 if isPresented {
                     CalendarView(
+                        currentMonth: $viewModel.currentMonth,
                         holidaysDict: $viewModel.holidaysDict,
                         scheduleDict: $viewModel.scheduleDict
                     ) { date in
@@ -44,10 +45,13 @@ struct WriteHolidayView: View {
                     }
                     .matchedGeometryEffect(id: "CALENDAR", in: calendarAnimation)
                     .padding(.top, 8)
+                    .padding(.horizontal, 16)
                 }
             }
             .padding(.top, 12)
-            .padding(.horizontal, 16)
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
         .onDisappear {
             onFinished(viewModel.holidaysDict, viewModel.scheduleDict)
@@ -85,21 +89,41 @@ struct WriteHolidayView: View {
         } message: {
             Text(viewModel.errorMessage)
         }
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+            }
+        }
     }
 
     @ViewBuilder
     func holidayPickerView() -> some View {
         VStack {
             HStack {
-                Text(viewModel.selectedDateHolidayText)
-                    .stTypo(.r6, color: .extraBlack)
+                VStack(spacing: 0) {
+                    Text(viewModel.selectedDateHolidayText)
+                        .stTypo(.r6, color: .extraBlack)
+
+                    HStack(spacing: 0) {
+                        Text("연차 : ")
+                            .stTypo(.r6, color: .extraBlack)
+
+                        Text("\(viewModel.annualCount)")
+                            .stTypo(.r6, color: .extraPrimary)
+                    }
+                }
 
                 Spacer()
             }
 
             HStack(spacing: 32) {
                 ForEach([HolidayType.dayoff, .annual, .work], id: \.hashValue) {
-                    holidayColumnView(holiday: $0)
+                    if $0 == .annual, viewModel.annualCount == 0 {
+                        EmptyView()
+                    } else {
+                        holidayColumnView(holiday: $0)
+                    }
                 }
             }
             .padding(.top, 32)

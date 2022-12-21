@@ -36,6 +36,7 @@ struct ScheduleCalendarView: View {
             VStack {
                 if isPresented {
                     CalendarView(
+                        currentMonth: $viewModel.currentMonth,
                         holidaysDict: $viewModel.holidaysDict,
                         scheduleDict: $viewModel.scheduleDict
                     ) { date in

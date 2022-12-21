@@ -10,8 +10,8 @@ public struct ScheduleRepositoryImpl: ScheduleRepository {
         self.remoteScheduleDataSource = remoteScheduleDataSource
     }
 
-    public func fetchSchedule(date: Date) async throws -> [ScheduleEntity] {
-        try await remoteScheduleDataSource.fetchSchedule(date: date)
+    public func fetchSchedule(start: Date, end: Date) async throws -> [ScheduleEntity] {
+        try await remoteScheduleDataSource.fetchSchedule(start: start, end: end)
     }
 
     public func createNewSchedule(req: CreateNewScheduleRequestDTO) async throws {

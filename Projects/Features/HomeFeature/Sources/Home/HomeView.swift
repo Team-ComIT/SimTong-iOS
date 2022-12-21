@@ -41,8 +41,12 @@ struct HomeView: View {
                     }
                 }
 
-                CalendarView(holidaysDict: $viewModel.holidaysDict, scheduleDict: $viewModel.schedules) { date in
-                    withAnimation {
+                CalendarView(
+                    currentMonth: $viewModel.currentMonth,
+                    holidaysDict: $viewModel.holidaysDict,
+                    scheduleDict: $viewModel.schedules
+                ) { date in
+                    withAnimation(.spring()) {
                         viewModel.onDateTap(date: date)
                     }
                 }
@@ -53,10 +57,15 @@ struct HomeView: View {
                     .stTypo(.r4, color: .extraBlack)
                     .padding(.top, 32)
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 8) {
-                        ForEach(viewModel.menus, id: \.date) { menu in
-                            MenuCardView(menu: menu)
+                if viewModel.isLoadingMeal {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                } else {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 8) {
+                            ForEach(viewModel.menus, id: \.date) { menu in
+                                MenuCardView(menu: menu)
+                            }
                         }
                     }
                 }
@@ -66,12 +75,17 @@ struct HomeView: View {
                         WideCardView(image: STImage(.pay), title: "나의 급여 정보", description: "나의 급여 정보를 손쉽게 확인하세요.")
                     }
 
-                    WideCardView(image: STImage(.holiday), title: "휴무표 작성", description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요.")
-                        .onTapGesture {
-                            withAnimation(.spring()) {
-                                viewModel.isPresentedHoliday = true
-                            }
+                    Button {
+                        withAnimation(.spring()) {
+                            viewModel.writeHolidayButtonDidTap()
                         }
+                    } label: {
+                        WideCardView(
+                            image: STImage(.holiday),
+                            title: "휴무표 작성",
+                            description: "휴무표를 작성해 일정을 손쉽게 관리해 보세요."
+                        )
+                    }
                 }
                 .padding(.top)
                 .padding(.bottom, 30)
@@ -84,7 +98,6 @@ struct HomeView: View {
         .overlay {
             if viewModel.isPresentedHoliday {
                 writeHolidayComponent.makeView(
-                    holidaysDict: viewModel.holidaysDict,
                     scheduleDict: viewModel.schedules,
                     isPresented: $viewModel.isPresentedHoliday,
                     calendarAnimation: calendarAnimation
@@ -109,6 +122,11 @@ struct HomeView: View {
         .onAppear {
             viewModel.homeDataInit()
         }
+        .alert("", isPresented: $viewModel.isError) {
+            Button("확인") {}
+        } message: {
+            Text(viewModel.errorMessage)
+        }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("")
         .toolbar {
@@ -127,5 +145,11 @@ struct HomeView: View {
             to: myPageComponent.makeView(),
             when: $viewModel.isPresentedMyPage
         )
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+            }
+        }
     }
 }

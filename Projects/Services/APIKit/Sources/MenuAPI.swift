@@ -4,8 +4,8 @@ import Utility
 import Moya
 
 public enum MenuAPI: SimTongAPI {
-    case fetchMenuList(Date)
-    case fetchPublicMenuList(Date)
+    case fetchMenuList(start: Date, end: Date)
+    case fetchPublicMenuList(start: Date, end: Date)
 }
 
 public extension MenuAPI {
@@ -32,9 +32,10 @@ public extension MenuAPI {
 
     var task: Moya.Task {
         switch self {
-        case let .fetchMenuList(date), let .fetchPublicMenuList(date):
+        case let .fetchMenuList(start, end), let .fetchPublicMenuList(start, end):
             return .requestParameters(parameters: [
-                "date": date.toSmallSimtongDateString()
+                "start_at": start.toSmallSimtongDateString(),
+                "end_at": end.toSmallSimtongDateString()
             ], encoding: URLEncoding.queryString)
         }
     }

@@ -8,7 +8,7 @@ public struct FetchScheduleUseCaseImpl: FetchScheduleUseCase {
         self.scheduleRepository = scheduleRepository
     }
 
-    public func execute(date: Date) async throws -> [ScheduleEntity] {
-        try await scheduleRepository.fetchSchedule(date: date)
+    public func execute(start: Date, end: Date) async throws -> [ScheduleEntity] {
+        try await scheduleRepository.fetchSchedule(start: start, end: end)
     }
 }
