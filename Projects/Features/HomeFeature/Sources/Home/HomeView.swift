@@ -102,7 +102,6 @@ struct HomeView: View {
                     isPresented: $viewModel.isPresentedHoliday,
                     calendarAnimation: calendarAnimation
                 ) { holidayDict, scheduleDict in
-                    viewModel.holidaysDict = holidayDict
                     viewModel.schedules = scheduleDict
                 }
             } else if viewModel.isPresentedSchedule {
