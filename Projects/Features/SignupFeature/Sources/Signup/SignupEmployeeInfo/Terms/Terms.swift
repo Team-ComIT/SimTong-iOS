@@ -14,7 +14,7 @@ extension Terms {
     var detailLink: URL {
         switch self {
         case .privacy:
-            return URL(string: "https://www.google.com")!
+            return URL(string: "https://sungsimdang.notion.site/6c7e8bd95d4e4b37b56a99038c5d07ad")!
         }
     }
 }

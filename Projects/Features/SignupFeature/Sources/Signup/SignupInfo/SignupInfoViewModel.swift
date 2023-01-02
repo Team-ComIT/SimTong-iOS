@@ -2,6 +2,7 @@ import BaseFeature
 import Combine
 import DomainModule
 import SwiftUI
+import FirebaseMessaging
 import Utility
 
 public final class SignupInfoViewModel: BaseViewModel {
@@ -35,6 +36,7 @@ public final class SignupInfoViewModel: BaseViewModel {
     @MainActor
     func nextButtonDidTap() {
         checkNickname()
+        guard let deviceToken = Messaging.messaging().fcmToken else { return }
 
         Task {
             await withAsyncTry(with: self) { owner in
@@ -51,7 +53,8 @@ public final class SignupInfoViewModel: BaseViewModel {
                         email: owner.signupInfoSceneParam.email,
                         password: owner.signupInfoSceneParam.password,
                         nickname: owner.nickname.isEmpty ? nil : owner.nickname,
-                        profileImagePath: url
+                        profileImagePath: url,
+                        deviceToken: deviceToken
                     )
                 )
                 owner.isSuccessSignup = true

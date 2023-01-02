@@ -1,6 +1,7 @@
 import Moya
 import DataMappingModule
 import ErrorModule
+import FirebaseMessaging
 
 public enum UsersAPI: SimTongAPI {
     case signin(SigninRequestDTO)
@@ -68,7 +69,8 @@ public extension UsersAPI {
         case let .signin(req):
             return .requestParameters(parameters: [
                 "employee_number": req.employeeID,
-                "password": req.password
+                "password": req.password,
+                "device_token": req.deviceToken
             ], encoding: JSONEncoding.default)
 
         case let .signup(req):
@@ -78,7 +80,8 @@ public extension UsersAPI {
                 "email": req.email,
                 "password": req.password,
                 "nickname": req.nickname as Any,
-                "profile_image_path": req.profileImagePath as Any
+                "profile_image_path": req.profileImagePath as Any,
+                "device_token": req.deviceToken
             ], encoding: JSONEncoding.default)
 
         case let .existsByNameAndEmployeeNumber(name, employeeNumber):

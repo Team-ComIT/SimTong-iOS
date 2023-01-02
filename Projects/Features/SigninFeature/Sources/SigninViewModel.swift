@@ -1,6 +1,7 @@
 import Combine
 import DomainModule
 import BaseFeature
+import FirebaseMessaging
 
 final class SigninViewModel: BaseViewModel {
     @Published var employeeID = "" {
@@ -25,7 +26,7 @@ final class SigninViewModel: BaseViewModel {
 
     @MainActor
     func signin() {
-        guard !isDisabledSignin else { return }
+        guard !isDisabledSignin, let deviceToken = Messaging.messaging().fcmToken else { return }
 
         Task {
             await withAsyncTry(with: self) { owner in
@@ -33,7 +34,8 @@ final class SigninViewModel: BaseViewModel {
                 try await owner.signinUseCase.execute(
                     req: .init(
                         employeeID: id,
-                        password: owner.password
+                        password: owner.password,
+                        deviceToken: deviceToken
                     )
                 )
                 owner.isSuccessSignin = true

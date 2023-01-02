@@ -69,6 +69,9 @@ struct IntroView: View {
             }
             .padding(.horizontal, 16)
         }
+        .onAppear {
+            hideKeyboard()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .navigate(
             to: signinComponent.makeView(),

@@ -70,11 +70,17 @@ struct TermsView: View {
 
             Spacer()
 
-            Link(destination: term.detailLink) {
+            Button {
+                UIApplication.shared.open(term.detailLink)
+            } label: {
                 Image(systemName: "chevron.right")
                     .resizable()
                     .frame(width: 9, height: 16)
                     .foregroundColor(Color.gray03)
+            }
+            .frame(width: 24, height: 24)
+            .background {
+                Color.white
             }
         }
         .onTapGesture {

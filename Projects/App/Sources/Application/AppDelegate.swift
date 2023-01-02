@@ -16,7 +16,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
         return true
     }
 
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+    func messaging(
+        _ messaging: Messaging,
+        didReceiveRegistrationToken fcmToken: String?
+    ) {
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
           NotificationCenter.default.post(
             name: Notification.Name("FCMToken"),
@@ -25,7 +28,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
           )
     }
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
         Messaging.messaging().apnsToken = deviceToken
     }
 }

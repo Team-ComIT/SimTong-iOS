@@ -81,7 +81,7 @@ extension STError: LocalizedError {
             return "이메일이 인증되지 않았습니다"
 
         case .userInfoIsAlreadyExistBySignup:
-            return "이메일 또는 사원번호, 또는 닉네임이 이미 사용중입니다"
+            return "사원번호, 또는 닉네임이 이미 사용중입니다"
 
         case .notExistsUserByVerifyEmployee:
             return "이름과 사번 정보가 일치하지 않습니다"
