@@ -5,11 +5,11 @@ struct STLoadingPreview: View {
         ZStack {
             Color.extraBackground
                 .ignoresSafeArea()
-            STLoadingView()
-                .padding(6)
-                .background(Color.extraWhite)
-                .frame(width: 64, height: 64)
-                .clipShape(Circle())
+//            STLoadingView()
+//                .padding(6)
+//                .background(Color.extraWhite)
+//                .frame(width: 64, height: 64)
+//                .clipShape(Circle())
         }
     }
 }
