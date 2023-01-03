@@ -1,7 +1,7 @@
 import ProjectDescription
 
 public enum Environment {
-    public static let appName = "Simtong"
+    public static let appName = "sim-tong"
     public static let targetName = "Simtong"
     public static let targetTestName = "\(targetName)Tests"
     public static let organizationName = "com.sungsimdang"
