@@ -51,6 +51,7 @@ struct SignupEmployeeInfoView: View {
                                     }
                                 }
                             )
+                            .keyboardType(.emailAddress)
                             .focused($focusField, equals: .email)
                             .opacity(viewModel.isEmailStep ? 1.0 : 0.0)
                         }
@@ -95,7 +96,8 @@ struct SignupEmployeeInfoView: View {
                                     viewModel.nextButtonDidTap()
                                     focusField = .number
                                 }
-                            })
+                            }
+                        )
                         .focused($focusField, equals: .name)
                     }
                     .padding(.horizontal, 16)
