@@ -9,6 +9,10 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.Feature {
+    static let RootFeature = TargetDependency.project(
+        target: ModulePaths.Feature.RootFeature.targetName(type: .sources),
+        path: .relativeToFeature(ModulePaths.Feature.RootFeature.targetName(type: .sources))
+    )
     static let SplashFeatureInterface = TargetDependency.project(
         target: ModulePaths.Feature.SplashFeature.targetName(type: .interface),
         path: .relativeToFeature(ModulePaths.Feature.SplashFeature.targetName(type: .interface))
