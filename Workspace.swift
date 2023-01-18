@@ -1,8 +1,8 @@
 import ProjectDescription
-import ProjectDescriptionHelpers
+import EnvironmentPlugin
 
 let workspace = Workspace(
-    name: Environment.appName,
+    name: env.name,
     projects: [
         "Projects/App"
     ]
