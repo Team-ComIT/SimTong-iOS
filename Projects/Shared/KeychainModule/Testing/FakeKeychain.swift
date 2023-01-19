@@ -1,18 +1,19 @@
 import Foundation
 import KeychainModuleInterface
 
-final class FakeKeyChain: Keychain {
-    var store: [String: String] = [:]
+public final class FakeKeyChain: Keychain {
+    public init() {}
+    public var store: [String: String] = [:]
 
-    func save(type: KeychainType, value: String) {
+    public func save(type: KeychainType, value: String) {
         store[type.rawValue] = value
     }
 
-    func load(type: KeychainType) -> String {
+    public func load(type: KeychainType) -> String {
         store[type.rawValue] ?? ""
     }
 
-    func delete(type: KeychainType) {
+    public func delete(type: KeychainType) {
         store[type.rawValue] = nil
     }
 }
