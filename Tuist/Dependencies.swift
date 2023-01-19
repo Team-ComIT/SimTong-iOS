@@ -10,6 +10,14 @@ let dependencies = Dependencies(
             .remote(url: "https://github.com/pointfreeco/swift-composable-architecture.git", requirement: .exact("0.49.2")),
             .remote(url: "https://github.com/Team-ComIT/Moya.git", requirement: .exact("15.0.4")),
         ],
+        productTypes: [
+            "Moya": .framework,
+            "Alamofire": .framework,
+            "ComposableArchitecture": .framework,
+            "Dependencies": .framework,
+            "CombineSchedulers": .framework,
+            "XCTestDynamicOverlay": .framework
+        ],
         baseSettings: .settings(
             configurations: [
                 .debug(name: .dev),

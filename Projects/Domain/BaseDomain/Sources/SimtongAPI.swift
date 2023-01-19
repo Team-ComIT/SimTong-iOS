@@ -16,7 +16,7 @@ extension SimtongAPI {
         "\(domain.asDomainPath)\(urlPath)"
     }
 
-    public var headers: [String : String]? {
+    public var headers: [String: String]? {
         ["Content-Type": "application/json"]
     }
 

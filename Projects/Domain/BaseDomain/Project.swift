@@ -10,6 +10,7 @@ let project = Project.makeModule(
         .SPM.Moya
     ],
     internalDependencies: [
+        .Core.KeychainModule,
         .Shared.GlobalThirdPartyLibrary,
         .Shared.UtilityModule
     ],

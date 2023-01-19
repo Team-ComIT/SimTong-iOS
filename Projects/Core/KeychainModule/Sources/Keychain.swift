@@ -5,7 +5,6 @@ public enum KeychainType: String {
     case accessToken = "ACCESS-TOKEN"
     case accessTokenExp = "ACCESS-TOKEN-EXP"
     case refreshToken = "REFRESH-TOKEN"
-    case refreshTokenExp = "REFRESH-TOKEN-EXP"
 }
 
 public struct Keychain {
@@ -50,6 +49,12 @@ extension Keychain: DependencyKey {
         ]
         SecItemDelete(query)
     }
+
+    public static var testValue: Keychain = Keychain { _, _ in
+    } load: { type in
+        "token"
+    } delete: { _ in }
+
 }
 
 extension DependencyValues {
