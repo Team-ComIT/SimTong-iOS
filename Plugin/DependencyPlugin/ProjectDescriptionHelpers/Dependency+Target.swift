@@ -35,6 +35,10 @@ public extension TargetDependency.Domain {
 }
 
 public extension TargetDependency.Core {
+    static let KeychainModule = TargetDependency.project(
+        target: ModulePaths.Core.KeychainModule.targetName(type: .sources),
+        path: .relativeToCore(ModulePaths.Core.KeychainModule.targetName(type: .sources))
+    )
     static let DesignSystem = TargetDependency.project(
         target: ModulePaths.Core.DesignSystem.targetName(type: .sources),
         path: .relativeToCore(ModulePaths.Core.DesignSystem.targetName(type: .sources))

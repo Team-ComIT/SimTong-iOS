@@ -32,6 +32,7 @@ public extension ModulePaths {
 
 public extension ModulePaths {
     enum Core: String {
+        case KeychainModule
         case DesignSystem
 
         func targetName(type: MicroTargetType) -> String {
