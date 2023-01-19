@@ -5,7 +5,7 @@ let dependencies = Dependencies(
     carthage: nil,
     swiftPackageManager: SwiftPackageManagerDependencies(
         [
-    
+            .remote(url: "https://github.com/Team-ComIT/Moya", requirement: .exact("15.0.4")),
         ],
         baseSettings: .settings(
             configurations: [
