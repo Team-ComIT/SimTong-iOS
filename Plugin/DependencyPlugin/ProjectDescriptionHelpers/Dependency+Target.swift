@@ -42,18 +42,6 @@ public extension TargetDependency.Core {
 }
 
 public extension TargetDependency.Shared {
-    static let KeychainModuleTesting = TargetDependency.project(
-        target: ModulePaths.Shared.KeychainModule.targetName(type: .testing),
-        path: .relativeToShared(ModulePaths.Shared.KeychainModule.targetName(type: .testing))
-    )
-    static let KeychainModuleInterface = TargetDependency.project(
-        target: ModulePaths.Shared.KeychainModule.targetName(type: .interface),
-        path: .relativeToShared(ModulePaths.Shared.KeychainModule.targetName(type: .interface))
-    )
-    static let KeychainModule = TargetDependency.project(
-        target: ModulePaths.Shared.KeychainModule.targetName(type: .sources),
-        path: .relativeToShared(ModulePaths.Shared.KeychainModule.targetName(type: .sources))
-    )
     static let UtilityModule = TargetDependency.project(
         target: ModulePaths.Shared.UtilityModule.targetName(type: .sources),
         path: .relativeToShared(ModulePaths.Shared.UtilityModule.targetName(type: .sources))

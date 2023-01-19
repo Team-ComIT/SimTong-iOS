@@ -124,10 +124,6 @@ public extension Project {
         if targets.contains(.testing) {
             testTargetDependencies.append(.target(name: "\(name)Testing"))
         }
-        testTargetDependencies.append(contentsOf: [
-            .SPM.Quick,
-            .SPM.Nimble
-        ])
 
         // MARK: - Unit Test
         if targets.contains(.unitTest) {
