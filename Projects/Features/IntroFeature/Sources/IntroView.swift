@@ -53,18 +53,6 @@ struct IntroView: View {
                 CTAButton(text: "로그인", style: .cancel) {
                     viewModel.isNavigateSignin = true
                 }
-
-                HStack(spacing: 12) {
-                    Text("일반 사용자라면?")
-                        .stTypo(.r6, color: .gray06)
-
-                    Button {
-                        appState.sceneFlow = .guest
-                    } label: {
-                        Text("게스트")
-                            .stTypo(.r6, color: .main)
-                    }
-                }
                 .padding(.bottom, 32)
             }
             .padding(.horizontal, 16)

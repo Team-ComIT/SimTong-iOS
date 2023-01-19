@@ -7,7 +7,6 @@ import DomainModule
 import FindAuthInfoTabFeature
 import FindEmployeeIDFeature
 import FindPasswordFeature
-import GuestFeature
 import HomeFeature
 import IntroFeature
 import KeychainModule
@@ -307,9 +306,6 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var splashComponent: SplashComponent {
         return appComponent.splashComponent
     }
-    var guestComponent: GuestComponent {
-        return appComponent.guestComponent
-    }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
         self.appComponent = appComponent
@@ -493,19 +489,6 @@ private class FindAuthInfoTabDependency79082cf44b62999fcee0Provider: FindAuthInf
 private func factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return FindAuthInfoTabDependency79082cf44b62999fcee0Provider(appComponent: parent1(component) as! AppComponent)
 }
-private class GuestDependency452a7de310bc588b860eProvider: GuestDependency {
-    var fetchPublicMenuListUseCase: any FetchPublicMenuListUseCase {
-        return appComponent.fetchPublicMenuListUseCase
-    }
-    private let appComponent: AppComponent
-    init(appComponent: AppComponent) {
-        self.appComponent = appComponent
-    }
-}
-/// ^->AppComponent->GuestComponent
-private func factory3e3f831d36968386aaf6f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return GuestDependency452a7de310bc588b860eProvider(appComponent: parent1(component) as! AppComponent)
-}
 private class IntroDependencye04a89d39c733d937499Provider: IntroDependency {
     var signinComponent: SigninComponent {
         return appComponent.signinComponent
@@ -527,55 +510,55 @@ private func factoryaf0e1f54bae4c77ad4acf47b58f8f304c97af4d5(_ component: Needle
 extension AppComponent: Registration {
     public func registerItems() {
 
-        localTable["remoteCommonsDataSource-any RemoteCommonsDataSource"] = { self.remoteCommonsDataSource as Any }
-        localTable["remoteFilesDataSource-any RemoteFilesDataSource"] = { self.remoteFilesDataSource as Any }
-        localTable["remoteUsersDataSource-any RemoteUsersDataSource"] = { self.remoteUsersDataSource as Any }
-        localTable["localUsersDataSource-any LocalUsersDataSource"] = { self.localUsersDataSource as Any }
-        localTable["remoteEmailsDataSource-any RemoteEmailsDataSource"] = { self.remoteEmailsDataSource as Any }
-        localTable["remoteMenuDataSource-any RemoteMenuDataSource"] = { self.remoteMenuDataSource as Any }
-        localTable["remoteScheduleDataSource-any RemoteScheduleDataSource"] = { self.remoteScheduleDataSource as Any }
-        localTable["remoteHolidaysDataSource-any RemoteHolidaysDataSource"] = { self.remoteHolidaysDataSource as Any }
-        localTable["commonsRepository-any CommonsRepository"] = { self.commonsRepository as Any }
-        localTable["filesRepository-any FilesRepository"] = { self.filesRepository as Any }
-        localTable["usersRepository-any UsersRepository"] = { self.usersRepository as Any }
-        localTable["emailsRepository-any EmailsRepository"] = { self.emailsRepository as Any }
-        localTable["menuRepository-any MenuRepository"] = { self.menuRepository as Any }
-        localTable["scheduleRepository-any ScheduleRepository"] = { self.scheduleRepository as Any }
-        localTable["holidaysRepository-any HolidaysRepository"] = { self.holidaysRepository as Any }
-        localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { self.fetchSpotListUseCase as Any }
-        localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { self.findEmployeeNumberUseCase as Any }
-        localTable["comparePasswordUseCase-any ComparePasswordUseCase"] = { self.comparePasswordUseCase as Any }
-        localTable["reissueTokenUseCase-any ReissueTokenUseCase"] = { self.reissueTokenUseCase as Any }
-        localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { self.resetPasswordUseCase as Any }
-        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { self.changePasswordUseCase as Any }
-        localTable["checkExistEmployeeIDAndEmailUseCase-any CheckExistEmployeeIDAndEmailUseCase"] = { self.checkExistEmployeeIDAndEmailUseCase as Any }
-        localTable["uploadSingleFileUseCase-any UploadSingleFileUseCase"] = { self.uploadSingleFileUseCase as Any }
-        localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { self.uploadMultipleFileUseCase as Any }
-        localTable["signinUseCase-any SigninUseCase"] = { self.signinUseCase as Any }
-        localTable["signupUseCase-any SignupUseCase"] = { self.signupUseCase as Any }
-        localTable["checkExistNameAndEmployeeIDUseCase-any CheckExistNameAndEmployeeIDUseCase"] = { self.checkExistNameAndEmployeeIDUseCase as Any }
-        localTable["checkDuplicateEmail-any CheckDuplicateEmailUseCase"] = { self.checkDuplicateEmail as Any }
-        localTable["fetchMyProfileUseCase-any FetchMyProfileUseCase"] = { self.fetchMyProfileUseCase as Any }
-        localTable["changeNicknameUseCase-any ChangeNicknameUseCase"] = { self.changeNicknameUseCase as Any }
-        localTable["changeEmailUseCase-any ChangeEmailUseCase"] = { self.changeEmailUseCase as Any }
-        localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { self.changeProfileImageUseCase as Any }
-        localTable["changeSpotUseCase-any ChangeSpotUseCase"] = { self.changeSpotUseCase as Any }
-        localTable["checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"] = { self.checkDuplicateNicknameUseCase as Any }
-        localTable["logoutUseCase-any LogoutUseCase"] = { self.logoutUseCase as Any }
-        localTable["verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"] = { self.verifyAuthCodeUseCase as Any }
-        localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { self.sendAuthCodeUseCase as Any }
-        localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { self.fetchMenuListUseCase as Any }
-        localTable["fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"] = { self.fetchPublicMenuListUseCase as Any }
-        localTable["fetchScheduleUseCase-any FetchScheduleUseCase"] = { self.fetchScheduleUseCase as Any }
-        localTable["createNewScheduleUseCase-any CreateNewScheduleUseCase"] = { self.createNewScheduleUseCase as Any }
-        localTable["updateScheduleUseCase-any UpdateScheduleUseCase"] = { self.updateScheduleUseCase as Any }
-        localTable["deleteScheduleUseCase-any DeleteScheduleUseCase"] = { self.deleteScheduleUseCase as Any }
-        localTable["fetchHolidayUseCase-any FetchHolidayUseCase"] = { self.fetchHolidayUseCase as Any }
-        localTable["setHolidayUseCase-any SetHolidayUseCase"] = { self.setHolidayUseCase as Any }
-        localTable["setAnnualUseCase-any SetAnnualUseCase"] = { self.setAnnualUseCase as Any }
-        localTable["setWorkUseCase-any SetWorkUseCase"] = { self.setWorkUseCase as Any }
-        localTable["fetchAnnualCountUseCase-any FetchAnnualCountUseCase"] = { self.fetchAnnualCountUseCase as Any }
-        localTable["checkIsHolidayPeriodUseCase-any CheckIsHolidayPeriodUseCase"] = { self.checkIsHolidayPeriodUseCase as Any }
+        localTable["remoteCommonsDataSource-any RemoteCommonsDataSource"] = { [unowned self] in self.remoteCommonsDataSource as Any }
+        localTable["remoteFilesDataSource-any RemoteFilesDataSource"] = { [unowned self] in self.remoteFilesDataSource as Any }
+        localTable["remoteUsersDataSource-any RemoteUsersDataSource"] = { [unowned self] in self.remoteUsersDataSource as Any }
+        localTable["localUsersDataSource-any LocalUsersDataSource"] = { [unowned self] in self.localUsersDataSource as Any }
+        localTable["remoteEmailsDataSource-any RemoteEmailsDataSource"] = { [unowned self] in self.remoteEmailsDataSource as Any }
+        localTable["remoteMenuDataSource-any RemoteMenuDataSource"] = { [unowned self] in self.remoteMenuDataSource as Any }
+        localTable["remoteScheduleDataSource-any RemoteScheduleDataSource"] = { [unowned self] in self.remoteScheduleDataSource as Any }
+        localTable["remoteHolidaysDataSource-any RemoteHolidaysDataSource"] = { [unowned self] in self.remoteHolidaysDataSource as Any }
+        localTable["commonsRepository-any CommonsRepository"] = { [unowned self] in self.commonsRepository as Any }
+        localTable["filesRepository-any FilesRepository"] = { [unowned self] in self.filesRepository as Any }
+        localTable["usersRepository-any UsersRepository"] = { [unowned self] in self.usersRepository as Any }
+        localTable["emailsRepository-any EmailsRepository"] = { [unowned self] in self.emailsRepository as Any }
+        localTable["menuRepository-any MenuRepository"] = { [unowned self] in self.menuRepository as Any }
+        localTable["scheduleRepository-any ScheduleRepository"] = { [unowned self] in self.scheduleRepository as Any }
+        localTable["holidaysRepository-any HolidaysRepository"] = { [unowned self] in self.holidaysRepository as Any }
+        localTable["fetchSpotListUseCase-any FetchSpotListUseCase"] = { [unowned self] in self.fetchSpotListUseCase as Any }
+        localTable["findEmployeeNumberUseCase-any FindEmployeeNumberUseCase"] = { [unowned self] in self.findEmployeeNumberUseCase as Any }
+        localTable["comparePasswordUseCase-any ComparePasswordUseCase"] = { [unowned self] in self.comparePasswordUseCase as Any }
+        localTable["reissueTokenUseCase-any ReissueTokenUseCase"] = { [unowned self] in self.reissueTokenUseCase as Any }
+        localTable["resetPasswordUseCase-any ResetPasswordUseCase"] = { [unowned self] in self.resetPasswordUseCase as Any }
+        localTable["changePasswordUseCase-any ChangePasswordUseCase"] = { [unowned self] in self.changePasswordUseCase as Any }
+        localTable["checkExistEmployeeIDAndEmailUseCase-any CheckExistEmployeeIDAndEmailUseCase"] = { [unowned self] in self.checkExistEmployeeIDAndEmailUseCase as Any }
+        localTable["uploadSingleFileUseCase-any UploadSingleFileUseCase"] = { [unowned self] in self.uploadSingleFileUseCase as Any }
+        localTable["uploadMultipleFileUseCase-any UploadMultipleFileUseCase"] = { [unowned self] in self.uploadMultipleFileUseCase as Any }
+        localTable["signinUseCase-any SigninUseCase"] = { [unowned self] in self.signinUseCase as Any }
+        localTable["signupUseCase-any SignupUseCase"] = { [unowned self] in self.signupUseCase as Any }
+        localTable["checkExistNameAndEmployeeIDUseCase-any CheckExistNameAndEmployeeIDUseCase"] = { [unowned self] in self.checkExistNameAndEmployeeIDUseCase as Any }
+        localTable["checkDuplicateEmail-any CheckDuplicateEmailUseCase"] = { [unowned self] in self.checkDuplicateEmail as Any }
+        localTable["fetchMyProfileUseCase-any FetchMyProfileUseCase"] = { [unowned self] in self.fetchMyProfileUseCase as Any }
+        localTable["changeNicknameUseCase-any ChangeNicknameUseCase"] = { [unowned self] in self.changeNicknameUseCase as Any }
+        localTable["changeEmailUseCase-any ChangeEmailUseCase"] = { [unowned self] in self.changeEmailUseCase as Any }
+        localTable["changeProfileImageUseCase-any ChangeProfileImageUseCase"] = { [unowned self] in self.changeProfileImageUseCase as Any }
+        localTable["changeSpotUseCase-any ChangeSpotUseCase"] = { [unowned self] in self.changeSpotUseCase as Any }
+        localTable["checkDuplicateNicknameUseCase-any CheckDuplicateNicknameUseCase"] = { [unowned self] in self.checkDuplicateNicknameUseCase as Any }
+        localTable["logoutUseCase-any LogoutUseCase"] = { [unowned self] in self.logoutUseCase as Any }
+        localTable["verifyAuthCodeUseCase-any VerifyAuthCodeUseCase"] = { [unowned self] in self.verifyAuthCodeUseCase as Any }
+        localTable["sendAuthCodeUseCase-any SendAuthCodeUseCase"] = { [unowned self] in self.sendAuthCodeUseCase as Any }
+        localTable["fetchMenuListUseCase-any FetchMenuListUseCase"] = { [unowned self] in self.fetchMenuListUseCase as Any }
+        localTable["fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"] = { [unowned self] in self.fetchPublicMenuListUseCase as Any }
+        localTable["fetchScheduleUseCase-any FetchScheduleUseCase"] = { [unowned self] in self.fetchScheduleUseCase as Any }
+        localTable["createNewScheduleUseCase-any CreateNewScheduleUseCase"] = { [unowned self] in self.createNewScheduleUseCase as Any }
+        localTable["updateScheduleUseCase-any UpdateScheduleUseCase"] = { [unowned self] in self.updateScheduleUseCase as Any }
+        localTable["deleteScheduleUseCase-any DeleteScheduleUseCase"] = { [unowned self] in self.deleteScheduleUseCase as Any }
+        localTable["fetchHolidayUseCase-any FetchHolidayUseCase"] = { [unowned self] in self.fetchHolidayUseCase as Any }
+        localTable["setHolidayUseCase-any SetHolidayUseCase"] = { [unowned self] in self.setHolidayUseCase as Any }
+        localTable["setAnnualUseCase-any SetAnnualUseCase"] = { [unowned self] in self.setAnnualUseCase as Any }
+        localTable["setWorkUseCase-any SetWorkUseCase"] = { [unowned self] in self.setWorkUseCase as Any }
+        localTable["fetchAnnualCountUseCase-any FetchAnnualCountUseCase"] = { [unowned self] in self.fetchAnnualCountUseCase as Any }
+        localTable["checkIsHolidayPeriodUseCase-any CheckIsHolidayPeriodUseCase"] = { [unowned self] in self.checkIsHolidayPeriodUseCase as Any }
     }
 }
 extension SplashComponent: Registration {
@@ -682,7 +665,6 @@ extension RootComponent: Registration {
         keyPathToName[\RootDependency.introComponent] = "introComponent-IntroComponent"
         keyPathToName[\RootDependency.mainTabComponent] = "mainTabComponent-MainTabComponent"
         keyPathToName[\RootDependency.splashComponent] = "splashComponent-SplashComponent"
-        keyPathToName[\RootDependency.guestComponent] = "guestComponent-GuestComponent"
     }
 }
 extension SigninComponent: Registration {
@@ -749,11 +731,6 @@ extension FindAuthInfoTabComponent: Registration {
         keyPathToName[\FindAuthInfoTabDependency.findPasswordInfoComponent] = "findPasswordInfoComponent-FindPasswordInfoComponent"
     }
 }
-extension GuestComponent: Registration {
-    public func registerItems() {
-        keyPathToName[\GuestDependency.fetchPublicMenuListUseCase] = "fetchPublicMenuListUseCase-any FetchPublicMenuListUseCase"
-    }
-}
 extension IntroComponent: Registration {
     public func registerItems() {
         keyPathToName[\IntroDependency.signinComponent] = "signinComponent-SigninComponent"
@@ -803,7 +780,6 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->FindPasswordInfoComponent", factory508fc8f893455de876c5f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->RenewalPasswordComponent", factory236a429a80d834e1f370f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->FindAuthInfoTabComponent", factory9e86e7b14b904564e8d9f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->GuestComponent", factory3e3f831d36968386aaf6f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->IntroComponent", factoryaf0e1f54bae4c77ad4acf47b58f8f304c97af4d5)
 }
 #endif

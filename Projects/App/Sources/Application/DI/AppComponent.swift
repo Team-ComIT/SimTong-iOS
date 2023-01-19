@@ -12,7 +12,6 @@ import MyPageFeature
 import SigninFeature
 import HomeFeature
 import SplashFeature
-import GuestFeature
 
 final class AppComponent: BootstrapComponent {
     func makeRootView() -> some View {
@@ -140,12 +139,5 @@ extension AppComponent {
 extension AppComponent {
     var splashComponent: SplashComponent {
         SplashComponent(parent: self)
-    }
-}
-
-// MARK: - Guest
-extension AppComponent {
-    var guestComponent: GuestComponent {
-        GuestComponent(parent: self)
     }
 }

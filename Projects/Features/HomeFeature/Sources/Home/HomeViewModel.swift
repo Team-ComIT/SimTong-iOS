@@ -121,7 +121,7 @@ public final class HomeViewModel: BaseViewModel {
                 let holidays = try await owner.fetchHolidayUseCase.execute(
                     start: first.toSmallSimtongDateString(),
                     end: last.toSmallSimtongDateString(),
-                    status: .completed
+                    status: .written
                 )
                 holidays.forEach { holiday in
                     owner.holidaysDict[holiday.date] = holiday.type

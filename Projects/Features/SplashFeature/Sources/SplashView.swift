@@ -24,7 +24,7 @@ struct SplashView: View {
                     }
                 } else {
                     withAnimation {
-                        appState.sceneFlow = .guest
+                        appState.sceneFlow = .intro
                     }
                 }
             }
