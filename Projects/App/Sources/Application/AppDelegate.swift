@@ -1,10 +1,33 @@
 import UIKit
+import BaseDomain
+import Moya
 
+enum CustomAPI: SimtongAPI {
+    case asdf
+    var domain: BaseDomain.SimtongDomain {
+        .commons
+    }
+    
+    var urlPath: String {
+        ""
+    }
+    
+    var method: Moya.Method {
+        .get
+    }
+    
+    var task: Moya.Task {
+        .requestPlain
+    }
+    
+    
+}
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         return true
     }
 
